@@ -8,12 +8,12 @@ package frame;
  *
  * @author mynla
  */
-public class DangNhapJPanel extends javax.swing.JPanel {
+public class LoginJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DangNhapJPanel
      */
-    public DangNhapJPanel() {
+    public LoginJPanel() {
         initComponents();
     }
 
@@ -27,13 +27,13 @@ public class DangNhapJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
+        txtPass = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        btnDangNhap = new javax.swing.JButton();
+        lblTaiKhoan = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
@@ -45,17 +45,17 @@ public class DangNhapJPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 0, 12)); // NOI18N
         jLabel2.setText("Mật Khẩu");
 
-        jButton1.setBackground(new java.awt.Color(255, 204, 51));
-        jButton1.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 0, 12)); // NOI18N
-        jButton1.setText("Đăng Nhập");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDangNhap.setBackground(new java.awt.Color(255, 204, 51));
+        btnDangNhap.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 0, 12)); // NOI18N
+        btnDangNhap.setText("Đăng Nhập");
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDangNhapActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 24)); // NOI18N
-        jLabel4.setText("Đăng Nhập");
+        lblTaiKhoan.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 24)); // NOI18N
+        lblTaiKhoan.setText("Đăng Nhập");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,37 +65,37 @@ public class DangNhapJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
-                        .addComponent(jLabel4))
+                        .addComponent(lblTaiKhoan))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                            .addComponent(btnDangNhap)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel1)
-                                .addComponent(jTextField2)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtPass)
+                                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
+                .addComponent(lblTaiKhoan)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jButton1)
+                .addComponent(btnDangNhap)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/logo Login (1).png"))); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/logo Login (1).png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,7 +105,7 @@ public class DangNhapJPanel extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(jLabel3)
+                .addComponent(lblLogo)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,7 +114,7 @@ public class DangNhapJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(jLabel3))
+                        .addComponent(lblLogo))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -124,19 +124,19 @@ public class DangNhapJPanel extends javax.swing.JPanel {
         jPanel1.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnDangNhapActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnDangNhap;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblTaiKhoan;
+    private javax.swing.JTextField txtPass;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
