@@ -15,6 +15,7 @@ CREATE TABLE [KhachHang] (
   PRIMARY KEY ([Ma_KH])
 );
 
+
 CREATE TABLE [Voucher] (
   [VoucherID] int IDENTITY(1,2),
   [discountPercent] float not null default(0),
