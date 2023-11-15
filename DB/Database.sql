@@ -61,6 +61,7 @@ CREATE TABLE [Food] (
   [price] float,
   [type] nvarchar(10),
   [isLocked] bit,
+  [img] img,
   PRIMARY KEY ([dish_ID])
 );
 
