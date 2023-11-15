@@ -62,7 +62,7 @@ CREATE TABLE [Food] (
   [price] float,
   [type] nvarchar(10),
   [isLocked] bit,
-  [img] img,
+  [img] VARBINARY(max),
   PRIMARY KEY ([dish_ID])
 );
 
