@@ -15,8 +15,8 @@ import java.sql.SQLException;
 public class DBCManager {
 
     private static final String url = "jdbc:sqlserver://localhost:1433;encrypt=false;trustServerCertificate=false;databaseName=";
-    private static final String db_name = "EduSys";
-    private static final String usr = "edusys";
+    private static final String db_name = "Restaurant";
+    private static final String usr = "sa";
     private static final String psw = "1234";
 
     private static Connection connection;

@@ -62,7 +62,7 @@ public class DBHelper {
         try {
             ResultSet rs = DBHelper.query(sql, args);
             if (rs.next()) {
-                return rs.getObject(0);
+                return rs.getObject(1);
             }
             return null;
         } catch (Exception e) {
