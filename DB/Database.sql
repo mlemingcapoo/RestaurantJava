@@ -126,12 +126,15 @@ CREATE TABLE [LoginHistory] (
       REFERENCES [User]([user_ID]) ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
-
-
-
-
-
 --=--=-=-=-=-=-=-=-=-=-=-=--=--=-=-=-=-=-=--=-=-=-=-=-=--=-=-=-=-----=-==--=-=-=---==-=-=
+GO
+
+INSERT INTO [User]
+VALUES('trung','1234',0,0)
+
+select * from [User]
+insert into [UserInfo]
+values()
 
 go
 
