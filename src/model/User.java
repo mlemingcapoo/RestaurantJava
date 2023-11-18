@@ -6,6 +6,6 @@ package model;
  *
  * @author capoo
  */
-public class model {
+public class User {
 
 }
