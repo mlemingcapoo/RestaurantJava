@@ -21,8 +21,6 @@ public class DBCManager {
 
     private static Connection connection;
     
-    
-
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         System.out.println("getting Connection...");
         if (connection == null) {
@@ -42,7 +40,7 @@ public class DBCManager {
         }
         return connection;
     }
-    
+
     public static void reconnect(
             String usr,
             String psw,

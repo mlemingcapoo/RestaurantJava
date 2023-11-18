@@ -5,7 +5,8 @@
 package main;
 
 import DAO.DBCManager;
-import control.login_frame;
+import GUI.loginFrame;
+import control.DangNhapControl;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +27,7 @@ public class main_class {
             // master changed
             DBCManager.getConnection();
             System.out.println("done");
-            login_frame.login("trung", "1234");
+            new loginFrame(null, true);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(main_class.class.getName()).log(Level.SEVERE, null, ex);
         }
