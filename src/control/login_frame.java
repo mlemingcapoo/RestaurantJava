@@ -17,7 +17,7 @@ public class login_frame {
         Object[] lmao = {usr};
         ResultSet value = null;
         try {
-            value = DBHelper.query("SELECT * FROM [User] WHERE username = ?", lmao);
+            value = DBHelper.query("SELECT * FROM User WHERE username = ?", lmao);
             if (value.next()) {
                 System.out.println(value.getString(2));
                 if (value.getString(3).equals(psw)){
