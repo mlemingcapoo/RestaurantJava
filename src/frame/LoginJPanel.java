@@ -35,7 +35,9 @@ public class LoginJPanel extends javax.swing.JPanel {
         lblTaiKhoan = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        setBackground(new java.awt.Color(255, 153, 153));
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
