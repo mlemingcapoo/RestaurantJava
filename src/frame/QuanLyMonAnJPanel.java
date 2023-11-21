@@ -88,6 +88,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
 
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm Kiếm"));
 
+        jComboBox4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại", "Đồ Uống", "Đồ Ăn", "Tráng miệng" }));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -111,10 +112,13 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức Năng"));
 
+        btnThem1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThem1.setText("Thêm");
 
+        btnSua1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSua1.setText("Sửa");
 
+        btnXoa1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXoa1.setText("Xoá");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
