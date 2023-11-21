@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public class DBCManager {
     
-    private static final String url = "jdbc:mysql://103.252.137.126:3306/"; // MySQL URL and port
+    private static final String url = "jdbc:mariadb://103.252.137.126:3306/"; // MySQL URL and port
     private static final String db_name = "hnguyenmanhidvn_DuAn1"; // Database name
     private static final String usr = "hnguyenmanhidvn_DuAn1"; // Database username
     private static final String psw = "hnguyenmanhidvn_DuAn1"; // Database password
@@ -28,7 +28,7 @@ public class DBCManager {
             try {
                 // Load the JDBC driver 
 //                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                Class.forName("com.mysql.cj.jdbc.Driver");
+                Class.forName("org.mariadb.jdbc.Driver");
                 connection = DriverManager.getConnection(url + db_name, usr, psw);
                 System.out.println("connected!");
             } catch (ClassNotFoundException | SQLException e) {
