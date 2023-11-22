@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBCManager {
+public class JDBCManager {
     
     private static final String url = "jdbc:mariadb://103.252.137.126:3306/"; // MySQL URL and port
     private static final String db_name = "hnguyenmanhidvn_DuAn1"; // Database name
@@ -21,7 +21,7 @@ public class DBCManager {
 
     private static Connection connection;
     
-    public static Connection getConnection() throws ClassNotFoundException, SQLException {
+    public static Connection getConnection() throws ClassNotFoundException, SQLException, Exception {
         System.out.println("getting Connection...");
         if (connection == null) {
             System.out.println("connection is null, try connecting...");
@@ -31,7 +31,7 @@ public class DBCManager {
                 Class.forName("org.mariadb.jdbc.Driver");
                 connection = DriverManager.getConnection(url + db_name, usr, psw);
                 System.out.println("connected!");
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (Exception e) {
                 System.out.println(e.toString());
                 throw e;
             }
@@ -48,14 +48,17 @@ public class DBCManager {
             String db_name) throws SQLException{
         connection = DriverManager.getConnection(url + db_name, usr, psw);
     }
+    
+    public static boolean isConnected() {
+        return connection == null;
+    }
 
-    public static void closeConnection() {
+    public static void closeConnection() throws SQLException,Exception{
         if (connection != null) {
-            try {
+            
                 connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
+            
         }
     }}
 

@@ -1,28 +1,38 @@
 /*
  * trungpvpp02786
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
 
-import control.DangNhapControl;
+import control.GUI_Interface;
+import control.mainUiControl;
+
 
 /**
  *
  * @author capoo
  */
-public class loginFrame extends javax.swing.JDialog {
+public class mainUI extends javax.swing.JFrame {
 
+    
+    mainUiControl mainUI;
+    GUI_Interface control;
+//            = new mainUiControl(this);
     /**
-     * Creates new form loginFrame
+     * Creates new form loginFrame1
      */
-    DangNhapControl control;
-
-    public loginFrame(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        this.control = new DangNhapControl();
+    public mainUI() {
         initComponents();
-        setVisible(modal);
+//        setVisible(true);
+//        mainUI = new mainUiControl();
+//        mainUI.init();
+//        mainUiControl.in
+//        mainUI.control = control;
+        mainUI = new mainUiControl(this);
+        control = mainUI;
     }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +47,7 @@ public class loginFrame extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        BtnDangxuat = new javax.swing.JButton();
+        BtnDangXuat = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         BtnQuanLyNhanVien = new javax.swing.JButton();
@@ -53,7 +63,7 @@ public class loginFrame extends javax.swing.JDialog {
         jButton5 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -96,10 +106,10 @@ public class loginFrame extends javax.swing.JDialog {
                 .addContainerGap(91, Short.MAX_VALUE))
         );
 
-        BtnDangxuat.setText("Đăng Xuất");
-        BtnDangxuat.addActionListener(new java.awt.event.ActionListener() {
+        BtnDangXuat.setText("Đăng ????");
+        BtnDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDangxuatActionPerformed(evt);
+                BtnDangXuatActionPerformed(evt);
             }
         });
 
@@ -157,7 +167,7 @@ public class loginFrame extends javax.swing.JDialog {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(BtnDangxuat))
+                        .addComponent(BtnDangXuat))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,8 +210,8 @@ public class loginFrame extends javax.swing.JDialog {
                 .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BtnQuanLyBanHang1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(BtnDangxuat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addComponent(BtnDangXuat)
                 .addContainerGap())
         );
 
@@ -259,7 +269,7 @@ public class loginFrame extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,11 +301,14 @@ public class loginFrame extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnDangxuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDangxuatActionPerformed
+    private void BtnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDangXuatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnDangxuatActionPerformed
+        control.login();
+        mainUI.DangXuat();
+    }//GEN-LAST:event_BtnDangXuatActionPerformed
 
     private void BtnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienActionPerformed
         // TODO add your handling code here:
@@ -337,41 +350,34 @@ public class loginFrame extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(loginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(loginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(loginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(loginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(mainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                loginFrame dialog = new loginFrame(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            new mainUI().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnDangxuat;
+    public javax.swing.JButton BtnDangXuat;
     private javax.swing.JButton BtnQuanLyBanHang;
-    private javax.swing.JButton BtnQuanLyBanHang1;
+    public javax.swing.JButton BtnQuanLyBanHang1;
     private javax.swing.JButton BtnQuanLyDoanhThu;
     private javax.swing.JButton BtnQuanLyHoiVien;
     private javax.swing.JButton BtnQuanLyMon;
     private javax.swing.JButton BtnQuanLyNhanVien;
-    private javax.swing.JButton jButton2;
+    public static javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -385,4 +391,6 @@ public class loginFrame extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
+
+
 }

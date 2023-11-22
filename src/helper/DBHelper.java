@@ -1,6 +1,6 @@
 package helper;
 
-import DAO.DBCManager;
+import DAO.JDBCManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,13 +12,13 @@ import java.sql.SQLException;
  */
 public class DBHelper {
 
-    public static PreparedStatement prepareState(String sql, Object... args) throws ClassNotFoundException, SQLException {
+    public static PreparedStatement prepareState(String sql, Object... args) throws ClassNotFoundException, SQLException, Exception {
 
-        PreparedStatement psmt = null;
+        PreparedStatement psmt;
         if (sql.trim().startsWith("{")) {
-            psmt = DBCManager.getConnection().prepareCall(sql);
+            psmt = JDBCManager.getConnection().prepareCall(sql);
         } else {
-            psmt = DBCManager.getConnection().prepareStatement(sql);
+            psmt = JDBCManager.getConnection().prepareStatement(sql);
         }
         for (int i = 0; i < args.length; i++) {
             psmt.setObject(i + 1, args[i]);
@@ -26,24 +26,24 @@ public class DBHelper {
         return psmt;
     }
 
-    public static void executeUpdate(String sql, Object... args) throws ClassNotFoundException, SQLException {
+    public static void executeUpdate(String sql, Object... args) throws ClassNotFoundException, SQLException, Exception {
 
         PreparedStatement psmt = prepareState(sql, args);
         psmt.executeUpdate();
     }
     
-    public static ResultSet executeQuery(String sql, Object...args) throws ClassNotFoundException,SQLException{
+    public static ResultSet executeQuery(String sql, Object...args) throws ClassNotFoundException,SQLException, Exception{
         PreparedStatement psm = prepareState(sql, args);
         return psm.executeQuery();
     }
     
-    public static ResultSet query(String sql, Object... args) throws SQLException, ClassNotFoundException {
+    public static ResultSet query(String sql, Object... args) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = DBHelper.getStmt(sql, args);
         return stmt.executeQuery();
     }
     
-    public static PreparedStatement getStmt(String sql, Object... args) throws SQLException, ClassNotFoundException {
-        Connection conn = DBCManager.getConnection();
+    public static PreparedStatement getStmt(String sql, Object... args) throws SQLException, ClassNotFoundException, Exception {
+        Connection conn = JDBCManager.getConnection();
         PreparedStatement stmt;
 
         if (sql.trim().startsWith("{")) {

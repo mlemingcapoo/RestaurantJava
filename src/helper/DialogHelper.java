@@ -2,8 +2,6 @@ package helper;
 
 
 import java.awt.Component;
-import DAO.DBCManager;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**

@@ -4,13 +4,7 @@
  */
 package main;
 
-import DAO.DBCManager;
-import GUI.loginFrame;
-import control.DangNhapControl;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import control.startControl;
 /**
  *
  * @author catty
@@ -25,11 +19,12 @@ public class main_class {
         System.out.println("hello");
         try {
             // master changed
-            DBCManager.getConnection();
+//            JDBCManager.getConnection();
             System.out.println("done");
-            new loginFrame(null, true);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(main_class.class.getName()).log(Level.SEVERE, null, ex);
+            new startControl().loading();
+        } catch (Exception ex) {
+//            Logger.getLogger(main_class.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("NO INTERNET");
         }
     }
     

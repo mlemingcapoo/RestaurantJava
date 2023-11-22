@@ -1,8 +1,5 @@
 package control;
 
-import GUI.loginFrame;
-import helper.DialogHelper;
-import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -11,12 +8,12 @@ import javax.swing.JTextField;
  * @author capoo
  */
 public class DangNhapControl {
-    static loginFrame loginframe;
+//    static login login;
     
     
     public void login(JTextField testUser, JPasswordField testPass) {
         System.out.println("got it!: "+testUser.getText()+" "+testPass.getText());
-        DialogHelper.alert(loginframe, "lmao");
+//        DialogHelper.alert(login, "lmao");
         //        ResultSet value = null;
 //        try {
 //            value = DBHelper.query("SELECT * FROM User WHERE username = ?", lmao);
