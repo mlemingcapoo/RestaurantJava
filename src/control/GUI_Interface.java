@@ -11,9 +11,9 @@ import javax.swing.JFrame;
  * @author capoo
  */
 public interface GUI_Interface {
-    public void init();
-    public void login();
-    public void navigate();
-    public void showFrame(JFrame frame);
-
+//    public void login();
+//    public void init();
+//    public void navigate();
+//    public void showFrame(JFrame frame);
+//    public void hideFrame(JFrame frame);
 }

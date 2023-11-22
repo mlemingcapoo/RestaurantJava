@@ -54,7 +54,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel5" alignment="0" pref="819" max="32767" attributes="0"/>
+                      <Component id="frameDisplay" alignment="0" pref="819" max="32767" attributes="0"/>
                       <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -71,7 +71,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jPanel3" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel5" min="-2" pref="652" max="-2" attributes="0"/>
+                          <Component id="frameDisplay" min="-2" pref="652" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jPanel4" alignment="1" max="32767" attributes="0"/>
                   </Group>
@@ -80,7 +80,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel5">
+        <Container class="javax.swing.JPanel" name="frameDisplay">
           <Properties>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[888, 670]"/>

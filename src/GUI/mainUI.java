@@ -16,7 +16,7 @@ public class mainUI extends javax.swing.JFrame {
 
     
     mainUiControl mainUI;
-    GUI_Interface control;
+//    GUI_Interface control;
 //            = new mainUiControl(this);
     /**
      * Creates new form loginFrame1
@@ -29,7 +29,8 @@ public class mainUI extends javax.swing.JFrame {
 //        mainUiControl.in
 //        mainUI.control = control;
         mainUI = new mainUiControl(this);
-        control = mainUI;
+//        control = mainUI;
+//        control.init();
     }
 
 
@@ -43,7 +44,7 @@ public class mainUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        frameDisplay = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -68,16 +69,16 @@ public class mainUI extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jPanel5.setPreferredSize(new java.awt.Dimension(888, 670));
+        frameDisplay.setPreferredSize(new java.awt.Dimension(888, 670));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout frameDisplayLayout = new javax.swing.GroupLayout(frameDisplay);
+        frameDisplay.setLayout(frameDisplayLayout);
+        frameDisplayLayout.setHorizontalGroup(
+            frameDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        frameDisplayLayout.setVerticalGroup(
+            frameDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 652, Short.MAX_VALUE)
         );
 
@@ -269,7 +270,7 @@ public class mainUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
+                    .addComponent(frameDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,7 +284,7 @@ public class mainUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(frameDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -306,7 +307,7 @@ public class mainUI extends javax.swing.JFrame {
 
     private void BtnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDangXuatActionPerformed
         // TODO add your handling code here:
-        control.login();
+//        control.login();
         mainUI.DangXuat();
     }//GEN-LAST:event_BtnDangXuatActionPerformed
 
@@ -377,6 +378,7 @@ public class mainUI extends javax.swing.JFrame {
     private javax.swing.JButton BtnQuanLyHoiVien;
     private javax.swing.JButton BtnQuanLyMon;
     private javax.swing.JButton BtnQuanLyNhanVien;
+    private javax.swing.JPanel frameDisplay;
     public static javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -389,7 +391,6 @@ public class mainUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 
 
