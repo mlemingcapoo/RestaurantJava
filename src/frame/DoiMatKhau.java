@@ -62,6 +62,12 @@ public class DoiMatKhau extends javax.swing.JPanel {
         btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLuu.setText("Thay Đổi");
 
+        txtMKCu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMKCuActionPerformed(evt);
+            }
+        });
+
         btnLuu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLuu1.setText("Huỷ");
 
@@ -143,6 +149,10 @@ public class DoiMatKhau extends javax.swing.JPanel {
     private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSDTActionPerformed
+
+    private void txtMKCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMKCuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMKCuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
