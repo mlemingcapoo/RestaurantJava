@@ -17,13 +17,13 @@ public class startControl extends start{
     Timer loading;
 
     public void loading() {
-        loading = new Timer(2, (ActionEvent e) -> {
+        loading = new Timer(10, (ActionEvent e) -> {
             loadingPercent++;
             start.loadingBar.setValue(loadingPercent);
             System.out.println(loadingPercent);
             while (loadingPercent >= 100) {
                 if (JDBCManager.isConnected()){
-                    DialogHelper.alert(rootPane, "No Internet!");
+                    DialogHelper.alert(rootPane, "Please check your Internet!");
                     stopLoading();
                     break;
                 } else {

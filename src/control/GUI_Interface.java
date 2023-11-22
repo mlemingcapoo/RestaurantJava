@@ -5,6 +5,7 @@
 package control;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -13,7 +14,7 @@ import javax.swing.JFrame;
 public interface GUI_Interface {
     public void login();
     public void init();
-    public void navigate();
+//    public void navigate(JPanel input);
     public void showFrame(JFrame frame);
     public void hideFrame(JFrame frame);
     public int checkPermission();

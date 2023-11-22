@@ -8,6 +8,15 @@ package DAO;
  *
  * @author Admin
  */
-public class AuthenDAO {
+public class AuthenticateDAO {
+    private int permissonLevel;
+
+    public int getPermissonLevel() {
+        return permissonLevel;
+    }
+
+    public void setPermissonLevel(int permissonLevel) {
+        this.permissonLevel = permissonLevel;
+    }
     
 }

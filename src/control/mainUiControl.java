@@ -1,7 +1,10 @@
 package control;
 
 import GUI.mainUI;
+import frame.LoginJPanel;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import util.panelNavigator;
 
 /**
  *
@@ -12,7 +15,8 @@ public final class mainUiControl
         implements GUI_Interface {
 
     private static mainUI frame;
-
+    LoginJPanel loginPanel;
+    
     public mainUiControl(mainUI frame) {
 //        super();
         mainUiControl.frame = frame;
@@ -26,20 +30,17 @@ public final class mainUiControl
     @Override
     public void init() {
 //        showFrame(loginFrame);
-        System.out.println("init!");
-
+        System.out.println("initializing... setting up login frame");
+        
     }
 
     @Override
     public void login() {
+        loginPanel = new LoginJPanel();
+        panelNavigator.navigate(frame, loginPanel, mainUI.panelDisplay);
         System.out.println("login");
-//        frame.dispose();
     }
 
-    @Override
-    public void navigate() {
-        System.out.println("rediect");
-    }
 
     @Override
     public void showFrame(JFrame frame) {

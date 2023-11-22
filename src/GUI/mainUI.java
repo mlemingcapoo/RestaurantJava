@@ -6,6 +6,12 @@ package GUI;
 
 import control.GUI_Interface;
 import control.mainUiControl;
+import frame.DoiMatKhau;
+import frame.LoginJPanel;
+import frame.blank_frame;
+import frame.cardlayout;
+import javax.swing.JPanel;
+import util.panelNavigator;
 
 
 /**
@@ -14,7 +20,8 @@ import control.mainUiControl;
  */
 public class mainUI extends javax.swing.JFrame {
 
-    
+    JPanel login = new DoiMatKhau();
+    JPanel blank = new cardlayout();
     mainUiControl mainUI;
 //    GUI_Interface control;
 //            = new mainUiControl(this);
@@ -31,6 +38,10 @@ public class mainUI extends javax.swing.JFrame {
         mainUI = new mainUiControl(this);
 //        control = mainUI;
 //        control.init();
+        panelDisplay.add(login,"LoginJPanel");
+//blank.setLayout(new java.awt.CardLayout());
+        panelDisplay.add(blank,"blank");
+        panelNavigator.switchPanel(panelDisplay, "blank");
     }
 
 
@@ -44,13 +55,13 @@ public class mainUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        frameDisplay = new javax.swing.JPanel();
+        panelDisplay = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        panelProfilePhoto = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         BtnDangXuat = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
+        lblRole = new javax.swing.JLabel();
         BtnQuanLyNhanVien = new javax.swing.JButton();
         BtnQuanLyDoanhThu = new javax.swing.JButton();
         BtnQuanLyHoiVien = new javax.swing.JButton();
@@ -69,39 +80,29 @@ public class mainUI extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        frameDisplay.setPreferredSize(new java.awt.Dimension(888, 670));
-
-        javax.swing.GroupLayout frameDisplayLayout = new javax.swing.GroupLayout(frameDisplay);
-        frameDisplay.setLayout(frameDisplayLayout);
-        frameDisplayLayout.setHorizontalGroup(
-            frameDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        frameDisplayLayout.setVerticalGroup(
-            frameDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 652, Short.MAX_VALUE)
-        );
+        panelDisplay.setPreferredSize(new java.awt.Dimension(888, 670));
+        panelDisplay.setLayout(new java.awt.CardLayout());
 
         jPanel4.setBackground(new java.awt.Color(255, 153, 153));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel4.setForeground(new java.awt.Color(255, 204, 204));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        panelProfilePhoto.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setText("ANH");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelProfilePhotoLayout = new javax.swing.GroupLayout(panelProfilePhoto);
+        panelProfilePhoto.setLayout(panelProfilePhotoLayout);
+        panelProfilePhotoLayout.setHorizontalGroup(
+            panelProfilePhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProfilePhotoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panelProfilePhotoLayout.setVerticalGroup(
+            panelProfilePhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProfilePhotoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addContainerGap(91, Short.MAX_VALUE))
@@ -114,9 +115,9 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Nguyễn Liên Mạnh");
+        lblUsername.setText("Nguyễn Liên Mạnh");
 
-        jLabel3.setText("Admin");
+        lblRole.setText("Admin");
 
         BtnQuanLyNhanVien.setText("Quản Lý Nhân Viên");
         BtnQuanLyNhanVien.addActionListener(new java.awt.event.ActionListener() {
@@ -170,35 +171,34 @@ public class mainUI extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(BtnDangXuat))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(37, 37, 37)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(lblUsername)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
-                                .addComponent(jLabel3))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblRole))
+                            .addComponent(panelProfilePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 21, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnQuanLyNhanVien)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(BtnCaiDat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 30, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(19, 19, 19))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelProfilePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblUsername)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(lblRole)
                 .addGap(66, 66, 66)
                 .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -270,7 +270,7 @@ public class mainUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(frameDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
+                    .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,7 +284,7 @@ public class mainUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(frameDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(panelDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -308,7 +308,8 @@ public class mainUI extends javax.swing.JFrame {
     private void BtnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDangXuatActionPerformed
         // TODO add your handling code here:
 //        control.login();
-        mainUI.DangXuat();
+//        mainUI.login();
+panelNavigator.switchPanel(panelDisplay, "LoginJPanel");
     }//GEN-LAST:event_BtnDangXuatActionPerformed
 
     private void BtnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienActionPerformed
@@ -337,7 +338,8 @@ public class mainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnQuanLyBanHangActionPerformed
 
     private void BtnCaiDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCaiDatActionPerformed
-        mainUI.CaiDat();
+//        mainUI.CaiDat();
+
     }//GEN-LAST:event_BtnCaiDatActionPerformed
 
     /**
@@ -370,8 +372,11 @@ public class mainUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new mainUI().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new mainUI().setVisible(true);
+            }
         });
     }
 
@@ -383,19 +388,19 @@ public class mainUI extends javax.swing.JFrame {
     private javax.swing.JButton BtnQuanLyHoiVien;
     private javax.swing.JButton BtnQuanLyMon;
     private javax.swing.JButton BtnQuanLyNhanVien;
-    private javax.swing.JPanel frameDisplay;
     public static javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblRole;
+    private javax.swing.JLabel lblUsername;
+    public static javax.swing.JPanel panelDisplay;
+    private javax.swing.JPanel panelProfilePhoto;
     // End of variables declaration//GEN-END:variables
 
 

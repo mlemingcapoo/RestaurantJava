@@ -2,6 +2,7 @@
 
 package control;
 
+import java.util.Arrays;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -11,7 +12,7 @@ import javax.swing.JTextField;
  */
 public class loginControl {
  public void login(JTextField testUser, JPasswordField testPass) {
-        System.out.println("got it!: "+testUser.getText()+" "+testPass.getText());
+        System.out.println("got it!: "+testUser.getText()+" "+Arrays.toString(testPass.getPassword()));
 //        DialogHelper.alert(login, "lmao");
         //        ResultSet value = null;
 //        try {
