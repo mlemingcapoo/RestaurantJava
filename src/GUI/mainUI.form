@@ -146,7 +146,7 @@
                           <Component id="BtnQuanLyDoanhThu" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
                           <Component id="BtnQuanLyNhanVien" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="BtnQuanLyBanHang1" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BtnCaiDat" alignment="1" max="32767" attributes="0"/>
                               <Component id="BtnQuanLyBanHang" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -174,7 +174,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="BtnQuanLyBanHang" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="BtnQuanLyBanHang1" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="BtnCaiDat" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace pref="89" max="32767" attributes="0"/>
                       <Component id="BtnDangXuat" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -281,12 +281,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnQuanLyBanHangActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="BtnQuanLyBanHang1">
+            <Component class="javax.swing.JButton" name="BtnCaiDat">
               <Properties>
                 <Property name="text" type="java.lang.String" value="C&#xe0;i &#x110;&#x1eb7;t"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnQuanLyBanHang1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCaiDatActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

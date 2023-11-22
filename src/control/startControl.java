@@ -52,9 +52,7 @@ public class startControl extends start{
     public void startMainUI() {
         mainUI main = new mainUI();
         main.setVisible(true);
-//        mainUiControl control = new mainUiControl(main);
 
-//        control
     }
 
 }

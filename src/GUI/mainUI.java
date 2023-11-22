@@ -56,7 +56,7 @@ public class mainUI extends javax.swing.JFrame {
         BtnQuanLyHoiVien = new javax.swing.JButton();
         BtnQuanLyMon = new javax.swing.JButton();
         BtnQuanLyBanHang = new javax.swing.JButton();
-        BtnQuanLyBanHang1 = new javax.swing.JButton();
+        BtnCaiDat = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -153,10 +153,10 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
-        BtnQuanLyBanHang1.setText("Cài Đặt");
-        BtnQuanLyBanHang1.addActionListener(new java.awt.event.ActionListener() {
+        BtnCaiDat.setText("Cài Đặt");
+        BtnCaiDat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnQuanLyBanHang1ActionPerformed(evt);
+                BtnCaiDatActionPerformed(evt);
             }
         });
 
@@ -186,7 +186,7 @@ public class mainUI extends javax.swing.JFrame {
                     .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnQuanLyNhanVien)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(BtnQuanLyBanHang1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnCaiDat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(19, 19, 19))
         );
@@ -210,7 +210,7 @@ public class mainUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnQuanLyBanHang1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnCaiDat, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(BtnDangXuat)
                 .addContainerGap())
@@ -313,27 +313,32 @@ public class mainUI extends javax.swing.JFrame {
 
     private void BtnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienActionPerformed
         // TODO add your handling code here:
+        mainUI.QuanLyNhanVien();
     }//GEN-LAST:event_BtnQuanLyNhanVienActionPerformed
 
     private void BtnQuanLyDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyDoanhThuActionPerformed
         // TODO add your handling code here:
+        mainUI.QuanLyDoanhThu();
     }//GEN-LAST:event_BtnQuanLyDoanhThuActionPerformed
 
     private void BtnQuanLyHoiVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyHoiVienActionPerformed
         // TODO add your handling code here:
+        mainUI.QuanLyHoiVien();
     }//GEN-LAST:event_BtnQuanLyHoiVienActionPerformed
 
     private void BtnQuanLyMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyMonActionPerformed
         // TODO add your handling code here:
+        mainUI.QuanLyMon();
     }//GEN-LAST:event_BtnQuanLyMonActionPerformed
 
     private void BtnQuanLyBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyBanHangActionPerformed
         // TODO add your handling code here:
+        mainUI.QuanLyBanHang();
     }//GEN-LAST:event_BtnQuanLyBanHangActionPerformed
 
-    private void BtnQuanLyBanHang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyBanHang1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnQuanLyBanHang1ActionPerformed
+    private void BtnCaiDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCaiDatActionPerformed
+        mainUI.CaiDat();
+    }//GEN-LAST:event_BtnCaiDatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,9 +376,9 @@ public class mainUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton BtnCaiDat;
     public javax.swing.JButton BtnDangXuat;
     private javax.swing.JButton BtnQuanLyBanHang;
-    public javax.swing.JButton BtnQuanLyBanHang1;
     private javax.swing.JButton BtnQuanLyDoanhThu;
     private javax.swing.JButton BtnQuanLyHoiVien;
     private javax.swing.JButton BtnQuanLyMon;
