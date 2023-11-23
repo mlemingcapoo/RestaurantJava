@@ -4,14 +4,8 @@
  */
 package GUI;
 
-import control.GUI_Interface;
+
 import control.mainUiControl;
-import frame.DoiMatKhau;
-import frame.LoginJPanel;
-import frame.blank_frame;
-import frame.cardlayout;
-import javax.swing.JPanel;
-import util.panelNavigator;
 
 
 /**
@@ -20,28 +14,13 @@ import util.panelNavigator;
  */
 public class mainUI extends javax.swing.JFrame {
 
-    JPanel login = new DoiMatKhau();
-    JPanel blank = new cardlayout();
     mainUiControl mainUI;
-//    GUI_Interface control;
-//            = new mainUiControl(this);
     /**
      * Creates new form loginFrame1
      */
     public mainUI() {
         initComponents();
-//        setVisible(true);
-//        mainUI = new mainUiControl();
-//        mainUI.init();
-//        mainUiControl.in
-//        mainUI.control = control;
         mainUI = new mainUiControl(this);
-//        control = mainUI;
-//        control.init();
-        panelDisplay.add(login,"LoginJPanel");
-//blank.setLayout(new java.awt.CardLayout());
-        panelDisplay.add(blank,"blank");
-        panelNavigator.switchPanel(panelDisplay, "blank");
     }
 
 
@@ -307,9 +286,7 @@ public class mainUI extends javax.swing.JFrame {
 
     private void BtnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDangXuatActionPerformed
         // TODO add your handling code here:
-//        control.login();
-//        mainUI.login();
-panelNavigator.switchPanel(panelDisplay, "LoginJPanel");
+        mainUI.login();
     }//GEN-LAST:event_BtnDangXuatActionPerformed
 
     private void BtnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienActionPerformed
@@ -338,7 +315,7 @@ panelNavigator.switchPanel(panelDisplay, "LoginJPanel");
     }//GEN-LAST:event_BtnQuanLyBanHangActionPerformed
 
     private void BtnCaiDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCaiDatActionPerformed
-//        mainUI.CaiDat();
+        mainUI.CaiDat();
 
     }//GEN-LAST:event_BtnCaiDatActionPerformed
 
@@ -382,25 +359,25 @@ panelNavigator.switchPanel(panelDisplay, "LoginJPanel");
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton BtnCaiDat;
-    public javax.swing.JButton BtnDangXuat;
+    public static javax.swing.JButton BtnDangXuat;
     private javax.swing.JButton BtnQuanLyBanHang;
     private javax.swing.JButton BtnQuanLyDoanhThu;
     private javax.swing.JButton BtnQuanLyHoiVien;
     private javax.swing.JButton BtnQuanLyMon;
     private javax.swing.JButton BtnQuanLyNhanVien;
     public static javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    public static javax.swing.JButton jButton3;
+    public static javax.swing.JButton jButton4;
+    public static javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
+    public static javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JLabel lblRole;
-    private javax.swing.JLabel lblUsername;
+    public static javax.swing.JLabel lblRole;
+    public static javax.swing.JLabel lblUsername;
     public static javax.swing.JPanel panelDisplay;
-    private javax.swing.JPanel panelProfilePhoto;
+    public static javax.swing.JPanel panelProfilePhoto;
     // End of variables declaration//GEN-END:variables
 
 

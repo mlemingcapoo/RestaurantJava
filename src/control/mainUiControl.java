@@ -18,20 +18,15 @@ public final class mainUiControl
     LoginJPanel loginPanel;
     
     public mainUiControl(mainUI frame) {
-//        super();
         mainUiControl.frame = frame;
-//        init();
+        init();
     }
 
-//  @Override
-//  public void buttonClicked() {
-//    // xử lý sự kiện click button
-////  }
     @Override
     public void init() {
 //        showFrame(loginFrame);
         System.out.println("initializing... setting up login frame");
-        
+        mainUI.BtnDangXuat.setText("Đăng Nhập");
     }
 
     @Override
