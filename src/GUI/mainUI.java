@@ -109,6 +109,7 @@ public class mainUI extends javax.swing.JFrame {
 
         lblRole.setText("Admin");
 
+        BtnQuanLyNhanVien.setBackground(new java.awt.Color(255, 204, 204));
         BtnQuanLyNhanVien.setText("Quản Lý Nhân Viên");
         BtnQuanLyNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +117,7 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
+        BtnQuanLyDoanhThu.setBackground(new java.awt.Color(255, 204, 204));
         BtnQuanLyDoanhThu.setText("Quản Lý Doanh Thu");
         BtnQuanLyDoanhThu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +125,7 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
+        BtnQuanLyHoiVien.setBackground(new java.awt.Color(255, 204, 204));
         BtnQuanLyHoiVien.setText("Quản Lý Hội Viên");
         BtnQuanLyHoiVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,6 +133,7 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
+        BtnQuanLyMon.setBackground(new java.awt.Color(255, 204, 204));
         BtnQuanLyMon.setText("Quản Lý Món Ăn");
         BtnQuanLyMon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +141,7 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
+        BtnQuanLyBanHang.setBackground(new java.awt.Color(255, 204, 204));
         BtnQuanLyBanHang.setText("Quản Lý Bán Hàng");
         BtnQuanLyBanHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +149,7 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
+        BtnCaiDat.setBackground(new java.awt.Color(255, 204, 204));
         BtnCaiDat.setText("Cài Đặt");
         BtnCaiDat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,10 +171,10 @@ public class mainUI extends javax.swing.JFrame {
                     .addComponent(panelProfilePhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 30, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                     .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -208,6 +214,7 @@ public class mainUI extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 153, 153));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        BtnOrder.setBackground(new java.awt.Color(255, 204, 204));
         BtnOrder.setText("Oder");
         BtnOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,6 +222,7 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
+        BtnDatBan.setBackground(new java.awt.Color(255, 204, 204));
         BtnDatBan.setText("Đặt Bàn");
         BtnDatBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,6 +230,7 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
+        BtnHoaDon.setBackground(new java.awt.Color(255, 204, 204));
         BtnHoaDon.setText("Hoá Đơn");
         BtnHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,6 +238,7 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
+        BtnGiaoCa.setBackground(new java.awt.Color(255, 204, 204));
         BtnGiaoCa.setText("Giao Ca");
         BtnGiaoCa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +246,6 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("1-1-2000 | 00:00:00 AM");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
