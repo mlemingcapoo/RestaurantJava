@@ -31,7 +31,7 @@ public class blank_frame extends javax.swing.JPanel {
 
         setLayout(new java.awt.CardLayout());
 
-        jLabel2.setText("blank");
+        jLabel2.setText("null");
         jPanel2.add(jLabel2);
 
         add(jPanel2, "card3");

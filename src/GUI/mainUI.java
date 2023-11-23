@@ -34,6 +34,7 @@ public class mainUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        wrapper = new javax.swing.JPanel();
         panelDisplay = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         panelProfilePhoto = new javax.swing.JPanel();
@@ -48,10 +49,10 @@ public class mainUI extends javax.swing.JFrame {
         BtnQuanLyBanHang = new javax.swing.JButton();
         BtnCaiDat = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        BtnOrder = new javax.swing.JButton();
+        BtnDatBan = new javax.swing.JButton();
+        BtnHoaDon = new javax.swing.JButton();
+        BtnGiaoCa = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,14 +60,24 @@ public class mainUI extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        panelDisplay.setPreferredSize(new java.awt.Dimension(888, 670));
+        wrapper.setPreferredSize(new java.awt.Dimension(888, 670));
+        wrapper.setLayout(new java.awt.CardLayout());
+
+        panelDisplay.setBackground(new java.awt.Color(255, 153, 153));
+        panelDisplay.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         panelDisplay.setLayout(new java.awt.CardLayout());
+        wrapper.add(panelDisplay, "card2");
 
         jPanel4.setBackground(new java.awt.Color(255, 153, 153));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel4.setForeground(new java.awt.Color(255, 204, 204));
 
         panelProfilePhoto.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        panelProfilePhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelProfilePhotoMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("ANH");
 
@@ -84,7 +95,7 @@ public class mainUI extends javax.swing.JFrame {
             .addGroup(panelProfilePhotoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         BtnDangXuat.setText("Đăng ????");
@@ -145,19 +156,14 @@ public class mainUI extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUsername)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(BtnDangXuat))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUsername)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(lblRole))
-                            .addComponent(panelProfilePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(lblRole))
+                    .addComponent(panelProfilePhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 30, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -168,44 +174,69 @@ public class mainUI extends javax.swing.JFrame {
                     .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(19, 19, 19))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnDangXuat)
+                .addGap(45, 45, 45))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(panelProfilePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelProfilePhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblUsername)
+                .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRole)
+                .addComponent(lblRole, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
                 .addGap(66, 66, 66)
-                .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnCaiDat, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                .addComponent(BtnDangXuat)
+                .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addGap(89, 89, 89)
+                .addComponent(BtnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 153, 153));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jButton2.setText("Oder");
+        BtnOrder.setText("Oder");
+        BtnOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOrderActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Đặt Bàn");
+        BtnDatBan.setText("Đặt Bàn");
+        BtnDatBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDatBanActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Hoá Đơn");
+        BtnHoaDon.setText("Hoá Đơn");
+        BtnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHoaDonActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Giao Ca");
+        BtnGiaoCa.setText("Giao Ca");
+        BtnGiaoCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGiaoCaActionPerformed(evt);
+            }
+        });
 
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("1-1-2000 | 00:00:00 AM");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -215,14 +246,14 @@ public class mainUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnGiaoCa, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                 .addGap(215, 215, 215))
         );
         jPanel3Layout.setVerticalGroup(
@@ -230,15 +261,12 @@ public class mainUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                        .addComponent(jLabel4)))
+                        .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                        .addComponent(jLabel4))
+                    .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnGiaoCa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -249,7 +277,7 @@ public class mainUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(wrapper, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,9 +289,10 @@ public class mainUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(wrapper, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -275,9 +304,7 @@ public class mainUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -319,6 +346,31 @@ public class mainUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnCaiDatActionPerformed
 
+    private void BtnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrderActionPerformed
+        // TODO add your handling code here:
+        mainUI.Order();
+    }//GEN-LAST:event_BtnOrderActionPerformed
+
+    private void BtnDatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDatBanActionPerformed
+        // TODO add your handling code here:
+        mainUI.DatBan();
+    }//GEN-LAST:event_BtnDatBanActionPerformed
+
+    private void BtnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHoaDonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_BtnHoaDonActionPerformed
+
+    private void BtnGiaoCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGiaoCaActionPerformed
+        // TODO add your handling code here:
+        mainUI.GiaoCa();
+    }//GEN-LAST:event_BtnGiaoCaActionPerformed
+
+    private void panelProfilePhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseClicked
+        // TODO add your handling code here:
+        mainUI.profile();
+    }//GEN-LAST:event_panelProfilePhotoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -349,26 +401,23 @@ public class mainUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new mainUI().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new mainUI().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton BtnCaiDat;
     public static javax.swing.JButton BtnDangXuat;
+    public static javax.swing.JButton BtnDatBan;
+    public static javax.swing.JButton BtnGiaoCa;
+    public static javax.swing.JButton BtnHoaDon;
+    public static javax.swing.JButton BtnOrder;
     private javax.swing.JButton BtnQuanLyBanHang;
     private javax.swing.JButton BtnQuanLyDoanhThu;
     private javax.swing.JButton BtnQuanLyHoiVien;
     private javax.swing.JButton BtnQuanLyMon;
     private javax.swing.JButton BtnQuanLyNhanVien;
-    public static javax.swing.JButton jButton2;
-    public static javax.swing.JButton jButton3;
-    public static javax.swing.JButton jButton4;
-    public static javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     public static javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
@@ -378,6 +427,7 @@ public class mainUI extends javax.swing.JFrame {
     public static javax.swing.JLabel lblUsername;
     public static javax.swing.JPanel panelDisplay;
     public static javax.swing.JPanel panelProfilePhoto;
+    public static javax.swing.JPanel wrapper;
     // End of variables declaration//GEN-END:variables
 
 

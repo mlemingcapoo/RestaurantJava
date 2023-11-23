@@ -17,7 +17,7 @@ public class startControl extends start{
     Timer loading;
 
     public void loading() {
-        loading = new Timer(10, (ActionEvent e) -> {
+        loading = new Timer(20, (ActionEvent e) -> {
             loadingPercent++;
             start.loadingBar.setValue(loadingPercent);
             System.out.println(loadingPercent);

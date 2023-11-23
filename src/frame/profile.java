@@ -1,5 +1,10 @@
 package frame;
 
+import GUI.mainUI;
+import javax.swing.JPanel;
+import util.panelNavigator;
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -10,12 +15,13 @@ package frame;
  * @author kenzn
  */
 public class profile extends javax.swing.JPanel {
-
+JPanel DoiMatKhau = new DoiMatKhau();
     /**
      * Creates new form profile
      */
     public profile() {
         initComponents();
+        
     }
 
     /**
@@ -91,6 +97,11 @@ public class profile extends javax.swing.JPanel {
 
         btnDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDoiMatKhau.setText("Đổi Mật Khẩu");
+        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoiMatKhauActionPerformed(evt);
+            }
+        });
 
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDangXuat.setText("Đăng Xuất ");
@@ -211,6 +222,12 @@ public class profile extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtsdtActionPerformed
 
+    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
+        // TODO add your handling code here:
+        mainUI.panelDisplay.add(DoiMatKhau,"DoiMatKhau");
+        panelNavigator.switchPanel(mainUI.panelDisplay, "DoiMatKhau");
+    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ImgAnh;
@@ -218,7 +235,7 @@ public class profile extends javax.swing.JPanel {
     private javax.swing.JTextField TxtHoTen;
     private javax.swing.JTextField TxtNamSinh;
     private javax.swing.JButton btnDangXuat;
-    private javax.swing.JButton btnDoiMatKhau;
+    public static javax.swing.JButton btnDoiMatKhau;
     private javax.swing.JButton btnLuu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
