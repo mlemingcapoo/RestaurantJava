@@ -34,15 +34,15 @@ JPanel DoiMatKhau = new DoiMatKhau();
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        TxtNamSinh = new javax.swing.JTextField();
+        txtNamSinh = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        TxtCccd = new javax.swing.JTextField();
-        TxtHoTen = new javax.swing.JTextField();
+        txtCccd = new javax.swing.JTextField();
+        txtHoTen = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         ImgAnh = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtsdt = new javax.swing.JTextField();
+        txtSdt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnDoiMatKhau = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
@@ -56,9 +56,9 @@ JPanel DoiMatKhau = new DoiMatKhau();
 
         jLabel4.setText("Số CCCD");
 
-        TxtHoTen.addActionListener(new java.awt.event.ActionListener() {
+        txtHoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtHoTenActionPerformed(evt);
+                txtHoTenActionPerformed(evt);
             }
         });
 
@@ -87,9 +87,9 @@ JPanel DoiMatKhau = new DoiMatKhau();
 
         jLabel2.setText("Số Điện Thoại ");
 
-        txtsdt.addActionListener(new java.awt.event.ActionListener() {
+        txtSdt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtsdtActionPerformed(evt);
+                txtSdtActionPerformed(evt);
             }
         });
 
@@ -135,15 +135,15 @@ JPanel DoiMatKhau = new DoiMatKhau();
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                         .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtsdt)
-                    .addComponent(TxtNamSinh)
+                    .addComponent(txtSdt)
+                    .addComponent(txtNamSinh)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TxtHoTen)
+                    .addComponent(txtHoTen)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(TxtCccd))
+                    .addComponent(txtCccd))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -154,19 +154,19 @@ JPanel DoiMatKhau = new DoiMatKhau();
                         .addGap(27, 27, 27)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtsdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtNamSinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNamSinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtCccd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCccd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap(39, Short.MAX_VALUE)
@@ -206,9 +206,9 @@ JPanel DoiMatKhau = new DoiMatKhau();
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TxtHoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtHoTenActionPerformed
+    private void txtHoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoTenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtHoTenActionPerformed
+    }//GEN-LAST:event_txtHoTenActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         // TODO add your handling code here:
@@ -218,9 +218,9 @@ JPanel DoiMatKhau = new DoiMatKhau();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
-    private void txtsdtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsdtActionPerformed
+    private void txtSdtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSdtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtsdtActionPerformed
+    }//GEN-LAST:event_txtSdtActionPerformed
 
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
         // TODO add your handling code here:
@@ -231,12 +231,9 @@ JPanel DoiMatKhau = new DoiMatKhau();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ImgAnh;
-    private javax.swing.JTextField TxtCccd;
-    private javax.swing.JTextField TxtHoTen;
-    private javax.swing.JTextField TxtNamSinh;
-    private javax.swing.JButton btnDangXuat;
+    public static javax.swing.JButton btnDangXuat;
     public static javax.swing.JButton btnDoiMatKhau;
-    private javax.swing.JButton btnLuu;
+    public static javax.swing.JButton btnLuu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -244,6 +241,9 @@ JPanel DoiMatKhau = new DoiMatKhau();
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtsdt;
+    private javax.swing.JTextField txtCccd;
+    private javax.swing.JTextField txtHoTen;
+    private javax.swing.JTextField txtNamSinh;
+    private javax.swing.JTextField txtSdt;
     // End of variables declaration//GEN-END:variables
 }

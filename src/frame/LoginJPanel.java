@@ -36,7 +36,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lblTaiKhoan = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPass = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -70,8 +70,8 @@ public class LoginJPanel extends javax.swing.JPanel {
         lblTaiKhoan.setText("Đăng Nhập");
         jPanel2.add(lblTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
         jPanel2.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 360, 31));
-        jPanel2.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 360, 31));
-        jPasswordField1.getAccessibleContext().setAccessibleDescription("");
+        jPanel2.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 360, 31));
+        txtPass.getAccessibleContext().setAccessibleDescription("");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/demo-lam-banner-facebook.png"))); // NOI18N
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 490, 360));
@@ -85,19 +85,19 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         // TODO add your handling code here:
-        control.login(txtUser, jPasswordField1);
+        control.login(txtUser, txtPass);
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDangNhap;
+    public static javax.swing.JButton btnDangNhap;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lblTaiKhoan;
+    private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

@@ -33,11 +33,11 @@ public class DoiMatKhau extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnLuu = new javax.swing.JButton();
+        btnThayDoi = new javax.swing.JButton();
         txtMKCu = new javax.swing.JPasswordField();
         txtMKMoi = new javax.swing.JPasswordField();
         txtMKMoi2 = new javax.swing.JPasswordField();
-        btnLuu1 = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -61,8 +61,8 @@ public class DoiMatKhau extends javax.swing.JPanel {
 
         jLabel4.setText("Nhập Lại Mk Mới ");
 
-        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnLuu.setText("Thay Đổi");
+        btnThayDoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThayDoi.setText("Thay Đổi");
 
         txtMKCu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,8 +70,8 @@ public class DoiMatKhau extends javax.swing.JPanel {
             }
         });
 
-        btnLuu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnLuu1.setText("Huỷ");
+        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHuy.setText("Huỷ");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/DoiMatKhau-SDT.png"))); // NOI18N
 
@@ -93,9 +93,9 @@ public class DoiMatKhau extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnLuu1)
+                        .addComponent(btnHuy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLuu))
+                        .addComponent(btnThayDoi))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSDT, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -131,8 +131,8 @@ public class DoiMatKhau extends javax.swing.JPanel {
                 .addComponent(txtMKMoi2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLuu)
-                    .addComponent(btnLuu1))
+                    .addComponent(btnThayDoi)
+                    .addComponent(btnHuy))
                 .addContainerGap())
         );
 
@@ -174,8 +174,8 @@ public class DoiMatKhau extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLuu;
-    private javax.swing.JButton btnLuu1;
+    public static javax.swing.JButton btnHuy;
+    public static javax.swing.JButton btnThayDoi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
