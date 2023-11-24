@@ -1,7 +1,6 @@
 package control;
 
 import DAO.JDBCManager;
-import GUI.mainUI;
 import GUI.start;
 import helper.DialogHelper;
 import java.awt.event.ActionEvent;
@@ -46,13 +45,14 @@ public class startControl extends start{
         System.out.println("timer stopped, starting main UI");
         super.dispose();
         System.out.println("stopped loading screen");
-        startMainUI();
+        startLogin();
+//        startMainUI();
     }
 
-    public void startMainUI() {
-        mainUI main = new mainUI();
-        main.setVisible(true);
 
+    private void startLogin() {
+        System.out.println("openning login frame");
+        new loginControl().init();
     }
 
 }

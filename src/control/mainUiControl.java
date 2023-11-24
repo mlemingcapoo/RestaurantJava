@@ -2,8 +2,6 @@ package control;
 
 import GUI.mainUI;
 import frame.CaiDatJPanel;
-import frame.DoiMatKhau;
-import frame.LoginJPanel;
 import frame.QuanLyDoanhThuJPanel;
 import frame.QuanLyHoiVienJPanel;
 import frame.QuanLyMonAnJPanel;
@@ -24,7 +22,7 @@ public final class mainUiControl implements GUI_Interface {
     
     JPanel caiDat = new CaiDatJPanel();
 //    JPanel DoiMatKhau = new DoiMatKhau();
-    JPanel LoginJPanel = new LoginJPanel() ;
+//    JPanel LoginJPanel = new LoginJPanel() ;
     JPanel QLDoanhThu = new QuanLyDoanhThuJPanel();
     JPanel QLHoiVien = new QuanLyHoiVienJPanel();
     JPanel QLMonAn = new QuanLyMonAnJPanel();
@@ -42,18 +40,21 @@ public final class mainUiControl implements GUI_Interface {
     @Override
     public void init() {
 //        showFrame(loginFrame);
-        System.out.println("initializing... setting up login frame");
-        mainUI.BtnDangXuat.setText("Đăng Nhập");
         
+//        mainUI.BtnDangXuat.setText("Đăng Nhập");
+        
+        System.out.println("... loading frame into panelDisplay...");
         mainUI.panelDisplay.add(caiDat,"CaiDat");
 //        mainUI.panelDisplay.add(DoiMatKhau,"DoiMatKhau");
-        mainUI.panelDisplay.add(LoginJPanel,"Login");
+//        mainUI.panelDisplay.add(LoginJPanel,"Login");
         mainUI.panelDisplay.add(QLDoanhThu,"DoanhThu");
         mainUI.panelDisplay.add(QLHoiVien,"HoiVien");
         mainUI.panelDisplay.add(QLMonAn,"MonAn");
         mainUI.panelDisplay.add(QLNNhanVien,"NhanVien");
         mainUI.panelDisplay.add(QLBanHang,"BanHang");
         mainUI.panelDisplay.add(Profile,"Profile");
+        panelNavigator.switchPanel(mainUI.panelDisplay, "Login");
+        
     }
 
     @Override
