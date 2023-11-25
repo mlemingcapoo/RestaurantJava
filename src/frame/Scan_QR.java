@@ -128,7 +128,7 @@ public void run() {
     do {
         try {
             Thread.sleep(100);
-            System.out.println("Đang tìm kiếm mã QR... ");
+            
         } catch (InterruptedException e) {
             
         }
@@ -151,7 +151,7 @@ public void run() {
 
         } catch (Exception e) {
             // Handle the exception appropriately, e.g., log it
-            e.printStackTrace();
+            System.out.println("Đang tìm kiếm mã QR... ");
         }
 
         if (result != null) {
