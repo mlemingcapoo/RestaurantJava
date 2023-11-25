@@ -1,6 +1,7 @@
 package helper;
 
 import DAO.JDBCManager;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,17 +32,17 @@ public class DBHelper {
         PreparedStatement psmt = prepareState(sql, args);
         psmt.executeUpdate();
     }
-    
-    public static ResultSet executeQuery(String sql, Object...args) throws ClassNotFoundException,SQLException, Exception{
+
+    public static ResultSet executeQuery(String sql, Object... args) throws ClassNotFoundException, SQLException, Exception {
         PreparedStatement psm = prepareState(sql, args);
         return psm.executeQuery();
     }
-    
+
     public static ResultSet query(String sql, Object... args) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = DBHelper.getStmt(sql, args);
         return stmt.executeQuery();
     }
-    
+
     public static PreparedStatement getStmt(String sql, Object... args) throws SQLException, ClassNotFoundException, Exception {
         Connection conn = JDBCManager.getConnection();
         PreparedStatement stmt;
@@ -57,7 +58,7 @@ public class DBHelper {
         }
         return stmt;
     }
-    
+
     public static Object value(String sql, Object... args) {
         try {
             ResultSet rs = DBHelper.query(sql, args);
@@ -77,11 +78,38 @@ public class DBHelper {
             try {
                 return stmt.executeUpdate();
             } finally {
-               
+
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-    
+
+    public static ResultSet executeProc(String procName, Object... args) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        Connection conn = JDBCManager.getConnection();
+        CallableStatement stmt = null;
+
+        String prepareArgs = "";
+        for (int i = 0; i < args.length; i++) {
+//            System.out.println("?,");
+            sb.append("?,");
+            prepareArgs = sb.toString();
+        }
+        String finalArg = prepareArgs.substring(0, prepareArgs.length() - 1);
+        if (args.length < 1) {
+            stmt = conn.prepareCall("CALL " + procName);
+        } else {
+            stmt = conn.prepareCall("CALL " + procName + "(" + finalArg + ")");
+            for (int i = 0; i < args.length; i++) {
+                stmt.setObject(i + 1, args[i]);
+            }
+        }
+        System.out.println("ảgs: " + args.length);
+        System.out.println(stmt);
+        stmt.execute();
+        return stmt.getResultSet();
+
+    }
+
 }

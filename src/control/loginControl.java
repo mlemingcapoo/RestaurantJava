@@ -2,6 +2,7 @@ package control;
 
 import DAO.AuthenticateDAO;
 import GUI.mainUI;
+import helper.DialogHelper;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -21,20 +22,24 @@ public class loginControl {
             System.out.println("got it!: " + User.getText() + " " + password);
             boolean isLoggedIn = auth.checkLogin(User.getText(), password);
             if (isLoggedIn) {
-                login.dispose();
-                startMainUI();
+                startMainUI(auth.getPermissonLevel());
                 System.out.println("logged in");
             } else {
                 System.out.println("no.");
+                DialogHelper.alert(login, "Thông tin đăng nhập không đúng!");
             }
         }
 
     }
     
-    public void startMainUI() {
-        mainUI main = new mainUI();
-        main.setVisible(true);
-
+    public void startMainUI(int permissionLevel) {
+        if (permissionLevel<0){
+            DialogHelper.exitNow(login, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
+        } else {
+            mainUI main = new mainUI();
+            login.dispose();
+            main.setVisible(true);
+        }
     }
     
     private boolean validated() {
@@ -47,5 +52,10 @@ public class loginControl {
         login = new GUI.login(this);
         login.setLocationRelativeTo(null);
         login.setVisible(true);
+    }
+
+    private void startLocked() {
+        throw new UnsupportedOperationException("Not supported yet.");
+        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

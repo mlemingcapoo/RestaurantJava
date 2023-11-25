@@ -13,16 +13,25 @@ import java.sql.ResultSet;
  */
 public class AuthenticateDAO {
 
-    private int permissonLevel;
+    private static int permissonLevel;
+    private static String username;
+    private static int id;
+    private static String name;
 
-    public boolean checkLogin(String username, String password) {
+    public boolean checkLogin(String user, String pass) {
         ResultSet value = null;
         boolean result = false;
         try {
-            value = DBHelper.query("SELECT TOP 1 FROM User WHERE username = ?", username);
+            value = DBHelper.query("SELECT * FROM User WHERE username = ? LIMIT 1", user);
             if (value.next()) {
                 System.out.println(value.getString(2));
-                if (value.getString(3).equals(password)) {
+                if (value.getString(3).equals(pass)) {
+                    username = value.getString(2);
+                    permissonLevel = value.getInt(4);
+                    id = value.getInt(1);
+                    if (value.getBoolean(5)){
+                        permissonLevel = -1;
+                    }
                     System.out.println("done login");
                     result = true;
                 } else {
@@ -41,15 +50,19 @@ public class AuthenticateDAO {
 
     public String getUsername() {
 
-        return null;
+        return username;
     }
 
     public int getPermissonLevel() {
         return permissonLevel;
     }
 
-    public void setPermissonLevel(int permissonLevel) {
-        this.permissonLevel = permissonLevel;
+//    public void setPermissonLevel(int permissonLevel) {
+//        this.permissonLevel = permissonLevel;
+//    }
+    
+    public boolean isUserLocked() {
+        return false;
     }
 
 }

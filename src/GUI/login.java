@@ -46,6 +46,8 @@ public class login extends javax.swing.JFrame {
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
+        txtUser.setText("user7");
+
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -70,6 +72,8 @@ public class login extends javax.swing.JFrame {
         lblTaiKhoan.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 24)); // NOI18N
         lblTaiKhoan.setForeground(new java.awt.Color(51, 51, 51));
         lblTaiKhoan.setText("Đăng Nhập");
+
+        txtPass.setText("pass789");
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/logo Login (1).png"))); // NOI18N
