@@ -42,6 +42,7 @@ public class VocherJPanel extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 153, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vocher", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
+        jTable1.setBackground(new java.awt.Color(255, 153, 153));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -55,6 +56,7 @@ public class VocherJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        btnXoa.setBackground(new java.awt.Color(255, 153, 153));
         btnXoa.setText("Xoá");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,9 +64,15 @@ public class VocherJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setBackground(new java.awt.Color(255, 153, 153));
         btnSua.setText("Sửa");
 
+        btnThem.setBackground(new java.awt.Color(255, 153, 153));
         btnThem.setText("Thêm");
+
+        txtNgayHetHan1.setBackground(new java.awt.Color(255, 153, 153));
+
+        txtNgayHetHan.setBackground(new java.awt.Color(255, 153, 153));
 
         jLabel1.setText("Ngày Hết Hạn");
 
@@ -135,9 +143,9 @@ public class VocherJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnXoa;
+    public static javax.swing.JButton btnSua;
+    public static javax.swing.JButton btnThem;
+    public static javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;

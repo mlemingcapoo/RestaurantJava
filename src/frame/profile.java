@@ -57,6 +57,7 @@ JPanel DoiMatKhau = new DoiMatKhau();
         jPanel2.setBackground(new java.awt.Color(255, 153, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        btnDoiMatKhau.setBackground(new java.awt.Color(255, 153, 153));
         btnDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDoiMatKhau.setText("Đổi Mật Khẩu");
         btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +66,7 @@ JPanel DoiMatKhau = new DoiMatKhau();
             }
         });
 
+        btnDangXuat.setBackground(new java.awt.Color(255, 153, 153));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDangXuat.setText("Đăng Xuất ");
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +75,7 @@ JPanel DoiMatKhau = new DoiMatKhau();
             }
         });
 
+        btnLuu.setBackground(new java.awt.Color(255, 153, 153));
         btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLuu.setText("Lưu ");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
@@ -81,9 +84,12 @@ JPanel DoiMatKhau = new DoiMatKhau();
             }
         });
 
+        jTextPane1.setBackground(new java.awt.Color(255, 153, 153));
         jScrollPane1.setViewportView(jTextPane1);
 
         jLabel5.setText("Ghi Chú");
+
+        jPanel3.setBackground(new java.awt.Color(255, 153, 153));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -107,6 +113,7 @@ JPanel DoiMatKhau = new DoiMatKhau();
 
         jLabel1.setText("Họ Và Tên ");
 
+        txtHoTen.setBackground(new java.awt.Color(255, 153, 153));
         txtHoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtHoTenActionPerformed(evt);
@@ -115,6 +122,7 @@ JPanel DoiMatKhau = new DoiMatKhau();
 
         jLabel2.setText("Số Điện Thoại ");
 
+        txtSdt.setBackground(new java.awt.Color(255, 153, 153));
         txtSdt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSdtActionPerformed(evt);
@@ -123,7 +131,11 @@ JPanel DoiMatKhau = new DoiMatKhau();
 
         jLabel3.setText("Năm Sinh ");
 
+        txtNamSinh.setBackground(new java.awt.Color(255, 153, 153));
+
         jLabel4.setText("Số CCCD");
+
+        txtCccd.setBackground(new java.awt.Color(255, 153, 153));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

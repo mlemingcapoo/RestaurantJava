@@ -63,13 +63,16 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 153, 153));
 
+        jPanel3.setBackground(new java.awt.Color(255, 153, 153));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Chỉnh Sửa"));
         jPanel3.setPreferredSize(new java.awt.Dimension(0, 0));
 
+        txtHoTen.setBackground(new java.awt.Color(255, 153, 153));
         txtHoTen.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel2.setText("Họ Và Tên");
 
+        txtSDT.setBackground(new java.awt.Color(255, 153, 153));
         txtSDT.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         txtSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,15 +82,19 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Số Điện Thoại");
 
+        txtNgaySinh.setBackground(new java.awt.Color(255, 153, 153));
         txtNgaySinh.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         aa.setText("Ngày Sinh");
 
+        txtCccd.setBackground(new java.awt.Color(255, 153, 153));
         txtCccd.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         aa1.setText("CCCD");
 
         aa2.setText("Mật Khẩu");
+
+        txtMatKhau.setBackground(new java.awt.Color(255, 153, 153));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -147,8 +154,10 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jPanel8.setBackground(new java.awt.Color(255, 153, 153));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm Kiếm"));
 
+        txtTimKiem.setBackground(new java.awt.Color(255, 153, 153));
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimKiemActionPerformed(evt);
@@ -172,12 +181,16 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jPanel5.setBackground(new java.awt.Color(255, 153, 153));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức Năng"));
 
+        btnThem.setBackground(new java.awt.Color(255, 153, 153));
         btnThem.setText("Thêm");
 
+        btnSua.setBackground(new java.awt.Color(255, 153, 153));
         btnSua.setText("Sửa");
 
+        btnXoa.setBackground(new java.awt.Color(255, 153, 153));
         btnXoa.setText("Xoá");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -204,6 +217,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addGap(8, 8, 8))
         );
 
+        tblDanhSachNhanVien.setBackground(new java.awt.Color(255, 153, 153));
         tblDanhSachNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -217,10 +231,13 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tblDanhSachNhanVien);
 
+        jPanel9.setBackground(new java.awt.Color(255, 153, 153));
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Kiểm Soát"));
 
+        btnKhoa.setBackground(new java.awt.Color(255, 153, 153));
         btnKhoa.setText("Khoá");
 
+        btnMo.setBackground(new java.awt.Color(255, 153, 153));
         btnMo.setText("Mở");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -250,7 +267,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 763, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
