@@ -79,9 +79,9 @@
                   </Group>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnLuu1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnHuy" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnLuu" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnThayDoi" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel1" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
                       <Component id="txtSDT" alignment="0" max="32767" attributes="0"/>
@@ -123,8 +123,8 @@
                   <Component id="txtMKMoi2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnLuu" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnLuu1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnThayDoi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnHuy" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -157,13 +157,16 @@
             <Property name="text" type="java.lang.String" value="Nh&#x1ead;p L&#x1ea1;i Mk M&#x1edb;i "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnLuu">
+        <Component class="javax.swing.JButton" name="btnThayDoi">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Thay &#x110;&#x1ed5;i"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtMKCu">
           <Events>
@@ -174,13 +177,16 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtMKMoi2">
         </Component>
-        <Component class="javax.swing.JButton" name="btnLuu1">
+        <Component class="javax.swing.JButton" name="btnHuy">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Hu&#x1ef7;"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>

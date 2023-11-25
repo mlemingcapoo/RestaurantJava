@@ -8,6 +8,7 @@ import frame.QuanLyHoiVienJPanel;
 import frame.QuanLyMonAnJPanel;
 import frame.QuanLyNhanVienJPanel;
 import frame.QuanLyQuanLyBanHangJPanel;
+import frame.VocherJPanel;
 import frame.profile;
 import helper.DialogHelper;
 import javax.swing.JFrame;
@@ -28,6 +29,7 @@ public final class mainUiControl implements GUI_Interface {
     JPanel QLMonAn = new QuanLyMonAnJPanel();
     JPanel QLNNhanVien = new QuanLyNhanVienJPanel();
     JPanel QLBanHang = new QuanLyQuanLyBanHangJPanel();
+    
     JPanel Profile = new profile();
 
     private static mainUI frame;
@@ -118,6 +120,8 @@ public final class mainUiControl implements GUI_Interface {
         panelNavigator.switchPanel(mainUI.panelDisplay, "Profile");
 
     }
+
+    
 
     public void GiaoCa() {
         throw new UnsupportedOperationException("Not supported yet.");
