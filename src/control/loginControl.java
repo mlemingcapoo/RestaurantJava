@@ -3,6 +3,7 @@ package control;
 import DAO.AuthenticateDAO;
 import GUI.mainUI;
 import helper.DialogHelper;
+import java.awt.Dimension;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -38,6 +39,7 @@ public class loginControl {
         } else {
             mainUI main = new mainUI();
             login.dispose();
+            main.setMinimumSize(new Dimension(1044 , 720));
             main.setVisible(true);
         }
     }

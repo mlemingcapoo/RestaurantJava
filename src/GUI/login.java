@@ -62,7 +62,7 @@ public class login extends javax.swing.JFrame {
 
         btnDangNhap.setBackground(new java.awt.Color(255, 204, 51));
         btnDangNhap.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 12)); // NOI18N
-        btnDangNhap.setForeground(new java.awt.Color(102, 102, 102));
+        btnDangNhap.setForeground(new java.awt.Color(0, 0, 0));
         btnDangNhap.setText("Đăng Nhập");
         btnDangNhap.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
