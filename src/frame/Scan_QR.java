@@ -128,8 +128,9 @@ public void run() {
     do {
         try {
             Thread.sleep(100);
+            System.out.println("Đang tìm kiếm mã QR... ");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            
         }
 
         Result result = null;
