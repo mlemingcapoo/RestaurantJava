@@ -50,47 +50,47 @@ public class login extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jCheckBox1.setBackground(new java.awt.Color(204, 0, 204));
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Show");
+        jCheckBox1.setText("Show Password");
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBox1ItemStateChanged(evt);
             }
         });
-        jPanel3.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
+        jPanel3.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
 
         btnDangNhap.setBackground(new java.awt.Color(255, 204, 51));
-        btnDangNhap.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 0, 12)); // NOI18N
+        btnDangNhap.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 12)); // NOI18N
+        btnDangNhap.setForeground(new java.awt.Color(102, 102, 102));
         btnDangNhap.setText("Đăng Nhập");
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
             }
         });
-        jPanel3.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 149, 36));
+        jPanel3.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 149, 36));
 
-        jLabel2.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Mật Khẩu");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 89, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 89, -1));
 
-        jLabel1.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tài Khoản");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 91, -1));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 91, -1));
 
-        lblTaiKhoan.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 24)); // NOI18N
-        lblTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        lblTaiKhoan.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 48)); // NOI18N
+        lblTaiKhoan.setForeground(new java.awt.Color(255, 255, 204));
         lblTaiKhoan.setText("Đăng Nhập");
-        jPanel3.add(lblTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
+        jPanel3.add(lblTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
         txtUser.setText("user3");
-        jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 360, 31));
+        jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 360, 31));
 
         txtPass.setText("pass345");
-        jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 360, 31));
+        jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 360, 31));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/demo-lam-banner-facebook.png"))); // NOI18N
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 490, 360));
