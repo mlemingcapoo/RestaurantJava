@@ -2,7 +2,6 @@ package control;
 
 import DAO.JDBCManager;
 import GUI.start;
-import helper.DialogHelper;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 import util.SQLThread;
@@ -22,7 +21,7 @@ public class startControl extends start{
             System.out.println(loadingPercent);
             while (loadingPercent >= 100) {
                 if (JDBCManager.isConnected()){
-                    DialogHelper.alert(rootPane, "Please check your Internet!");
+//                    DialogHelper.alert(rootPane, "Please check your Internet!");
                     stopLoading();
                     break;
                 } else {
@@ -30,7 +29,7 @@ public class startControl extends start{
                     break;
                 }
             }
-            if (loadingPercent == 1) {
+            if (loadingPercent == 20) {
                 new SQLThread().main(null);
             }
             if (!JDBCManager.isConnected()) {
