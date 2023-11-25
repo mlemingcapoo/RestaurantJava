@@ -85,7 +85,11 @@ public class login extends javax.swing.JFrame {
         lblTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
         lblTaiKhoan.setText("Đăng Nhập");
         jPanel3.add(lblTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
+
+        txtUser.setText("user3");
         jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 360, 31));
+
+        txtPass.setText("pass345");
         jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 360, 31));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/demo-lam-banner-facebook.png"))); // NOI18N

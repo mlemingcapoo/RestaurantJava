@@ -163,6 +163,9 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JTextField" name="txtUser">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="user3"/>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="200" y="270" width="360" height="31"/>
@@ -170,6 +173,9 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JPasswordField" name="txtPass">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="pass345"/>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="200" y="350" width="360" height="31"/>
