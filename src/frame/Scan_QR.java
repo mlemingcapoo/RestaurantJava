@@ -1,21 +1,21 @@
 package frame;
 
 import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamException;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import helper.DialogHelper;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
-import javax.swing.JOptionPane;
 
 
 public class Scan_QR extends javax.swing.JFrame implements Runnable, ThreadFactory {
@@ -76,10 +76,37 @@ public class Scan_QR extends javax.swing.JFrame implements Runnable, ThreadFacto
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
+    
+    public Webcam getCam() {
+		Webcam webcam = Webcam.getDefault();
+		if (webcam != null) {
+			System.out.println("Webcam: " + webcam.getName());
+		} else {
+			System.out.println("No webcam detected");
+		}
+                return webcam;
+	}
+    
     private void initWebcam() {
         Dimension size = WebcamResolution.QVGA.getSize();
-        webcam = Webcam.getWebcams().get(0); //0 is default webcam
+        try {
+            
+            webcam = Webcam.getWebcams().get(0);
+        } catch (WebcamException w){
+            DialogHelper.alert(panel, w.toString());
+            
+        } catch (IndexOutOfBoundsException e){
+            DialogHelper.alert(panel, "Không tìm thấy webcam nào, đang thử lại...");
+            try {
+                webcam = getCam();
+            } catch (Exception e1){
+                DialogHelper.alert(panel, e1.toString());
+            }
+        } 
+        
+        //0 is default webcam
         //stop get webcam
+        try{
         Webcam.getDiscoveryService().setEnabled(false);
         Webcam.getDiscoveryService().stop();
         webcam.setViewSize(size);
@@ -91,6 +118,9 @@ public class Scan_QR extends javax.swing.JFrame implements Runnable, ThreadFacto
         
         jPanel2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
         executor.execute(this);
+        } catch (Exception e){
+            DialogHelper.alert(panel, "Có lỗi khi cố gắng tìm webcam");
+        }
     }
 
     @Override
