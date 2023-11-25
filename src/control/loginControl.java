@@ -53,7 +53,12 @@ public class loginControl {
     void init() {
         login = new GUI.login(this);
         login.setLocationRelativeTo(null);
+        Dimension defaultSize = new Dimension(800, 650);
+        login.setSize(defaultSize);
+        login.setMinimumSize(defaultSize);
+        login.setMaximumSize(defaultSize);
         login.setVisible(true);
+        
     }
 
     private void startLocked() {

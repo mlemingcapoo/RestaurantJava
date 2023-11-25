@@ -17,6 +17,7 @@ public class login extends javax.swing.JFrame {
      * @param control
      */
     public login(loginControl control) {
+//        setUndecorated(true);
         initComponents();
         login.control=control;
     }
