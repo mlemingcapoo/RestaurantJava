@@ -64,6 +64,7 @@ public class login extends javax.swing.JFrame {
         btnDangNhap.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 12)); // NOI18N
         btnDangNhap.setForeground(new java.awt.Color(102, 102, 102));
         btnDangNhap.setText("Đăng Nhập");
+        btnDangNhap.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
@@ -86,10 +87,16 @@ public class login extends javax.swing.JFrame {
         lblTaiKhoan.setText("Đăng Nhập");
         jPanel3.add(lblTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
+        txtUser.setBackground(new java.awt.Color(255, 255, 255));
+        txtUser.setForeground(new java.awt.Color(0, 0, 0));
         txtUser.setText("user3");
+        txtUser.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 360, 31));
 
+        txtPass.setBackground(new java.awt.Color(255, 255, 255));
+        txtPass.setForeground(new java.awt.Color(0, 0, 0));
         txtPass.setText("pass345");
+        txtPass.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 360, 31));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/demo-lam-banner-facebook.png"))); // NOI18N
