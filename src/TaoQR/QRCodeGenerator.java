@@ -14,7 +14,7 @@ public class QRCodeGenerator {
 
   public static void main(String[] args) throws Exception {
 
-    String text = "Oke";
+    String text = "MaVocherne";
     
     QRCodeWriter qrCodeWriter = new QRCodeWriter();
     BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 500, 500);
