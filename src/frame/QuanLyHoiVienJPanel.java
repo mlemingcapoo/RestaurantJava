@@ -233,7 +233,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
     public static javax.swing.JButton btnSua;
     public static javax.swing.JButton btnThem;
     public static javax.swing.JButton btnXoa;
-    private javax.swing.JComboBox<String> cboLocHoiVien;
+    public static javax.swing.JComboBox<String> cboLocHoiVien;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -243,10 +243,10 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblQuanLyHoiVien;
-    private javax.swing.JTextField txtGmailHoiVien;
-    private javax.swing.JTextField txtSDTHoiVien;
-    private javax.swing.JTextField txtTenHoiVien;
-    private javax.swing.JTextField txtTimKiem;
+    public static javax.swing.JTable tblQuanLyHoiVien;
+    public static javax.swing.JTextField txtGmailHoiVien;
+    public static javax.swing.JTextField txtSDTHoiVien;
+    public static javax.swing.JTextField txtTenHoiVien;
+    public static javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

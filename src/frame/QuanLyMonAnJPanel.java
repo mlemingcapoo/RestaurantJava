@@ -280,22 +280,22 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
     public static javax.swing.JButton btnSua;
     public static javax.swing.JButton btnThem;
     public static javax.swing.JButton btnXoa;
-    private javax.swing.JComboBox<String> cboChonLoaiMon;
-    private javax.swing.JComboBox<String> cboLoaiMon;
-    private javax.swing.JComboBox<String> cboTrangThai;
+    public static javax.swing.JComboBox<String> cboChonLoaiMon;
+    public static javax.swing.JComboBox<String> cboLoaiMon;
+    public static javax.swing.JComboBox<String> cboTrangThai;
     private javax.swing.JLabel imgAnhMonAn;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
+    public static javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
+    public static javax.swing.JPanel jPanel15;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblDanhSachMonAn;
-    private javax.swing.JTextField txtGiaMon;
+    public static javax.swing.JTable tblDanhSachMonAn;
+    public static javax.swing.JTextField txtGiaMon;
     private javax.swing.JTextField txtTenMon;
-    private javax.swing.JTextField txtTimKiem;
+    public static javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

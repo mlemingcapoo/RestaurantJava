@@ -138,7 +138,7 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnDangNhap;
-    private javax.swing.JCheckBox jCheckBox1;
+    public static javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -146,7 +146,7 @@ public class LoginJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblTaiKhoan;
-    private javax.swing.JPasswordField txtPass;
-    private javax.swing.JTextField txtUser;
+    public static javax.swing.JPasswordField txtPass;
+    public static javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

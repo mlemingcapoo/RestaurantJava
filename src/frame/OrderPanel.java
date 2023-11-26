@@ -721,7 +721,7 @@ public class OrderPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JComboBox<String> Cbbloai;
+    public static javax.swing.JComboBox<String> Cbbloai;
     public static javax.swing.JButton btnKhoa;
     public static javax.swing.JButton btnMo;
     public static javax.swing.JButton btnMo1;
