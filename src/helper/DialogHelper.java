@@ -28,7 +28,10 @@ public class DialogHelper {
         return JOptionPane.showInputDialog(parent, content,"Lưu ý", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    
+    public static boolean exitNow(Component parent, String content){
+        int result = JOptionPane.showConfirmDialog(parent, content,"Cảnh báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        return result == JOptionPane.YES_OPTION;
+    }
     
 //    public void openMainUI(){
 //        mainUI dialog = new mainUI();

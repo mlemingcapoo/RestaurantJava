@@ -105,9 +105,11 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
-        lblUsername.setText("Nguyễn Liên Mạnh");
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUsername.setText("User");
 
-        lblRole.setText("Admin");
+        lblRole.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRole.setText("Role");
 
         BtnQuanLyNhanVien.setBackground(new java.awt.Color(255, 204, 204));
         BtnQuanLyNhanVien.setText("Quản Lý Nhân Viên");
@@ -161,15 +163,6 @@ public class mainUI extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUsername)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(lblRole))
-                    .addComponent(panelProfilePhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(35, 35, 35))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -184,6 +177,18 @@ public class mainUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BtnDangXuat)
                 .addGap(45, 45, 45))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(panelProfilePhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(35, 35, 35))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblRole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblUsername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,17 +421,17 @@ public class mainUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton BtnCaiDat;
+    public static javax.swing.JButton BtnCaiDat;
     public static javax.swing.JButton BtnDangXuat;
     public static javax.swing.JButton BtnDatBan;
     public static javax.swing.JButton BtnGiaoCa;
     public static javax.swing.JButton BtnHoaDon;
     public static javax.swing.JButton BtnOrder;
-    private javax.swing.JButton BtnQuanLyBanHang;
-    private javax.swing.JButton BtnQuanLyDoanhThu;
-    private javax.swing.JButton BtnQuanLyHoiVien;
-    private javax.swing.JButton BtnQuanLyMon;
-    private javax.swing.JButton BtnQuanLyNhanVien;
+    public static javax.swing.JButton BtnQuanLyBanHang;
+    public static javax.swing.JButton BtnQuanLyDoanhThu;
+    public static javax.swing.JButton BtnQuanLyHoiVien;
+    public static javax.swing.JButton BtnQuanLyMon;
+    public static javax.swing.JButton BtnQuanLyNhanVien;
     private javax.swing.JLabel jLabel1;
     public static javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

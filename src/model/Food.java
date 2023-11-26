@@ -12,6 +12,16 @@ public class Food {
     private float price;
     private String type;
     private boolean isLocked;
+    private String img;
+    
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+    
 
     public int getDish_ID() {
         return dish_ID;

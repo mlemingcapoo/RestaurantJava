@@ -51,8 +51,10 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 153, 153));
         setPreferredSize(new java.awt.Dimension(1080, 720));
 
+        jPanel11.setBackground(new java.awt.Color(255, 153, 153));
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách"));
 
+        tblDanhSachMonAn.setBackground(new java.awt.Color(255, 153, 153));
         tblDanhSachMonAn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -79,15 +81,19 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 339, Short.MAX_VALUE)
+            .addGap(0, 345, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel11Layout.createSequentialGroup()
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
+        jPanel12.setBackground(new java.awt.Color(255, 153, 153));
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm Kiếm"));
 
+        txtTimKiem.setBackground(new java.awt.Color(255, 153, 153));
+
+        cboChonLoaiMon.setBackground(new java.awt.Color(255, 153, 153));
         cboChonLoaiMon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cboChonLoaiMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại", "Đồ Uống", "Đồ Ăn", "Tráng miệng" }));
 
@@ -110,14 +116,18 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jPanel13.setBackground(new java.awt.Color(255, 153, 153));
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức Năng"));
 
+        btnThem.setBackground(new java.awt.Color(255, 153, 153));
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThem.setText("Thêm");
 
+        btnSua.setBackground(new java.awt.Color(255, 153, 153));
         btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSua.setText("Sửa");
 
+        btnXoa.setBackground(new java.awt.Color(255, 153, 153));
         btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXoa.setText("Xoá");
 
@@ -144,20 +154,25 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
                 .addGap(5, 5, 5))
         );
 
+        jPanel14.setBackground(new java.awt.Color(255, 153, 153));
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder("Chỉnh Sửa"));
 
+        txtTenMon.setBackground(new java.awt.Color(255, 153, 153));
         txtTenMon.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel9.setText("Tên Món");
 
+        txtGiaMon.setBackground(new java.awt.Color(255, 153, 153));
         txtGiaMon.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel10.setText("Giá Món");
 
         aa3.setText("Loại");
 
+        cboLoaiMon.setBackground(new java.awt.Color(255, 153, 153));
         cboLoaiMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        cboTrangThai.setBackground(new java.awt.Color(255, 153, 153));
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoạt Động", "Đã Tắt" }));
 
         jLabel12.setText("Trạng Thái");
@@ -248,7 +263,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 264, Short.MAX_VALUE)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 276, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

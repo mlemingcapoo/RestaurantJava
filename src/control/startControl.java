@@ -1,9 +1,7 @@
 package control;
 
 import DAO.JDBCManager;
-import GUI.mainUI;
 import GUI.start;
-import helper.DialogHelper;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 import util.SQLThread;
@@ -23,7 +21,7 @@ public class startControl extends start{
             System.out.println(loadingPercent);
             while (loadingPercent >= 100) {
                 if (JDBCManager.isConnected()){
-                    DialogHelper.alert(rootPane, "Please check your Internet!");
+//                    DialogHelper.alert(rootPane, "Please check your Internet!");
                     stopLoading();
                     break;
                 } else {
@@ -31,7 +29,7 @@ public class startControl extends start{
                     break;
                 }
             }
-            if (loadingPercent == 1) {
+            if (loadingPercent == 20) {
                 new SQLThread().main(null);
             }
             if (!JDBCManager.isConnected()) {
@@ -46,13 +44,14 @@ public class startControl extends start{
         System.out.println("timer stopped, starting main UI");
         super.dispose();
         System.out.println("stopped loading screen");
-        startMainUI();
+        startLogin();
+//        startMainUI();
     }
 
-    public void startMainUI() {
-        mainUI main = new mainUI();
-        main.setVisible(true);
 
+    private void startLogin() {
+        System.out.println("openning login frame");
+        new loginControl().init();
     }
 
 }

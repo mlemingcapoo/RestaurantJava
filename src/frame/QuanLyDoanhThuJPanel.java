@@ -41,9 +41,11 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
         setToolTipText("[255,204,204]");
         setPreferredSize(new java.awt.Dimension(805, 652));
 
+        jPanel12.setBackground(new java.awt.Color(255, 153, 153));
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Thống Kê Chi Tiết"));
         jPanel12.setRequestFocusEnabled(false);
 
+        tblQuanLyChiTiet.setBackground(new java.awt.Color(255, 153, 153));
         tblQuanLyChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -73,8 +75,10 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel7.setBackground(new java.awt.Color(255, 153, 153));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức năng"));
 
+        cboChucNung.setBackground(new java.awt.Color(255, 153, 153));
         cboChucNung.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cboChucNung.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -95,9 +99,10 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
+        jPanel6.setBackground(new java.awt.Color(255, 153, 153));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Tổng"));
 
-        jPanel8.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel8.setBackground(new java.awt.Color(255, 153, 153));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Hội Viên"));
         jPanel8.setPreferredSize(new java.awt.Dimension(180, 86));
 
@@ -112,7 +117,7 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             .addGap(0, 63, Short.MAX_VALUE)
         );
 
-        jPanel9.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel9.setBackground(new java.awt.Color(255, 153, 153));
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Ngày"));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -126,7 +131,7 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel10.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel10.setBackground(new java.awt.Color(255, 153, 153));
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Tháng"));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -140,7 +145,7 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel11.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel11.setBackground(new java.awt.Color(255, 153, 153));
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Năm"));
         jPanel11.setPreferredSize(new java.awt.Dimension(180, 2));
 
