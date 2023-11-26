@@ -421,7 +421,7 @@ public class mainUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton BtnCaiDat;
+    public static javax.swing.JButton BtnCaiDat;
     public static javax.swing.JButton BtnDangXuat;
     public static javax.swing.JButton BtnDatBan;
     public static javax.swing.JButton BtnGiaoCa;

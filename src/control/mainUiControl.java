@@ -3,12 +3,11 @@ package control;
 import DAO.AuthenticateDAO;
 import GUI.mainUI;
 import frame.CaiDatJPanel;
+import frame.OrderPanel;
 import frame.QuanLyDoanhThuJPanel;
 import frame.QuanLyHoiVienJPanel;
 import frame.QuanLyMonAnJPanel;
 import frame.QuanLyNhanVienJPanel;
-import frame.QuanLyQuanLyBanHangJPanel;
-import frame.VocherJPanel;
 import frame.profile;
 import helper.DialogHelper;
 import javax.swing.JFrame;
@@ -28,12 +27,12 @@ public final class mainUiControl implements GUI_Interface {
     JPanel QLHoiVien = new QuanLyHoiVienJPanel();
     JPanel QLMonAn = new QuanLyMonAnJPanel();
     JPanel QLNNhanVien = new QuanLyNhanVienJPanel();
-    JPanel QLBanHang = new QuanLyQuanLyBanHangJPanel();
-    
+    OrderPanel QLBanHang = new OrderPanel();
+
     JPanel Profile = new profile();
 
     private static mainUI frame;
-    private AuthenticateDAO dao = new AuthenticateDAO();
+    private final AuthenticateDAO dao = new AuthenticateDAO();
 
     public mainUiControl(mainUI frame) {
         mainUiControl.frame = frame;
@@ -71,7 +70,7 @@ public final class mainUiControl implements GUI_Interface {
     @Override
     public void showFrame(JFrame frame) {
         System.out.println("lmao");
-        frame = (mainUI) frame;
+        mainUiControl.frame = (mainUI) frame;
         frame.setVisible(true);
 
     }
@@ -102,7 +101,8 @@ public final class mainUiControl implements GUI_Interface {
     }
 
     public void QuanLyBanHang() {
-        panelNavigator.switchPanel(mainUI.panelDisplay, "BanHang");
+//        panelNavigator.switchPanel(mainUI.panelDisplay, "BanHang");
+
     }
 
     public void CaiDat() {
@@ -121,8 +121,6 @@ public final class mainUiControl implements GUI_Interface {
 
     }
 
-    
-
     public void GiaoCa() {
         throw new UnsupportedOperationException("Not supported yet.");
         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -135,53 +133,54 @@ public final class mainUiControl implements GUI_Interface {
 
     public void Order() {
         panelNavigator.switchPanel(mainUI.panelDisplay, "BanHang");
+        OrderControl control = new OrderControl();
+        control.init(QLBanHang);
     }
 
     public void enforePerm(int permissonLevel) {
         lockAllBtn();
         unlockPerm(dao.getPermissonLevel());
         if (permissonLevel < 0) {
-            frame.BtnDangXuat.setEnabled(true);
+            mainUI.BtnDangXuat.setEnabled(true);
             DialogHelper.exitNow(frame, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
             System.exit(1);
 //            hideFrame(frame);
 //            frame.BtnDangXuat.setText("fuck");
 //            new startControl().loading();
-        } 
-    }
-
-    public static void lockAllBtn() {
-        frame.BtnCaiDat.setEnabled(false);
-        frame.BtnGiaoCa.setEnabled(false);
-        frame.BtnHoaDon.setEnabled(false);
-//        frame.BtnDangXuat.setEnabled(false);
-        frame.BtnDatBan.setEnabled(false);
-        frame.BtnQuanLyBanHang.setEnabled(false);
-        frame.BtnQuanLyMon.setEnabled(false);
-        frame.BtnQuanLyHoiVien.setEnabled(false);
-        frame.BtnQuanLyDoanhThu.setEnabled(false);
-        frame.BtnQuanLyNhanVien.setEnabled(false);
-        frame.BtnOrder.setEnabled(false);
-        frame.panelProfilePhoto.setVisible(false);
-    }
-
-    private void unlockPerm(int level) {
-        if (level>=0){
-           frame.BtnCaiDat.setEnabled(true);
-           frame.BtnGiaoCa.setEnabled(true);
-            frame.BtnHoaDon.setEnabled(true);
-            frame.BtnDatBan.setEnabled(true);
-            frame.BtnQuanLyBanHang.setEnabled(true);
-            frame.BtnQuanLyHoiVien.setEnabled(true);
-            frame.BtnOrder.setEnabled(true);
-            frame.panelProfilePhoto.setVisible(true);
-        } if (level>=1){
-            frame.BtnQuanLyDoanhThu.setEnabled(true);
-        frame.BtnQuanLyNhanVien.setEnabled(true);
-        frame.BtnQuanLyMon.setEnabled(true);
         }
     }
 
+    public static void lockAllBtn() {
+        mainUI.BtnCaiDat.setEnabled(false);
+        mainUI.BtnGiaoCa.setEnabled(false);
+        mainUI.BtnHoaDon.setEnabled(false);
+//        frame.BtnDangXuat.setEnabled(false);
+        mainUI.BtnDatBan.setEnabled(false);
+        mainUI.BtnQuanLyBanHang.setEnabled(false);
+        mainUI.BtnQuanLyMon.setEnabled(false);
+        mainUI.BtnQuanLyHoiVien.setEnabled(false);
+        mainUI.BtnQuanLyDoanhThu.setEnabled(false);
+        mainUI.BtnQuanLyNhanVien.setEnabled(false);
+        mainUI.BtnOrder.setEnabled(false);
+        mainUI.panelProfilePhoto.setVisible(false);
+    }
 
+    private void unlockPerm(int level) {
+        if (level >= 0) {
+            mainUI.BtnCaiDat.setEnabled(true);
+            mainUI.BtnGiaoCa.setEnabled(true);
+            mainUI.BtnHoaDon.setEnabled(true);
+            mainUI.BtnDatBan.setEnabled(true);
+            mainUI.BtnQuanLyBanHang.setEnabled(true);
+            mainUI.BtnQuanLyHoiVien.setEnabled(true);
+            mainUI.BtnOrder.setEnabled(true);
+            mainUI.panelProfilePhoto.setVisible(true);
+        }
+        if (level >= 1) {
+            mainUI.BtnQuanLyDoanhThu.setEnabled(true);
+            mainUI.BtnQuanLyNhanVien.setEnabled(true);
+            mainUI.BtnQuanLyMon.setEnabled(true);
+        }
+    }
 
 }

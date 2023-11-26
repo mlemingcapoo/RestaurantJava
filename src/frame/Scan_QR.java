@@ -21,14 +21,14 @@ import java.util.concurrent.ThreadFactory;
 public class Scan_QR extends javax.swing.JFrame implements Runnable, ThreadFactory {
 
     private WebcamPanel panel = null;
-    private Webcam webcam = null;
+    private static Webcam webcam = null;
 
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
 
-    private QuanLyQuanLyBanHangJPanel QuanLyQuanLyBanHang = null;
+    private OrderPanel QuanLyQuanLyBanHang = null;
     
-    public Scan_QR(QuanLyQuanLyBanHangJPanel QuanLyQuanLyBanHang) {
+    public Scan_QR(OrderPanel QuanLyQuanLyBanHang) {
         initComponents();
         setLocationRelativeTo (null);
         initWebcam();
@@ -65,7 +65,11 @@ public class Scan_QR extends javax.swing.JFrame implements Runnable, ThreadFacto
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        webcam.close();
+        try{webcam.close();}catch(Exception e){
+            DialogHelper.alert(this,"Vui lòng kiểm tra lại quyền truy cập webcam");
+        }
+        this.dispose();
+        System.out.println("Webcam Frame exited");
     }//GEN-LAST:event_formWindowClosing
 
     /**
@@ -119,7 +123,7 @@ public class Scan_QR extends javax.swing.JFrame implements Runnable, ThreadFacto
         jPanel2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
         executor.execute(this);
         } catch (Exception e){
-            DialogHelper.alert(panel, "Có lỗi khi cố gắng tìm webcam");
+            System.out.println("Webcam frame status: "+e.getMessage());
         }
     }
 
@@ -155,7 +159,7 @@ public void run() {
         }
 
         if (result != null) {
-            QuanLyQuanLyBanHangJPanel quanLyPanel = this.QuanLyQuanLyBanHang;
+            OrderPanel quanLyPanel = this.QuanLyQuanLyBanHang;
             String[] code = result.getText().split(",");
 
             // Assuming QuanLyQuanLyBanHangJPanel has a static field txtMaVocher
