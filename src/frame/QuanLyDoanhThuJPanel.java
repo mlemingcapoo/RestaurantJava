@@ -213,7 +213,7 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cboChucNung;
+    public static javax.swing.JComboBox<String> cboChucNung;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -222,6 +222,6 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblQuanLyChiTiet;
+    public static javax.swing.JTable tblQuanLyChiTiet;
     // End of variables declaration//GEN-END:variables
 }

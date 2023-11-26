@@ -318,16 +318,16 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    public static javax.swing.JPanel jPanel5;
+    public static javax.swing.JPanel jPanel8;
+    public static javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblDanhSachNhanVien;
-    private javax.swing.JTextField txtCccd;
-    private javax.swing.JTextField txtHoTen;
-    private javax.swing.JPasswordField txtMatKhau;
-    private javax.swing.JTextField txtNgaySinh;
-    private javax.swing.JTextField txtSDT;
-    private javax.swing.JTextField txtTimKiem;
+    public static javax.swing.JTable tblDanhSachNhanVien;
+    public static javax.swing.JTextField txtCccd;
+    public static javax.swing.JTextField txtHoTen;
+    public static javax.swing.JPasswordField txtMatKhau;
+    public static javax.swing.JTextField txtNgaySinh;
+    public static javax.swing.JTextField txtSDT;
+    public static javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
