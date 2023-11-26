@@ -6,6 +6,7 @@ package DAO;
 
 import helper.DBHelper;
 import java.sql.ResultSet;
+import java.sql.SQLNonTransientConnectionException;
 
 /**
  *
@@ -18,10 +19,9 @@ public class AuthenticateDAO {
     private static int id;
     private static String name;
 
-    public boolean checkLogin(String user, String pass) {
+    public boolean checkLogin(String user, String pass) throws SQLNonTransientConnectionException, Exception{
         ResultSet value = null;
         boolean result = false;
-        try {
             value = DBHelper.query("SELECT * FROM User WHERE username = ? LIMIT 1", user);
             if (value.next()) {
                 System.out.println(value.getString(2));
@@ -42,9 +42,7 @@ public class AuthenticateDAO {
                 System.out.println("outside of result");
                 result = false;
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+
         return result;
     }
 

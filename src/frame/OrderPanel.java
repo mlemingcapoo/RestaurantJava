@@ -65,7 +65,7 @@ public class OrderPanel extends javax.swing.JPanel {
         tblDSMonAn = new javax.swing.JTable();
         jPanel18 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tblDSLichSuThanhToan = new javax.swing.JTable();
+        tblDSOrderDangLam = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         txtTienKhachDua = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -86,19 +86,28 @@ public class OrderPanel extends javax.swing.JPanel {
         lblDSDangOrder.setBackground(new java.awt.Color(255, 204, 204));
         lblDSDangOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Tên Món", "Số lượng"
             }
-        ));
-        lblDSDangOrder.setMaximumSize(null);
-        lblDSDangOrder.setMinimumSize(null);
-        lblDSDangOrder.setPreferredSize(null);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        lblDSDangOrder.setColumnSelectionAllowed(true);
+        lblDSDangOrder.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(lblDSDangOrder);
+        lblDSDangOrder.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (lblDSDangOrder.getColumnModel().getColumnCount() > 0) {
+            lblDSDangOrder.getColumnModel().getColumn(0).setResizable(false);
+            lblDSDangOrder.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Tổng :");
@@ -364,16 +373,24 @@ public class OrderPanel extends javax.swing.JPanel {
         tblDSMonAn.setBackground(new java.awt.Color(255, 204, 204));
         tblDSMonAn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Tên Món", "Giá", "", "Ảnh", "Trạng Thái"
+                "Tên Món", "Giá", "Loại", "Ảnh"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDSMonAn.setColumnSelectionAllowed(true);
+        tblDSMonAn.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tblDSMonAn);
+        tblDSMonAn.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -417,19 +434,30 @@ public class OrderPanel extends javax.swing.JPanel {
         jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("Order Đang Làm"));
         jPanel18.setMaximumSize(null);
 
-        tblDSLichSuThanhToan.setBackground(new java.awt.Color(255, 204, 204));
-        tblDSLichSuThanhToan.setModel(new javax.swing.table.DefaultTableModel(
+        tblDSOrderDangLam.setBackground(new java.awt.Color(255, 204, 204));
+        tblDSOrderDangLam.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "STT", "ID Đơn Hàng"
             }
-        ));
-        jScrollPane4.setViewportView(tblDSLichSuThanhToan);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDSOrderDangLam.setColumnSelectionAllowed(true);
+        tblDSOrderDangLam.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(tblDSOrderDangLam);
+        tblDSOrderDangLam.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tblDSOrderDangLam.getColumnModel().getColumnCount() > 0) {
+            tblDSOrderDangLam.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -603,13 +631,13 @@ public class OrderPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane4;
     public static javax.swing.JTable lblDSDangOrder;
     public javax.swing.JLabel smileyFace;
-    public static javax.swing.JTable tblDSLichSuThanhToan;
-    public static javax.swing.JTable tblDSMonAn;
-    public static javax.swing.JTextField txtMaVocher;
-    public static javax.swing.JTextField txtSDTHoiVien;
-    public static javax.swing.JTextField txtTienKhachDua;
-    public static javax.swing.JTextField txtTienKhachMat;
-    public static javax.swing.JTextField txtTimMonAn;
-    public static javax.swing.JTextField txtTraKhach;
+    private javax.swing.JTable tblDSMonAn;
+    private javax.swing.JTable tblDSOrderDangLam;
+    public javax.swing.JTextField txtMaVocher;
+    public javax.swing.JTextField txtSDTHoiVien;
+    private javax.swing.JTextField txtTienKhachDua;
+    private javax.swing.JTextField txtTienKhachMat;
+    public javax.swing.JTextField txtTimMonAn;
+    private javax.swing.JTextField txtTraKhach;
     // End of variables declaration//GEN-END:variables
 }
