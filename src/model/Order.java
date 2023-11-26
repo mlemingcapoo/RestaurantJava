@@ -9,6 +9,7 @@ package model;
 public class Order {
     private int order_ID;
     private int bill_ID;
+    private String note;
     private boolean isCompleted;
 
     public int getOrder_ID() {
@@ -33,6 +34,14 @@ public class Order {
 
     public void setIsCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
     
      
