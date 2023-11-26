@@ -143,7 +143,6 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel10.setText("Voucher");
 
         txtMaVocher.setBackground(new java.awt.Color(255, 204, 204));
-        txtMaVocher.setForeground(new java.awt.Color(0, 0, 0));
         txtMaVocher.setMaximumSize(null);
         txtMaVocher.setMinimumSize(null);
         txtMaVocher.setPreferredSize(null);
@@ -154,7 +153,6 @@ public class OrderPanel extends javax.swing.JPanel {
         });
 
         txtSDTHoiVien.setBackground(new java.awt.Color(255, 204, 204));
-        txtSDTHoiVien.setForeground(new java.awt.Color(0, 0, 0));
         txtSDTHoiVien.setMinimumSize(null);
         txtSDTHoiVien.setPreferredSize(null);
 
@@ -207,7 +205,7 @@ public class OrderPanel extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -228,7 +226,6 @@ public class OrderPanel extends javax.swing.JPanel {
 
         btnThanhtoan.setBackground(new java.awt.Color(0, 204, 0));
         btnThanhtoan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnThanhtoan.setForeground(new java.awt.Color(0, 0, 0));
         btnThanhtoan.setText("Thanh Toán");
         btnThanhtoan.setMaximumSize(null);
         btnThanhtoan.setMinimumSize(null);
@@ -241,7 +238,6 @@ public class OrderPanel extends javax.swing.JPanel {
 
         btnThanhtoan1.setBackground(new java.awt.Color(255, 102, 0));
         btnThanhtoan1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnThanhtoan1.setForeground(new java.awt.Color(0, 0, 0));
         btnThanhtoan1.setText("Đặt Hàng");
         btnThanhtoan1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -454,7 +450,6 @@ public class OrderPanel extends javax.swing.JPanel {
         jPanel1.setMaximumSize(new java.awt.Dimension(0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(0, 0));
 
-        txtTienKhachDua.setBackground(new java.awt.Color(255, 255, 255));
         txtTienKhachDua.setForeground(new java.awt.Color(51, 51, 51));
         txtTienKhachDua.setMaximumSize(null);
         txtTienKhachDua.setMinimumSize(null);
@@ -462,7 +457,6 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Khách Thanh Toán");
 
-        txtTienKhachMat.setBackground(new java.awt.Color(255, 255, 255));
         txtTienKhachMat.setForeground(new java.awt.Color(51, 51, 51));
         txtTienKhachMat.setMargin(null);
         txtTienKhachMat.setMaximumSize(null);
@@ -470,7 +464,6 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Tổng tiền trên hoá đơn");
 
-        txtTraKhach.setBackground(new java.awt.Color(255, 255, 255));
         txtTraKhach.setForeground(new java.awt.Color(51, 51, 51));
         txtTraKhach.setMargin(null);
         txtTraKhach.setMaximumSize(null);
@@ -579,13 +572,13 @@ public class OrderPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JComboBox<String> Cbbloai;
+    public static javax.swing.JComboBox<String> Cbbloai;
     public static javax.swing.JButton btnKhoa;
     public static javax.swing.JButton btnMo;
     private javax.swing.JLabel btnTaoVocher;
     public static javax.swing.JButton btnThanhtoan;
     public static javax.swing.JButton btnThanhtoan1;
-    public javax.swing.JComboBox<String> cboHinhThucThanhToan;
+    public static javax.swing.JComboBox<String> cboHinhThucThanhToan;
     public static javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -608,15 +601,15 @@ public class OrderPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable lblDSDangOrder;
+    public static javax.swing.JTable lblDSDangOrder;
     public javax.swing.JLabel smileyFace;
-    private javax.swing.JTable tblDSLichSuThanhToan;
-    private javax.swing.JTable tblDSMonAn;
-    public javax.swing.JTextField txtMaVocher;
-    public javax.swing.JTextField txtSDTHoiVien;
-    private javax.swing.JTextField txtTienKhachDua;
-    private javax.swing.JTextField txtTienKhachMat;
-    public javax.swing.JTextField txtTimMonAn;
-    private javax.swing.JTextField txtTraKhach;
+    public static javax.swing.JTable tblDSLichSuThanhToan;
+    public static javax.swing.JTable tblDSMonAn;
+    public static javax.swing.JTextField txtMaVocher;
+    public static javax.swing.JTextField txtSDTHoiVien;
+    public static javax.swing.JTextField txtTienKhachDua;
+    public static javax.swing.JTextField txtTienKhachMat;
+    public static javax.swing.JTextField txtTimMonAn;
+    public static javax.swing.JTextField txtTraKhach;
     // End of variables declaration//GEN-END:variables
 }

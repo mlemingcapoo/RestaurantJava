@@ -184,9 +184,9 @@ public class DoiMatKhau extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField txtMKCu;
-    private javax.swing.JPasswordField txtMKMoi;
-    private javax.swing.JPasswordField txtMKMoi2;
-    private javax.swing.JTextField txtSDT;
+    public static javax.swing.JPasswordField txtMKCu;
+    public static javax.swing.JPasswordField txtMKMoi;
+    public static javax.swing.JPasswordField txtMKMoi2;
+    public static javax.swing.JTextField txtSDT;
     // End of variables declaration//GEN-END:variables
 }
