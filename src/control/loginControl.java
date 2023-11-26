@@ -4,6 +4,7 @@ import DAO.AuthenticateDAO;
 import GUI.mainUI;
 import helper.DialogHelper;
 import java.awt.Dimension;
+import java.sql.SQLNonTransientConnectionException;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -21,10 +22,21 @@ public class loginControl {
             char[] passwordChars = Pass.getPassword();
             String password = new String(passwordChars);
             System.out.println("got it!: " + User.getText() + " " + password);
-            boolean isLoggedIn = auth.checkLogin(User.getText(), password);
+            boolean isLoggedIn = false;
+            boolean connectionResetted = false;
+            try{
+                isLoggedIn = auth.checkLogin(User.getText(), password);
+            } catch (SQLNonTransientConnectionException e){
+                connectionResetted = true;
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
             if (isLoggedIn) {
                 startMainUI(auth.getPermissonLevel());
                 System.out.println("logged in");
+            } else if (connectionResetted&&!isLoggedIn){
+                System.out.println("connection lost.");
+                DialogHelper.alert(login, "Mất kết nối!");
             } else {
                 System.out.println("no.");
                 DialogHelper.alert(login, "Thông tin đăng nhập không đúng!");
