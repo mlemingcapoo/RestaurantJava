@@ -6,6 +6,7 @@ package GUI;
 
 import control.loginControl;
 
+
 /**
  *
  * @author capoo
@@ -36,6 +37,7 @@ public class login extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         btnDangNhap = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblTaiKhoan = new javax.swing.JLabel();
@@ -63,7 +65,6 @@ public class login extends javax.swing.JFrame {
 
         btnDangNhap.setBackground(new java.awt.Color(255, 204, 51));
         btnDangNhap.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 12)); // NOI18N
-        btnDangNhap.setForeground(new java.awt.Color(0, 0, 0));
         btnDangNhap.setText("Đăng Nhập");
         btnDangNhap.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +73,18 @@ public class login extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 149, 36));
+
+        jLabel4.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Quên Mật Khẩu ?");
+        jLabel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,14 +101,10 @@ public class login extends javax.swing.JFrame {
         lblTaiKhoan.setText("Đăng Nhập");
         jPanel3.add(lblTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
-        txtUser.setBackground(new java.awt.Color(255, 255, 255));
-        txtUser.setForeground(new java.awt.Color(0, 0, 0));
         txtUser.setText("user3");
         txtUser.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 360, 31));
 
-        txtPass.setBackground(new java.awt.Color(255, 255, 255));
-        txtPass.setForeground(new java.awt.Color(0, 0, 0));
         txtPass.setText("pass345");
         txtPass.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 360, 31));
@@ -149,6 +158,11 @@ public class login extends javax.swing.JFrame {
         control.login(txtUser, txtPass);
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+ 
+
+    }//GEN-LAST:event_jLabel4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -188,6 +202,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    public static javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
