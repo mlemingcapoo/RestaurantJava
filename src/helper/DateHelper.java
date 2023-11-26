@@ -60,7 +60,7 @@ public class DateHelper {
         try {
             Date chk = formater.parse(date);
             return true;
-        } catch (Exception e) {
+        } catch (ParseException e) {
             return  false;
         }
     }

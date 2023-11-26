@@ -1,0 +1,68 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package DAO;
+
+import helper.DBHelper;
+import java.sql.ResultSet;
+
+/**
+ *
+ * @author catty
+ */
+public class AuthenticateDAO {
+
+    private static int permissonLevel;
+    private static String username;
+    private static int id;
+    private static String name;
+
+    public boolean checkLogin(String user, String pass) {
+        ResultSet value = null;
+        boolean result = false;
+        try {
+            value = DBHelper.query("SELECT * FROM User WHERE username = ? LIMIT 1", user);
+            if (value.next()) {
+                System.out.println(value.getString(2));
+                if (value.getString(3).equals(pass)) {
+                    username = value.getString(2);
+                    permissonLevel = value.getInt(4);
+                    id = value.getInt(1);
+                    if (value.getBoolean(5)){
+                        permissonLevel = -1;
+                    }
+                    System.out.println("done login");
+                    result = true;
+                } else {
+                    System.out.println("wtf password?");
+                    result = false;
+                }
+            } else {
+                System.out.println("outside of result");
+                result = false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
+    public String getUsername() {
+
+        return username;
+    }
+
+    public int getPermissonLevel() {
+        return permissonLevel;
+    }
+
+//    public void setPermissonLevel(int permissonLevel) {
+//        this.permissonLevel = permissonLevel;
+//    }
+    
+    public boolean isUserLocked() {
+        return false;
+    }
+
+}

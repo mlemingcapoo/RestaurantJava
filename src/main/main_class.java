@@ -4,12 +4,8 @@
  */
 package main;
 
-import DAO.DBCManager;
-import GUI.loginFrame;
-import control.DangNhapControl;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import control.startControl;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -21,16 +17,19 @@ public class main_class {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        String log4jConfPath = "src/main/resources/log4j.properties";
+        PropertyConfigurator.configure(log4jConfPath);
         // TODO code application logic here
         System.out.println("hello");
         try {
             // master changed
-            DBCManager.getConnection();
+//            JDBCManager.getConnection();
             System.out.println("done");
-            new loginFrame(null, true);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(main_class.class.getName()).log(Level.SEVERE, null, ex);
+            new startControl().loading();
+        } catch (Exception ex) {
+//            Logger.getLogger(main_class.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("NO INTERNET");
         }
     }
-    
+
 }
