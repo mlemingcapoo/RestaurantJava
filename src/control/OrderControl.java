@@ -31,6 +31,7 @@ public class OrderControl {
     OrderDAO daoOrder = new OrderDAO();
     OrderDetailsDAO daoOrderDetails = new OrderDetailsDAO();
 
+    static Scan_QR_Control scanqr = new Scan_QR_Control();
     private static OrderPanel panel;
     SQL dao = new FoodDAO();
     DefaultTableModel foodModel = new DefaultTableModel();
@@ -170,7 +171,7 @@ public class OrderControl {
             } catch (Exception e) {
             }
         }
-        
+
     }
 
     public void dishClicked(int selectedRow) {
@@ -285,6 +286,11 @@ public class OrderControl {
         } catch (Exception ex) {
             DialogHelper.alert(panel, "Không tìm thấy order nào, vui lòng kiểm tra kết nối!");
         }
+    }
+
+    public void scanQR(OrderPanel aThis) {
+        System.out.println("Starting QR Scan");
+        scanqr.scan(aThis);
     }
 
 }

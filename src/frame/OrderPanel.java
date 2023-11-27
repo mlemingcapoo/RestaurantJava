@@ -19,10 +19,11 @@ public class OrderPanel extends javax.swing.JPanel {
 
     JPanel Vocher = new VoucherJPanel();
     JPanel HoiVien = new QuanLyHoiVienJPanel();
-    OrderControl control = new OrderControl();/**
-             * Creates new form ManHinhChinhJPanel
-             */
-
+    OrderControl control = new OrderControl();
+    
+    /**
+     * Creates new form ManHinhChinhJPanel
+     */
     public OrderPanel() {
         initComponents();
     }
@@ -675,7 +676,7 @@ public class OrderPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTaoVocherMouseClicked
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        new Scan_QR(this).setVisible(true);
+        control.scanQR(this);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void btnThanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhtoanActionPerformed
@@ -686,7 +687,7 @@ public class OrderPanel extends javax.swing.JPanel {
     private void btnSetOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetOrderActionPerformed
         // TODO add your handling code here:
         control.createOrder();
-        
+
     }//GEN-LAST:event_btnSetOrderActionPerformed
 
     private void txtTienKhachDuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienKhachDuaActionPerformed
