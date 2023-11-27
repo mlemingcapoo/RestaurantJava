@@ -3,7 +3,6 @@
 package DAO;
 
 import helper.DBHelper;
-import helper.DialogHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,9 @@ extends SQL<Food, String>
             }
             System.out.println("dish name at index 0: "+list.get(0).getName());;
         } catch (Exception e) {
-            DialogHelper.showDialog(null, "Vui lòng kiểm tra lại database!");
+//            DialogHelper.showDialog(null, "Vui lòng kiểm tra lại kết nối mạng và bấm OK!");
+            System.out.println("Connection was lost.. ");
+//            new SQLThread().main(null);
 //            throw new RuntimeException(e);
         }
         return list;
