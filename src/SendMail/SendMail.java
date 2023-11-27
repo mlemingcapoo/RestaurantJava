@@ -90,6 +90,7 @@ public class SendMail extends javax.swing.JFrame {
         // Hiển thị thông báo khi gửi thành công
         JOptionPane.showMessageDialog(this, "done");
         System.out.println("Done");
+        
 
     } catch (MessagingException | IOException e) {
         e.printStackTrace();

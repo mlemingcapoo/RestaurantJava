@@ -6,6 +6,7 @@ package GUI;
 
 import control.loginControl;
 import helper.RoundedCornerBorder;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JTextField;
@@ -28,9 +29,6 @@ public class login extends javax.swing.JFrame {
         initComponents();
         login.control = control;
     }
-    
-    
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,12 +118,18 @@ public class login extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jCheckBox1.setBackground(new Color(255, 0, 0, 0));
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setForeground(new java.awt.Color(242, 242, 242));
         jCheckBox1.setText("Show Password");
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBox1ItemStateChanged(evt);
+            }
+        });
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
             }
         });
         jPanel3.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
@@ -243,6 +247,10 @@ public class login extends javax.swing.JFrame {
         btnDangNhapActionPerformed(evt);
     }//GEN-LAST:event_txtPassActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -291,5 +299,3 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
-
-
