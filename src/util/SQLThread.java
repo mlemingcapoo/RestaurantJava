@@ -14,7 +14,7 @@ public class SQLThread implements Runnable {
     @Override
     public void run() {
         try {
-            Connection con = JDBCManager.getConnection();
+            Connection con = JDBCManager.reconnect();
             System.out.println(con.toString());
         } catch (Exception e) {
             System.out.println(e.toString());
