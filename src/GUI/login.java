@@ -5,6 +5,10 @@
 package GUI;
 
 import control.loginControl;
+import helper.RoundedCornerBorder;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import javax.swing.JTextField;
 
 /**
  *
@@ -24,6 +28,9 @@ public class login extends javax.swing.JFrame {
         initComponents();
         login.control = control;
     }
+    
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,13 +44,72 @@ public class login extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        btnDangNhap = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        btnDangNhap = new javax.swing.JButton(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
+        jLabel4 = new javax.swing.JLabel(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblTaiKhoan = new javax.swing.JLabel();
-        txtUser = new javax.swing.JTextField();
-        txtPass = new javax.swing.JPasswordField();
+        txtUser = new JTextField(20) {
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
+
+        ;
+        txtPass = new javax.swing.JPasswordField(20){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
+        ;
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -64,10 +130,11 @@ public class login extends javax.swing.JFrame {
         });
         jPanel3.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
 
-        btnDangNhap.setBackground(new java.awt.Color(255, 204, 51));
+        btnDangNhap.setBackground(new java.awt.Color(102, 102, 102));
         btnDangNhap.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 12)); // NOI18N
+        btnDangNhap.setForeground(new java.awt.Color(255, 255, 255));
         btnDangNhap.setText("Đăng Nhập");
-        btnDangNhap.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDangNhap.setBorder(new helper.RoundedCornerBorder());
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
@@ -75,11 +142,11 @@ public class login extends javax.swing.JFrame {
         });
         jPanel3.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 149, 36));
 
-        jLabel4.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel4.setBackground(new java.awt.Color(70, 73, 75));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Quên Mật Khẩu ?");
-        jLabel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel4.setBorder(new helper.RoundedCornerBorder());
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -103,7 +170,7 @@ public class login extends javax.swing.JFrame {
         jPanel3.add(lblTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
         txtUser.setText("user3");
-        txtUser.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtUser.setBorder(new helper.RoundedCornerBorder());
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPassActionPerformed(evt);
@@ -112,7 +179,7 @@ public class login extends javax.swing.JFrame {
         jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 360, 31));
 
         txtPass.setText("pass345");
-        txtPass.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPass.setBorder(new helper.RoundedCornerBorder());
         txtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPassActionPerformed(evt);
@@ -224,3 +291,5 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
+
+
