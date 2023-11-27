@@ -6,6 +6,8 @@ package frame;
 
 import GUI.mainUI;
 import control.OrderControl;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import util.panelNavigator;
 
@@ -37,11 +39,11 @@ public class OrderPanel extends javax.swing.JPanel {
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        lblDSDangOrder = new javax.swing.JTable();
+        tblDSDangOrder = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblTotalPayment = new javax.swing.JLabel();
         smileyFace = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboTable = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -53,7 +55,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnTaoVocher = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         btnThanhtoan = new javax.swing.JButton();
-        btnThanhtoan1 = new javax.swing.JButton();
+        btnSetOrder = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         txtTimMonAn = new javax.swing.JTextField();
@@ -61,10 +63,10 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnMo1 = new javax.swing.JButton();
-        txtTimMonAn1 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         btnMo = new javax.swing.JButton();
         btnKhoa = new javax.swing.JButton();
+        spinnerAmount = new javax.swing.JSpinner();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDSMonAn = new javax.swing.JTable();
         jPanel18 = new javax.swing.JPanel();
@@ -87,42 +89,59 @@ public class OrderPanel extends javax.swing.JPanel {
 
         jPanel14.setBackground(new java.awt.Color(255, 204, 204));
 
-        lblDSDangOrder.setBackground(new java.awt.Color(255, 204, 204));
-        lblDSDangOrder.setModel(new javax.swing.table.DefaultTableModel(
+        tblDSDangOrder.setBackground(new java.awt.Color(255, 204, 204));
+        tblDSDangOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tên Món", "Số lượng"
+                "Tên Món", "Số lượng", "Gộp Giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        lblDSDangOrder.setColumnSelectionAllowed(true);
-        lblDSDangOrder.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(lblDSDangOrder);
-        lblDSDangOrder.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (lblDSDangOrder.getColumnModel().getColumnCount() > 0) {
-            lblDSDangOrder.getColumnModel().getColumn(0).setResizable(false);
-            lblDSDangOrder.getColumnModel().getColumn(1).setResizable(false);
+        tblDSDangOrder.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent mouseEvent){
+                if(tblDSDangOrder.getSelectedRow()!=-1 && mouseEvent.getClickCount()==2)
+                {
+                    // code
+                    control.removeDishFromOrder(tblDSDangOrder.getSelectedRow());
+                    //        JOptionPane.showMessageDialog(null, "2clicked");
+                }
+            }
+        });
+        tblDSDangOrder.setColumnSelectionAllowed(true);
+        tblDSDangOrder.getTableHeader().setReorderingAllowed(false);
+        tblDSDangOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblDSDangOrderMousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblDSDangOrder);
+        tblDSDangOrder.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tblDSDangOrder.getColumnModel().getColumnCount() > 0) {
+            tblDSDangOrder.getColumnModel().getColumn(0).setResizable(false);
+            tblDSDangOrder.getColumnModel().getColumn(1).setResizable(false);
+            tblDSDangOrder.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Tổng :");
 
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("0");
+        lblTotalPayment.setForeground(new java.awt.Color(51, 51, 51));
+        lblTotalPayment.setText("0");
 
         smileyFace.setForeground(new java.awt.Color(51, 51, 51));
-        smileyFace.setText(":)))");
+        smileyFace.setText("VND");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mang Về", "Bàn 1", "Bàn 2", "Bàn 3", "Bàn 4" }));
+        cboTable.setForeground(new java.awt.Color(255, 255, 255));
+        cboTable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mang Về", "Bàn 1", "Bàn 2", "Bàn 3", "Bàn 4" }));
 
         jLabel6.setText("Giao Đến");
 
@@ -133,15 +152,15 @@ public class OrderPanel extends javax.swing.JPanel {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                    .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(189, 189, 189)
-                        .addComponent(smileyFace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblTotalPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(smileyFace, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cboTable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
@@ -151,15 +170,15 @@ public class OrderPanel extends javax.swing.JPanel {
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addGap(2, 2, 2)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTotalPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(smileyFace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(9, 9, 9))
         );
@@ -172,6 +191,7 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
         jLabel10.setText("Voucher");
 
+        txtMaVocher.setForeground(new java.awt.Color(255, 255, 255));
         txtMaVocher.setMaximumSize(null);
         txtMaVocher.setMinimumSize(null);
         txtMaVocher.setPreferredSize(null);
@@ -181,6 +201,7 @@ public class OrderPanel extends javax.swing.JPanel {
             }
         });
 
+        txtSDTHoiVien.setForeground(new java.awt.Color(255, 255, 255));
         txtSDTHoiVien.setMinimumSize(null);
         txtSDTHoiVien.setPreferredSize(null);
 
@@ -192,6 +213,7 @@ public class OrderPanel extends javax.swing.JPanel {
             }
         });
 
+        cboHinhThucThanhToan.setForeground(new java.awt.Color(255, 255, 255));
         cboHinhThucThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Chuyển Khoản", "Tiền Mặt" }));
         cboHinhThucThanhToan.setMaximumSize(null);
         cboHinhThucThanhToan.setMinimumSize(null);
@@ -269,12 +291,12 @@ public class OrderPanel extends javax.swing.JPanel {
             }
         });
 
-        btnThanhtoan1.setBackground(new java.awt.Color(255, 102, 0));
-        btnThanhtoan1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnThanhtoan1.setText("Đặt Hàng");
-        btnThanhtoan1.addActionListener(new java.awt.event.ActionListener() {
+        btnSetOrder.setBackground(new java.awt.Color(255, 102, 0));
+        btnSetOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSetOrder.setText("New Order");
+        btnSetOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThanhtoan1ActionPerformed(evt);
+                btnSetOrderActionPerformed(evt);
             }
         });
 
@@ -290,7 +312,7 @@ public class OrderPanel extends javax.swing.JPanel {
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addComponent(btnThanhtoan1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSetOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnThanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
@@ -304,7 +326,7 @@ public class OrderPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThanhtoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnSetOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel15.setBackground(new java.awt.Color(255, 204, 204));
@@ -314,8 +336,10 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("Tên Món");
 
+        txtTimMonAn.setForeground(new java.awt.Color(255, 255, 255));
+
         Cbbloai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Cbbloai.setForeground(new java.awt.Color(102, 102, 102));
+        Cbbloai.setForeground(new java.awt.Color(255, 255, 255));
         Cbbloai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Món Ăn", "Đồ Uống", "Tráng Miệng" }));
 
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
@@ -342,6 +366,17 @@ public class OrderPanel extends javax.swing.JPanel {
         btnKhoa.setForeground(new java.awt.Color(51, 51, 51));
         btnKhoa.setText("Khoá Món");
 
+        spinnerAmount.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinnerAmountStateChanged(evt);
+            }
+        });
+        spinnerAmount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                spinnerAmountMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -353,9 +388,9 @@ public class OrderPanel extends javax.swing.JPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
-                                .addGap(18, 18, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(txtTimMonAn1)
+                                .addComponent(spinnerAmount)
                                 .addGap(6, 6, 6)))
                         .addComponent(btnMo1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -373,8 +408,8 @@ public class OrderPanel extends javax.swing.JPanel {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTimMonAn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMo1)))
+                    .addComponent(btnMo1)
+                    .addComponent(spinnerAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         tblDSMonAn.setBackground(new java.awt.Color(255, 204, 204));
@@ -396,6 +431,21 @@ public class OrderPanel extends javax.swing.JPanel {
         });
         tblDSMonAn.setColumnSelectionAllowed(true);
         tblDSMonAn.getTableHeader().setReorderingAllowed(false);
+        tblDSMonAn.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent mouseEvent){
+                if(tblDSMonAn.getSelectedRow()!=-1 && mouseEvent.getClickCount()==2)
+                {
+                    // code
+                    control.addDish(tblDSMonAn.getSelectedRow());
+                    //        JOptionPane.showMessageDialog(null, "2clicked");
+                }
+            }
+        });
+        tblDSMonAn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblDSMonAnMousePressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblDSMonAn);
         tblDSMonAn.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -450,11 +500,11 @@ public class OrderPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "ID Đơn Hàng"
+                "STT", "ID Đơn Hàng", "Note"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -463,7 +513,22 @@ public class OrderPanel extends javax.swing.JPanel {
         });
         tblDSOrderDangLam.setColumnSelectionAllowed(true);
         tblDSOrderDangLam.getTableHeader().setReorderingAllowed(false);
+        tblDSOrderDangLam.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblDSOrderDangLamMousePressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblDSOrderDangLam);
+        tblDSOrderDangLam.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent mouseEvent){
+                if(tblDSOrderDangLam.getSelectedRow()!=-1 && mouseEvent.getClickCount()==2)
+                {
+                    // code
+                    control.deletePendingOrderClicked(tblDSOrderDangLam.getSelectedRow());
+                    //        JOptionPane.showMessageDialog(null, "2clicked");
+                }
+            }
+        });
         tblDSOrderDangLam.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (tblDSOrderDangLam.getColumnModel().getColumnCount() > 0) {
             tblDSOrderDangLam.getColumnModel().getColumn(1).setResizable(false);
@@ -483,31 +548,43 @@ public class OrderPanel extends javax.swing.JPanel {
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Máy tính"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tính tiền thừa"));
         jPanel1.setForeground(new java.awt.Color(102, 102, 102));
         jPanel1.setMaximumSize(new java.awt.Dimension(0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(0, 0));
 
-        txtTienKhachDua.setForeground(new java.awt.Color(51, 51, 51));
+        txtTienKhachDua.setBackground(new java.awt.Color(102, 102, 102));
+        txtTienKhachDua.setForeground(new java.awt.Color(255, 255, 255));
         txtTienKhachDua.setMaximumSize(null);
         txtTienKhachDua.setMinimumSize(null);
+        txtTienKhachDua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTienKhachDuaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Khách Thanh Toán");
+        jLabel2.setText("Khách Thanh Toán (VND)");
 
-        txtTienKhachMat.setForeground(new java.awt.Color(51, 51, 51));
+        txtTienKhachMat.setEditable(false);
+        txtTienKhachMat.setBackground(new java.awt.Color(51, 51, 51));
+        txtTienKhachMat.setForeground(new java.awt.Color(255, 255, 255));
+        txtTienKhachMat.setText("Chưa có hoá đơn");
         txtTienKhachMat.setMargin(null);
         txtTienKhachMat.setMaximumSize(null);
 
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Tổng tiền trên hoá đơn");
+        jLabel3.setText("Tổng tiền trên hoá đơn (VND)");
 
-        txtTraKhach.setForeground(new java.awt.Color(51, 51, 51));
+        txtTraKhach.setEditable(false);
+        txtTraKhach.setBackground(new java.awt.Color(51, 51, 51));
+        txtTraKhach.setForeground(new java.awt.Color(255, 255, 255));
+        txtTraKhach.setText("0");
         txtTraKhach.setMargin(null);
         txtTraKhach.setMaximumSize(null);
 
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Tiền trả lại");
+        jLabel4.setText("Tiền trả lại (VND)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -578,7 +655,7 @@ public class OrderPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, Short.MAX_VALUE)
                         .addGap(5, 5, 5)))
                 .addGap(0, 0, 0))
         );
@@ -603,26 +680,58 @@ public class OrderPanel extends javax.swing.JPanel {
 
     private void btnThanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhtoanActionPerformed
         // TODO add your handling code here:
-        control.test();
+        control.payment();
     }//GEN-LAST:event_btnThanhtoanActionPerformed
 
-    private void btnThanhtoan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhtoan1ActionPerformed
+    private void btnSetOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetOrderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnThanhtoan1ActionPerformed
+        control.createOrder();
+        
+    }//GEN-LAST:event_btnSetOrderActionPerformed
+
+    private void txtTienKhachDuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienKhachDuaActionPerformed
+        // TODO add your handling code here:
+        control.calculate();
+    }//GEN-LAST:event_txtTienKhachDuaActionPerformed
+
+    private void tblDSMonAnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSMonAnMousePressed
+        // TODO add your handling code here:
+        control.dishClicked(tblDSMonAn.getSelectedRow());
+    }//GEN-LAST:event_tblDSMonAnMousePressed
+
+    private void tblDSDangOrderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSDangOrderMousePressed
+        // TODO add your handling code here:
+        control.orderClicked(tblDSDangOrder.getSelectedRow());
+    }//GEN-LAST:event_tblDSDangOrderMousePressed
+
+    private void spinnerAmountMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spinnerAmountMousePressed
+        // TODO add your handling code here:
+//        control.changeDishAmount(spinnerAmount.getValue().toString());
+    }//GEN-LAST:event_spinnerAmountMousePressed
+
+    private void spinnerAmountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerAmountStateChanged
+        // TODO add your handling code here:
+        control.changeDishAmount(spinnerAmount);
+    }//GEN-LAST:event_spinnerAmountStateChanged
+
+    private void tblDSOrderDangLamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSOrderDangLamMousePressed
+        // TODO add your handling code here:
+        control.viewPendingOrderClicked(tblDSOrderDangLam.getSelectedRow());
+    }//GEN-LAST:event_tblDSOrderDangLamMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Cbbloai;
-    private javax.swing.JButton btnKhoa;
-    private javax.swing.JButton btnMo;
-    private javax.swing.JButton btnMo1;
+    public javax.swing.JComboBox<String> Cbbloai;
+    public static javax.swing.JButton btnKhoa;
+    public static javax.swing.JButton btnMo;
+    public static javax.swing.JButton btnMo1;
+    public static javax.swing.JButton btnSetOrder;
     private javax.swing.JLabel btnTaoVocher;
     public static javax.swing.JButton btnThanhtoan;
-    public static javax.swing.JButton btnThanhtoan1;
     public javax.swing.JComboBox<String> cboHinhThucThanhToan;
+    private javax.swing.JComboBox<String> cboTable;
     public static javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -631,7 +740,6 @@ public class OrderPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -644,16 +752,17 @@ public class OrderPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable lblDSDangOrder;
+    private javax.swing.JLabel lblTotalPayment;
     public javax.swing.JLabel smileyFace;
-    private javax.swing.JTable tblDSMonAn;
-    private javax.swing.JTable tblDSOrderDangLam;
+    private javax.swing.JSpinner spinnerAmount;
+    public javax.swing.JTable tblDSDangOrder;
+    public javax.swing.JTable tblDSMonAn;
+    public javax.swing.JTable tblDSOrderDangLam;
     public javax.swing.JTextField txtMaVocher;
     public javax.swing.JTextField txtSDTHoiVien;
-    private javax.swing.JTextField txtTienKhachDua;
-    private javax.swing.JTextField txtTienKhachMat;
-    private javax.swing.JTextField txtTimMonAn;
-    private javax.swing.JTextField txtTimMonAn1;
-    private javax.swing.JTextField txtTraKhach;
+    public javax.swing.JTextField txtTienKhachDua;
+    public javax.swing.JTextField txtTienKhachMat;
+    public javax.swing.JTextField txtTimMonAn;
+    public javax.swing.JTextField txtTraKhach;
     // End of variables declaration//GEN-END:variables
 }

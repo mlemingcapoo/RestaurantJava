@@ -6,6 +6,7 @@ package model;
  */
 public class OrderDetails {
 
+    
     private int quantity;
     private int order_ID;
     private int dish_ID;

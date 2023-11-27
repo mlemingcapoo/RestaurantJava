@@ -220,7 +220,7 @@ public class mainUI extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         BtnOrder.setBackground(new java.awt.Color(255, 204, 204));
-        BtnOrder.setText("Oder");
+        BtnOrder.setText("Order");
         BtnOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnOrderActionPerformed(evt);
