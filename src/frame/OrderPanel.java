@@ -17,7 +17,7 @@ import util.panelNavigator;
  */
 public class OrderPanel extends javax.swing.JPanel {
 
-    JPanel Vocher = new VocherJPanel();
+    JPanel Vocher = new VoucherJPanel();
     JPanel HoiVien = new QuanLyHoiVienJPanel();
     OrderControl control = new OrderControl();/**
              * Creates new form ManHinhChinhJPanel

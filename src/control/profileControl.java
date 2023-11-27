@@ -1,6 +1,6 @@
-
-
 package control;
+
+import frame.profile;
 
 /**
  *
@@ -8,4 +8,9 @@ package control;
  */
 public class profileControl {
 
+    static profile panel;
+
+    public void init(profile panel) {
+        profileControl.panel=panel;
+    }  
 }

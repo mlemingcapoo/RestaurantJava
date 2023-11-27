@@ -8,12 +8,12 @@ package frame;
  *
  * @author mynla
  */
-public class VocherJPanel extends javax.swing.JPanel {
+public class VoucherJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form VocherJPanel
      */
-    public VocherJPanel() {
+    public VoucherJPanel() {
         initComponents();
     }
 
