@@ -20,5 +20,7 @@ import java.util.List;
     abstract public List<E> selectAll();
 //    abstract public E selectByID(K id);
     abstract protected List<E> selectBySQL(String sql, Object...args);
+
+    
 }
 

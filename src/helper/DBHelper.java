@@ -96,7 +96,10 @@ public class DBHelper {
             sb.append("?,");
             prepareArgs = sb.toString();
         }
-        String finalArg = prepareArgs.substring(0, prepareArgs.length() - 1);
+//        String finalArg = "";
+        System.out.println("preparedArgs before process: "+prepareArgs);
+        String finalArg = removeComma(prepareArgs);
+        System.out.println("preparedArgs after processed: "+finalArg);
         if (args.length < 1) {
             stmt = conn.prepareCall("CALL " + procName);
         } else {
@@ -111,5 +114,12 @@ public class DBHelper {
         return stmt.getResultSet();
 
     }
+    
+    public static String removeComma(String str) {
+    if(str.endsWith(",")) {
+        str = str.substring(0, str.length() - 1);
+    }
+    return str;
+}
 
 }
