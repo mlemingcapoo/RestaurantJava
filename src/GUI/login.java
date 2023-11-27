@@ -6,23 +6,24 @@ package GUI;
 
 import control.loginControl;
 
-
 /**
  *
  * @author capoo
  */
 public class login extends javax.swing.JFrame {
+
     static loginControl control;
+
     /**
      * Creates new form login
+     *
      * @param control
      */
     public login(loginControl control) {
 //        setUndecorated(true);
         initComponents();
-        login.control=control;
+        login.control = control;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,10 +104,20 @@ public class login extends javax.swing.JFrame {
 
         txtUser.setText("user3");
         txtUser.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
         jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 360, 31));
 
         txtPass.setText("pass345");
         txtPass.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
         jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 360, 31));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/demo-lam-banner-facebook.png"))); // NOI18N
@@ -143,12 +154,9 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
-        if(evt.getStateChange() == 1)
-        {
-            txtPass.setEchoChar((char)0);
-        }
-        else
-        {
+        if (evt.getStateChange() == 1) {
+            txtPass.setEchoChar((char) 0);
+        } else {
             txtPass.setEchoChar('•');
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
@@ -159,9 +167,14 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
- 
+        control.forgorPass();
 
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        // TODO add your handling code here:
+        btnDangNhapActionPerformed(evt);
+    }//GEN-LAST:event_txtPassActionPerformed
 
     /**
      * @param args the command line arguments
