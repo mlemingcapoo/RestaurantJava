@@ -29,7 +29,7 @@ public class startControl extends start{
                     break;
                 }
             }
-            if (loadingPercent == 20) {
+            if (loadingPercent == 10) {
                 new SQLThread().main(null);
             }
             if (!JDBCManager.isConnected()) {
