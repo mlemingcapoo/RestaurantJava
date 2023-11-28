@@ -24,8 +24,8 @@ public class DateHelper {
             if (date == null) {
                 return DateHelper.now();
             }
-            System.out.println(date);
-            return formater.parse(date);
+            Date converted = formater.parse(date);
+            return addDays(converted, 30);
         } catch (ParseException ex) {
             throw new RuntimeException(ex);
         }
