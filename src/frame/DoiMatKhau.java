@@ -1,5 +1,9 @@
 package frame;
 
+import helper.RoundedCornerBorder;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -29,7 +33,21 @@ public class DoiMatKhau extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtSDT = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -49,6 +67,7 @@ public class DoiMatKhau extends javax.swing.JPanel {
 
         jLabel1.setText("Số Điện Thoại ");
 
+        txtSDT.setBorder(new RoundedCornerBorder());
         txtSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSDTActionPerformed(evt);

@@ -141,6 +141,10 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSDTActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtSDT.setBorder(new RoundedCornerBorder());"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -185,6 +189,7 @@
             <Property name="text" type="java.lang.String" value="Hu&#x1ef7;"/>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton()"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
