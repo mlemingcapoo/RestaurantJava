@@ -398,7 +398,7 @@ public class mainUI extends javax.swing.JFrame {
     );
 
     jPanel3.setBackground(new java.awt.Color(255, 153, 153));
-    jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+    jPanel3.setBorder(new RoundedCornerBorder2());
 
     BtnOrder.setBackground(new java.awt.Color(255, 204, 204));
     BtnOrder.setBorder(new RoundedCornerBorder());
@@ -450,7 +450,7 @@ public class mainUI extends javax.swing.JFrame {
             .addGap(18, 18, 18)
             .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
             .addGap(18, 18, 18)
-            .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
             .addGap(18, 18, 18)
             .addComponent(BtnGiaoCa, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
             .addGap(215, 215, 215))
