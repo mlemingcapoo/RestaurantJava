@@ -1,9 +1,6 @@
-
-
 package control;
 
 import DAO.FoodDAO;
-import DAO.SQL;
 import frame.QuanLyMonAnJPanel;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,21 +14,23 @@ import model.Food;
  * @author capoo
  */
 public class QuanLyMonAnControl {
-private static QuanLyMonAnJPanel panel;
-static List<Food> food = new ArrayList<>();
-DefaultTableModel foodModel = new DefaultTableModel();
-FoodDAO dao = new FoodDAO();
+
+    private static QuanLyMonAnJPanel panel;
+    static List<Food> food = new ArrayList<>();
+    DefaultTableModel foodModel = new DefaultTableModel();
+    FoodDAO dao = new FoodDAO();
 
     public void init(QuanLyMonAnJPanel panel) {
         QuanLyMonAnControl.panel = panel;
         refresh();
     }
-    
-    public void refresh(){
+
+    public void refresh() {
         getMon();
         fillDishes();
     }
-    public void fillDishes(){
+
+    public void fillDishes() {
         DefaultTableModel model = (DefaultTableModel) panel.tblDanhSachMonAn.getModel();
         model.setRowCount(0);
         for (Food fd : food) {
@@ -39,10 +38,8 @@ FoodDAO dao = new FoodDAO();
             model.addRow(row);
         }
     }
-    
-        
 
-    public void getMon(){
+    public void getMon() {
         food.clear();
         try {
             food = dao.selectAll();
@@ -50,82 +47,82 @@ FoodDAO dao = new FoodDAO();
         } catch (Exception e) {
         }
     }
-  public void themMon() {
-    try {
-        // Retrieve information from UI components
-        String tenMon = panel.txtTenMon.getText().trim();
-        if (tenMon.isEmpty()) {
-            helper.DialogHelper.alert(panel, "Vui lòng nhập tên món!");
-            return;
-        }
 
-        float giaMon;
+    public void themMon() {
         try {
-            giaMon = Float.parseFloat(panel.txtGiaMon.getText());
-        } catch (NumberFormatException ex) {
-            helper.DialogHelper.alert(panel, "Giá món phải là một số!");
-            return;
+            // Retrieve information from UI components
+            String tenMon = panel.txtTenMon.getText().trim();
+            if (tenMon.isEmpty()) {
+                helper.DialogHelper.alert(panel, "Vui lòng nhập tên món!");
+                return;
+            }
+
+            float giaMon;
+            try {
+                giaMon = Float.parseFloat(panel.txtGiaMon.getText());
+            } catch (NumberFormatException ex) {
+                helper.DialogHelper.alert(panel, "Giá món phải là một số!");
+                return;
+            }
+
+            String loaiMon = (String) panel.cboLoaiMon.getSelectedItem();
+            int trangThaiIndex = panel.cboTrangThai.getSelectedIndex();
+            boolean trangThai = (trangThaiIndex == 1);
+
+            String imgPath = null;
+
+            // Check if the image path is empty or null, set a default image link
+            if (imgPath == null || imgPath.isEmpty()) {
+                imgPath = "https://example.com/default-image.jpg"; // Replace with your default image link
+            }
+
+            // Check if the food item with the same name already exists
+            boolean isDuplicateName = food.stream().anyMatch(f -> f.getName().equalsIgnoreCase(tenMon));
+            if (isDuplicateName) {
+                helper.DialogHelper.alert(panel, "Tên món đã tồn tại trong danh sách!");
+                return;
+            }
+
+            // Create a new Food object
+            Food newFood = new Food();
+            newFood.setName(tenMon);
+            newFood.setPrice(giaMon);
+
+            // Map the selected item from the combo box to the appropriate type
+            switch (loaiMon.toLowerCase()) {
+                case "food":
+                    newFood.setType("Food");
+                    break;
+                case "drink":
+                    newFood.setType("Drink");
+                    break;
+                case "dessert":
+                    newFood.setType("Dessert");
+                    break;
+            }
+
+            newFood.setIsLocked(trangThai);
+            newFood.setImg(imgPath);
+
+            // Insert the new food item into the database
+            dao.insert(newFood);
+
+            // Refresh the data and update the UI
+            refresh();
+            clearForm();
+            helper.DialogHelper.alert(panel, "Thêm món thành công!");
+        } catch (Exception ex) {
+            helper.DialogHelper.alert(panel, "Đã xảy ra lỗi khi thêm món!");
+            ex.printStackTrace(); // Handle the exception appropriately, e.g., show an error message
         }
-
-        String loaiMon = (String) panel.cboLoaiMon.getSelectedItem();
-        int trangThaiIndex = panel.cboTrangThai.getSelectedIndex();
-        boolean trangThai = (trangThaiIndex == 1);
-
-        String imgPath = null;
-
-        // Check if the image path is empty or null, set a default image link
-        if (imgPath == null || imgPath.isEmpty()) {
-            imgPath = "https://example.com/default-image.jpg"; // Replace with your default image link
-        }
-
-        // Check if the food item with the same name already exists
-        boolean isDuplicateName = food.stream().anyMatch(f -> f.getName().equalsIgnoreCase(tenMon));
-        if (isDuplicateName) {
-            helper.DialogHelper.alert(panel, "Tên món đã tồn tại trong danh sách!");
-            return;
-        }
-
-        // Create a new Food object
-        Food newFood = new Food();
-        newFood.setName(tenMon);
-        newFood.setPrice(giaMon);
-
-        // Map the selected item from the combo box to the appropriate type
-        switch (loaiMon.toLowerCase()) {
-            case "food":
-                newFood.setType("Food");
-                break;
-            case "drink":
-                newFood.setType("Drink");
-                break;
-            case "dessert":
-                newFood.setType("Dessert");
-                break;
-        }
-
-        newFood.setIsLocked(trangThai);
-        newFood.setImg(imgPath);
-
-        // Insert the new food item into the database
-        dao.insert(newFood);
-
-        // Refresh the data and update the UI
-        refresh();
-        clearForm();
-        helper.DialogHelper.alert(panel, "Thêm món thành công!");
-    } catch (Exception ex) {
-        helper.DialogHelper.alert(panel, "Đã xảy ra lỗi khi thêm món!");
-        ex.printStackTrace(); // Handle the exception appropriately, e.g., show an error message
     }
-}
-  
 
-    
-    public void fillToForm(int selectedRow){
-    Food get = food.get(selectedRow);
+    public void fillToForm(int selectedRow) {
+        Food get = food.get(selectedRow);
         setForm(get);
-}
-    public void setForm(Food fd){
+    }
+
+    public void setForm(Food fd) {
         panel.txtTenMon.setText(fd.getName());
         panel.txtGiaMon.setText(String.valueOf(fd.getPrice()));
         panel.cboLoaiMon.setSelectedItem(fd.getType());
@@ -140,8 +137,8 @@ FoodDAO dao = new FoodDAO();
     }
 
     public void suaMon(int selectedRow) {
-        System.out.println("sua mon: "+selectedRow);
-        int dish_id= food.get(selectedRow).getDish_ID();
+        System.out.println("sua mon: " + selectedRow);
+        int dish_id = food.get(selectedRow).getDish_ID();
         Food newFood = new Food();
         newFood.setDish_ID(dish_id);
         newFood.setName(panel.txtTenMon.getText());
@@ -156,52 +153,57 @@ FoodDAO dao = new FoodDAO();
                 break;
         }
         newFood.setImg(food.get(selectedRow).getImg());
-    try {
-        dao.update(newFood);
-        clearForm();
-        helper.DialogHelper.alert(panel, "Sửa món thành công!!!");
-    } catch (Exception ex) {
-        helper.DialogHelper.alert(panel, "Xảy ra lỗi khi sửa món!!!");
-        Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            dao.update(newFood);
+            clearForm();
+            helper.DialogHelper.alert(panel, "Sửa món thành công!!!");
+        } catch (Exception ex) {
+            helper.DialogHelper.alert(panel, "Xảy ra lỗi khi sửa món!!!");
+            Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void xoaMon(int selectedRow) {
-        System.out.println("xoa mon: "+selectedRow);
-        int dish_id= food.get(selectedRow).getDish_ID();
+        System.out.println("xoa mon: " + selectedRow);
+        int dish_id = food.get(selectedRow).getDish_ID();
         Food newFood = new Food();
         newFood.setDish_ID(dish_id);
-    try {
-        dao.delete(newFood);
-        clearForm();
-        helper.DialogHelper.alert(panel, "Xóa Món Thành Công!");
-    } catch (Exception ex) {
-        helper.DialogHelper.alert(panel, "Xóa món thất bại!");
-        Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            dao.delete(newFood);
+            clearForm();
+            helper.DialogHelper.alert(panel, "Xóa Món Thành Công!");
+        } catch (Exception ex) {
+            helper.DialogHelper.alert(panel, "Xóa món thất bại!");
+            Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    }
-   
-    public void clearForm(){
+
+    public void clearForm() {
         panel.txtTenMon.setText("");
         panel.txtGiaMon.setText("");
         panel.cboLoaiMon.setSelectedIndex(0);
         panel.cboTrangThai.setSelectedIndex(0);
     }
 
-    public void timKiem(String tuKhoa, String type) {
-    try {
-        List<Food> fd = dao.searchByNameAndType(tuKhoa, type);
-        DefaultTableModel model = (DefaultTableModel) panel.tblDanhSachMonAn.getModel();
-        model.setRowCount(0);
-        for (Food fd1 : fd) {
-            Object[] row = new Object[]{fd1.getName(), fd1.getPrice(), fd1.getType(), fd1.getImg(), fd1.isIsLocked()};
-            model.addRow(row);
+    public void timKiem(String tuKhoa, String type1) {
+        try {
+            String type = "%";
+            if (type1.equals("Chọn Loại")){
+                type = "%";
+            }
+            List<Food> fd = dao.searchByNameAndType("%"+tuKhoa+"%", "%"+type+"%");
+            System.out.println("Tu Khoa search: "+tuKhoa);
+            System.out.println("Loai search: "+type1);
+            DefaultTableModel model = (DefaultTableModel) panel.tblDanhSachMonAn.getModel();
+            model.setRowCount(0);
+            for (Food fd1 : fd) {
+                Object[] row = new Object[]{fd1.getName(), fd1.getPrice(), fd1.getType(), fd1.getImg(), fd1.isIsLocked()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (Exception ex) {
-        Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        
-    }
 
+    }
 
 }
