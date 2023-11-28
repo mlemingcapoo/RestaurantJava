@@ -7,6 +7,8 @@ import DAO.SQL;
 import frame.QuanLyMonAnJPanel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.Food;
 
@@ -51,19 +53,36 @@ FoodDAO dao = new FoodDAO();
   public void themMon() {
     try {
         // Retrieve information from UI components
-        String tenMon = panel.txtTenMon.getText();
-        float giaMon = Float.parseFloat(panel.txtGiaMon.getText());
-        String loaiMon = (String) panel.cboLoaiMon.getSelectedItem();
-        int trangThaiIndex = panel.cboTrangThai.getSelectedIndex(); // Get the selected index
+        String tenMon = panel.txtTenMon.getText().trim();
+        if (tenMon.isEmpty()) {
+            helper.DialogHelper.alert(panel, "Vui lòng nhập tên món!");
+            return;
+        }
 
-        // Map the selected index from the combo box to the appropriate status
-        boolean trangThai = (trangThaiIndex == 1); // 1 represents "đã tắt," 0 represents "hoạt động"
+        float giaMon;
+        try {
+            giaMon = Float.parseFloat(panel.txtGiaMon.getText());
+        } catch (NumberFormatException ex) {
+            helper.DialogHelper.alert(panel, "Giá món phải là một số!");
+            return;
+        }
+
+        String loaiMon = (String) panel.cboLoaiMon.getSelectedItem();
+        int trangThaiIndex = panel.cboTrangThai.getSelectedIndex();
+        boolean trangThai = (trangThaiIndex == 1);
 
         String imgPath = null;
 
         // Check if the image path is empty or null, set a default image link
         if (imgPath == null || imgPath.isEmpty()) {
             imgPath = "https://example.com/default-image.jpg"; // Replace with your default image link
+        }
+
+        // Check if the food item with the same name already exists
+        boolean isDuplicateName = food.stream().anyMatch(f -> f.getName().equalsIgnoreCase(tenMon));
+        if (isDuplicateName) {
+            helper.DialogHelper.alert(panel, "Tên món đã tồn tại trong danh sách!");
+            return;
         }
 
         // Create a new Food object
@@ -93,13 +112,12 @@ FoodDAO dao = new FoodDAO();
         // Refresh the data and update the UI
         refresh();
         helper.DialogHelper.alert(panel, "Thêm món thành công!");
-    } catch (NumberFormatException ex) {
-        helper.DialogHelper.alert(panel, "Giá món phải là một số!");
     } catch (Exception ex) {
         helper.DialogHelper.alert(panel, "Đã xảy ra lỗi khi thêm món!");
         ex.printStackTrace(); // Handle the exception appropriately, e.g., show an error message
     }
 }
+  
 
     
     public void fillToForm(int selectedRow){
@@ -120,7 +138,30 @@ FoodDAO dao = new FoodDAO();
         }
     }
 
-    public void suaMon() {
-        
+    public void suaMon(int selectedRow) {
+        System.out.println("sua mon: "+selectedRow);
+        int dish_id= food.get(selectedRow).getDish_ID();
+        Food newFood = new Food();
+        newFood.setDish_ID(dish_id);
+        newFood.setName(panel.txtTenMon.getText());
+        newFood.setPrice(Float.parseFloat(panel.txtGiaMon.getText()));
+        newFood.setType(panel.cboLoaiMon.getSelectedItem().toString());
+        switch (panel.cboTrangThai.getSelectedIndex()) {
+            case 1:
+                newFood.setIsLocked(true);
+                break;
+            case 0:
+                newFood.setIsLocked(false);
+                break;
+        }
+        newFood.setImg(food.get(selectedRow).getImg());
+    try {
+        dao.update(newFood);
+    } catch (Exception ex) {
+        Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
     }
+    }
+   
+
+
 }

@@ -149,6 +149,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblDanhSachMonAn.setColumnSelectionAllowed(true);
         tblDanhSachMonAn.getTableHeader().setReorderingAllowed(false);
         tblDanhSachMonAn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -156,6 +157,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tblDanhSachMonAn);
+        tblDanhSachMonAn.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -386,11 +388,11 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
 
     private void tblDanhSachMonAnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMonAnMousePressed
         control.fillToForm(tblDanhSachMonAn.getSelectedRow());
-        control.refresh();
+//        control.refresh();
     }//GEN-LAST:event_tblDanhSachMonAnMousePressed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        control.suaMon();
+        control.suaMon(tblDanhSachMonAn.getSelectedRow());
         control.refresh();
     }//GEN-LAST:event_btnSuaActionPerformed
 

@@ -22,7 +22,7 @@ extends SQL<Food, String>
     String SELECT_ALL_SQL = "SELECT * FROM Food";
     String SELECT_BY_ID_SQL = "SELECT * FROM Food WHERE FoodID = ?";
     String INSERT_SQL = "CALL ThemMonAn(?,?,?,?,?)";
-//    String UPDATE_SQL = "CALL SuaMonAn(?,?,?,?,?)";
+    String UPDATEMONAN_SQL = "CALL CapNhatMonAn(?,?,?,?,?,?)";
     @Override
     public List<Food> selectAll() {
         return this.selectBySQL(SELECT_ALL_SQL);
@@ -57,5 +57,9 @@ extends SQL<Food, String>
    public void insert(Food food) throws Exception {
 //        DBHelper.executeProc(INSERT_SQL,);
         DBHelper.executeProc("ThemMonAn", food.getName(), food.getPrice(), food.getType(), food.isIsLocked(), food.getImg() );
+    }
+   public void update(Food food) throws Exception {
+//        DBHelper.executeProc(INSERT_SQL,);
+        DBHelper.executeProc("CapNhatMonAn", food.getDish_ID(),food.getName(), food.getPrice(), food.getType(), food.isIsLocked(), food.getImg() );
     }
 }
