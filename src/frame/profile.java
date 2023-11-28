@@ -1,6 +1,7 @@
 package frame;
 
 import GUI.mainUI;
+import control.profileControl;
 import javax.swing.JPanel;
 import util.panelNavigator;
 
@@ -16,12 +17,13 @@ import util.panelNavigator;
  */
 public class profile extends javax.swing.JPanel {
 JPanel DoiMatKhau = new DoiMatKhau();
+    profileControl control = new profileControl();
     /**
      * Creates new form profile
      */
     public profile() {
         initComponents();
-        
+        control.init(this);
     }
 
     /**
@@ -242,6 +244,7 @@ JPanel DoiMatKhau = new DoiMatKhau();
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         // TODO add your handling code here:
+        control.fuck();
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
