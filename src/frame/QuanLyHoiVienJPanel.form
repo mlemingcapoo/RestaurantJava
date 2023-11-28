@@ -304,7 +304,7 @@
             <Property name="text" type="java.lang.String" value="Ng&#xe0;y sinh"/>
           </Properties>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="chonngay">
+        <Component class="org.netbeans.modules.form.InvalidComponent" name="chonngay">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="QuanLyHoiVienJPanel_chonngay"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

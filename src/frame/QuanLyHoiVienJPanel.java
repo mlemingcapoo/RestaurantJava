@@ -6,14 +6,8 @@ package frame;
 
 import DAO.HoiVienDAO;
 import control.QuanLyHoiVienControl;
-import helper.DateHelper;
-import helper.DialogHelper;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.KhachHang;
 
@@ -70,7 +64,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        chonngay = new com.toedter.calendar.JDateChooser();
+        chonngay = new org.netbeans.modules.form.InvalidComponent();
         txtTenHoiVien1 = new javax.swing.JTextField();
         txtSDTHoiVien = new javax.swing.JTextField();
         txtGmailHoiVien = new javax.swing.JTextField();
@@ -363,7 +357,7 @@ control.themHV();
     public static javax.swing.JButton btnThem;
     public static javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboLocHoiVien;
-    public com.toedter.calendar.JDateChooser chonngay;
+    private org.netbeans.modules.form.InvalidComponent chonngay;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
