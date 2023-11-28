@@ -4,17 +4,25 @@
  */
 package frame;
 
+import control.QuanLyMonAnControl;
+import helper.RoundedCornerBorder;
+import helper.RoundedCornerBorder2;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 /**
  *
  * @author mynla
  */
 public class QuanLyMonAnJPanel extends javax.swing.JPanel {
-
+    QuanLyMonAnControl control = new QuanLyMonAnControl();
     /**
      * Creates new form ManHinhChinhJPanel
      */
     public QuanLyMonAnJPanel() {
         initComponents();
+        control.init(this);
+        
     }
 
     /**
@@ -33,11 +41,67 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         txtTimKiem = new javax.swing.JTextField();
         cboChonLoaiMon = new javax.swing.JComboBox<>();
         jPanel13 = new javax.swing.JPanel();
-        btnThem = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
+        btnSua = new javax.swing.JButton(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
+        btnXoa = new javax.swing.JButton(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
         jPanel14 = new javax.swing.JPanel();
-        txtTenMon = new javax.swing.JTextField();
+        txtTenMon = new javax.swing.JTextField(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
         jLabel9 = new javax.swing.JLabel();
         txtGiaMon = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -45,7 +109,21 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         cboLoaiMon = new javax.swing.JComboBox<>();
         cboTrangThai = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        jPanel15 = new javax.swing.JPanel();
+        lblAnh = new javax.swing.JPanel(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
         imgAnhMonAn = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 153, 153));
@@ -57,15 +135,26 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         tblDanhSachMonAn.setBackground(new java.awt.Color(255, 153, 153));
         tblDanhSachMonAn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Tên Món", "Giá", "Loại", "Ảnh", "Trạng Thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDanhSachMonAn.getTableHeader().setReorderingAllowed(false);
+        tblDanhSachMonAn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblDanhSachMonAnMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDanhSachMonAn);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -119,14 +208,27 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         jPanel13.setBackground(new java.awt.Color(255, 153, 153));
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức Năng"));
 
+        btnThem.setBorder(new RoundedCornerBorder());
         btnThem.setBackground(new java.awt.Color(255, 153, 153));
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
+        btnSua.setBorder(new RoundedCornerBorder());
         btnSua.setBackground(new java.awt.Color(255, 153, 153));
         btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
+        btnXoa.setBorder(new RoundedCornerBorder());
         btnXoa.setBackground(new java.awt.Color(255, 153, 153));
         btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXoa.setText("Xoá");
@@ -157,6 +259,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         jPanel14.setBackground(new java.awt.Color(255, 153, 153));
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder("Chỉnh Sửa"));
 
+        txtTenMon.setBorder(new RoundedCornerBorder());
         txtTenMon.setBackground(new java.awt.Color(255, 153, 153));
         txtTenMon.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -170,29 +273,30 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         aa3.setText("Loại");
 
         cboLoaiMon.setBackground(new java.awt.Color(255, 153, 153));
-        cboLoaiMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboLoaiMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food", "Drink", "Dessert" }));
 
         cboTrangThai.setBackground(new java.awt.Color(255, 153, 153));
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoạt Động", "Đã Tắt" }));
 
         jLabel12.setText("Trạng Thái");
 
-        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        lblAnh.setBorder(new RoundedCornerBorder2());
+        lblAnh.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         imgAnhMonAn.setText("ANH");
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
+        javax.swing.GroupLayout lblAnhLayout = new javax.swing.GroupLayout(lblAnh);
+        lblAnh.setLayout(lblAnhLayout);
+        lblAnhLayout.setHorizontalGroup(
+            lblAnhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblAnhLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(imgAnhMonAn)
                 .addContainerGap(106, Short.MAX_VALUE))
         );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
+        lblAnhLayout.setVerticalGroup(
+            lblAnhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblAnhLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(imgAnhMonAn)
                 .addContainerGap(128, Short.MAX_VALUE))
@@ -214,7 +318,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel12)
                     .addComponent(cboTrangThai, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -240,7 +344,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
                         .addComponent(cboTrangThai)
                         .addGap(90, 90, 90))
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -274,15 +378,31 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        control.themMon();
+        control.refresh();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void tblDanhSachMonAnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMonAnMousePressed
+        control.fillToForm(tblDanhSachMonAn.getSelectedRow());
+        control.refresh();
+    }//GEN-LAST:event_tblDanhSachMonAnMousePressed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        control.suaMon();
+        control.refresh();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aa3;
     public static javax.swing.JButton btnSua;
     public static javax.swing.JButton btnThem;
     public static javax.swing.JButton btnXoa;
-    private javax.swing.JComboBox<String> cboChonLoaiMon;
-    private javax.swing.JComboBox<String> cboLoaiMon;
-    private javax.swing.JComboBox<String> cboTrangThai;
+    public javax.swing.JComboBox<String> cboChonLoaiMon;
+    public javax.swing.JComboBox<String> cboLoaiMon;
+    public javax.swing.JComboBox<String> cboTrangThai;
     private javax.swing.JLabel imgAnhMonAn;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -291,11 +411,11 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblDanhSachMonAn;
-    private javax.swing.JTextField txtGiaMon;
-    private javax.swing.JTextField txtTenMon;
-    private javax.swing.JTextField txtTimKiem;
+    public static javax.swing.JPanel lblAnh;
+    public javax.swing.JTable tblDanhSachMonAn;
+    public javax.swing.JTextField txtGiaMon;
+    public javax.swing.JTextField txtTenMon;
+    public javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

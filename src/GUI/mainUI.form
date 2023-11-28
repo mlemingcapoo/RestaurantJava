@@ -240,12 +240,17 @@
             </Container>
             <Component class="javax.swing.JButton" name="BtnDangXuat">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng ????"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnDangXuatActionPerformed"/>
               </Events>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="BtnDangXuat.setBorder(new RoundedCornerBorder());"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
@@ -309,6 +314,8 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnQuanLyHoiVienActionPerformed"/>
               </Events>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="BtnQuanLyHoiVien.setBorder(new RoundedCornerBorder());"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
@@ -323,6 +330,8 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnQuanLyMonActionPerformed"/>
               </Events>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="BtnQuanLyMon.setBorder(new RoundedCornerBorder());"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
@@ -337,12 +346,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnQuanLyBanHangActionPerformed"/>
               </Events>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="BtnQuanLyBanHang.setBorder(new RoundedCornerBorder());"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="BtnCaiDat">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="BtnCaiDat.setBorder(new RoundedCornerBorder());">
                   <Color blue="cc" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="C&#xe0;i &#x110;&#x1eb7;t"/>
@@ -351,6 +362,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCaiDatActionPerformed"/>
               </Events>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>

@@ -58,7 +58,21 @@ public class mainUI extends javax.swing.JFrame {
         }
     };
     jLabel1 = new javax.swing.JLabel();
-    BtnDangXuat = new javax.swing.JButton();
+    BtnDangXuat = new javax.swing.JButton(){
+        @Override protected void paintComponent(Graphics g) {
+            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setPaint(getBackground());
+                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                    0, 0, getWidth() - 1, getHeight() - 1));
+            g2.dispose();
+        } super.paintComponent(g);}
+        @Override public void updateUI() {
+            super.updateUI();
+            setOpaque(false);
+
+        }
+    };
     lblUsername = new javax.swing.JLabel();
     lblRole = new javax.swing.JLabel();
     BtnQuanLyNhanVien = new javax.swing.JButton(){
@@ -91,10 +105,66 @@ public class mainUI extends javax.swing.JFrame {
 
         }
     };
-    BtnQuanLyHoiVien = new javax.swing.JButton();
-    BtnQuanLyMon = new javax.swing.JButton();
-    BtnQuanLyBanHang = new javax.swing.JButton();
-    BtnCaiDat = new javax.swing.JButton();
+    BtnQuanLyHoiVien = new javax.swing.JButton(){
+        @Override protected void paintComponent(Graphics g) {
+            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setPaint(getBackground());
+                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                    0, 0, getWidth() - 1, getHeight() - 1));
+            g2.dispose();
+        } super.paintComponent(g);}
+        @Override public void updateUI() {
+            super.updateUI();
+            setOpaque(false);
+
+        }
+    };
+    BtnQuanLyMon = new javax.swing.JButton(){
+        @Override protected void paintComponent(Graphics g) {
+            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setPaint(getBackground());
+                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                    0, 0, getWidth() - 1, getHeight() - 1));
+            g2.dispose();
+        } super.paintComponent(g);}
+        @Override public void updateUI() {
+            super.updateUI();
+            setOpaque(false);
+
+        }
+    };
+    BtnQuanLyBanHang = new javax.swing.JButton(){
+        @Override protected void paintComponent(Graphics g) {
+            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setPaint(getBackground());
+                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                    0, 0, getWidth() - 1, getHeight() - 1));
+            g2.dispose();
+        } super.paintComponent(g);}
+        @Override public void updateUI() {
+            super.updateUI();
+            setOpaque(false);
+
+        }
+    };
+    BtnCaiDat = new javax.swing.JButton(){
+        @Override protected void paintComponent(Graphics g) {
+            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setPaint(getBackground());
+                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                    0, 0, getWidth() - 1, getHeight() - 1));
+            g2.dispose();
+        } super.paintComponent(g);}
+        @Override public void updateUI() {
+            super.updateUI();
+            setOpaque(false);
+
+        }
+    };
     jPanel3 = new javax.swing.JPanel();
     BtnOrder = new javax.swing.JButton(){
         @Override protected void paintComponent(Graphics g) {
@@ -201,6 +271,8 @@ public class mainUI extends javax.swing.JFrame {
             .addContainerGap(90, Short.MAX_VALUE))
     );
 
+    BtnDangXuat.setBorder(new RoundedCornerBorder());
+    BtnDangXuat.setBackground(new java.awt.Color(255, 204, 204));
     BtnDangXuat.setText("Đăng ????");
     BtnDangXuat.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,6 +304,7 @@ public class mainUI extends javax.swing.JFrame {
         }
     });
 
+    BtnQuanLyHoiVien.setBorder(new RoundedCornerBorder());
     BtnQuanLyHoiVien.setBackground(new java.awt.Color(255, 204, 204));
     BtnQuanLyHoiVien.setText("Quản Lý Hội Viên");
     BtnQuanLyHoiVien.addActionListener(new java.awt.event.ActionListener() {
@@ -240,6 +313,7 @@ public class mainUI extends javax.swing.JFrame {
         }
     });
 
+    BtnQuanLyMon.setBorder(new RoundedCornerBorder());
     BtnQuanLyMon.setBackground(new java.awt.Color(255, 204, 204));
     BtnQuanLyMon.setText("Quản Lý Món Ăn");
     BtnQuanLyMon.addActionListener(new java.awt.event.ActionListener() {
@@ -248,6 +322,7 @@ public class mainUI extends javax.swing.JFrame {
         }
     });
 
+    BtnQuanLyBanHang.setBorder(new RoundedCornerBorder());
     BtnQuanLyBanHang.setBackground(new java.awt.Color(255, 204, 204));
     BtnQuanLyBanHang.setText("Quản Lý Bán Hàng");
     BtnQuanLyBanHang.addActionListener(new java.awt.event.ActionListener() {
@@ -257,6 +332,7 @@ public class mainUI extends javax.swing.JFrame {
     });
 
     BtnCaiDat.setBackground(new java.awt.Color(255, 204, 204));
+    BtnCaiDat.setBorder(new RoundedCornerBorder());
     BtnCaiDat.setText("Cài Đặt");
     BtnCaiDat.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
