@@ -183,10 +183,20 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm Kiếm"));
 
         txtTimKiem.setBackground(new java.awt.Color(255, 153, 153));
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemActionPerformed(evt);
+            }
+        });
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
 
         cboChonLoaiMon.setBackground(new java.awt.Color(255, 153, 153));
         cboChonLoaiMon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        cboChonLoaiMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại", "Đồ Uống", "Đồ Ăn", "Tráng miệng" }));
+        cboChonLoaiMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại", "Food", "Drink", "Dessert" }));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -234,6 +244,11 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         btnXoa.setBackground(new java.awt.Color(255, 153, 153));
         btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXoa.setText("Xoá");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -395,6 +410,19 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         control.suaMon(tblDanhSachMonAn.getSelectedRow());
         control.refresh();
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        control.xoaMon(tblDanhSachMonAn.getSelectedRow());
+        control.refresh();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
+        control.timKiem(txtTimKiem.getText(), cboChonLoaiMon.getSelectedItem().toString());
+    }//GEN-LAST:event_txtTimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -23,16 +23,18 @@ extends SQL<Food, String>
     String SELECT_BY_ID_SQL = "SELECT * FROM Food WHERE FoodID = ?";
     String INSERT_SQL = "CALL ThemMonAn(?,?,?,?,?)";
     String UPDATEMONAN_SQL = "CALL CapNhatMonAn(?,?,?,?,?,?)";
+    String DELETE_SQL = "CALL XoaMonAn(?)";
+    String TIMKIEM_SQL = "SELECT * FROM `Food` WHERE name like ? and type like ?";
     @Override
     public List<Food> selectAll() {
         return this.selectBySQL(SELECT_ALL_SQL);
     }
 
     
-    @Override
-    protected List<Food> selectBySQL(String sql, Object... args) {
+//    @Override
+    protected List<Food> selectBySQL(String sql, Object... args) throws Exception{
         List<Food> list = new ArrayList<>();
-        try {
+        
             ResultSet rs = DBHelper.query(sql, args);
             while (rs.next()) {
                 Food newFood = new Food();
@@ -43,14 +45,10 @@ extends SQL<Food, String>
                 newFood.setIsLocked(rs.getBoolean(5));
                 newFood.setImg(rs.getString(6));
                 list.add(newFood);
-            }
+            
             System.out.println("dish name at index 0: "+list.get(0).getName());;
-        } catch (Exception e) {
-//            DialogHelper.showDialog(null, "Vui lòng kiểm tra lại kết nối mạng và bấm OK!");
-            System.out.println("Connection was lost.. ");
-//            new SQLThread().main(null);
-//            throw new RuntimeException(e);
-        }
+            
+        
         return list;
     }
     
@@ -62,4 +60,12 @@ extends SQL<Food, String>
 //        DBHelper.executeProc(INSERT_SQL,);
         DBHelper.executeProc("CapNhatMonAn", food.getDish_ID(),food.getName(), food.getPrice(), food.getType(), food.isIsLocked(), food.getImg() );
     }
+   public void delete(Food food) throws Exception{
+       DBHelper.executeProc("XoaMonAn", food.getDish_ID());
+   }
+   public List<Food> searchByNameAndType(String name, String type) throws Exception{
+       return selectBySQL(TIMKIEM_SQL, name, type);
+        
+       
+   }
 }

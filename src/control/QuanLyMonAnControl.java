@@ -111,6 +111,7 @@ FoodDAO dao = new FoodDAO();
 
         // Refresh the data and update the UI
         refresh();
+        clearForm();
         helper.DialogHelper.alert(panel, "Thêm món thành công!");
     } catch (Exception ex) {
         helper.DialogHelper.alert(panel, "Đã xảy ra lỗi khi thêm món!");
@@ -157,11 +158,50 @@ FoodDAO dao = new FoodDAO();
         newFood.setImg(food.get(selectedRow).getImg());
     try {
         dao.update(newFood);
+        clearForm();
+        helper.DialogHelper.alert(panel, "Sửa món thành công!!!");
     } catch (Exception ex) {
+        helper.DialogHelper.alert(panel, "Xảy ra lỗi khi sửa món!!!");
+        Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+
+    public void xoaMon(int selectedRow) {
+        System.out.println("xoa mon: "+selectedRow);
+        int dish_id= food.get(selectedRow).getDish_ID();
+        Food newFood = new Food();
+        newFood.setDish_ID(dish_id);
+    try {
+        dao.delete(newFood);
+        clearForm();
+        helper.DialogHelper.alert(panel, "Xóa Món Thành Công!");
+    } catch (Exception ex) {
+        helper.DialogHelper.alert(panel, "Xóa món thất bại!");
         Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
    
+    public void clearForm(){
+        panel.txtTenMon.setText("");
+        panel.txtGiaMon.setText("");
+        panel.cboLoaiMon.setSelectedIndex(0);
+        panel.cboTrangThai.setSelectedIndex(0);
+    }
+
+    public void timKiem(String tuKhoa, String type) {
+    try {
+        List<Food> fd = dao.searchByNameAndType(tuKhoa, type);
+        DefaultTableModel model = (DefaultTableModel) panel.tblDanhSachMonAn.getModel();
+        model.setRowCount(0);
+        for (Food fd1 : fd) {
+            Object[] row = new Object[]{fd1.getName(), fd1.getPrice(), fd1.getType(), fd1.getImg(), fd1.isIsLocked()};
+            model.addRow(row);
+        }
+    } catch (Exception ex) {
+        Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+    }
 
 
 }
