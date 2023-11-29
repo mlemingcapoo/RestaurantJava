@@ -4,12 +4,8 @@
 src/GUI/test.java
 src/.DS_Store
 src/.DS_Store
-target/classes/control/QuanLyHoiVienControl.class
 *.class
 target/test-classes/.netbeans_automatic_build
 target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 target/classes/.netbeans_automatic_build
-*.class
-*.class
-*.class
-*.class
+
