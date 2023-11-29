@@ -190,6 +190,8 @@ public class QuanLyMonAnControl {
             String type = "%";
             if (type1.equals("Chọn Loại")){
                 type = "%";
+            } else {
+                type = type1;
             }
             List<Food> fd = dao.searchByNameAndType("%"+tuKhoa+"%", "%"+type+"%");
             System.out.println("Tu Khoa search: "+tuKhoa);

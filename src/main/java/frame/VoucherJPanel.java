@@ -5,7 +5,6 @@
 package frame;
 
 import Api_upload_image.upanh;
-import com.google.zxing.WriterException;
 import control.VoucherControl;
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +32,7 @@ VoucherControl control = new VoucherControl();
     public VoucherJPanel() {
         initComponents();
         control.init(this);
+        
     }
 
     /**
@@ -57,12 +57,13 @@ VoucherControl control = new VoucherControl();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHoiVien = new javax.swing.JTable();
         btnsend = new javax.swing.JButton();
-        txtlinkVouCher = new javax.swing.JTextField();
+        txtLinkAnh = new javax.swing.JTextField();
         btnSendall = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtNDung = new javax.swing.JTextArea();
         txtTieuDe = new javax.swing.JTextField();
         btnSendall1 = new javax.swing.JButton();
+        txtMail = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 153, 153));
 
@@ -139,6 +140,11 @@ VoucherControl control = new VoucherControl();
         ));
         tblHoiVien.setColumnSelectionAllowed(true);
         tblHoiVien.getTableHeader().setReorderingAllowed(false);
+        tblHoiVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblHoiVienMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblHoiVien);
         tblHoiVien.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -150,7 +156,7 @@ VoucherControl control = new VoucherControl();
             }
         });
 
-        txtlinkVouCher.setBackground(new java.awt.Color(255, 153, 153));
+        txtLinkAnh.setBackground(new java.awt.Color(255, 153, 153));
 
         btnSendall.setBackground(new java.awt.Color(255, 153, 153));
         btnSendall.setText("Send All");
@@ -198,17 +204,19 @@ VoucherControl control = new VoucherControl();
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtGiam)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                    .addComponent(txtlinkVouCher)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnSendall)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSendall1)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnsend))
-                    .addComponent(jScrollPane3)
-                    .addComponent(txtTieuDe))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                        .addComponent(txtLinkAnh)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(btnSendall)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSendall1)
+                            .addGap(27, 27, 27)
+                            .addComponent(btnsend))
+                        .addComponent(jScrollPane3)
+                        .addComponent(txtTieuDe))
+                    .addComponent(txtMail, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -219,13 +227,15 @@ VoucherControl control = new VoucherControl();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtlinkVouCher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtLinkAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnsend)
@@ -339,7 +349,7 @@ VoucherControl control = new VoucherControl();
                         System.out.println("Image uploaded successfully");
                         System.out.println("Image URL: " + imageUrl);
                         JOptionPane.showMessageDialog(this, "Tải Ảnh Thành Công !");
-                        txtlinkVouCher.setText(imageUrl);
+                        txtLinkAnh.setText(imageUrl);
                     } else {
                         System.out.println("Error: 'url' not found in the response");
                     }
@@ -354,6 +364,12 @@ VoucherControl control = new VoucherControl();
             Logger.getLogger(upanh.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSendall1ActionPerformed
+
+    private void tblHoiVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoiVienMousePressed
+        // TODO add your handling code here:
+        
+        control.fillMail(tblHoiVien.getSelectedRow());
+    }//GEN-LAST:event_tblHoiVienMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -370,11 +386,12 @@ VoucherControl control = new VoucherControl();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblHoiVien;
+    public javax.swing.JTable tblHoiVien;
     public javax.swing.JTable tblVoucher;
     public static javax.swing.JTextField txtGiam;
+    public javax.swing.JTextField txtLinkAnh;
+    public javax.swing.JTextField txtMail;
     public javax.swing.JTextArea txtNDung;
     public javax.swing.JTextField txtTieuDe;
-    public javax.swing.JTextField txtlinkVouCher;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,6 @@
 package control;
 
+import DAO.HoiVienDAO;
 import DAO.VoucherDAO;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -33,9 +34,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import model.KhachHang;
 import model.Voucher;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -55,17 +56,34 @@ public class VoucherControl {
     private static Voucher newVoucher;
     static List<Voucher> voucher = new ArrayList<>();
     DefaultTableModel Voucher = new DefaultTableModel();
-    VoucherDAO dao = new VoucherDAO();
+    VoucherDAO vcdao = new VoucherDAO();
+    
+//KhachHang hoiVien = new KhachHang();
+static List<KhachHang> hv = new ArrayList<>();
+HoiVienDAO hvdao = new HoiVienDAO();
 
     public void init(VoucherJPanel panel) {
         VoucherControl.panel = panel;
         refresh();
-
+        
     }
 
     public void refresh() {
         getVoucher();
         fillDishes();
+        fillHoiVien();
+    }
+    
+    public void fillHoiVien(){
+        hv.clear();
+        hv = hvdao.selectAll();
+        DefaultTableModel model = (DefaultTableModel) panel.tblHoiVien.getModel();
+        model.setRowCount(0);
+        for (KhachHang fd : hv) {
+            Object[] row = new Object[]{fd.getName(),fd.getSDT(),fd.getEmail()};
+            model.addRow(row);
+        }
+        System.out.println("HoiVien filled");
     }
 
     public void fillDishes() {
@@ -109,7 +127,7 @@ public class VoucherControl {
     public void getVoucher() {
         voucher.clear();
         try {
-            voucher = dao.selectAll();
+            voucher = vcdao.selectAll();
 //            System.out.println("số món có trong menu:" + voucher.size());
         } catch (Exception e) {
         }
@@ -143,7 +161,7 @@ public class VoucherControl {
 
             voucher.add(newVoucher);
 
-            dao.insert(newVoucher);
+            vcdao.insert(newVoucher);
 
             refresh();
 
@@ -210,7 +228,7 @@ public class VoucherControl {
                         System.out.println("Image URL: " + imageUrl);
 
                         // Set the image URL in the panel
-                        SwingUtilities.invokeLater(() -> panel.txtlinkVouCher.setText(imageUrl));
+                        SwingUtilities.invokeLater(() -> panel.txtLinkAnh.setText(imageUrl));
                     } else {
                         System.out.println("Error: 'url' not found in the response");
                     }
@@ -253,7 +271,7 @@ public class VoucherControl {
             selectedVoucher.setDiscountPercent((float) discount);
             selectedVoucher.setExpireDate(formattedDate);
 
-            dao.update(selectedVoucher); // Update the voucher in the database
+            vcdao.update(selectedVoucher); // Update the voucher in the database
 
             refresh();
 
@@ -278,7 +296,7 @@ public class VoucherControl {
         Voucher newVocher = new Voucher();
         newVocher.setVoucherID(VoucherID);
         try {
-            dao.deleteById(newVocher);
+            vcdao.deleteById(newVocher);
             clearForm();
             helper.DialogHelper.alert(panel, "Xóa Voucher Thành Công!");
         } catch (Exception ex) {
@@ -330,7 +348,7 @@ public class VoucherControl {
             );
             multipart.addBodyPart(textPart);
 
-            String imagePath = panel.txtlinkVouCher.getText();
+            String imagePath = panel.txtLinkAnh.getText();
 
             // Thêm phần ảnh vào email
             BodyPart imagePart = new MimeBodyPart();
@@ -354,4 +372,10 @@ public class VoucherControl {
             e.printStackTrace();
         }
     }
+
+    public void fillMail(int selectedRow) {
+        panel.txtMail.setText(hv.get(selectedRow).getEmail());
+    }
+
+
 }

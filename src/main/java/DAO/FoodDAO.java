@@ -43,9 +43,9 @@ public class FoodDAO
                 newFood.setImg(rs.getString(6));
                 list.add(newFood);
             }
-            System.out.println("dish name at index 0: " + list.get(0).getName());;
+//            System.out.println("dish name at index 0: " + list.get(0).getName());;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("line 48 FoodDAO: "+e.getMessage());
         }
 
         return list;
