@@ -20,6 +20,15 @@ import javax.swing.border.AbstractBorder;
  */
 public class RoundedCornerBorder2 extends AbstractBorder {
   private static final Color ALPHA_ZERO = new Color(0x0, true);
+  private Color color;
+
+  public RoundedCornerBorder2(Color color) {
+    this.color = color;
+  }
+
+  public RoundedCornerBorder2() {
+    this(Color.GRAY); 
+  }
   @Override public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
     Graphics2D g2 = (Graphics2D) g.create();
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -28,7 +37,7 @@ public class RoundedCornerBorder2 extends AbstractBorder {
     Area corner = new Area(new Rectangle2D.Double(x, y, width, height));
     corner.subtract(new Area(border));
     g2.fill(corner);
-    g2.setPaint(Color.GRAY);
+    g2.setPaint(color);
     g2.draw(border);
     g2.dispose();
   }
