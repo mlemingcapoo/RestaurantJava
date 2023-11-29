@@ -7,3 +7,4 @@ src/.DS_Store
 target/classes/control/QuanLyHoiVienControl.class
 /mavenproject1/target/
 /demonhac/target/
+*.class
