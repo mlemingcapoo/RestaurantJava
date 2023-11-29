@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
  *
  * @author catty
  */
+
 public class imgHelper {
     public static Image getAppIcon(){
         URL url = imgHelper.class.getResource("/icn/logo.png");

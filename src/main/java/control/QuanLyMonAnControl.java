@@ -21,7 +21,7 @@ public class QuanLyMonAnControl {
     FoodDAO dao = new FoodDAO();
 
     public void init(QuanLyMonAnJPanel panel) {
-        QuanLyMonAnControl.panel = panel;
+        this.panel = panel;
         refresh();
     }
 
