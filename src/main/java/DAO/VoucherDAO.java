@@ -51,6 +51,13 @@ public class VoucherDAO extends SQL<Voucher, String> {
    public void update(Voucher voucher) throws Exception {
     DBHelper.executeProc("SuaVoucher", voucher.getVoucherID(), voucher.getDiscountPercent(), voucher.getExpireDate());
 }
+   public void deleteById(Voucher voucher) throws Exception {
+    DBHelper.executeProc("XoaVocher", voucher.getVoucherID());
+}
+
+    public void deleteById(int voucher) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }
   

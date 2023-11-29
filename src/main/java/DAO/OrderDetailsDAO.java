@@ -15,10 +15,6 @@ import model.orderedDishes;
  * @author capoo
  */
 public class OrderDetailsDAO extends SQL<OrderDetails, String>{
-
-    public static void deleteAllDishes(int order_ID) throws Exception{
-        DBHelper.executeProc("deleteAllDishesByOrderID",order_ID);
-    }
 //    String INSERT_SQL = "INSERT INTO Food(MaNV, Password, FullName, Role) VALUES(?,?,?,?)";
 //    String UPDATE_SQL = "UPDATE Food SET Password = ?, FullName = ?, Role = ? WHERE MaNV = ?";
     String DELETE_SQL = "DELETE FROM OrderDetails WHERE orderID = ?";
@@ -83,5 +79,9 @@ public class OrderDetailsDAO extends SQL<OrderDetails, String>{
 
     public void removeDishByID(int orderID, int quantity, int dishID) throws Exception{
         DBHelper.executeProc("deleteDishesByOrderID", orderID, quantity, dishID);
+    }
+
+    public static void deleteAllDishes(int order_ID) throws Exception{
+        DBHelper.executeProc("deleteAllDishesByOrderID",order_ID);
     }
 }

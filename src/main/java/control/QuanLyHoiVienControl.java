@@ -47,24 +47,17 @@ public class QuanLyHoiVienControl {
 
     public void themHV() {
         try {
-            String tenHV = panel.txtTenHoiVien1.getText();
-//            System.out.println("dm : "+panel.txtTenHoiVien1.getText());
+            String tenHV = panel.txtTenHoiVien.getText();
             String email = panel.txtGmailHoiVien.getText();
             String sdt = panel.txtSDTHoiVien.getText();
-            Date date = panel.chonngay.getDate();
-            System.out.println("line 54: "+date.toString());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            
+            Date date = panel.NgaySinh.getDate();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");    
             String formattedDate = dateFormat.format(date);
             KhachHang newkh = new KhachHang();
-            newkh.setName(tenHV);
-            System.out.println("ten"+tenHV);
-            newkh.setEmail(email);
-            System.out.println("ten"+email);
+            newkh.setName(tenHV);          
+            newkh.setEmail(email);           
             newkh.setSDT(sdt);
-            System.out.println("ten"+sdt);
             newkh.setBirthday(formattedDate);
-            System.out.println("ten"+formattedDate);
             dao.insert(newkh);
             helper.DialogHelper.alert(panel, "Thêm khách hàng thành công!");
         } catch (Exception e) {
@@ -74,12 +67,12 @@ public class QuanLyHoiVienControl {
     }
 
     public void setform(KhachHang kh) {
-        panel.jTextField1.setText(kh.getName());
+        panel.txtTenHoiVien.setText(kh.getName());
         panel.txtSDTHoiVien.setText(kh.getSDT());
         panel.txtGmailHoiVien.setText(kh.getEmail());
         Date dt = new Date();
         dt = DateHelper.toDate(kh.getBirthday(), "YYYY-MM-DD");
-        panel.chonngay.setDate(dt);
+        panel.NgaySinh.setDate(dt);
     }
 
     public void fillToForm(int selectedRow) {

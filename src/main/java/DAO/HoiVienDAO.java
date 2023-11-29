@@ -48,7 +48,7 @@ public class HoiVienDAO extends SQL<KhachHang, String> {
     }
    public void update(KhachHang kh) throws Exception {
 //        DBHelper.executeProc(INSERT_SQL,);
-        DBHelper.executeProc("SuaKhachHang", kh.getName(),kh.getSDT(), kh.getEmail(), kh.getDiem(), kh.getBirthday());
+        DBHelper.executeProc("SuaKhachHang",kh.getMa_KH(), kh.getName(),kh.getSDT(), kh.getEmail(), kh.getDiem(), kh.getBirthday());
     }
     
 }
