@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.KhachHang;
 
@@ -21,18 +23,16 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
 
 //    QuanLyHoiVienControl control = new QuanLyHoiVienControl();
     static int selected = 0;
-         static List<KhachHang> KhachHang = new ArrayList<>();
-            DefaultTableModel model = new DefaultTableModel();
+    static List<KhachHang> KhachHang = new ArrayList<>();
+    DefaultTableModel model = new DefaultTableModel();
     HoiVienDAO dao = new HoiVienDAO();
-
 
     public QuanLyHoiVienJPanel() {
         initComponents();
-//        control.init(this);
-    refresh();
+        refresh();
     }
 
-     public List<KhachHang> getHV() {
+    public List<KhachHang> getHV() {
         try {
             KhachHang.clear();
             KhachHang = dao.selectAll();
@@ -46,11 +46,9 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
 
     public void fillToForm(int selectedRow) {
         KhachHang.clear();
-            KhachHang = dao.selectAll();
-        System.out.println("line 101????: " + selectedRow);
+        KhachHang = dao.selectAll();
         List<KhachHang> hv = getHV();
         KhachHang kh = KhachHang.get(selected);
-        System.out.println("line 93!!!!!: " + kh.getMaKH());
         txtTenHoiVien.setText(kh.getName());
         txtSDTHoiVien.setText(kh.getSDT());
         txtGmailHoiVien.setText(kh.getEmail());
@@ -59,7 +57,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         NgaySinh.setDate(dt);
         System.out.println(kh.getEmail());
     }
-    
+
     public final void refresh() {
         KhachHang.clear();
         KhachHang = getHV();
@@ -67,11 +65,11 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
     }
 
     public void fillTable() {
-        
-        model =(DefaultTableModel) tblQuanLyHoiVien.getModel();
+
+        model = (DefaultTableModel) tblQuanLyHoiVien.getModel();
         model.setRowCount(0);
         for (KhachHang kh : KhachHang) {
-            Object[] row = new Object[]{"Ma: "+kh.getMaKH(),kh.getName(), kh.getSDT(), kh.getEmail(), kh.getDiem(), kh.getBirthday()};
+            Object[] row = new Object[]{"Ma: " + kh.getMaKH(), kh.getName(), kh.getSDT(), kh.getEmail(), kh.getDiem(), kh.getBirthday()};
             model.addRow(row);
         }
         System.out.println("FILLED HOIVEN TABLE");
@@ -88,13 +86,12 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
 //        }
 //        return KhachHang;
 //    }
-
     public void themHV() {
         try {
             String tenHV = txtTenHoiVien.getText();
             String email = txtGmailHoiVien.getText();
-              String sdt = txtSDTHoiVien.getText();
-               Date date = NgaySinh.getDate();
+            String sdt = txtSDTHoiVien.getText();
+            Date date = NgaySinh.getDate();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = dateFormat.format(date);
             KhachHang newkh = new KhachHang();
@@ -111,7 +108,6 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         }
     }
 
-    
 //
 //    public void fillToForm(int selectedRow) {
 //        System.out.println("line 101????: "+selectedRow);
@@ -133,7 +129,6 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
 ////        }
 ////            setform(selectedRow);
 //    }
-
 //    public void suaHV(int selectedRow) {
 //        System.out.println("sua mon: " + selectedRow);
 //        String sdt1 = KhachHang.get(selectedRow).getSDT();
@@ -153,11 +148,8 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
 //            helper.DialogHelper.alert(this, "Xảy ra lỗi khi sửa món!!!");
 //        }
 //    }
-
     public void suaHV1(int selectedRow) {
-        System.out.println("line128: " + selectedRow);
-        
-        if (selectedRow >= 0 && selectedRow < KhachHang.size()) {            
+        if (selectedRow >= 0 && selectedRow < KhachHang.size()) {
             int makh = KhachHang.get(selectedRow).getMaKH();
             KhachHang newKh = new KhachHang();
             newKh.setMaKH(makh);
@@ -187,19 +179,27 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         NgaySinh.setDate(null);
     }
 
-    
-    public void clearform(){
+    public void clearform() {
         txtTenHoiVien.setText("");
         txtSDTHoiVien.setText("");
         txtGmailHoiVien.setText("");
         NgaySinh.setDate(null);
     }
     
-
-
-    public void suaKhachHang(int selectedRow) {
-        KhachHang newkh = new KhachHang();
-
+    public void searchByName(String tuKhoa){
+        try {
+//            String type = "%";
+            List<KhachHang> kh1 = dao.searchByNameAndType("%"+tuKhoa+"%");
+            System.out.println("Tu Khoa search: "+tuKhoa);
+            DefaultTableModel model = (DefaultTableModel) tblQuanLyHoiVien.getModel();
+            model.setRowCount(0);
+            for (KhachHang kh : kh1) {
+                Object[] row = new Object[]{kh.getMaKH(), kh.getName(), kh.getSDT(), kh.getEmail(), kh.getDiem(), kh.getBirthday()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(QuanLyHoiVienJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -207,13 +207,11 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel7 = new javax.swing.JPanel();
-        txtTimKiem = new javax.swing.JTextField();
-        cboLocHoiVien = new javax.swing.JComboBox<>();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        txtTimKiem = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -234,13 +232,6 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1080, 720));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức Năng"));
-
-        cboLocHoiVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboLocHoiVien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboLocHoiVienActionPerformed(evt);
-            }
-        });
 
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThem.setText("Thêm");
@@ -268,7 +259,11 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
 
         jLabel7.setText("Tìm Kiếm");
 
-        jLabel8.setText("Lọc Hội Viên");
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -278,34 +273,27 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(txtTimKiem))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(cboLocHoiVien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                        .addGap(3, 3, 3)))
-                .addGap(9, 9, 9))
+                        .addComponent(jLabel7)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+                        .addGap(12, 12, 12))))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
+                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTimKiem)
-                    .addComponent(cboLocHoiVien))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnThem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -416,7 +404,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -447,10 +435,6 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cboLocHoiVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocHoiVienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboLocHoiVienActionPerformed
-
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         themHV();
         refresh();
@@ -470,18 +454,20 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         fillToForm(selected);
     }//GEN-LAST:event_tblQuanLyHoiVienMousePressed
 
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        searchByName(txtTimKiem.getText());
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public com.toedter.calendar.JDateChooser NgaySinh;
     public static javax.swing.JButton btnSua;
     public static javax.swing.JButton btnThem;
     public static javax.swing.JButton btnXoa;
-    private javax.swing.JComboBox<String> cboLocHoiVien;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     public javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
