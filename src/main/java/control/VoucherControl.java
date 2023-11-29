@@ -1,5 +1,6 @@
 package control;
 
+import Api_upload_image.upanh;
 import DAO.HoiVienDAO;
 import DAO.VoucherDAO;
 import com.google.zxing.BarcodeFormat;
@@ -34,6 +35,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import model.KhachHang;
@@ -44,6 +47,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -198,52 +202,53 @@ HoiVienDAO hvdao = new HoiVienDAO();
         }
     }
 
-    public void upload() {
-        String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
+   public String upload() {
+    String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
+    String imageUrl = "";
 
-        OkHttpClient client = new OkHttpClient();
+    OkHttpClient client = new OkHttpClient();
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("key", apiKey)
-                .addFormDataPart("image", newVoucher.getVCode() + ".png",
-                        RequestBody.create(new File("D:\\" + newVoucher.getVCode() + ".png"), MediaType.parse("image/png")))
-                .build();
+    RequestBody requestBody = new MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("key", apiKey)
+            .addFormDataPart("image", newVoucher.getVCode() + ".png",
+                    RequestBody.create(new File("D:\\" + newVoucher.getVCode() + ".png"), MediaType.parse("image/png")))
+            .build();
 
-        Request request = new Request.Builder()
-                .url("https://api.imgbb.com/1/upload")
-                .post(requestBody)
-                .build();
+    Request request = new Request.Builder()
+            .url("https://api.imgbb.com/1/upload")
+            .post(requestBody)
+            .build();
 
-        try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                String responseBody = response.body().string();
-                JSONObject jsonResponse = new JSONObject(responseBody);
+    try (Response response = client.newCall(request).execute()) {
+        if (response.isSuccessful()) {
+            String responseBody = response.body().string();
+            JSONObject jsonResponse = new JSONObject(responseBody);
 
-                if (jsonResponse.has("data")) {
-                    JSONObject dataObject = jsonResponse.getJSONObject("data");
-                    if (dataObject.has("url")) {
-                        String imageUrl = dataObject.getString("url");
-                        System.out.println("Image uploaded successfully");
-                        System.out.println("Image URL: " + imageUrl);
-
-                        // Set the image URL in the panel
-                        SwingUtilities.invokeLater(() -> panel.txtLinkAnh.setText(imageUrl));
-                    } else {
-                        System.out.println("Error: 'url' not found in the response");
-                    }
+            if (jsonResponse.has("data")) {
+                JSONObject dataObject = jsonResponse.getJSONObject("data");
+                if (dataObject.has("url")) {
+                    imageUrl = dataObject.getString("url");
+                    System.out.println("Image uploaded successfully");
+                    System.out.println("Image URL: " + imageUrl);
                 } else {
-                    System.out.println("Error: 'data' not found in the response");
+                    System.out.println("Error: 'url' not found in the response");
                 }
             } else {
-                System.out.println("Error uploading image");
-                System.out.println("Response code: " + response.code());
+                System.out.println("Error: 'data' not found in the response");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error uploading image.");
+        } else {
+            System.out.println("Error uploading image");
+            System.out.println("Response code: " + response.code());
         }
+    } catch (IOException e) {
+        e.printStackTrace();
+        System.out.println("Error uploading image.");
     }
+
+    return imageUrl;
+}
+
 
     public void suaVoucher(int selectedRow) {
         try {
@@ -329,7 +334,7 @@ HoiVienDAO hvdao = new HoiVienDAO();
         message.setFrom(new InternetAddress(username));
         message.setRecipients(
                 Message.RecipientType.TO,
-                InternetAddress.parse("trung11082004@gmail.com")
+                InternetAddress.parse(panel.txtMail.getText())
         );
         message.setSubject(panel.txtTieuDe.getText());
 
@@ -348,7 +353,7 @@ HoiVienDAO hvdao = new HoiVienDAO();
             );
             multipart.addBodyPart(textPart);
 
-            String imagePath = panel.txtLinkAnh.getText();
+            String imagePath = upload();
 
             // Thêm phần ảnh vào email
             BodyPart imagePart = new MimeBodyPart();
@@ -377,5 +382,5 @@ HoiVienDAO hvdao = new HoiVienDAO();
         panel.txtMail.setText(hv.get(selectedRow).getEmail());
     }
 
-
+    
 }

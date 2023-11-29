@@ -57,12 +57,10 @@ VoucherControl control = new VoucherControl();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHoiVien = new javax.swing.JTable();
         btnsend = new javax.swing.JButton();
-        txtLinkAnh = new javax.swing.JTextField();
         btnSendall = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtNDung = new javax.swing.JTextArea();
         txtTieuDe = new javax.swing.JTextField();
-        btnSendall1 = new javax.swing.JButton();
         txtMail = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 153, 153));
@@ -156,8 +154,6 @@ VoucherControl control = new VoucherControl();
             }
         });
 
-        txtLinkAnh.setBackground(new java.awt.Color(255, 153, 153));
-
         btnSendall.setBackground(new java.awt.Color(255, 153, 153));
         btnSendall.setText("Send All");
 
@@ -167,14 +163,6 @@ VoucherControl control = new VoucherControl();
         jScrollPane3.setViewportView(txtNDung);
 
         txtTieuDe.setText("Cửa Hàng Tặng Mã voucher");
-
-        btnSendall1.setBackground(new java.awt.Color(255, 153, 153));
-        btnSendall1.setText("Ảnh");
-        btnSendall1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSendall1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -207,16 +195,13 @@ VoucherControl control = new VoucherControl();
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                        .addComponent(txtLinkAnh)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(btnSendall)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSendall1)
-                            .addGap(27, 27, 27)
                             .addComponent(btnsend))
                         .addComponent(jScrollPane3)
                         .addComponent(txtTieuDe))
-                    .addComponent(txtMail, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -227,20 +212,17 @@ VoucherControl control = new VoucherControl();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                        .addGap(25, 25, 25)
                         .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtLinkAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(46, 46, 46)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnsend)
-                            .addComponent(btnSendall)
-                            .addComponent(btnSendall1)))
+                            .addComponent(btnSendall)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtGiam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -302,80 +284,17 @@ VoucherControl control = new VoucherControl();
        control.send();
     }//GEN-LAST:event_btnsendActionPerformed
 
-    private void btnSendall1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendall1ActionPerformed
-         String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
-
-        // Use a file chooser to let the user select the image file
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Choose an Image File");
-        int userSelection = fileChooser.showOpenDialog(null);
-
-        if (userSelection != JFileChooser.APPROVE_OPTION) {
-            System.out.println("Image selection canceled.");
-            return;
-        }
-
-        File imageFile = fileChooser.getSelectedFile();
-        System.out.println("Selected Image: " + imageFile.getAbsolutePath());
-
-        if (!imageFile.exists()) {
-            System.out.println("Error: Image file not found at " + imageFile.getAbsolutePath());
-            return;
-        }
-
-        OkHttpClient client = new OkHttpClient();
-
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("key", apiKey)
-                .addFormDataPart("image", imageFile.getName(),
-                        RequestBody.create(imageFile, MediaType.parse("image/jpeg")))
-                .build();
-
-        Request request = new Request.Builder()
-                .url("https://api.imgbb.com/1/upload")
-                .post(requestBody)
-                .build();
-
-        try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                String responseBody = response.body().string();
-                JSONObject jsonResponse = new JSONObject(responseBody);
-
-                if (jsonResponse.has("data")) {
-                    JSONObject dataObject = jsonResponse.getJSONObject("data");
-                    if (dataObject.has("url")) {
-                        String imageUrl = dataObject.getString("url");
-                        System.out.println("Image uploaded successfully");
-                        System.out.println("Image URL: " + imageUrl);
-                        JOptionPane.showMessageDialog(this, "Tải Ảnh Thành Công !");
-                        txtLinkAnh.setText(imageUrl);
-                    } else {
-                        System.out.println("Error: 'url' not found in the response");
-                    }
-                } else {
-                    System.out.println("Error: 'data' not found in the response");
-                }
-            } else {
-                System.out.println("Error uploading image");
-                System.out.println("Response code: " + response.code());
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(upanh.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnSendall1ActionPerformed
-
     private void tblHoiVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoiVienMousePressed
         // TODO add your handling code here:
         
         control.fillMail(tblHoiVien.getSelectedRow());
+         control.refresh();
     }//GEN-LAST:event_tblHoiVienMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static com.toedter.calendar.JDateChooser NgayHetHan;
     private javax.swing.JButton btnSendall;
-    private javax.swing.JButton btnSendall1;
     public static javax.swing.JButton btnSua;
     public static javax.swing.JButton btnThem;
     public static javax.swing.JButton btnXoa;
@@ -389,7 +308,6 @@ VoucherControl control = new VoucherControl();
     public javax.swing.JTable tblHoiVien;
     public javax.swing.JTable tblVoucher;
     public static javax.swing.JTextField txtGiam;
-    public javax.swing.JTextField txtLinkAnh;
     public javax.swing.JTextField txtMail;
     public javax.swing.JTextArea txtNDung;
     public javax.swing.JTextField txtTieuDe;
