@@ -39,8 +39,8 @@
           <Color blue="cc" green="cc" red="ff" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+            <EtchetBorder/>
           </Border>
         </Property>
       </Properties>
@@ -95,10 +95,8 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="ff" type="rgb"/>
                 </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder/>
-                  </Border>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new RoundedCornerBorder2(Color.BLACK)" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -119,10 +117,8 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="ff" type="rgb"/>
             </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new RoundedCornerBorder2()" type="code"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="ff" type="rgb"/>
@@ -132,23 +128,6 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="BtnQuanLyNhanVien" max="32767" attributes="0"/>
-                          <Component id="BtnQuanLyDoanhThu" alignment="1" pref="154" max="32767" attributes="0"/>
-                          <Component id="BtnQuanLyHoiVien" alignment="1" max="32767" attributes="0"/>
-                          <Component id="BtnQuanLyMon" alignment="1" max="32767" attributes="0"/>
-                          <Component id="BtnQuanLyBanHang" alignment="1" max="32767" attributes="0"/>
-                          <Component id="BtnCaiDat" alignment="1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="BtnDangXuat" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="panelProfilePhoto" max="32767" attributes="0"/>
@@ -165,6 +144,21 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="BtnDangXuat" pref="154" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="BtnQuanLyNhanVien" max="32767" attributes="0"/>
+                              <Component id="BtnQuanLyDoanhThu" alignment="1" pref="154" max="32767" attributes="0"/>
+                              <Component id="BtnQuanLyHoiVien" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BtnQuanLyMon" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BtnQuanLyBanHang" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BtnCaiDat" alignment="1" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -175,7 +169,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="lblUsername" pref="21" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="lblRole" pref="20" max="32767" attributes="0"/>
+                      <Component id="lblRole" pref="22" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                       <Component id="BtnQuanLyNhanVien" pref="42" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
@@ -225,7 +219,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="90" max="32767" attributes="0"/>
+                          <EmptySpace pref="88" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -378,7 +372,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;  @Override protected void paintComponent(Graphics g) {&#xa;    if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;      Graphics2D g2 = (Graphics2D) g.create();&#xa;      g2.setPaint(getBackground());&#xa;      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;          0, 0, getWidth() - 1, getHeight() - 1));&#xa;      g2.dispose();&#xa;    }&#xa;    super.paintComponent(g);&#xa;  }&#xa;  @Override public void updateUI() {&#xa;    super.updateUI();&#xa;    setOpaque(false);&#xa;    &#xa;  }&#xa;};&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel()&#xa;"/>
           </AuxValues>
 
           <Layout>
@@ -426,6 +420,10 @@
                 <Property name="text" type="java.lang.String" value="Order"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnOrderMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnOrderMouseExited"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnOrderMousePressed"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnOrderMouseReleased"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnOrderActionPerformed"/>
               </Events>
               <AuxValues>

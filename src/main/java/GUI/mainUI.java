@@ -6,7 +6,9 @@ package GUI;
 
 
 import control.mainUiControl;
+import helper.RoundedCornerBorder;
 import helper.RoundedCornerBorder2;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -165,7 +167,8 @@ public class mainUI extends javax.swing.JFrame {
 
         }
     };
-    jPanel3 = new javax.swing.JPanel();
+    jPanel3 = new javax.swing.JPanel()
+    ;
     BtnOrder = new javax.swing.JButton(){
         @Override protected void paintComponent(Graphics g) {
             if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
@@ -231,18 +234,18 @@ public class mainUI extends javax.swing.JFrame {
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
     jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-    jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+    jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
     wrapper.setPreferredSize(new java.awt.Dimension(888, 670));
     wrapper.setLayout(new java.awt.CardLayout());
 
     panelDisplay.setBackground(new java.awt.Color(255, 153, 153));
-    panelDisplay.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+    panelDisplay.setBorder(new RoundedCornerBorder2(Color.BLACK));
     panelDisplay.setLayout(new java.awt.CardLayout());
     wrapper.add(panelDisplay, "card2");
 
     jPanel4.setBackground(new java.awt.Color(255, 153, 153));
-    jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+    jPanel4.setBorder(new RoundedCornerBorder2());
     jPanel4.setForeground(new java.awt.Color(255, 204, 204));
 
     panelProfilePhoto.setBorder(new RoundedCornerBorder2());
@@ -268,7 +271,7 @@ public class mainUI extends javax.swing.JFrame {
         .addGroup(panelProfilePhotoLayout.createSequentialGroup()
             .addContainerGap()
             .addComponent(jLabel1)
-            .addContainerGap(90, Short.MAX_VALUE))
+            .addContainerGap(88, Short.MAX_VALUE))
     );
 
     BtnDangXuat.setBorder(new RoundedCornerBorder());
@@ -344,20 +347,6 @@ public class mainUI extends javax.swing.JFrame {
     jPanel4.setLayout(jPanel4Layout);
     jPanel4Layout.setHorizontalGroup(
         jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGap(19, 19, 19))
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(BtnDangXuat)
-            .addGap(45, 45, 45))
         .addGroup(jPanel4Layout.createSequentialGroup()
             .addGap(37, 37, 37)
             .addComponent(panelProfilePhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -370,6 +359,18 @@ public class mainUI extends javax.swing.JFrame {
                     .addComponent(lblRole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addComponent(lblUsername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addContainerGap())
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(BtnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGap(19, 19, 19))
     );
     jPanel4Layout.setVerticalGroup(
         jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,7 +380,7 @@ public class mainUI extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(lblRole, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            .addComponent(lblRole, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
             .addGap(66, 66, 66)
             .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
             .addGap(18, 18, 18)
@@ -403,6 +404,20 @@ public class mainUI extends javax.swing.JFrame {
     BtnOrder.setBackground(new java.awt.Color(255, 204, 204));
     BtnOrder.setBorder(new RoundedCornerBorder());
     BtnOrder.setText("Order");
+    BtnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            BtnOrderMouseEntered(evt);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            BtnOrderMouseExited(evt);
+        }
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+            BtnOrderMousePressed(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnOrderMouseReleased(evt);
+        }
+    });
     BtnOrder.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             BtnOrderActionPerformed(evt);
@@ -476,7 +491,7 @@ public class mainUI extends javax.swing.JFrame {
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
             .addContainerGap()
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(wrapper, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(wrapper, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -491,7 +506,7 @@ public class mainUI extends javax.swing.JFrame {
                     .addGap(2, 2, 2)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(wrapper, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(wrapper, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
     );
 
@@ -569,6 +584,33 @@ public class mainUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         mainUI.profile();
     }//GEN-LAST:event_panelProfilePhotoMouseClicked
+
+    private void BtnOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMouseEntered
+        // TODO add your handling code here:
+        System.out.println("entered");
+        BtnOrder.setForeground(Color.BLACK);
+        BtnOrder.setBorder(new RoundedCornerBorder(Color.BLACK));
+//        javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE;
+    }//GEN-LAST:event_BtnOrderMouseEntered
+
+    private void BtnOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMouseExited
+        // TODO add your handling code here:
+        System.out.println("exited");
+        BtnOrder.setForeground(Color.darkGray);
+        BtnOrder.setBorder(new RoundedCornerBorder());
+    }//GEN-LAST:event_BtnOrderMouseExited
+
+    private void BtnOrderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMousePressed
+        // TODO add your handling code here:
+        BtnOrder.setForeground(Color.red);
+        BtnOrder.setBorder(new RoundedCornerBorder(Color.red));
+    }//GEN-LAST:event_BtnOrderMousePressed
+
+    private void BtnOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMouseReleased
+        // TODO add your handling code here:
+        BtnOrder.setForeground(Color.BLACK);
+        BtnOrder.setBorder(new RoundedCornerBorder(Color.BLACK));
+    }//GEN-LAST:event_BtnOrderMouseReleased
 
     /**
      * @param args the command line arguments

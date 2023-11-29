@@ -134,7 +134,7 @@ public class login extends javax.swing.JFrame {
         });
         jPanel3.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
 
-        btnDangNhap.setBackground(new java.awt.Color(102, 102, 102));
+        btnDangNhap.setBackground(new java.awt.Color(102, 102, 0));
         btnDangNhap.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 12)); // NOI18N
         btnDangNhap.setForeground(new java.awt.Color(255, 255, 255));
         btnDangNhap.setText("Đăng Nhập");
