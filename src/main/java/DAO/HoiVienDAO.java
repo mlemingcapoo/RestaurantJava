@@ -43,12 +43,10 @@ public class HoiVienDAO extends SQL<KhachHang, String> {
     }
     
     public void insert(KhachHang kh) throws Exception {
-//        DBHelper.executeProc(INSERT_SQL,);
         DBHelper.executeProc("ThemKhachHang", kh.getName(), kh.getSDT(), kh.getEmail(),kh.getBirthday());
     }
    public void update(KhachHang kh) throws Exception {
-//        DBHelper.executeProc(INSERT_SQL,);
-        DBHelper.executeProc("SuaKhachHang", kh.getName(),kh.getSDT(), kh.getEmail(), kh.getDiem(), kh.getBirthday());
+        DBHelper.executeProc("SuaKhachHang", kh.getSDT(),kh.getName(), kh.getEmail(), kh.getBirthday());
     }
     
 }
