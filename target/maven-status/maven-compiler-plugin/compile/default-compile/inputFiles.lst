@@ -27,6 +27,7 @@ D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\helper\imgHelpe
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\model\KhachHang.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\control\profileControl.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\control\startControl.java
+D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\playnhac\nhac.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\frame\Scan_QR.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\GUI\login.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\control\GUI_Interface.java
@@ -47,11 +48,11 @@ D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\util\panelNavig
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\helper\DialogHelper.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\helper\PanelHelper.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\DAO\VoucherDAO.java
-D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\DAO\ThongKeDAO.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\frame\CaiDatJPanel.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\DAO\OrderDetailsDAO.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\frame\QuanLyBanHangJPanel.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\control\mainUiControl.java
+D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\DAO\DoanhThuDAO.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\Api_upload_image\upanh.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\control\timerControl.java
 D:\FPT Polytechnic\ki4\block 2\DuAn\RestaurantJava\src\main\java\frame\QuanLyHoiVienJPanel.java

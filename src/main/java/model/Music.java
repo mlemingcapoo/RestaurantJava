@@ -1,3 +1,4 @@
+package model;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import javazoom.jl.player.advanced.PlaybackEvent;
@@ -11,12 +12,12 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 
-public class PlaneWithMusic extends JFrame {
+public class Music extends JFrame {
 
-    private AdvancedPlayer player;
+    public AdvancedPlayer player;
 
 
-    private void playBackgroundMusic() {
+    public void playBackgroundMusic() {
         try {
             // Load audio file from the classpath
             URL url = new URL("https://cv.nguyenmanh.id.vn/1.mp3");
@@ -53,10 +54,14 @@ public class PlaneWithMusic extends JFrame {
         super.dispose();
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            PlaneWithMusic planeWithMusic = new PlaneWithMusic();
+            Music planeWithMusic = new Music();
             planeWithMusic.setVisible(true);
         });
+    }
+
+    public void play() {
+        playBackgroundMusic();
     }
 }
