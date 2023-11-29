@@ -25,6 +25,7 @@ public class HoiVienDAO extends SQL<KhachHang, String> {
             ResultSet rs = DBHelper.query(sql, args);
             while (rs.next()) {
                 KhachHang newKhachHang = new KhachHang();
+                newKhachHang.setMaKH(rs.getInt(1));
                 newKhachHang.setName(rs.getString(2));
                 newKhachHang.setSDT(rs.getString(3));
                 newKhachHang.setEmail(rs.getString(5));                
@@ -43,10 +44,10 @@ public class HoiVienDAO extends SQL<KhachHang, String> {
     }
     
     public void insert(KhachHang kh) throws Exception {
-        DBHelper.executeProc("ThemKhachHang", kh.getName(), kh.getSDT(), kh.getEmail(),kh.getBirthday());
+        DBHelper.executeProc("ThemKhachHang", kh.getName(),kh.getSDT(), 0,kh.getEmail(), kh.getBirthday());
     }
    public void update(KhachHang kh) throws Exception {
-        DBHelper.executeProc("SuaKhachHang", kh.getSDT(),kh.getName(), kh.getEmail(), kh.getBirthday());
+        DBHelper.executeProc("SuaKhachHang", kh.getMaKH(),kh.getName(),kh.getSDT(), 0,kh.getEmail(), kh.getBirthday());
     }
     
 }

@@ -16,6 +16,7 @@ import java.awt.Graphics2D;
  */
 public class QuanLyMonAnJPanel extends javax.swing.JPanel {
     QuanLyMonAnControl control = new QuanLyMonAnControl();
+    static int selected;
     /**
      * Creates new form ManHinhChinhJPanel
      */
@@ -157,22 +158,22 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tblDanhSachMonAn);
-        tblDanhSachMonAn.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblDanhSachMonAn.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1053, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel11Layout.createSequentialGroup()
-                    .addGap(7, 7, 7)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
                     .addGap(7, 7, 7)))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 345, Short.MAX_VALUE)
+            .addGap(0, 343, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel11Layout.createSequentialGroup()
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
@@ -409,17 +410,18 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblDanhSachMonAnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMonAnMousePressed
-        control.fillToForm(tblDanhSachMonAn.getSelectedRow());
+        selected = tblDanhSachMonAn.getSelectedRow();
+                control.fillToForm(selected);
 //        control.refresh();
     }//GEN-LAST:event_tblDanhSachMonAnMousePressed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        control.suaMon(tblDanhSachMonAn.getSelectedRow());
+        control.suaMon(selected);
         control.refresh();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        control.xoaMon(tblDanhSachMonAn.getSelectedRow());
+        control.xoaMon(selected);
         control.refresh();
     }//GEN-LAST:event_btnXoaActionPerformed
 

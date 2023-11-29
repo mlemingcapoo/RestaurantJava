@@ -7,19 +7,16 @@ package model;
  * @author capoo
  */
 public class KhachHang {
-    private int Ma_KH;
+    private int MaKH;
     private String Name;
     private String SDT;
-    private int Diem;
-    private String email;
-    private String birthday;
 
-    public int getMa_KH() {
-        return Ma_KH;
+    public int getMaKH() {
+        return MaKH;
     }
 
-    public void setMa_KH(int Ma_KH) {
-        this.Ma_KH = Ma_KH;
+    public void setMaKH(int MaKH) {
+        this.MaKH = MaKH;
     }
 
     public String getName() {
@@ -61,4 +58,8 @@ public class KhachHang {
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
+    private int Diem;
+    private String email;
+    private String birthday;
+
 }
