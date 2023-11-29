@@ -2,10 +2,6 @@
 
 package model;
 
-/**
- *
- * @author capoo
- */
 public class KhachHang {
     private int Ma_KH;
     private String Name;

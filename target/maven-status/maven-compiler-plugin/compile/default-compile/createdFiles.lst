@@ -1,6 +1,7 @@
 frame\profile$4.class
 GUI\mainUI$16.class
 frame\OrderPanel$3.class
+frame\QuanLyNhanVienJPanel$6.class
 control\profileControl.class
 frame\DoiMatKhau$3.class
 SendMail\SendMail.class
@@ -41,7 +42,6 @@ GUI\mainUI.class
 util\panelNavigator.class
 control\Scan_QR_Control.class
 model\Bill.class
-Bill\InBill.class
 frame\Scan_QR$1.class
 DAO\FoodDAO.class
 GUI\login.class
@@ -75,7 +75,6 @@ frame\OrderPanel$1.class
 frame\QuanLyMonAnJPanel$7.class
 GUI\mainUI$18.class
 DAO\JDBCManager.class
-DAO\ThongKeDAO.class
 frame\OrderPanel$2.class
 GUI\mainUI$17.class
 GUI\mainUI$22.class
@@ -95,6 +94,7 @@ frame\QuanLyMonAnJPanel$5.class
 helper\DBHelper.class
 GUI\mainUI$13.class
 main\testClass.class
+frame\QuanLyNhanVienJPanel$3.class
 frame\Scan_QR.class
 GUI\RoundedCornerBorder.class
 control\DoiMatKhauControl.class
@@ -117,6 +117,7 @@ frame\QuanLyNhanVienJPanel.class
 GUI\mainUI$19.class
 frame\OrderPanel$12.class
 control\OrderControl.class
+frame\QuanLyNhanVienJPanel$4.class
 frame\OrderPanel$5.class
 frame\LoginJPanel$3.class
 frame\OrderPanel.class
@@ -139,11 +140,12 @@ helper\imgHelper.class
 GUI\mainUI$1.class
 control\VoucherControl.class
 frame\OrderPanel$7.class
+model\NhanVien.class
 frame\LoginJPanel$1.class
 frame\QuanLyMonAnJPanel$11.class
 model\Voucher.class
-Bill\InBill$1.class
 GUI\mainUI$12.class
+frame\QuanLyNhanVienJPanel$5.class
 frame\profile$5.class
 frame\VoucherJPanel$1.class
 TaoQR\QuetQR$2.class
@@ -155,13 +157,14 @@ helper\DialogHelper.class
 helper\DateHelper.class
 GUI\mainUI$11.class
 GUI\start.class
-Bill\InBill$2.class
 GUI\login$8.class
 frame\VoucherJPanel$2.class
 frame\VoucherJPanel.class
+DAO\NhanVienDao.class
 model\OrderDetails.class
 GUI\test$2.class
 control\CaiDatControl.class
+frame\QuanLyNhanVienJPanel$7.class
 frame\QuenMatKhauJPanel.class
 frame\OrderPanel$8.class
 frame\VoucherJPanel$3.class
