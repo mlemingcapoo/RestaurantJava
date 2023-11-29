@@ -5,6 +5,11 @@
 package frame;
 
 import control.loginControl;
+import helper.RoundedCornerBorder;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import javax.swing.JTextField;
 
 /**
  *
@@ -31,109 +36,200 @@ public class LoginJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        btnDangNhap = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        btnDangNhap = new javax.swing.JButton(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
+        jLabel4 = new javax.swing.JLabel(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblTaiKhoan = new javax.swing.JLabel();
-        txtUser = new javax.swing.JTextField();
-        txtPass = new javax.swing.JPasswordField();
+        txtUser = new JTextField(20) {
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
+
+        ;
+        txtPass = new javax.swing.JPasswordField(20){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
+            }
+        };
+        ;
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 153, 153));
         setLayout(new java.awt.CardLayout());
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel2.setLayout(new java.awt.CardLayout());
 
-        jCheckBox1.setBackground(new java.awt.Color(204, 0, 204));
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Show");
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jCheckBox1.setBackground(new Color(255, 0, 0, 0));
+        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jCheckBox1.setForeground(new java.awt.Color(242, 242, 242));
+        jCheckBox1.setText("Show Password");
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBox1ItemStateChanged(evt);
             }
         });
-        jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
 
-        btnDangNhap.setBackground(new java.awt.Color(255, 204, 51));
-        btnDangNhap.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 0, 12)); // NOI18N
+        btnDangNhap.setBackground(new java.awt.Color(102, 102, 102));
+        btnDangNhap.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 12)); // NOI18N
+        btnDangNhap.setForeground(new java.awt.Color(255, 255, 255));
         btnDangNhap.setText("Đăng Nhập");
+        btnDangNhap.setBorder(new helper.RoundedCornerBorder());
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
             }
         });
-        jPanel2.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 149, 36));
+        jPanel3.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 149, 36));
 
-        jLabel4.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel4.setBackground(new java.awt.Color(70, 73, 75));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Quên Mật Khẩu ?");
-        jLabel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel4.setBorder(new helper.RoundedCornerBorder());
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
-            }
         });
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, -1, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Mật Khẩu");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 89, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 89, -1));
 
-        jLabel1.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tài Khoản");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 91, -1));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 91, -1));
 
-        lblTaiKhoan.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 24)); // NOI18N
-        lblTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        lblTaiKhoan.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 48)); // NOI18N
+        lblTaiKhoan.setForeground(new java.awt.Color(255, 255, 204));
         lblTaiKhoan.setText("Đăng Nhập");
-        jPanel2.add(lblTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
-        jPanel2.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 360, 31));
-        jPanel2.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 360, 31));
-        txtPass.getAccessibleContext().setAccessibleDescription("");
+        jPanel3.add(lblTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/demo-lam-banner-facebook.png"))); // NOI18N
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 490, 360));
+        txtUser.setText("user3");
+        txtUser.setBorder(new helper.RoundedCornerBorder());
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsertxtPassActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 360, 31));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icn/demo-lam-banner-.png"))); // NOI18N
+        txtPass.setText("pass345");
+        txtPass.setBorder(new helper.RoundedCornerBorder());
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 360, 31));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/demo-lam-banner-facebook.png"))); // NOI18N
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 490, 360));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/demo-lam-banner-.png"))); // NOI18N
         jLabel3.setText("jLabel3");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 820, 670));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 820, 670));
 
-        add(jPanel2, "card3");
+        jPanel2.add(jPanel3, "card3");
+
+        add(jPanel2, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        // TODO add your handling code here:
-        control.login(txtUser, txtPass);
-    }//GEN-LAST:event_btnDangNhapActionPerformed
-
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
-         if(evt.getStateChange() == 1)
-        {
-            txtPass.setEchoChar((char)0);
-        }
-        else
-        {
+        if (evt.getStateChange() == 1) {
+            txtPass.setEchoChar((char) 0);
+        } else {
             txtPass.setEchoChar('•');
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnDangNhapActionPerformed
+
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-      
+        control.forgorPass();
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-            
-    }//GEN-LAST:event_jLabel4MousePressed
+    private void txtUsertxtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsertxtPassActionPerformed
+        // TODO add your handling code here:
+        btnDangNhapActionPerformed(evt);
+    }//GEN-LAST:event_txtUsertxtPassActionPerformed
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        // TODO add your handling code here:
+        btnDangNhapActionPerformed(evt);
+    }//GEN-LAST:event_txtPassActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -142,9 +238,10 @@ public class LoginJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    public static javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblTaiKhoan;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;
