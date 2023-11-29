@@ -185,12 +185,12 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         txtGmailHoiVien.setText("");
         NgaySinh.setDate(null);
     }
-    
-    public void searchByName(String tuKhoa){
+
+    public void searchByName(String tuKhoa) {
         try {
 //            String type = "%";
-            List<KhachHang> kh1 = dao.searchByNameAndType("%"+tuKhoa+"%");
-            System.out.println("Tu Khoa search: "+tuKhoa);
+            List<KhachHang> kh1 = dao.searchByNameAndType("%" + tuKhoa + "%");
+            System.out.println("Tu Khoa search: " + tuKhoa);
             DefaultTableModel model = (DefaultTableModel) tblQuanLyHoiVien.getModel();
             model.setRowCount(0);
             for (KhachHang kh : kh1) {
@@ -200,6 +200,35 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         } catch (Exception ex) {
             Logger.getLogger(QuanLyHoiVienJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public boolean validateForm(boolean chk) {
+        if (txtTenHoiVien.getText().length() == 0) {
+            helper.DialogHelper.alert(this, "Không được phép để trống tên!");
+            txtTenHoiVien.requestFocus();
+            return false;
+        } else if (txtSDTHoiVien.getText().length() == 0) {
+            helper.DialogHelper.alert(this, "Không được phép để trống số điện thoại!");
+            txtTenHoiVien.requestFocus();
+            return false;
+        } else if (txtSDTHoiVien.getText().matches("((84)|(0))\\d{9}")) {
+            helper.DialogHelper.alert(this, "Sai định dạng số điện thoại!");
+            txtTenHoiVien.requestFocus();
+            return false;
+        } else if (txtGmailHoiVien.getText().length() == 0) {
+            helper.DialogHelper.alert(this, "Không được phép để trống email!");
+            txtTenHoiVien.requestFocus();
+            return false;
+        } else if (txtGmailHoiVien.getText().matches("\\w+@\\w+(\\.\\w+){1,2}")) {
+            helper.DialogHelper.alert(this, "Sai định dạng email!");
+            txtTenHoiVien.requestFocus();
+            return false;
+        } else if (NgaySinh.getDate() == null) {
+            helper.DialogHelper.alert(this, "Ngày sinh lỗi!");
+            txtTenHoiVien.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -436,13 +465,17 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        themHV();
-        refresh();
+        if (validateForm(true)) {
+            themHV();
+            refresh();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        suaHV1(selected);
-        refresh();
+        if (validateForm(true)) {
+            suaHV1(selected);
+            refresh();
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
