@@ -4,9 +4,15 @@
  */
 package SendMail;
 
+import Api_upload_image.upanh;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +28,16 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import org.json.JSONObject;
+import sun.misc.IOUtils;
 
 /**
  *
@@ -36,8 +51,71 @@ public class SendMail extends javax.swing.JFrame {
     public SendMail() {
         initComponents();
     }
-    public void send() throws IOException {
-    // Lấy thông tin đăng nhập từ người dùng
+
+    public void getlink() {
+        String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
+
+        // Use a file chooser to let the user select the image file
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Choose an Image File");
+        int userSelection = fileChooser.showOpenDialog(null);
+
+        if (userSelection != JFileChooser.APPROVE_OPTION) {
+            System.out.println("Image selection canceled.");
+            return;
+        }
+
+        File imageFile = fileChooser.getSelectedFile();
+        System.out.println("Selected Image: " + imageFile.getAbsolutePath());
+
+        if (!imageFile.exists()) {
+            System.out.println("Error: Image file not found at " + imageFile.getAbsolutePath());
+            return;
+        }
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("key", apiKey)
+                .addFormDataPart("image", imageFile.getName(),
+                        RequestBody.create(imageFile, MediaType.parse("image/jpeg")))
+                .build();
+
+        Request request = new Request.Builder()
+                .url("https://api.imgbb.com/1/upload")
+                .post(requestBody)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                JSONObject jsonResponse = new JSONObject(responseBody);
+
+                if (jsonResponse.has("data")) {
+                    JSONObject dataObject = jsonResponse.getJSONObject("data");
+                    if (dataObject.has("url")) {
+                        String imageUrl = dataObject.getString("url");
+                        System.out.println("Image uploaded successfully");
+                        System.out.println("Image URL: " + imageUrl);
+                        JOptionPane.showMessageDialog(this, "Tải Ảnh Thành Công !");
+                        txtgetlinkAnh.setText(imageUrl);
+                    } else {
+                        System.out.println("Error: 'url' not found in the response");
+                    }
+                } else {
+                    System.out.println("Error: 'data' not found in the response");
+                }
+            } else {
+                System.out.println("Error uploading image");
+                System.out.println("Response code: " + response.code());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(upanh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void send() {
     final String username = txtMail.getText();
     final String password = txtPass.getText();
 
@@ -73,12 +151,14 @@ public class SendMail extends javax.swing.JFrame {
         textPart.setText(txtnd.getText());
         multipart.addBodyPart(textPart);
 
+        String imagePath = txtgetlinkAnh.getText();
+
         // Thêm phần ảnh vào email
         BodyPart imagePart = new MimeBodyPart();
-        File imageFile = new File("src\\Font_Anh\\2.png"); // Đường dẫn thực tế đến tệp ảnh
-        byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
-        imagePart.setDataHandler(new DataHandler(new ByteArrayDataSource(imageBytes, "image/jpeg")));
-        imagePart.setFileName(imageFile.getName());
+        URL imageUrl = new URL(imagePath);
+        InputStream imageStream = imageUrl.openStream();
+        imagePart.setDataHandler(new DataHandler(new ByteArrayDataSource(imageStream, "image/jpeg")));
+        imagePart.setFileName("image.jpg"); // You can set any file name here
         multipart.addBodyPart(imagePart);
 
         // Đặt nội dung của email là phần nội dung multipart vừa tạo
@@ -90,12 +170,12 @@ public class SendMail extends javax.swing.JFrame {
         // Hiển thị thông báo khi gửi thành công
         JOptionPane.showMessageDialog(this, "done");
         System.out.println("Done");
-        
 
     } catch (MessagingException | IOException e) {
         e.printStackTrace();
     }
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,6 +193,8 @@ public class SendMail extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtnd = new javax.swing.JTextArea();
         btngui = new javax.swing.JButton();
+        txtgetlinkAnh = new javax.swing.JTextField();
+        getLinkAnh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,20 +215,36 @@ public class SendMail extends javax.swing.JFrame {
             }
         });
 
+        txtgetlinkAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtgetlinkAnhActionPerformed(evt);
+            }
+        });
+
+        getLinkAnh.setText("Ảnh");
+        getLinkAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getLinkAnhActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btngui)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1)
-                        .addComponent(txtMail)
-                        .addComponent(txtPass)
-                        .addComponent(txtMailto)
-                        .addComponent(txtNdchinh, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(getLinkAnh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btngui))
+                    .addComponent(jScrollPane1)
+                    .addComponent(txtMail)
+                    .addComponent(txtPass)
+                    .addComponent(txtMailto)
+                    .addComponent(txtNdchinh, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addComponent(txtgetlinkAnh))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -161,22 +259,32 @@ public class SendMail extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtNdchinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btngui)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtgetlinkAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btngui)
+                    .addComponent(getLinkAnh))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnguiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguiActionPerformed
-        try {
+       
             send();
-        } catch (IOException ex) {
-            Logger.getLogger(SendMail.class.getName()).log(Level.SEVERE, null, ex);
-        }
+  
     }//GEN-LAST:event_btnguiActionPerformed
+
+    private void getLinkAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getLinkAnhActionPerformed
+        getlink();
+    }//GEN-LAST:event_getLinkAnhActionPerformed
+
+    private void txtgetlinkAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtgetlinkAnhActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtgetlinkAnhActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,14 +321,15 @@ public class SendMail extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btngui;
+    private javax.swing.JButton getLinkAnh;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtMail;
     private javax.swing.JTextField txtMailto;
     private javax.swing.JTextField txtNdchinh;
     private javax.swing.JTextField txtPass;
+    private javax.swing.JTextField txtgetlinkAnh;
     private javax.swing.JTextArea txtnd;
     // End of variables declaration//GEN-END:variables
 }

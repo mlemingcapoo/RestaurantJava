@@ -56,10 +56,10 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
 
     public void themHV() {
         try {
-            String tenHV = txtTenHoiVien1.getText();
+            String tenHV = txtTenHoiVien.getText();
             String email = txtGmailHoiVien.getText();
             String sdt = txtSDTHoiVien.getText();
-            Date date = chonngay.getDate();
+            Date date = NgaySinh.getDate();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = dateFormat.format(date);
             KhachHang newkh = new KhachHang();
@@ -77,12 +77,12 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
     }
 
     public void setform(KhachHang kh) {
-        txtTenHoiVien1.setText(kh.getName());
+        txtTenHoiVien.setText(kh.getName());
         txtSDTHoiVien.setText(kh.getSDT());
         txtGmailHoiVien.setText(kh.getEmail());
         Date dt = new Date();
         dt = DateHelper.toDate(kh.getBirthday(), "YYYY-MM-DD");
-        chonngay.setDate(dt);
+        NgaySinh.setDate(dt);
     }
 
     public void fillToForm(int selectedRow) {
@@ -111,7 +111,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
 //        newKh.setSDT(sdt1);
 //        newKh.setName(txtTenHoiVien1.getText());
 //        newKh.setEmail(txtGmailHoiVien.getText());
-//        Date date = chonngay.getDate();
+//        Date date = NgaySinh.getDate();
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        String formattedDate = dateFormat.format(date);
 //        newKh.setBirthday(formattedDate);
@@ -130,9 +130,9 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
             String sdt1 = KhachHang.get(selectedRow).getSDT();
             KhachHang newKh = new KhachHang();
             newKh.setSDT(sdt1);
-            newKh.setName(txtTenHoiVien1.getText());
+            newKh.setName(txtTenHoiVien.getText());
             newKh.setEmail(txtGmailHoiVien.getText());
-            Date date = chonngay.getDate();
+            Date date = NgaySinh.getDate();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = dateFormat.format(date);
             newKh.setBirthday(formattedDate);
@@ -149,10 +149,10 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
     }
 
     public void clearForm() {
-        txtTenHoiVien1.setText("");
+        txtTenHoiVien.setText("");
         txtSDTHoiVien.setText("");
         txtGmailHoiVien.setText("");
-        chonngay.setDate(null);
+        NgaySinh.setDate(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -172,10 +172,10 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtTenHoiVien1 = new javax.swing.JTextField();
+        txtTenHoiVien = new javax.swing.JTextField();
         txtSDTHoiVien = new javax.swing.JTextField();
         txtGmailHoiVien = new javax.swing.JTextField();
-        chonngay = new com.toedter.calendar.JDateChooser();
+        NgaySinh = new com.toedter.calendar.JDateChooser();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblQuanLyHoiVien = new javax.swing.JTable();
@@ -290,7 +290,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
                         .addGap(30, 30, 30))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtTenHoiVien1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTenHoiVien, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtSDTHoiVien))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,8 +299,10 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel10))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(chonngay, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
+                        .addGap(0, 142, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(NgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -310,7 +312,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTenHoiVien1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTenHoiVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,10 +322,10 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtSDTHoiVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chonngay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(7, Short.MAX_VALUE))
+                    .addComponent(NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -373,7 +375,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(123, 123, 123))
         );
@@ -387,8 +389,9 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -416,11 +419,11 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public com.toedter.calendar.JDateChooser NgaySinh;
     public static javax.swing.JButton btnSua;
     public static javax.swing.JButton btnThem;
     public static javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboLocHoiVien;
-    public com.toedter.calendar.JDateChooser chonngay;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -434,7 +437,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblQuanLyHoiVien;
     public javax.swing.JTextField txtGmailHoiVien;
     public javax.swing.JTextField txtSDTHoiVien;
-    public javax.swing.JTextField txtTenHoiVien1;
+    public javax.swing.JTextField txtTenHoiVien;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

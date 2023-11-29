@@ -4,19 +4,44 @@
  */
 package frame;
 
+import DAO.DoanhThuDAO;
+import helper.DBHelper;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+
+
 /**
  *
  * @author mynla
  */
 public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
+    private DBHelper dbHelper;
 
     /**
-     * Creates new form ManHinhChinhJPanel
+     * Creates new form QuanLyDoanhThuJPanel
      */
     public QuanLyDoanhThuJPanel() {
         initComponents();
+        TongHoiVien();
+        
     }
 
+
+    // Other methods and UI initialization code goes here
+
+  
+
+public void TongHoiVien(){
+   lblHoiVien.setText("test");
+}
+//public void TongThang(){
+//    lblHoiVien.setText("test");
+//}
+//public void TongNam(){
+//    lblHoiVien.setText("test");
+//}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,7 +57,8 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         cboChucNung = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
+        aaa = new javax.swing.JPanel();
+        lblHoiVien = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -65,7 +91,7 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,19 +128,27 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 153, 153));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Tổng"));
 
-        jPanel8.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Hội Viên"));
-        jPanel8.setPreferredSize(new java.awt.Dimension(180, 86));
+        aaa.setBackground(new java.awt.Color(255, 153, 153));
+        aaa.setBorder(javax.swing.BorderFactory.createTitledBorder("Hội Viên"));
+        aaa.setPreferredSize(new java.awt.Dimension(180, 86));
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
+        lblHoiVien.setText("jLabel1");
+
+        javax.swing.GroupLayout aaaLayout = new javax.swing.GroupLayout(aaa);
+        aaa.setLayout(aaaLayout);
+        aaaLayout.setHorizontalGroup(
+            aaaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aaaLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(lblHoiVien, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 63, Short.MAX_VALUE)
+        aaaLayout.setVerticalGroup(
+            aaaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aaaLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblHoiVien)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jPanel9.setBackground(new java.awt.Color(255, 153, 153));
@@ -166,7 +200,7 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addComponent(aaa, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(21, 21, 21)
@@ -179,7 +213,7 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(aaa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -213,15 +247,16 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel aaa;
     private javax.swing.JComboBox<String> cboChucNung;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JLabel lblHoiVien;
     private javax.swing.JTable tblQuanLyChiTiet;
     // End of variables declaration//GEN-END:variables
 }

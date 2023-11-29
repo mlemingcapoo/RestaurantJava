@@ -4,12 +4,22 @@
  */
 package frame;
 
-import com.google.zxing.WriterException;
+import Api_upload_image.upanh;
 import control.VoucherControl;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import org.json.JSONObject;
+//
 /**
  *
  * @author mynla
@@ -22,6 +32,7 @@ VoucherControl control = new VoucherControl();
     public VoucherJPanel() {
         initComponents();
         control.init(this);
+        
     }
 
     /**
@@ -43,7 +54,16 @@ VoucherControl control = new VoucherControl();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         NgayHetHan = new com.toedter.calendar.JDateChooser();
-        txtTime = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblHoiVien = new javax.swing.JTable();
+        btnsend = new javax.swing.JButton();
+        txtLinkAnh = new javax.swing.JTextField();
+        btnSendall = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtNDung = new javax.swing.JTextArea();
+        txtTieuDe = new javax.swing.JTextField();
+        btnSendall1 = new javax.swing.JButton();
+        txtMail = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 153, 153));
 
@@ -107,6 +127,55 @@ VoucherControl control = new VoucherControl();
 
         jLabel2.setText("Giảm (%)");
 
+        NgayHetHan.setBackground(new java.awt.Color(255, 153, 153));
+
+        tblHoiVien.setBackground(new java.awt.Color(255, 153, 153));
+        tblHoiVien.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tên Hội Viên", "SĐT", "Email"
+            }
+        ));
+        tblHoiVien.setColumnSelectionAllowed(true);
+        tblHoiVien.getTableHeader().setReorderingAllowed(false);
+        tblHoiVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblHoiVienMousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblHoiVien);
+        tblHoiVien.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        btnsend.setBackground(new java.awt.Color(255, 153, 153));
+        btnsend.setText("Send");
+        btnsend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsendActionPerformed(evt);
+            }
+        });
+
+        txtLinkAnh.setBackground(new java.awt.Color(255, 153, 153));
+
+        btnSendall.setBackground(new java.awt.Color(255, 153, 153));
+        btnSendall.setText("Send All");
+
+        txtNDung.setColumns(20);
+        txtNDung.setRows(5);
+        txtNDung.setText("Vocher siêu ngon \n<Ngày hết hạn vocher điền tay =))>");
+        jScrollPane3.setViewportView(txtNDung);
+
+        txtTieuDe.setText("Cửa Hàng Tặng Mã voucher");
+
+        btnSendall1.setBackground(new java.awt.Color(255, 153, 153));
+        btnSendall1.setText("Ảnh");
+        btnSendall1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendall1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -115,22 +184,39 @@ VoucherControl control = new VoucherControl();
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnThem)
-                        .addGap(80, 80, 80)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtGiam, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(26, 26, 26))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(267, 267, 267))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(NgayHetHan, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTime)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                            .addComponent(NgayHetHan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(10, 10, 10))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtGiam)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                        .addComponent(txtLinkAnh)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(btnSendall)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSendall1)
+                            .addGap(27, 27, 27)
+                            .addComponent(btnsend))
+                        .addComponent(jScrollPane3)
+                        .addComponent(txtTieuDe))
+                    .addComponent(txtMail, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -139,20 +225,35 @@ VoucherControl control = new VoucherControl();
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtGiam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(NgayHetHan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoa)
-                    .addComponent(btnSua)
-                    .addComponent(btnThem))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtLinkAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnsend)
+                            .addComponent(btnSendall)
+                            .addComponent(btnSendall1)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtGiam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(NgayHetHan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnXoa)
+                            .addComponent(btnSua)
+                            .addComponent(btnThem))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -175,18 +276,16 @@ VoucherControl control = new VoucherControl();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
+       control.xoaVoucher(tblVoucher.getSelectedRow());
+           control.refresh();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-    try {
+   
         control.them();
         control.TaoQRVoucher();
-    } catch (WriterException ex) {
-        Logger.getLogger(VoucherJPanel.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IOException ex) {
-        Logger.getLogger(VoucherJPanel.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        control.upload();
+   
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -199,18 +298,100 @@ VoucherControl control = new VoucherControl();
 //         control.refresh();
     }//GEN-LAST:event_tblVoucherMousePressed
 
+    private void btnsendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsendActionPerformed
+       control.send();
+    }//GEN-LAST:event_btnsendActionPerformed
+
+    private void btnSendall1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendall1ActionPerformed
+         String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
+
+        // Use a file chooser to let the user select the image file
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Choose an Image File");
+        int userSelection = fileChooser.showOpenDialog(null);
+
+        if (userSelection != JFileChooser.APPROVE_OPTION) {
+            System.out.println("Image selection canceled.");
+            return;
+        }
+
+        File imageFile = fileChooser.getSelectedFile();
+        System.out.println("Selected Image: " + imageFile.getAbsolutePath());
+
+        if (!imageFile.exists()) {
+            System.out.println("Error: Image file not found at " + imageFile.getAbsolutePath());
+            return;
+        }
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("key", apiKey)
+                .addFormDataPart("image", imageFile.getName(),
+                        RequestBody.create(imageFile, MediaType.parse("image/jpeg")))
+                .build();
+
+        Request request = new Request.Builder()
+                .url("https://api.imgbb.com/1/upload")
+                .post(requestBody)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                JSONObject jsonResponse = new JSONObject(responseBody);
+
+                if (jsonResponse.has("data")) {
+                    JSONObject dataObject = jsonResponse.getJSONObject("data");
+                    if (dataObject.has("url")) {
+                        String imageUrl = dataObject.getString("url");
+                        System.out.println("Image uploaded successfully");
+                        System.out.println("Image URL: " + imageUrl);
+                        JOptionPane.showMessageDialog(this, "Tải Ảnh Thành Công !");
+                        txtLinkAnh.setText(imageUrl);
+                    } else {
+                        System.out.println("Error: 'url' not found in the response");
+                    }
+                } else {
+                    System.out.println("Error: 'data' not found in the response");
+                }
+            } else {
+                System.out.println("Error uploading image");
+                System.out.println("Response code: " + response.code());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(upanh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSendall1ActionPerformed
+
+    private void tblHoiVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoiVienMousePressed
+        // TODO add your handling code here:
+        
+        control.fillMail(tblHoiVien.getSelectedRow());
+    }//GEN-LAST:event_tblHoiVienMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static com.toedter.calendar.JDateChooser NgayHetHan;
+    private javax.swing.JButton btnSendall;
+    private javax.swing.JButton btnSendall1;
     public static javax.swing.JButton btnSua;
     public static javax.swing.JButton btnThem;
     public static javax.swing.JButton btnXoa;
+    private javax.swing.JButton btnsend;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    public javax.swing.JTable tblHoiVien;
     public javax.swing.JTable tblVoucher;
     public static javax.swing.JTextField txtGiam;
-    private javax.swing.JTextField txtTime;
+    public javax.swing.JTextField txtLinkAnh;
+    public javax.swing.JTextField txtMail;
+    public javax.swing.JTextArea txtNDung;
+    public javax.swing.JTextField txtTieuDe;
     // End of variables declaration//GEN-END:variables
 }
