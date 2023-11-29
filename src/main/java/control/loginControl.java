@@ -47,7 +47,7 @@ public class loginControl {
     
     public void startMainUI(int permissionLevel) {
         if (permissionLevel<0){
-            DialogHelper.exitNow(login, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
+            DialogHelper.alert(login, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
         } else {
             mainUI main = new mainUI();
             login.dispose();

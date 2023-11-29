@@ -148,14 +148,12 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="BtnDangXuat" pref="154" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="BtnQuanLyNhanVien" max="32767" attributes="0"/>
-                              <Component id="BtnQuanLyDoanhThu" alignment="1" pref="154" max="32767" attributes="0"/>
-                              <Component id="BtnQuanLyHoiVien" alignment="1" max="32767" attributes="0"/>
-                              <Component id="BtnQuanLyMon" alignment="1" max="32767" attributes="0"/>
-                              <Component id="BtnQuanLyBanHang" alignment="1" max="32767" attributes="0"/>
-                              <Component id="BtnCaiDat" alignment="1" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="BtnQuanLyNhanVien" max="32767" attributes="0"/>
+                          <Component id="BtnQuanLyDoanhThu" alignment="1" pref="154" max="32767" attributes="0"/>
+                          <Component id="BtnQuanLyHoiVien" alignment="1" max="32767" attributes="0"/>
+                          <Component id="BtnQuanLyMon" alignment="1" max="32767" attributes="0"/>
+                          <Component id="BtnQuanLyBanHang" alignment="1" max="32767" attributes="0"/>
+                          <Component id="BtnCaiDat" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>

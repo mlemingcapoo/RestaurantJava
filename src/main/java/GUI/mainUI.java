@@ -24,6 +24,7 @@ public class mainUI extends javax.swing.JFrame {
      * Creates new form loginFrame1
      */
     public mainUI() {
+        setUndecorated(true);
         initComponents();
         mainUI = new mainUiControl(this);
     }
@@ -527,7 +528,7 @@ public class mainUI extends javax.swing.JFrame {
 
     private void BtnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDangXuatActionPerformed
         // TODO add your handling code here:
-        mainUI.login();
+        mainUI.DangXuat();
     }//GEN-LAST:event_BtnDangXuatActionPerformed
 
     private void BtnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienActionPerformed

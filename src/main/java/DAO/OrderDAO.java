@@ -5,7 +5,10 @@ import helper.DialogHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Order;
+import model.OrdersWithTable;
 import util.SQLThread;
 
 /**
@@ -15,6 +18,7 @@ import util.SQLThread;
 public class OrderDAO extends SQL<Order, String> {
 //    String INSERT_SQL = "INSERT INTO Food(MaNV, Password, FullName, Role) VALUES(?,?,?,?)";
 //    String UPDATE_SQL = "UPDATE Food SET Password = ?, FullName = ?, Role = ? WHERE MaNV = ?";
+
     String DELETE_SQL = "DELETE FROM `Order` WHERE order_ID = ?";
 
     String SELECT_ALL_SQL = "SELECT * FROM Order";
@@ -75,6 +79,24 @@ public class OrderDAO extends SQL<Order, String> {
 
         DBHelper.update(DELETE_SQL, order_ID);
 
+    }
+
+    public List<OrdersWithTable> getOrdersWithTableName() {
+        List<OrdersWithTable> list = null;
+        try {
+            ResultSet rs = DBHelper.executeProc("getOrdersWithTableName");
+            list = new ArrayList<>();
+            while (rs.next()) {
+                OrdersWithTable orders = new OrdersWithTable();
+                orders.setOrder_ID(rs.getInt(1));
+                orders.setTableName(rs.getString(2));
+                orders.setNote(rs.getString(3));
+                list.add(orders);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
 }

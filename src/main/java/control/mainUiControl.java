@@ -9,6 +9,7 @@ import frame.QuanLyDoanhThuJPanel;
 import frame.QuanLyHoiVienJPanel;
 import frame.QuanLyMonAnJPanel;
 import frame.QuanLyNhanVienJPanel;
+import frame.TableJPanel;
 import frame.profile;
 import helper.DialogHelper;
 import javax.swing.JFrame;
@@ -29,6 +30,8 @@ public final class mainUiControl implements GUI_Interface {
     JPanel QLMonAn = new QuanLyMonAnJPanel();
     JPanel QLNNhanVien = new QuanLyNhanVienJPanel();
     OrderPanel QLBanHang = new OrderPanel();
+    TableJPanel QLTable = new TableJPanel();
+    
 
     JPanel Profile = new profile();
 
@@ -57,7 +60,8 @@ public final class mainUiControl implements GUI_Interface {
         mainUI.panelDisplay.add(QLBanHang, "BanHang");
 //        panelNavigator.switchPanel(mainUI.panelDisplay, "");
         mainUI.panelDisplay.add(Profile, "Profile");
-
+        mainUI.panelDisplay.add(QLTable, "Table");
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     @Override
@@ -130,8 +134,9 @@ public final class mainUiControl implements GUI_Interface {
     }
 
     public void DatBan() {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        panelNavigator.switchPanel(mainUI.panelDisplay, "Table");
+        TableControl control = new TableControl();
+        control.init(QLTable);
     }
 
     public void Order() {
@@ -145,8 +150,8 @@ public final class mainUiControl implements GUI_Interface {
         unlockPerm(dao.getPermissonLevel());
         if (permissonLevel < 0) {
             mainUI.BtnDangXuat.setEnabled(true);
-//            DialogHelper.showDialog(frame, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
-            DialogHelper.alert(frame, "lmao");
+//            DialogHelper.showDialog(frame, "");
+            DialogHelper.alert(frame, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
             System.out.println("vai lon?");
 //            System.exit();
 //            hideFrame(frame);

@@ -20,7 +20,9 @@
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/CaiDatJPanel.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/model/OrderDetails.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/QuenMatKhauControl.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/DAO/TableDAO.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/helper/PanelHelper.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/model/Tables.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/OrderControl.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/VoucherJPanel.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/model/Order.java
@@ -39,6 +41,7 @@
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/DAO/SQL.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/GUI/mainUI.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/DAO/OrderDetailsDAO.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/TableControl.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/DAO/JDBCManager.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/Bill/InBill.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/model/Bill.java
@@ -64,6 +67,8 @@
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/QuanLyDoanhThuJPanel.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/GUI/test.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/LoginJPanel.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/TableJPanel.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/model/OrdersWithTable.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/helper/DialogHelper.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/TaoQR/QRCodeGenerator.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/Scan_QR_Control.java
