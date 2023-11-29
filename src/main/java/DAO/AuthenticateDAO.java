@@ -14,7 +14,7 @@ import java.sql.SQLNonTransientConnectionException;
  */
 public class AuthenticateDAO {
 
-    private static int permissonLevel;
+    private static int permissonLevel=-1;
     private static String username;
     private static int id;
     private static String name;

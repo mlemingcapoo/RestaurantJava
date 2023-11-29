@@ -3,6 +3,7 @@ package control;
 import DAO.AuthenticateDAO;
 import GUI.mainUI;
 import frame.CaiDatJPanel;
+import frame.LoginJPanel;
 import frame.OrderPanel;
 import frame.QuanLyDoanhThuJPanel;
 import frame.QuanLyHoiVienJPanel;
@@ -22,7 +23,7 @@ public final class mainUiControl implements GUI_Interface {
 
     JPanel caiDat = new CaiDatJPanel();
 //    JPanel DoiMatKhau = new DoiMatKhau();
-//    JPanel LoginJPanel = new LoginJPanel() ;
+    JPanel LoginJPanel = new LoginJPanel() ;
     JPanel QLDoanhThu = new QuanLyDoanhThuJPanel();
     JPanel QLHoiVien = new QuanLyHoiVienJPanel();
     JPanel QLMonAn = new QuanLyMonAnJPanel();
@@ -48,7 +49,7 @@ public final class mainUiControl implements GUI_Interface {
         System.out.println("... loading frame into panelDisplay...");
         mainUI.panelDisplay.add(caiDat, "CaiDat");
 //        mainUI.panelDisplay.add(DoiMatKhau,"DoiMatKhau");
-//        mainUI.panelDisplay.add(LoginJPanel,"Login");
+        mainUI.panelDisplay.add(LoginJPanel,"Login");
         mainUI.panelDisplay.add(QLDoanhThu, "DoanhThu");
         mainUI.panelDisplay.add(QLHoiVien, "HoiVien");
         mainUI.panelDisplay.add(QLMonAn, "MonAn");
@@ -76,7 +77,9 @@ public final class mainUiControl implements GUI_Interface {
     }
 
     public void DangXuat() {
-        panelNavigator.switchPanel(mainUI.panelDisplay, "Login");
+//        panelNavigator.switchPanel(mainUI.panelDisplay, "Login");
+            frame.dispose();
+            new loginControl().init();
     }
 
     @Override
@@ -142,11 +145,14 @@ public final class mainUiControl implements GUI_Interface {
         unlockPerm(dao.getPermissonLevel());
         if (permissonLevel < 0) {
             mainUI.BtnDangXuat.setEnabled(true);
-            DialogHelper.exitNow(frame, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
-            System.exit(1);
+//            DialogHelper.showDialog(frame, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
+            DialogHelper.alert(frame, "lmao");
+            System.out.println("vai lon?");
+//            System.exit();
 //            hideFrame(frame);
 //            frame.BtnDangXuat.setText("fuck");
 //            new startControl().loading();
+//            frame.dispose();
         }
     }
 
