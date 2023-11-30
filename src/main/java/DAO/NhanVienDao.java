@@ -14,7 +14,7 @@ import util.SQLThread;
 public class NhanVienDao extends SQL<NhanVien, String> {
       String SELECT_ALL_SQL = "SELECT * FROM User";
     String INSERT_SQL ="CALL ThemNhanVien(?,?,?,?)";
-     String TIMKIEM_SQL = "SELECT * FROM `User` WHERE UserName like ?";
+     String TIMKIEM_SQL = "SELECT * FROM `User` WHERE UserName  LIKE ? AND role = ? ";
 
     @Override
     public List<NhanVien> selectAll() {
@@ -34,6 +34,12 @@ public class NhanVienDao extends SQL<NhanVien, String> {
                 newNhanVien.setPass(rs.getString(3));
                 newNhanVien.setRole(rs.getBoolean(4));
                 newNhanVien.setIsLooked(rs.getBoolean(5));
+                newNhanVien.setAddress(rs.getString(6));
+                 newNhanVien.setName(rs.getString(7));
+                  newNhanVien.setBirthday(rs.getString(8));
+                   newNhanVien.setSodienthoai(rs.getString(9));
+                    newNhanVien.setCccd(rs.getString(10));
+                     newNhanVien.setImg(rs.getString(11));
                 list.add(newNhanVien);
             }
         }catch(Exception e){
@@ -44,14 +50,14 @@ public class NhanVienDao extends SQL<NhanVien, String> {
           return list;
     }
 public void them(NhanVien nhanvien) throws Exception{
-        DBHelper.executeProc("ThemNguoiDung", nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked());
+        DBHelper.executeProc("AddNhanVien", nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked(),nhanvien.getAddress(),nhanvien.getName(),nhanvien.getBirthday(),nhanvien.getSodienthoai(),nhanvien.getCccd(),nhanvien.getImg());
 }
 public  void sua(NhanVien nhanvien)throws Exception{
-    DBHelper.executeProc("SuaThongTinNhanVien",nhanvien.getMaNV(),nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked() );
+    DBHelper.executeProc("UpdateNhanVien",nhanvien.getMaNV(),nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked(),nhanvien.getAddress(),nhanvien.getName(),nhanvien.getBirthday(),nhanvien.getSodienthoai(),nhanvien.getCccd(),nhanvien.getImg() );
 }
 
-    public List<NhanVien> searchByNameAndType(String User) {
-        return selectBySQL(TIMKIEM_SQL,User);
+    public List<NhanVien> searchByNameAndType(String user,String role) {
+        return selectBySQL(TIMKIEM_SQL,user,role);
     }
 
     public void delete(NhanVien nhanvien) throws Exception {

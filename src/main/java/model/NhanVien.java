@@ -5,48 +5,19 @@
 package model;
 
 public class NhanVien {
-    private int MaNV;
 
+    private int MaNV;
     private String User;
     private String Pass;
     private boolean Role;
-    private boolean IsLooked;  
+    private boolean IsLooked;
     private String Address;
     private String Name;
     private String Birthday;
-    private Integer Cccd;
+    private String  Cccd;
+    private String Sodienthoai;
+    private String Img;
 
-    public String getAddress() {
-        return Address;
-    }
-
-    public void setAddress(String Address) {
-        this.Address = Address;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String Name) {
-        this.Name = Name;
-    }
-
-    public String getBirthday() {
-        return Birthday;
-    }
-
-    public void setBirthday(String Birthday) {
-        this.Birthday = Birthday;
-    }
-
-    public Integer getCccd() {
-        return Cccd;
-    }
-
-    public void setCccd(Integer Cccd) {
-        this.Cccd = Cccd;
-    }
     public int getMaNV() {
         return MaNV;
     }
@@ -54,6 +25,7 @@ public class NhanVien {
     public void setMaNV(int MaNV) {
         this.MaNV = MaNV;
     }
+
     public String getUser() {
         return User;
     }
@@ -86,7 +58,53 @@ public class NhanVien {
         this.IsLooked = IsLooked;
     }
 
-   
-    
+    public String getAddress() {
+        return Address;
+    }
 
+    public void setAddress(String Address) {
+        this.Address = Address;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public String getBirthday() {
+        return Birthday;
+    }
+
+    public void setBirthday(String Birthday) {
+        this.Birthday = Birthday;
+    }
+
+    public String getCccd() {
+        return Cccd;
+    }
+
+    public void setCccd(String Cccd) {
+        this.Cccd = Cccd;
+    }
+
+    public String getSodienthoai() {
+        return Sodienthoai;
+    }
+
+    public void setSodienthoai(String Sodienthoai) {
+        this.Sodienthoai = Sodienthoai;
+    }
+
+    public String getImg() {
+        return Img;
+    }
+
+    public void setImg(String Img) {
+        this.Img = Img;
+    }
+
+    
 }
