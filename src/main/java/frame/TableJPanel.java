@@ -263,7 +263,7 @@ TableDAO dao = new TableDAO();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAppendTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAppendTableActionPerformed
-
+        control.datBan();
     }//GEN-LAST:event_btnAppendTableActionPerformed
 
     private void btnEditTableNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditTableNameActionPerformed
@@ -279,21 +279,21 @@ TableDAO dao = new TableDAO();
 
     private void btnDeleteTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteTableActionPerformed
         // TODO add your handling code here:
-//        control.deleteTable();
-//        try {
-            System.out.println("what0?");
-            int selectedRow = tblListBan.getSelectedRow();
-        try {
-            dao.delete(selectedRow);
-        } catch (Exception ex) {
-            Logger.getLogger(TableJPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            System.out.println("wha1?");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        control.deleteTable();
+
+//        control.refresh();
+
         control.refresh();
-        System.out.println("what2?");
+        System.out.println(tblListBan.getSelectedRow());
+        if(evt.getSource() == btnDeleteTable) {
+            try {
+                dao.delete(tblListBan.getSelectedRow());
+            } catch (Exception ex) {
+                Logger.getLogger(TableJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("FUCK");
+            
+        };
     }//GEN-LAST:event_btnDeleteTableActionPerformed
 
     private void btnAddTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTableActionPerformed
@@ -317,7 +317,7 @@ TableDAO dao = new TableDAO();
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jscroll;
-    public javax.swing.JTable tblListBan;
+    public static javax.swing.JTable tblListBan;
     public javax.swing.JTable tblOrderList;
     public javax.swing.JTextField txtTableName;
     // End of variables declaration//GEN-END:variables

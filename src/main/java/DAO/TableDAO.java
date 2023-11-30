@@ -73,7 +73,7 @@ e.printStackTrace();
 
     public void delete(int Table_ID) throws Exception{
 
-        DBHelper.update(DELETE_SQL, Table_ID);
+        DBHelper.executeProc("deleteTableByID", Table_ID);
 
     }
 
@@ -93,6 +93,10 @@ e.printStackTrace();
 
     public void add(String text) throws Exception {
         DBHelper.executeProc("insertTableWithName", text);
+    }
+
+    public void setTableByOrderID(int cboIdOrder, int TableID) throws Exception {
+        DBHelper.executeProc("setTableByOrderID", cboIdOrder,TableID);
     }
 
 }

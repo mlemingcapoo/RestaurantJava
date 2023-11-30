@@ -215,9 +215,8 @@ public class OrderPanel extends javax.swing.JPanel {
         });
 
         cboHinhThucThanhToan.setForeground(new java.awt.Color(255, 255, 255));
-        cboHinhThucThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Chuyển Khoản", "Tiền Mặt" }));
+        cboHinhThucThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn hình thức thanh toán", "Chuyển Khoản", "Tiền Mặt" }));
         cboHinhThucThanhToan.setMaximumSize(null);
-        cboHinhThucThanhToan.setMinimumSize(null);
         cboHinhThucThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboHinhThucThanhToanActionPerformed(evt);
@@ -287,7 +286,7 @@ public class OrderPanel extends javax.swing.JPanel {
         });
 
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel9.setText("Hội Viên");
+        jLabel9.setText("SDT Hội Viên");
 
         jCheckBox1.setText("Dùng Điểm");
 
@@ -761,8 +760,8 @@ public class OrderPanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)

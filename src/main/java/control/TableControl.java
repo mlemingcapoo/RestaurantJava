@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import model.Order;
 import model.OrdersWithTable;
 import model.Tables;
 
@@ -20,6 +21,7 @@ public class TableControl {
 
     static TableJPanel panel;
     static List<OrdersWithTable> order = new ArrayList<>();
+    static List<Order> orderList = new ArrayList<>();
     static List<Tables> tables = new ArrayList<>();
     TableDAO dao = new TableDAO();
     OrderDAO orderDao = new OrderDAO();
@@ -38,6 +40,7 @@ public class TableControl {
     }
 
     public void fillTables() {
+        panel.cboTableName.removeAllItems();
         System.out.println("filling table tabe...");
         DefaultTableModel model = (DefaultTableModel) panel.tblListBan.getModel();
         model.setRowCount(0);
@@ -86,11 +89,24 @@ public class TableControl {
     }
 
     public void deleteTable() {
-            System.out.println("what33?");
-        
+        System.out.println("what33?");
+        System.out.println("what2?");
+        try {
+            System.out.println("what0?");
+            int selectedRow = panel.tblListBan.getSelectedRow();
+
+            dao.delete(selectedRow);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("wha1?");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void getFillOrders() {
+        fillComboOrders();
         order.clear();
         order = orderDao.getOrdersWithTableName();
         System.out.println("filling...");
@@ -101,7 +117,7 @@ public class TableControl {
             Object[] row = new Object[]{count, fd.getOrder_ID(), fd.getTableName(), fd.getNote()};
             model.addRow(row);
             count++;
-            panel.cboIdOrder.addItem(String.valueOf(fd.getOrder_ID()));
+
         }
     }
 
@@ -113,6 +129,29 @@ public class TableControl {
         }
         refresh();
         panel.txtTableName.setText("");
+    }
+
+    public void datBan() {
+        try {
+            int cboIdOrder = Integer.parseInt(panel.cboIdOrder.getSelectedItem().toString());
+            int TableIndex = panel.cboTableName.getSelectedIndex();
+            int TableID = tables.get(TableIndex).getTable_ID();
+            dao.setTableByOrderID(cboIdOrder,TableID);
+        } catch (Exception ex) {
+//            Logger.getLogger(TableControl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            refresh();
+        }
+    }
+
+    private void fillComboOrders() {
+        orderList.clear();
+        panel.cboIdOrder.removeAllItems();
+        orderList = orderDao.selectAllPending();
+        for (Order fd : orderList) {
+            panel.cboIdOrder.addItem(String.valueOf(fd.getOrder_ID()));
+        }
+
     }
 
 }
