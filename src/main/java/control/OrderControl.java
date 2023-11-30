@@ -4,6 +4,7 @@ import DAO.FoodDAO;
 import DAO.OrderDAO;
 import DAO.OrderDetailsDAO;
 import DAO.SQL;
+import GUI.Payment;
 import frame.OrderPanel;
 import helper.DialogHelper;
 import java.sql.SQLException;
@@ -86,7 +87,7 @@ public class OrderControl {
     public void payment() {
 //        order_choosen;
 //        order ;
-        
+        new Payment().setOrder(order, order_choosen);
     }
 
     public void createOrder() {
