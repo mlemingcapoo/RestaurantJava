@@ -42,6 +42,9 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         NhanVien nv = nhanvien.get(selectedRow);
         System.out.println("may dang o: " + selectedRow);
         setForm(nv);
+//       refresh();
+        
+        
        
     }
      public void setForm(NhanVien nv) {
@@ -57,10 +60,10 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         }
         switch (String.valueOf(nv.isIsLooked())) {
             case "true":
-                cboRole.setSelectedIndex(1);
+                cboTrangThai.setSelectedIndex(1);
                 break;
             case "false":
-                cboRole.setSelectedIndex(0);
+                cboTrangThai.setSelectedIndex(0);
                 break;
         }
     }
@@ -68,12 +71,12 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblDanhSachNhanVien.getModel();
         model.setRowCount(0);
         for (NhanVien nv : nhanvien) {
-            Object[] row = new Object[]{nv.getUser(),nv.getPass(),nv.isRole(),nv.isIsLooked()};
+            Object[] row = new Object[]{nv.getMaNV(),nv.getUser(),nv.getPass(),nv.isRole(),nv.isIsLooked()};
             model.addRow(row);
         }
     }
     public void getNV() {
-        clearForm();
+//        clearForm();
         try {
             nhanvien = dao.selectAll();
                System.out.println("Số Nhan vien có trong danh sách: " + nhanvien.size());    
@@ -107,46 +110,59 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             ex.printStackTrace(); // Handle the exception appropriately, e.g., show an error message
         }
     }
-        public void SuaNV(int selectedRow) {
-            System.out.println("sua mon: " + selectedRow);
-        int MaNV = nhanvien.get(selectedRow).getMaNV();
-        NhanVien newNh = new NhanVien();
-        newNh.setMaNV(MaNV);
-         newNh.setUser(txttaikhoan.getText());
-          newNh.setPass(txtPass.getText());
-        switch (String.valueOf(newNh.isRole())) {
-            case "true":
-                cboRole.setSelectedIndex(1);
+       public void SuaNV(int selectedRow) {
+        System.out.println("tao o hang : " + selectedRow);
+
+        int maNV = nhanvien.get(selectedRow).getMaNV();
+        System.out.println("tao sua o id : " + maNV);
+    try {
+
+        System.out.println("Employee ID: " + maNV);
+
+        NhanVien updatedEmployee = new NhanVien();
+        updatedEmployee.setMaNV(maNV);
+        updatedEmployee.setUser(txttaikhoan.getText());
+        updatedEmployee.setPass(txtPass.getText());
+        switch (cboRole.getSelectedIndex()) {
+            case 1:
+                updatedEmployee.setRole(true);
                 break;
-            case "false":
-                cboRole.setSelectedIndex(0);
+            case 0:
+                updatedEmployee.setRole(false);
                 break;
         }
-        switch (String.valueOf(newNh.isIsLooked())) {
-            case "true":
-                cboRole.setSelectedIndex(1);
+        switch (cboTrangThai.getSelectedIndex()) {
+            case 1:
+                updatedEmployee.setIsLooked(true);
                 break;
-            case "false":
-                cboRole.setSelectedIndex(0);
+            case 0:
+                updatedEmployee.setIsLooked(false);
                 break;
-    }try {
-            dao.sua(newNh);
-            clearForm();
-            System.out.println("done");
-//            helper.DialogHelper.alert(QuanLyNhanVienJPanel, "Sửa món thành công!!!");
-        } catch (Exception ex) {
-              System.out.println("loi");
-//            helper.DialogHelper.alert(QuanLyNhanVienJPanel, "Xảy ra lỗi khi sửa món!!!");
-//            Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+
+        dao.sua(updatedEmployee);
+        
+//        clearForm();
+//        refresh();
+        System.out.println("Update successful");
+    } catch (Exception ex) {
+        // Log or handle the exception appropriately
+        ex.printStackTrace();
+        System.out.println("Error updating employee");
     }
+}
+
+
 public void xoaMon(int selectedRow) {
         System.out.println("TaoXoaNV nhe :" + selectedRow);
         int MaNV = nhanvien.get(selectedRow).getMaNV();
+        System.out.println(" id tao ne :" + MaNV);
         NhanVien newNhanVien = new NhanVien();
         newNhanVien.setMaNV(MaNV);
         try {
             dao.delete(newNhanVien);
+            refresh();
             clearForm();
             System.out.println("done");
 //            helper.DialogHelper.alert(QuanLyNhanVienJPanel, "Xóa Món Thành Công!");
@@ -231,11 +247,11 @@ public void timKiem(String tuKhoa) {
 
         jLabel3.setText("Pass");
 
-        cboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nhanVien", "QuanLy" }));
+        cboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Quản Lý" }));
 
         jLabel4.setText("Role");
 
-        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Khoa", "Mo" }));
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "false", "true" }));
 
         jLabel5.setText("Trang Thai");
 
@@ -373,11 +389,11 @@ public void timKiem(String tuKhoa) {
 
             },
             new String [] {
-                "user", "pass", "IsLooked", "role"
+                "ID", "User", "Pas", "IsLooked", "role"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -430,7 +446,7 @@ public void timKiem(String tuKhoa) {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 763, Short.MAX_VALUE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -474,6 +490,7 @@ public void timKiem(String tuKhoa) {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         SuaNV(tblDanhSachNhanVien.getSelectedRow());
+        refresh();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
@@ -492,7 +509,7 @@ public void timKiem(String tuKhoa) {
     public static javax.swing.JButton btnThem;
     public static javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboRole;
-    private javax.swing.JComboBox<String> cboTrangThai;
+    public javax.swing.JComboBox<String> cboTrangThai;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

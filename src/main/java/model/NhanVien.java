@@ -11,7 +11,42 @@ public class NhanVien {
     private String Pass;
     private boolean Role;
     private boolean IsLooked;  
+    private String Address;
+    private String Name;
+    private String Birthday;
+    private Integer Cccd;
 
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String Address) {
+        this.Address = Address;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public String getBirthday() {
+        return Birthday;
+    }
+
+    public void setBirthday(String Birthday) {
+        this.Birthday = Birthday;
+    }
+
+    public Integer getCccd() {
+        return Cccd;
+    }
+
+    public void setCccd(Integer Cccd) {
+        this.Cccd = Cccd;
+    }
     public int getMaNV() {
         return MaNV;
     }

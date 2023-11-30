@@ -40,7 +40,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="txtUser" alignment="0" pref="763" max="32767" attributes="0"/>
+                  <Component id="txtUser" alignment="0" pref="840" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -161,8 +161,8 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="nhanVien"/>
-                <StringItem index="1" value="QuanLy"/>
+                <StringItem index="0" value="Nh&#xe2;n Vi&#xea;n"/>
+                <StringItem index="1" value="Qu&#x1ea3;n L&#xfd;"/>
               </StringArray>
             </Property>
           </Properties>
@@ -179,13 +179,14 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="Khoa"/>
-                <StringItem index="1" value="Mo"/>
+                <StringItem index="0" value="false"/>
+                <StringItem index="1" value="true"/>
               </StringArray>
             </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -343,15 +344,21 @@
               <Color blue="99" green="99" red="ff" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="0">
-                <Column editable="false" title="user" type="java.lang.Object"/>
-                <Column editable="false" title="pass" type="java.lang.Object"/>
+              <Table columnCount="5" rowCount="0">
+                <Column editable="false" title="ID" type="java.lang.Object"/>
+                <Column editable="false" title="User" type="java.lang.Object"/>
+                <Column editable="false" title="Pas" type="java.lang.Object"/>
                 <Column editable="false" title="IsLooked" type="java.lang.Object"/>
-                <Column editable="false" title="role" type="java.lang.Object"/>
+                <Column editable="true" title="role" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="1">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

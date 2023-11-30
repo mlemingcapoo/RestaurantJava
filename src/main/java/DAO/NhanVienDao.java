@@ -29,6 +29,7 @@ public class NhanVienDao extends SQL<NhanVien, String> {
             ResultSet rs = DBHelper.query(sql, args);
             while (rs.next()) {
                 NhanVien newNhanVien = new NhanVien();
+                newNhanVien.setMaNV(rs.getInt(1));
                 newNhanVien.setUser(rs.getString(2));
                 newNhanVien.setPass(rs.getString(3));
                 newNhanVien.setRole(rs.getBoolean(4));
@@ -54,7 +55,7 @@ public  void sua(NhanVien nhanvien)throws Exception{
     }
 
     public void delete(NhanVien nhanvien) throws Exception {
-        DBHelper.executeProc("XoaNhanVienTheoID",nhanvien.getMaNV());
+        DBHelper.executeProc("XoaNguoiDungVaThongTin",nhanvien.getMaNV());
     }
     }
    
