@@ -163,7 +163,7 @@ public final class mainUiControl implements GUI_Interface {
 
     public static void lockAllBtn() {
         mainUI.BtnCaiDat.setEnabled(false);
-        mainUI.BtnGiaoCa.setEnabled(false);
+//        mainUI.BtnGiaoCa.setEnabled(false);
         mainUI.BtnHoaDon.setEnabled(false);
 //        frame.BtnDangXuat.setEnabled(false);
         mainUI.BtnDatBan.setEnabled(false);
@@ -179,7 +179,7 @@ public final class mainUiControl implements GUI_Interface {
     private void unlockPerm(int level) {
         if (level >= 0) {
             mainUI.BtnCaiDat.setEnabled(true);
-            mainUI.BtnGiaoCa.setEnabled(true);
+//            mainUI.BtnGiaoCa.setEnabled(true);
             mainUI.BtnHoaDon.setEnabled(true);
             mainUI.BtnDatBan.setEnabled(true);
             mainUI.BtnQuanLyBanHang.setEnabled(true);
@@ -192,6 +192,11 @@ public final class mainUiControl implements GUI_Interface {
             mainUI.BtnQuanLyNhanVien.setEnabled(true);
             mainUI.BtnQuanLyMon.setEnabled(true);
         }
+    }
+
+    public void HoaDon() {
+        throw new UnsupportedOperationException("Not supported yet.");
+        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

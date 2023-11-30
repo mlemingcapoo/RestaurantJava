@@ -88,7 +88,7 @@ public class OrderPanel extends javax.swing.JPanel {
         btnMo2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        noteA = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -242,7 +242,7 @@ public class OrderPanel extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)
-                        .addComponent(cboHinhThucThanhToan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cboHinhThucThanhToan, 0, 1, Short.MAX_VALUE))
                     .addComponent(txtMaVocher, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
@@ -356,6 +356,11 @@ public class OrderPanel extends javax.swing.JPanel {
         btnKhoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKhoa.setForeground(new java.awt.Color(51, 51, 51));
         btnKhoa.setText("Thêm");
+        btnKhoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhoaActionPerformed(evt);
+            }
+        });
 
         spinnerAmount.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -491,12 +496,17 @@ public class OrderPanel extends javax.swing.JPanel {
 
         Cbbloai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Cbbloai.setForeground(new java.awt.Color(255, 255, 255));
-        Cbbloai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Món Ăn", "Đồ Uống", "Tráng Miệng" }));
+        Cbbloai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Món Ăn", "Đồ Uống", "Tráng Miệng" }));
 
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
         jLabel12.setText("Loại");
 
         txtTimMonAn.setForeground(new java.awt.Color(255, 255, 255));
+        txtTimMonAn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimMonAnKeyReleased(evt);
+            }
+        });
 
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("Tên Món");
@@ -623,7 +633,7 @@ public class OrderPanel extends javax.swing.JPanel {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
@@ -717,13 +727,23 @@ public class OrderPanel extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 204, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "note", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        noteA.setColumns(20);
+        noteA.setRows(5);
+        jScrollPane1.setViewportView(noteA);
 
         jButton1.setText("Xoá");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Lưu");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -776,7 +796,7 @@ public class OrderPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE))
+                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE))
                 .addGap(12, 12, 12))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -851,6 +871,26 @@ public class OrderPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMo2ActionPerformed
 
+    private void btnKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoaActionPerformed
+        // TODO add your handling code here:
+//        control.addDish
+    }//GEN-LAST:event_btnKhoaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        control.setNote(tblDSOrderDangLam.getSelectedRow(),noteA.getText());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        control.setNote(tblDSOrderDangLam.getSelectedRow(), "");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtTimMonAnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimMonAnKeyReleased
+        // TODO add your handling code here:
+        control.search(txtTimMonAn.getText(),Cbbloai.getSelectedItem().toString());
+    }//GEN-LAST:event_txtTimMonAnKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox<String> Cbbloai;
@@ -893,8 +933,8 @@ public class OrderPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblTotalPayment;
+    private javax.swing.JTextArea noteA;
     public javax.swing.JLabel smileyFace;
     private javax.swing.JSpinner spinnerAmount;
     private javax.swing.JSpinner spinnerAmount2;

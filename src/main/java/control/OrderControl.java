@@ -293,4 +293,19 @@ public class OrderControl {
         scanqr.scan(aThis);
     }
 
+    public void lockDish(int selectedRow) {
+        throw new UnsupportedOperationException("Not supported yet.");
+        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void unlockDish(int selectedRow) {
+        throw new UnsupportedOperationException("Not supported yet.");
+        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setNote(int selectedRow, String text) {
+        throw new UnsupportedOperationException("Not supported yet.");
+        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

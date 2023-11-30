@@ -573,7 +573,7 @@ public class mainUI extends javax.swing.JFrame {
 
     private void BtnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHoaDonActionPerformed
         // TODO add your handling code here:
-        
+        mainUI.HoaDon();
     }//GEN-LAST:event_BtnHoaDonActionPerformed
 
     private void BtnGiaoCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGiaoCaActionPerformed
