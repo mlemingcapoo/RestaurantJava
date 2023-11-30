@@ -44,7 +44,7 @@ public class NhanVienDao extends SQL<NhanVien, String> {
           return list;
     }
 public void them(NhanVien nhanvien) throws Exception{
-        DBHelper.executeProc("ThemNguoiDung", nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked());
+        DBHelper.executeProc("ThemNguoiDung", nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked(),nhanvien.getName(),nhanvien.getBirthday(),nhanvien.get);
 }
 public  void sua(NhanVien nhanvien)throws Exception{
     DBHelper.executeProc("SuaThongTinNhanVien",nhanvien.getMaNV(),nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked() );
