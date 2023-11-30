@@ -44,10 +44,10 @@ public class NhanVienDao extends SQL<NhanVien, String> {
           return list;
     }
 public void them(NhanVien nhanvien) throws Exception{
-        DBHelper.executeProc("ThemNguoiDung", nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked(),nhanvien.getAddress(),nhanvien.getName(),nhanvien.getBirthday(),nhanvien.getSodienthoai(),nhanvien.getCccd(),nhanvien.getImg());
+        DBHelper.executeProc("AddNhanVien", nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked(),nhanvien.getAddress(),nhanvien.getName(),nhanvien.getBirthday(),nhanvien.getSodienthoai(),nhanvien.getCccd(),nhanvien.getImg());
 }
 public  void sua(NhanVien nhanvien)throws Exception{
-    DBHelper.executeProc("SuaThongTinNhanVien",nhanvien.getMaNV(),nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked(),nhanvien.getAddress(),nhanvien.getName(),nhanvien.getBirthday(),nhanvien.getSodienthoai(),nhanvien.getCccd(),nhanvien.getImg() );
+    DBHelper.executeProc("UpdateNhanVien",nhanvien.getMaNV(),nhanvien.getUser(),nhanvien.getPass(),nhanvien.isRole(),nhanvien.isIsLooked(),nhanvien.getAddress(),nhanvien.getName(),nhanvien.getBirthday(),nhanvien.getSodienthoai(),nhanvien.getCccd(),nhanvien.getImg() );
 }
 
     public List<NhanVien> searchByNameAndType(String User) {

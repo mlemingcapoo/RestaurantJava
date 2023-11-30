@@ -12,7 +12,6 @@ util\SQLThread.class
 frame\OrderPanel$14.class
 GUI\mainUI$8.class
 helper\RoundedCornerBorder2.class
-model\User.class
 TaoQR\QRCodeGenerator.class
 GUI\mainUI$10.class
 frame\LoginJPanel$5.class

@@ -9,6 +9,7 @@ import control.QuanLyNhanVienControl;
 import helper.DateHelper;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,34 +21,42 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     QuanLyNhanVienControl control = new QuanLyNhanVienControl();
     static List<NhanVien> nhanvien = new ArrayList<>();
     NhanVienDao dao = new NhanVienDao();
-    
+
     public QuanLyNhanVienJPanel() {
         initComponents();
 //        getNV();
         refresh();
-        
+
     }
+
     public void refresh() {
         getNV();
         fillTable();
     }
+
     public void clearForm() {
         txttaikhoan.setText("");
         txtPass.setText("");
         cboRole.setSelectedIndex(0);
         cboTrangThai.setSelectedIndex(0);
+        txtAdd.setText("");
+        txtCccd.setText("");
+        txtHoTen.setText("");
+        txtLinkAnh.setText("");
+        txtSdt.setText("");
+        dateNgaySinh.setDate(null);
     }
-    public void  fillToForm(int selectedRow){
+
+    public void fillToForm(int selectedRow) {
         NhanVien nv = nhanvien.get(selectedRow);
         System.out.println("may dang o: " + selectedRow);
         setForm(nv);
 //       refresh();
-        
-        
-       
+
     }
-     public void setForm(NhanVien nv) {
-         txttaikhoan.setText(nv.getUser());
+
+    public void setForm(NhanVien nv) {
+        txttaikhoan.setText(nv.getUser());
         txtPass.setText(nv.getPass());
         switch (String.valueOf(nv.isRole())) {
             case "true":
@@ -65,26 +74,37 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 cboTrangThai.setSelectedIndex(0);
                 break;
         }
+        txtAdd.setText(nv.getAddress());
+        txtHoTen.setText(nv.getName());
+        Date dt = new Date();
+        dt = DateHelper.toDate(nv.getBirthday(), "YYYY-MM-DD");
+        dateNgaySinh.setDate(dt);
+        txtSdt.setText(nv.getSodienthoai());
+        txtCccd.setText(String.valueOf(nv.getCccd()));
+        txtLinkAnh.setText(nv.getImg());
     }
-   public void fillTable() {
+
+    public void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblDanhSachNhanVien.getModel();
         model.setRowCount(0);
         for (NhanVien nv : nhanvien) {
-            Object[] row = new Object[]{nv.getMaNV(),nv.getUser(),nv.getPass(),nv.isRole(),nv.isIsLooked()};
+            Object[] row = new Object[]{nv.getMaNV(), nv.getUser(), nv.getPass(), nv.isRole(), nv.isIsLooked()};
             model.addRow(row);
         }
     }
+
     public void getNV() {
 //        clearForm();
         try {
             nhanvien = dao.selectAll();
-               System.out.println("Số Nhan vien có trong danh sách: " + nhanvien.size());    
+            System.out.println("Số Nhan vien có trong danh sách: " + nhanvien.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
-            
-        }
-    public void themNV(){
+
+    }
+
+    public void themNV() {
         try {
             String user = txttaikhoan.getText();
             String pass = txtPass.getText();
@@ -93,13 +113,26 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             boolean role = (roleIndex == 1);
             int TrangThaiIntdex = cboTrangThai.getSelectedIndex();
             boolean TrangThai = (TrangThaiIntdex == 1);
-            
+            String address = txtAdd.getText();
+            String name = txtHoTen.getText();
+            Date date = dateNgaySinh.getDate();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = dateFormat.format(date);
+            String sdt = txtSdt.getText();
+            int cccd = Integer.parseInt(txtCccd.getText());
+            String img = txtLinkAnh.getText();
             NhanVien newnhanvien = new NhanVien();
             newnhanvien.setUser(user);
-           
             newnhanvien.setPass(pass);
             newnhanvien.setRole(role);
             newnhanvien.setIsLooked(TrangThai);
+            newnhanvien.setAddress(address);
+            newnhanvien.setName(name);
+            newnhanvien.setBirthday(formattedDate);
+            newnhanvien.setSodienthoai(sdt);
+            newnhanvien.setCccd(cccd);
+            newnhanvien.setImg(img);
+
             dao.them(newnhanvien);
             refresh();
             clearForm();
@@ -109,51 +142,57 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             ex.printStackTrace(); // Handle the exception appropriately, e.g., show an error message
         }
     }
-       public void SuaNV(int selectedRow) {
+
+    public void SuaNV(int selectedRow) {
         System.out.println("tao o hang : " + selectedRow);
 
         int maNV = nhanvien.get(selectedRow).getMaNV();
         System.out.println("tao sua o id : " + maNV);
-    try {
+        try {
 
-        System.out.println("Employee ID: " + maNV);
+            System.out.println("Employee ID: " + maNV);
 
-        NhanVien updatedEmployee = new NhanVien();
-        updatedEmployee.setMaNV(maNV);
-        updatedEmployee.setUser(txttaikhoan.getText());
-        updatedEmployee.setPass(txtPass.getText());
-        switch (cboRole.getSelectedIndex()) {
-            case 1:
-                updatedEmployee.setRole(true);
-                break;
-            case 0:
-                updatedEmployee.setRole(false);
-                break;
-        }
-        switch (cboTrangThai.getSelectedIndex()) {
-            case 1:
-                updatedEmployee.setIsLooked(true);
-                break;
-            case 0:
-                updatedEmployee.setIsLooked(false);
-                break;
-        }
-        
+            NhanVien updatedEmployee = new NhanVien();
+            updatedEmployee.setMaNV(maNV);
+            updatedEmployee.setUser(txttaikhoan.getText());
+            updatedEmployee.setPass(txtPass.getText());
+            switch (cboRole.getSelectedIndex()) {
+                case 1:
+                    updatedEmployee.setRole(true);
+                    break;
+                case 0:
+                    updatedEmployee.setRole(false);
+                    break;
+            }
+            switch (cboTrangThai.getSelectedIndex()) {
+                case 1:
+                    updatedEmployee.setIsLooked(true);
+                    break;
+                case 0:
+                    updatedEmployee.setIsLooked(false);
+                    break;
+            }
+            updatedEmployee.setAddress(txtAdd.getText());
+            updatedEmployee.setName(txtHoTen.getText());
+            Date date = dateNgaySinh.getDate();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = dateFormat.format(date);
+            updatedEmployee.setBirthday(formattedDate);
+            updatedEmployee.setSodienthoai(txtSdt.getText());
+            updatedEmployee.setCccd(Integer.parseInt(txtCccd.getText()));
+            dao.sua(updatedEmployee);
 
-        dao.sua(updatedEmployee);
-        
 //        clearForm();
 //        refresh();
-        System.out.println("Update successful");
-    } catch (Exception ex) {
-        // Log or handle the exception appropriately
-        ex.printStackTrace();
-        System.out.println("Error updating employee");
+            System.out.println("Update successful");
+        } catch (Exception ex) {
+            // Log or handle the exception appropriately
+            ex.printStackTrace();
+            System.out.println("Error updating employee");
+        }
     }
-}
 
-
-public void xoaMon(int selectedRow) {
+    public void xoaMon(int selectedRow) {
         System.out.println("TaoXoaNV nhe :" + selectedRow);
         int MaNV = nhanvien.get(selectedRow).getMaNV();
         System.out.println(" id tao ne :" + MaNV);
@@ -171,7 +210,8 @@ public void xoaMon(int selectedRow) {
 //            Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-public void timKiem(String tuKhoa) {
+
+    public void timKiem(String tuKhoa) {
         try {
 //            String type = "%";
 //            if (type1.equals("Chọn Loại")){
@@ -179,13 +219,13 @@ public void timKiem(String tuKhoa) {
 //            } else {
 //                type = type1;
 //            }
-            List<NhanVien> hv = dao.searchByNameAndType("%"+tuKhoa+"%");
-            System.out.println("Tu Khoa search: "+tuKhoa);
+            List<NhanVien> hv = dao.searchByNameAndType("%" + tuKhoa + "%");
+            System.out.println("Tu Khoa search: " + tuKhoa);
 //            System.out.println("Loai search: "+type1);
             DefaultTableModel model = (DefaultTableModel) tblDanhSachNhanVien.getModel();
             model.setRowCount(0);
             for (NhanVien hv1 : hv) {
-                Object[] row = new Object[]{hv1.getUser(),hv1.getPass(),hv1.isIsLooked(),hv1.isRole()};
+                Object[] row = new Object[]{hv1.getUser(), hv1.getPass(), hv1.isIsLooked(), hv1.isRole()};
                 model.addRow(row);
             }
         } catch (Exception ex) {
@@ -193,7 +233,7 @@ public void timKiem(String tuKhoa) {
         }
 
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -551,7 +591,7 @@ public void timKiem(String tuKhoa) {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblDanhSachNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachNhanVienMousePressed
-       fillToForm(tblDanhSachNhanVien.getSelectedRow());
+        fillToForm(tblDanhSachNhanVien.getSelectedRow());
 //       refresh();
     }//GEN-LAST:event_tblDanhSachNhanVienMousePressed
 
@@ -561,7 +601,7 @@ public void timKiem(String tuKhoa) {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
-       timKiem(txtTimKiem.getText());
+        timKiem(txtTimKiem.getText());
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -569,7 +609,7 @@ public void timKiem(String tuKhoa) {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
-       if (evt.getStateChange() == 1) {
+        if (evt.getStateChange() == 1) {
             txtPass.setEchoChar((char) 0);
         } else {
             txtPass.setEchoChar('•');
@@ -612,10 +652,6 @@ public void timKiem(String tuKhoa) {
     private javax.swing.JPanel txtUser;
     private javax.swing.JTextField txttaikhoan;
     // End of variables declaration//GEN-END:variables
-
-    
-
-   
 
 //    private void fillToForm(int selectedRow) {
 //       System.out.println("line88: " + selectedRow);
