@@ -1,21 +1,17 @@
 package model;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.URL;
+import javax.swing.*;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import javazoom.jl.player.advanced.PlaybackEvent;
 import javazoom.jl.player.advanced.PlaybackListener;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.net.URL;
-
 public class Music extends JFrame {
 
     public AdvancedPlayer player;
-
+    Thread t;
 
     public void playBackgroundMusic() {
         try {
@@ -32,14 +28,18 @@ public class Music extends JFrame {
             });
 
             // Start playing the audio
-            new Thread(() -> {
-                try {
-                    player.play();
-                } catch (JavaLayerException e) {
-                    e.printStackTrace();
+            t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        player.play();
+                    } catch (JavaLayerException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }).start();
-
+            }); 
+            t.start();
+            
         } catch (IOException | JavaLayerException e) {
             e.printStackTrace();
         }
@@ -64,4 +64,10 @@ public class Music extends JFrame {
     public void play() {
         playBackgroundMusic();
     }
+    
+    public void stop(){
+//        t.interrupt();
+        
+        }
+    
 }

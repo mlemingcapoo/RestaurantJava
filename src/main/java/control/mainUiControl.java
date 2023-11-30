@@ -12,8 +12,15 @@ import frame.QuanLyNhanVienJPanel;
 import frame.TableJPanel;
 import frame.profile;
 import helper.DialogHelper;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import util.panelNavigator;
 
 /**
@@ -24,27 +31,71 @@ public final class mainUiControl implements GUI_Interface {
 
     JPanel caiDat = new CaiDatJPanel();
 //    JPanel DoiMatKhau = new DoiMatKhau();
-    JPanel LoginJPanel = new LoginJPanel() ;
+    JPanel LoginJPanel = new LoginJPanel();
     JPanel QLDoanhThu = new QuanLyDoanhThuJPanel();
     JPanel QLHoiVien = new QuanLyHoiVienJPanel();
     JPanel QLMonAn = new QuanLyMonAnJPanel();
     JPanel QLNNhanVien = new QuanLyNhanVienJPanel();
     OrderPanel QLBanHang = new OrderPanel();
     TableJPanel QLTable = new TableJPanel();
-    
 
     JPanel Profile = new profile();
 
-    private static mainUI frame;
+    public static mainUI frame;
     private final AuthenticateDAO dao = new AuthenticateDAO();
+    Thread t;
+    ExecutorService executor = Executors.newFixedThreadPool(1);
 
     public mainUiControl(mainUI frame) {
         mainUiControl.frame = frame;
-        init();
+
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("executor is a lone wolf");
+                // Code to be executed in a separate thread
+//                frame.lblTime
+            }
+        });
+        mainThread();
+    }
+
+    public void timer() {
+        setTime();
+        Timer timer = new Timer(5000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setTime();
+            }
+        });
+        timer.start();
+    }
+
+    public void setTime() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a"));
+        mainUI.lblTime.setText(formattedTime);
+        System.out.println("whattttttt");
+    }
+
+    public void mainThread() {
+        t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    init();
+                    timer();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
     }
 
     @Override
     public void init() {
+        System.out.println("a wild thread has started... " + t.isAlive());
         System.out.println("Perm level: " + dao.getPermissonLevel());
         enforePerm(dao.getPermissonLevel());
 
@@ -52,7 +103,7 @@ public final class mainUiControl implements GUI_Interface {
         System.out.println("... loading frame into panelDisplay...");
         mainUI.panelDisplay.add(caiDat, "CaiDat");
 //        mainUI.panelDisplay.add(DoiMatKhau,"DoiMatKhau");
-        mainUI.panelDisplay.add(LoginJPanel,"Login");
+        mainUI.panelDisplay.add(LoginJPanel, "Login");
         mainUI.panelDisplay.add(QLDoanhThu, "DoanhThu");
         mainUI.panelDisplay.add(QLHoiVien, "HoiVien");
         mainUI.panelDisplay.add(QLMonAn, "MonAn");
@@ -62,6 +113,7 @@ public final class mainUiControl implements GUI_Interface {
         mainUI.panelDisplay.add(Profile, "Profile");
         mainUI.panelDisplay.add(QLTable, "Table");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        t.interrupt();
     }
 
     @Override
@@ -82,8 +134,8 @@ public final class mainUiControl implements GUI_Interface {
 
     public void DangXuat() {
 //        panelNavigator.switchPanel(mainUI.panelDisplay, "Login");
-            frame.dispose();
-            new loginControl().init();
+        frame.dispose();
+        new loginControl().init();
     }
 
     @Override
@@ -139,9 +191,9 @@ public final class mainUiControl implements GUI_Interface {
         control.init(QLTable);
     }
 
-    public void Order() {
+    public void Order(mainUI aThis) {
         panelNavigator.switchPanel(mainUI.panelDisplay, "BanHang");
-        OrderControl control = new OrderControl();
+        OrderControl control = new OrderControl(aThis);
         control.init(QLBanHang);
     }
 

@@ -4,7 +4,7 @@ import DAO.FoodDAO;
 import DAO.OrderDAO;
 import DAO.OrderDetailsDAO;
 import DAO.SQL;
-import GUI.Payment;
+import GUI.mainUI;
 import frame.OrderPanel;
 import helper.DialogHelper;
 import java.sql.SQLException;
@@ -23,7 +23,15 @@ import model.orderedDishes;
  * @author capoo
  */
 public class OrderControl {
+    mainUI parentFrame;
 
+    public OrderControl(mainUI aThis) {
+        parentFrame=aThis;
+    }
+
+    public OrderControl() {
+        
+    }
     static List<Food> food = new ArrayList<>();
     static List<Order> order = new ArrayList<>();
     static List<OrderDetails> orderDetails = new ArrayList<>();
@@ -42,15 +50,23 @@ public class OrderControl {
 
     public void init(OrderPanel panel) {
         OrderControl.panel = panel;
-//        panel.setVisible(false);
-        refreshAll();
-        System.out.println("refrshed all");
+        new Thread(() -> {
+            try {
+                //        panel.setVisible(false);
+                refreshAll();
+                System.out.println("refrshed all");
 //        panel.
 //        panel.tblDSMonAn.setModel(model);
 //        fillPendingOrders();
-        viewPendingOrderClicked(order.size() - 1);
-        System.out.println("viewing laste record");
-        System.out.println("order choosen in init: " + order_choosen);
+                viewPendingOrderClicked(order.size() - 1);
+                System.out.println("viewing laste record");
+                System.out.println("order choosen in init: " + order_choosen);
+                panel.revalidate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
     }
 
     public void refreshAll() {
@@ -87,7 +103,7 @@ public class OrderControl {
     public void payment() {
 //        order_choosen;
 //        order ;
-        new Payment().setOrder(order, order_choosen);
+        new thanhToanControl(parentFrame).setOrder(order, order_choosen);
     }
 
     public void createOrder() {
@@ -129,7 +145,8 @@ public class OrderControl {
     }
 
     public void addDish(int selectedRow) {
-
+new Thread(() -> {
+    try {
         getDishes();
         System.out.println("addDish clicked: " + selectedRow);
 //        Object data = table.getValueAt(row, 0);
@@ -149,6 +166,11 @@ public class OrderControl {
             } catch (Exception e) {
             }
         }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}).start();
+        
 
     }
 
@@ -315,6 +337,5 @@ public class OrderControl {
         throw new UnsupportedOperationException("Not supported yet.");
         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
 
 }
