@@ -30,7 +30,7 @@ private Music musicPlayer;
         initComponents();
         mainUI = new mainUiControl(this);
         musicPlayer = new Music(); // Instantiate your Music class
-        musicPlayer.play(); // Call the play method
+//        musicPlayer.play(); // Call the play method
     }
 
 
@@ -142,21 +142,6 @@ private Music musicPlayer;
 
         }
     };
-    BtnQuanLyBanHang = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-
-        }
-    };
     BtnCaiDat = new javax.swing.JButton(){
         @Override protected void paintComponent(Graphics g) {
             if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
@@ -205,21 +190,6 @@ private Music musicPlayer;
         }
     };
     BtnHoaDon = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-
-        }
-    };
-    BtnGiaoCa = new javax.swing.JButton(){
         @Override protected void paintComponent(Graphics g) {
             if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -330,15 +300,6 @@ private Music musicPlayer;
         }
     });
 
-    BtnQuanLyBanHang.setBorder(new RoundedCornerBorder());
-    BtnQuanLyBanHang.setBackground(new java.awt.Color(255, 204, 204));
-    BtnQuanLyBanHang.setText("Quản Lý Bán Hàng");
-    BtnQuanLyBanHang.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnQuanLyBanHangActionPerformed(evt);
-        }
-    });
-
     BtnCaiDat.setBackground(new java.awt.Color(255, 204, 204));
     BtnCaiDat.setBorder(new RoundedCornerBorder());
     BtnCaiDat.setText("Cài Đặt");
@@ -368,13 +329,11 @@ private Music musicPlayer;
             .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                 .addComponent(BtnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                    .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGap(19, 19, 19))
     );
     jPanel4Layout.setVerticalGroup(
@@ -394,9 +353,7 @@ private Music musicPlayer;
             .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
             .addGap(18, 18, 18)
             .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
-            .addComponent(BtnQuanLyBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
+            .addGap(78, 78, 78)
             .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
             .addGap(89, 89, 89)
             .addComponent(BtnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
@@ -447,15 +404,6 @@ private Music musicPlayer;
         }
     });
 
-    BtnGiaoCa.setBackground(new java.awt.Color(255, 204, 204));
-    BtnGiaoCa.setBorder(new RoundedCornerBorder());
-    BtnGiaoCa.setText("Giao Ca");
-    BtnGiaoCa.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnGiaoCaActionPerformed(evt);
-        }
-    });
-
     jLabel4.setText("1-1-2000 | 00:00:00 AM");
 
     javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -471,9 +419,7 @@ private Music musicPlayer;
             .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
             .addGap(18, 18, 18)
             .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
-            .addComponent(BtnGiaoCa, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-            .addGap(215, 215, 215))
+            .addGap(335, 335, 335))
     );
     jPanel3Layout.setVerticalGroup(
         jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,8 +430,7 @@ private Music musicPlayer;
                     .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(jLabel4))
                 .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnGiaoCa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addContainerGap())
     );
 
@@ -555,11 +500,6 @@ private Music musicPlayer;
         mainUI.QuanLyMon();
     }//GEN-LAST:event_BtnQuanLyMonActionPerformed
 
-    private void BtnQuanLyBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyBanHangActionPerformed
-        // TODO add your handling code here:
-        mainUI.QuanLyBanHang();
-    }//GEN-LAST:event_BtnQuanLyBanHangActionPerformed
-
     private void BtnCaiDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCaiDatActionPerformed
         mainUI.CaiDat();
 
@@ -579,11 +519,6 @@ private Music musicPlayer;
         // TODO add your handling code here:
         mainUI.HoaDon();
     }//GEN-LAST:event_BtnHoaDonActionPerformed
-
-    private void BtnGiaoCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGiaoCaActionPerformed
-        // TODO add your handling code here:
-        mainUI.GiaoCa();
-    }//GEN-LAST:event_BtnGiaoCaActionPerformed
 
     private void panelProfilePhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseClicked
         // TODO add your handling code here:
@@ -660,10 +595,8 @@ private Music musicPlayer;
     public static javax.swing.JButton BtnCaiDat;
     public static javax.swing.JButton BtnDangXuat;
     public static javax.swing.JButton BtnDatBan;
-    public static javax.swing.JButton BtnGiaoCa;
     public static javax.swing.JButton BtnHoaDon;
     public static javax.swing.JButton BtnOrder;
-    public static javax.swing.JButton BtnQuanLyBanHang;
     public static javax.swing.JButton BtnQuanLyDoanhThu;
     public static javax.swing.JButton BtnQuanLyHoiVien;
     public static javax.swing.JButton BtnQuanLyMon;

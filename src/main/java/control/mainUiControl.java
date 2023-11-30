@@ -167,7 +167,7 @@ public final class mainUiControl implements GUI_Interface {
         mainUI.BtnHoaDon.setEnabled(false);
 //        frame.BtnDangXuat.setEnabled(false);
         mainUI.BtnDatBan.setEnabled(false);
-        mainUI.BtnQuanLyBanHang.setEnabled(false);
+//        mainUI.BtnQuanLyBanHang.setEnabled(false);
         mainUI.BtnQuanLyMon.setEnabled(false);
         mainUI.BtnQuanLyHoiVien.setEnabled(false);
         mainUI.BtnQuanLyDoanhThu.setEnabled(false);
@@ -182,7 +182,7 @@ public final class mainUiControl implements GUI_Interface {
 //            mainUI.BtnGiaoCa.setEnabled(true);
             mainUI.BtnHoaDon.setEnabled(true);
             mainUI.BtnDatBan.setEnabled(true);
-            mainUI.BtnQuanLyBanHang.setEnabled(true);
+//            mainUI.BtnQuanLyBanHang.setEnabled(true);
             mainUI.BtnQuanLyHoiVien.setEnabled(true);
             mainUI.BtnOrder.setEnabled(true);
             mainUI.panelProfilePhoto.setVisible(true);

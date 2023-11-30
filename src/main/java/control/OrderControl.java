@@ -84,7 +84,9 @@ public class OrderControl {
     }
 
     public void payment() {
-        panel.setVisible(false);
+//        order_choosen;
+//        order ;
+        
     }
 
     public void createOrder() {
@@ -307,5 +309,11 @@ public class OrderControl {
         throw new UnsupportedOperationException("Not supported yet.");
         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public void search(String text, String toString) {
+        throw new UnsupportedOperationException("Not supported yet.");
+        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
 }

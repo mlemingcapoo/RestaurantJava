@@ -152,7 +152,6 @@
                           <Component id="BtnQuanLyDoanhThu" alignment="1" pref="154" max="32767" attributes="0"/>
                           <Component id="BtnQuanLyHoiVien" alignment="1" max="32767" attributes="0"/>
                           <Component id="BtnQuanLyMon" alignment="1" max="32767" attributes="0"/>
-                          <Component id="BtnQuanLyBanHang" alignment="1" max="32767" attributes="0"/>
                           <Component id="BtnCaiDat" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -176,9 +175,7 @@
                       <Component id="BtnQuanLyHoiVien" pref="42" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnQuanLyMon" pref="42" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="BtnQuanLyBanHang" pref="42" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                       <Component id="BtnCaiDat" pref="42" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                       <Component id="BtnDangXuat" pref="25" max="32767" attributes="0"/>
@@ -327,22 +324,6 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="BtnQuanLyBanHang">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; B&#xe1;n H&#xe0;ng"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnQuanLyBanHangActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="BtnQuanLyBanHang.setBorder(new RoundedCornerBorder());"/>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JButton" name="BtnCaiDat">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="BtnCaiDat.setBorder(new RoundedCornerBorder());">
@@ -385,9 +366,7 @@
                       <Component id="BtnDatBan" pref="100" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnHoaDon" pref="102" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="BtnGiaoCa" pref="102" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -402,7 +381,6 @@
                           </Group>
                           <Component id="BtnDatBan" alignment="0" max="32767" attributes="0"/>
                           <Component id="BtnHoaDon" alignment="0" max="32767" attributes="0"/>
-                          <Component id="BtnGiaoCa" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -457,21 +435,6 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="BtnHoaDon.setBorder(new RoundedCornerBorder());"/>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JButton" name="BtnGiaoCa">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="BtnGiaoCa.setBorder(new RoundedCornerBorder());">
-                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Giao Ca"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnGiaoCaActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>

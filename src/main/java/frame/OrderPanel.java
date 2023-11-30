@@ -463,11 +463,21 @@ public class OrderPanel extends javax.swing.JPanel {
         btnMo3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnMo3.setForeground(new java.awt.Color(255, 255, 255));
         btnMo3.setText("Mở Món");
+        btnMo3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMo3ActionPerformed(evt);
+            }
+        });
 
         btnKhoa1.setBackground(new java.awt.Color(153, 255, 255));
         btnKhoa1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKhoa1.setForeground(new java.awt.Color(51, 51, 51));
         btnKhoa1.setText("Khoá Món");
+        btnKhoa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhoa1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -889,6 +899,15 @@ public class OrderPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         control.search(txtTimMonAn.getText(),Cbbloai.getSelectedItem().toString());
     }//GEN-LAST:event_txtTimMonAnKeyReleased
+
+    private void btnKhoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoa1ActionPerformed
+        // TODO add your handling code here:
+//        control.lockDish(tblDSMonAn.);
+    }//GEN-LAST:event_btnKhoa1ActionPerformed
+
+    private void btnMo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMo3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMo3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
