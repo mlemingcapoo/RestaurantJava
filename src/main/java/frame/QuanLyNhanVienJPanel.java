@@ -4,17 +4,29 @@
  */
 package frame;
 
+import Api_upload_image.upanh;
 import DAO.NhanVienDao;
 import control.QuanLyNhanVienControl;
 import helper.DateHelper;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.NhanVien;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import org.json.JSONObject;
 
 public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 
@@ -79,22 +91,28 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         Date dt = new Date();
         dt = DateHelper.toDate(nv.getBirthday(), "YYYY-MM-DD");
         dateNgaySinh.setDate(dt);
+        System.out.println("tao  lấy dc " +nv.getSodienthoai()  +"|"+nv.getCccd() +"|"+nv.getAddress()+"|"+nv.getName()+"|"+nv.getCccd());
         txtSdt.setText(nv.getSodienthoai());
-        txtCccd.setText(String.valueOf(nv.getCccd()));
+        txtCccd.setText(nv.getCccd());
         txtLinkAnh.setText(nv.getImg());
     }
 
-    public void fillTable() {
-        DefaultTableModel model = (DefaultTableModel) tblDanhSachNhanVien.getModel();
-        model.setRowCount(0);
-        for (NhanVien nv : nhanvien) {
-            Object[] row = new Object[]{nv.getMaNV(), nv.getUser(), nv.getPass(), nv.isRole(), nv.isIsLooked()};
-            model.addRow(row);
-        }
+   public void fillTable() {
+    DefaultTableModel model = (DefaultTableModel) tblDanhSachNhanVien.getModel();
+    model.setRowCount(0);
+    
+    for (NhanVien nv : nhanvien) {
+        String role = nv.isRole() ? "Quản Lý" : "Nhân Viên";
+        String accountStatus = nv.isIsLooked() ? "Khoá" : "Mở";
+        
+        Object[] row = new Object[]{nv.getUser(), nv.getPass(), role, accountStatus};
+        model.addRow(row);
     }
+}
+
 
     public void getNV() {
-//        clearForm();
+//       clearForm();
         try {
             nhanvien = dao.selectAll();
             System.out.println("Số Nhan vien có trong danh sách: " + nhanvien.size());
@@ -119,7 +137,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = dateFormat.format(date);
             String sdt = txtSdt.getText();
-            int cccd = Integer.parseInt(txtCccd.getText());
+            String  cccd =txtCccd.getText();
             String img = txtLinkAnh.getText();
             NhanVien newnhanvien = new NhanVien();
             newnhanvien.setUser(user);
@@ -179,7 +197,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             String formattedDate = dateFormat.format(date);
             updatedEmployee.setBirthday(formattedDate);
             updatedEmployee.setSodienthoai(txtSdt.getText());
-            updatedEmployee.setCccd(Integer.parseInt(txtCccd.getText()));
+            updatedEmployee.setCccd(txtCccd.getText());
             dao.sua(updatedEmployee);
 
 //        clearForm();
@@ -210,24 +228,90 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 //            Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+public void upload(){
+        String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
 
-    public void timKiem(String tuKhoa) {
+        // Use a file chooser to let the user select the image file
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Choose an Image File");
+        int userSelection = fileChooser.showOpenDialog(null);
+
+        if (userSelection != JFileChooser.APPROVE_OPTION) {
+            System.out.println("Image selection canceled.");
+            return;
+        }
+
+        File imageFile = fileChooser.getSelectedFile();
+        System.out.println("Selected Image: " + imageFile.getAbsolutePath());
+
+        if (!imageFile.exists()) {
+            System.out.println("Error: Image file not found at " + imageFile.getAbsolutePath());
+            return;
+        }
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("key", apiKey)
+                .addFormDataPart("image", imageFile.getName(),
+                        RequestBody.create(imageFile, MediaType.parse("image/jpeg")))
+                .build();
+
+        Request request = new Request.Builder()
+                .url("https://api.imgbb.com/1/upload")
+                .post(requestBody)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                JSONObject jsonResponse = new JSONObject(responseBody);
+
+                if (jsonResponse.has("data")) {
+                    JSONObject dataObject = jsonResponse.getJSONObject("data");
+                    if (dataObject.has("url")) {
+                        String imageUrl = dataObject.getString("url");
+                        System.out.println("Image uploaded successfully");
+                        System.out.println("Image URL: " + imageUrl);
+                        JOptionPane.showMessageDialog(this, "Tải Ảnh Thành Công !");
+                        txtLinkAnh.setText(imageUrl);
+                    } else {
+                        System.out.println("Error: 'url' not found in the response");
+                    }
+                } else {
+                    System.out.println("Error: 'data' not found in the response");
+                }
+            } else {
+                System.out.println("Error uploading image");
+                System.out.println("Response code: " + response.code());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(upanh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+    public void timKiem(String tuKhoa, String type1) {
         try {
-//            String type = "%";
-//            if (type1.equals("Chọn Loại")){
-//                type = "%";
-//            } else {
-//                type = type1;
-//            }
-            List<NhanVien> hv = dao.searchByNameAndType("%" + tuKhoa + "%");
+        String type;
+        if ("Nhân Viên".equals(type1)) {
+            type = "0";
+        } else if ("QuảnLý".equals(type1)) {
+            type = "1";
+        } else {
+            type = "%";
+        }
+              List<NhanVien> nhanvien = dao.searchByNameAndType("%"+tuKhoa+"%", "%"+type+"%");
             System.out.println("Tu Khoa search: " + tuKhoa);
-//            System.out.println("Loai search: "+type1);
+          System.out.println("Loai search: "+type1);
             DefaultTableModel model = (DefaultTableModel) tblDanhSachNhanVien.getModel();
             model.setRowCount(0);
-            for (NhanVien hv1 : hv) {
-                Object[] row = new Object[]{hv1.getUser(), hv1.getPass(), hv1.isIsLooked(), hv1.isRole()};
-                model.addRow(row);
-            }
+          for (NhanVien nv : nhanvien) {
+        String role = nv.isRole() ? "Quản Lý" : "Nhân Viên";
+        String accountStatus = nv.isIsLooked() ? "Khoá" : "Mở";
+        
+        Object[] row = new Object[]{nv.getUser(), nv.getPass(), role, accountStatus};
+        model.addRow(row);
+    }
         } catch (Exception ex) {
             Logger.getLogger(QuanLyNhanVienJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -269,7 +353,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboloai = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
@@ -313,6 +397,11 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         jLabel6.setText("Link Ảnh");
 
         btnUpload.setText("UPLOAD");
+        btnUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploadActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Họ Và Tên");
 
@@ -452,7 +541,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Quản Lý" }));
+        cboloai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "role", "Nhân Viên", "Quản Lý" }));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -462,7 +551,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cboloai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -471,7 +560,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addContainerGap(8, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboloai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -532,11 +621,11 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "User", "Pas", "IsLooked", "role"
+                "User", "Pass", "Chức Vụ", "Tình Trạng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -601,7 +690,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
-        timKiem(txtTimKiem.getText());
+    timKiem (txtTimKiem.getText(), cboRole.getSelectedItem().toString());
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -616,6 +705,10 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
+    private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
+upload();
+    }//GEN-LAST:event_btnUploadActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnSua;
@@ -624,9 +717,9 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     public static javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboRole;
     public javax.swing.JComboBox<String> cboTrangThai;
+    private javax.swing.JComboBox<String> cboloai;
     private com.toedter.calendar.JDateChooser dateNgaySinh;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
