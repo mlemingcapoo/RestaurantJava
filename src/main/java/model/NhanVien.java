@@ -5,16 +5,34 @@
 package model;
 
 public class NhanVien {
-    private int MaNV;
 
+    private int MaNV;
     private String User;
     private String Pass;
     private boolean Role;
-    private boolean IsLooked;  
+    private boolean IsLooked;
     private String Address;
     private String Name;
     private String Birthday;
     private Integer Cccd;
+    private String Sodienthoai;
+    private String Img;
+
+    public String getImg() {
+        return Img;
+    }
+
+    public void setImg(String Img) {
+        this.Img = Img;
+    }
+
+    public String getSodienthoai() {
+        return Sodienthoai;
+    }
+
+    public void setSodienthoai(String Sodienthoai) {
+        this.Sodienthoai = Sodienthoai;
+    }
 
     public String getAddress() {
         return Address;
@@ -47,6 +65,7 @@ public class NhanVien {
     public void setCccd(Integer Cccd) {
         this.Cccd = Cccd;
     }
+
     public int getMaNV() {
         return MaNV;
     }
@@ -54,6 +73,7 @@ public class NhanVien {
     public void setMaNV(int MaNV) {
         this.MaNV = MaNV;
     }
+
     public String getUser() {
         return User;
     }
@@ -85,8 +105,5 @@ public class NhanVien {
     public void setIsLooked(boolean IsLooked) {
         this.IsLooked = IsLooked;
     }
-
-   
-    
 
 }
