@@ -10,13 +10,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JTextField;
-
+import model.Music;
 /**
  *
  * @author capoo
  */
 public class login extends javax.swing.JFrame {
-
+Music test = new Music();
     static loginControl control;
 
     /**
@@ -27,6 +27,7 @@ public class login extends javax.swing.JFrame {
     public login(loginControl control) {
 //        setUndecorated(true);
         initComponents();
+//        Music.playBackgroundMusic();
         login.control = control;
     }
 
@@ -290,7 +291,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel3;
     public static javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;

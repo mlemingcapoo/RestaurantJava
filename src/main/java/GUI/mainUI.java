@@ -11,6 +11,7 @@ import helper.RoundedCornerBorder2;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import model.Music;
 
 
 /**
@@ -18,8 +19,9 @@ import java.awt.Graphics2D;
  * @author capoo
  */
 public class mainUI extends javax.swing.JFrame {
-
-    mainUiControl mainUI;
+     mainUiControl mainUI;
+private Music musicPlayer;
+   
     /**
      * Creates new form loginFrame1
      */
@@ -27,6 +29,8 @@ public class mainUI extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         mainUI = new mainUiControl(this);
+        musicPlayer = new Music(); // Instantiate your Music class
+        musicPlayer.play(); // Call the play method
     }
 
 
