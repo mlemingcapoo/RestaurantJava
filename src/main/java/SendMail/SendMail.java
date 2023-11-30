@@ -6,13 +6,9 @@ package SendMail;
 
 import Api_upload_image.upanh;
 import java.io.File;
-import java.io.IOException;
+import java.io.IOException; 
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +33,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.json.JSONObject;
-import sun.misc.IOUtils;
 
 /**
  *
