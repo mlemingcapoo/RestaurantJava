@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package frame;
-//
+
 import Api_upload_image.upanh;
 import DAO.NhanVienDao;
 import control.QuanLyNhanVienControl;
@@ -263,32 +263,39 @@ public void upload(){
                 .post(requestBody)
                 .build();
 
-        try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                String responseBody = response.body().string();
-                JSONObject jsonResponse = new JSONObject(responseBody);
+       try (Response response = client.newCall(request).execute()) {
+        if (response.isSuccessful()) {
+            String responseBody = response.body().string();
+            JSONObject jsonResponse = new JSONObject(responseBody);
 
-                if (jsonResponse.has("data")) {
-                    JSONObject dataObject = jsonResponse.getJSONObject("data");
-                    if (dataObject.has("url")) {
-                        String imageUrl = dataObject.getString("url");
+            if (jsonResponse.has("data")) {
+                JSONObject dataObject = jsonResponse.getJSONObject("data");
+                
+                if (dataObject.has("image")) {
+                    JSONObject imageObject = dataObject.getJSONObject("image");
+
+                    if (imageObject.has("filename")) {
+                        String filename = imageObject.getString("filename");
                         System.out.println("Image uploaded successfully");
-                        System.out.println("Image URL: " + imageUrl);
+                        System.out.println("Image Filename: " + filename);
                         JOptionPane.showMessageDialog(this, "Tải Ảnh Thành Công !");
-                        txtLinkAnh.setText(imageUrl);
+                        txtLinkAnh.setText(filename);
                     } else {
-                        System.out.println("Error: 'url' not found in the response");
+                        System.out.println("Error: 'filename' not found in the response");
                     }
                 } else {
-                    System.out.println("Error: 'data' not found in the response");
+                    System.out.println("Error: 'image' not found in the response");
                 }
             } else {
-                System.out.println("Error uploading image");
-                System.out.println("Response code: " + response.code());
+                System.out.println("Error: 'data' not found in the response");
             }
-        } catch (IOException ex) {
-            Logger.getLogger(upanh.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            System.out.println("Error uploading image");
+            System.out.println("Response code: " + response.code());
         }
+    } catch (IOException ex) {
+        Logger.getLogger(upanh.class.getName()).log(Level.SEVERE, null, ex);
+    }
 }
     public void timKiem(String tuKhoa, String type1) {
         try {
