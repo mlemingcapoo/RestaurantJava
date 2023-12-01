@@ -15,6 +15,8 @@ public class Bill {
     private int Ma_KH;
     private int VCode;
 
+    private String billCode;
+
     public int getBill_ID() {
         return bill_ID;
     }
@@ -59,8 +61,8 @@ public class Bill {
         return Ma_KH;
     }
 
-    public void setMa_KH(int Ma_KH) {
-        this.Ma_KH = Ma_KH;
+    public void setMa_KH(int ma_KH) {
+        Ma_KH = ma_KH;
     }
 
     public int getVCode() {
@@ -69,5 +71,13 @@ public class Bill {
 
     public void setVCode(int VCode) {
         this.VCode = VCode;
+    }
+
+    public String getBillCode() {
+        return billCode;
+    }
+
+    public void setBillCode(String billCode) {
+        this.billCode = billCode;
     }
 }
