@@ -11,7 +11,7 @@ import util.SQLThread;
 public class HoiVienDAO extends SQL<KhachHang, String> {
 
     String SELECT_ALL_SQL = "SELECT * FROM KhachHang";
-    String INSERT_SQL ="CALL ThemKhachHang(?,?,?,?)";
+    String INSERT_SQL = "CALL ThemKhachHang(?,?,?,?)";
     String TIMKIEM_SQL = "SELECT * FROM `KhachHang` WHERE name like ?";
 
     @Override
@@ -29,7 +29,7 @@ public class HoiVienDAO extends SQL<KhachHang, String> {
                 newKhachHang.setMaKH(rs.getInt(1));
                 newKhachHang.setName(rs.getString(2));
                 newKhachHang.setSDT(rs.getString(3));
-                newKhachHang.setEmail(rs.getString(5));                
+                newKhachHang.setEmail(rs.getString(5));
                 newKhachHang.setDiem(rs.getInt(4));
                 newKhachHang.setBirthday(rs.getString(6));
                 list.add(newKhachHang);
@@ -43,17 +43,28 @@ public class HoiVienDAO extends SQL<KhachHang, String> {
         }
         return list;
     }
-    
+
     public void insert(KhachHang kh) throws Exception {
-        DBHelper.executeProc("ThemKhachHang", kh.getName(),kh.getSDT(), 0,kh.getEmail(), kh.getBirthday());
+        DBHelper.executeProc("ThemKhachHang", kh.getName(), kh.getSDT(), 0, kh.getEmail(), kh.getBirthday());
     }
-    
+
     public void update(KhachHang kh) throws Exception {
-        DBHelper.executeProc("SuaKhachHang", kh.getMaKH(),kh.getName(),kh.getSDT(), 0,kh.getEmail(), kh.getBirthday());
+        DBHelper.executeProc("SuaKhachHang", kh.getMaKH(), kh.getName(), kh.getSDT(), 0, kh.getEmail(), kh.getBirthday());
     }
-    
+
     public List<KhachHang> searchByNameAndType(String name) throws Exception {
         return selectBySQL(TIMKIEM_SQL, name);
 
+    }
+
+    public String getNameBySDT(String sdt) {
+        String name = "";
+        try {
+            List<KhachHang> selectBySQL = selectBySQL("SELECT * FROM KhachHang WHERE SDT LIKE ?", sdt);
+            name = selectBySQL.get(0).getName();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return name;
     }
 }

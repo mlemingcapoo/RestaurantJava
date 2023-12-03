@@ -710,7 +710,7 @@ public class OrderPanel extends javax.swing.JPanel {
 
         btnMo2.setBackground(new java.awt.Color(255, 51, 51));
         btnMo2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnMo2.setForeground(new java.awt.Color(255, 255, 255));
+        btnMo2.setForeground(new java.awt.Color(51, 51, 51));
         btnMo2.setText("Xoá món");
         btnMo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

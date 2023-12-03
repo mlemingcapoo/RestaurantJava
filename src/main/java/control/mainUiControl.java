@@ -75,7 +75,7 @@ public final class mainUiControl implements GUI_Interface {
         LocalDateTime currentTime = LocalDateTime.now();
         String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a"));
         mainUI.lblTime.setText(formattedTime);
-        System.out.println("whattttttt");
+//        System.out.println("whattttttt");
     }
 
     public void mainThread() {

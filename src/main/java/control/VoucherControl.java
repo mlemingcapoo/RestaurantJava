@@ -1,6 +1,5 @@
 package control;
 
-import Api_upload_image.upanh;
 import DAO.HoiVienDAO;
 import DAO.VoucherDAO;
 import com.google.zxing.BarcodeFormat;
@@ -35,9 +34,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import model.KhachHang;
 import model.Voucher;
@@ -47,7 +43,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -215,7 +210,6 @@ HoiVienDAO hvdao = new HoiVienDAO();
                     //System.out.print("");
                     RequestBody.create(new File("D:\\" + newVoucher.getVCode() + ".png"), MediaType.parse("image/png")))
             .build();
-            System.out.println("line 99");
 
     Request request = new Request.Builder()
             .url("https://api.imgbb.com/1/upload")

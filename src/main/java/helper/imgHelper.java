@@ -1,7 +1,4 @@
-
-
 package helper;
-
 
 import java.awt.Image;
 import java.io.File;
@@ -17,21 +14,20 @@ import javax.swing.ImageIcon;
  *
  * @author catty
  */
-
 public class imgHelper {
-    public static Image getAppIcon(){
+
+    public static Image getAppIcon() {
         URL url = imgHelper.class.getResource("/icn/logo.png");
         return new ImageIcon(url).getImage();
     }
-    
-    public static Image resize(Image originalImage, int targetWidth, int targetHeight){
+
+    public static Image resize(Image originalImage, int targetWidth, int targetHeight) {
         Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(resultingImage);
         return resultingImage;
     }
-    
-//    public static ImageIcon resize(Image originalImage, int width, int height) {
 
+//    public static ImageIcon resize(Image originalImage, int width, int height) {
 //  // Use a BufferedImage for better quality
 //  BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 //  
@@ -46,10 +42,9 @@ public class imgHelper {
 //  
 //  return resizedIcon;
 //}
-        
-    public static void save(File src){
+    public static void save(File src) {
         File dst = new File("logos", src.getName());
-        if(!dst.getParentFile().exists()){
+        if (!dst.getParentFile().exists()) {
             dst.getParentFile().mkdirs(); //Tao thu muc logos neu chua ton tai
         }
         try {
@@ -60,9 +55,11 @@ public class imgHelper {
             throw new RuntimeException(e);
         }
     }
-    
-    public static ImageIcon read(String fileName){
+
+    public static ImageIcon read(String fileName) {
         File path = new File("logos", fileName);
         return new ImageIcon(path.getAbsolutePath());
     }
+
+    
 }

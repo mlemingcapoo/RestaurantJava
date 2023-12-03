@@ -6,6 +6,7 @@ import DAO.OrderDetailsDAO;
 import DAO.SQL;
 import GUI.mainUI;
 import frame.OrderPanel;
+import frame.ThanhToanJDialog;
 import helper.DialogHelper;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,14 +24,15 @@ import model.orderedDishes;
  * @author capoo
  */
 public class OrderControl {
+
     mainUI parentFrame;
 
     public OrderControl(mainUI aThis) {
-        parentFrame=aThis;
+        parentFrame = aThis;
     }
 
     public OrderControl() {
-        
+
     }
     static List<Food> food = new ArrayList<>();
     static List<Order> order = new ArrayList<>();
@@ -50,35 +52,38 @@ public class OrderControl {
 
     public void init(OrderPanel panel) {
         OrderControl.panel = panel;
-        new Thread(() -> {
-            try {
-                //        panel.setVisible(false);
-                refreshAll();
-                System.out.println("refrshed all");
+
+        try {
+            //        panel.setVisible(false);
+            refreshAll();
+            System.out.println("refrshed all");
 //        panel.
 //        panel.tblDSMonAn.setModel(model);
 //        fillPendingOrders();
-                viewPendingOrderClicked(order.size() - 1);
-                System.out.println("viewing laste record");
-                System.out.println("order choosen in init: " + order_choosen);
-                panel.revalidate();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
+            viewPendingOrderClicked(order.size() - 1);
+            System.out.println("viewing laste record");
+            System.out.println("order choosen in init: " + order_choosen);
+            panel.revalidate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     public void refreshAll() {
         foodModel.setRowCount(0);
-        getDishes();
+        Thread dish = new Thread(() -> {
+            getDishes();
+            try {
+                fetchDishes(order_choosen);
+            } catch (Exception e) {
+            }
+        });
+        dish.start();
 //        getPendingOrders();
         fillDishes();
         fillPendingOrders();
-        try {
-            fetchDishes(order_choosen);
-        } catch (Exception e) {
-        }
+
     }
 
     public static void setSelectedRow(JTable table, int row) {
@@ -103,7 +108,9 @@ public class OrderControl {
     public void payment() {
 //        order_choosen;
 //        order ;
-        new thanhToanControl(parentFrame).setOrder(order, order_choosen);
+        ThanhToanControl control2 = new ThanhToanControl(parentFrame);
+        control2.setOrder(panel.txtSDTHoiVien.getText(), panel.txtMaVocher.getText(), order_choosen);
+        ThanhToanJDialog pay = new ThanhToanJDialog(parentFrame, true, control2);
     }
 
     public void createOrder() {
@@ -145,32 +152,31 @@ public class OrderControl {
     }
 
     public void addDish(int selectedRow) {
-new Thread(() -> {
-    try {
-        getDishes();
-        System.out.println("addDish clicked: " + selectedRow);
-//        Object data = table.getValueAt(row, 0);
-        int orderID = order_choosen;
-        System.out.println("order chosen: " + order_choosen);
-        int quantity = 1;
-        int dishID = food.get(selectedRow).getDish_ID();
-        System.out.println("dishID chosen: " + dishID);
-        try {
-            daoOrderDetails.addDishByID(orderID, quantity, dishID);
-        } catch (Exception e) {
-            DialogHelper.alert(panel, e.getMessage());
-        } finally {
-            refreshAll();
+        new Thread(() -> {
             try {
-                fetchDishes(order_choosen);
+                getDishes();
+                System.out.println("addDish clicked: " + selectedRow);
+//        Object data = table.getValueAt(row, 0);
+                int orderID = order_choosen;
+                System.out.println("order chosen: " + order_choosen);
+                int quantity = 1;
+                int dishID = food.get(selectedRow).getDish_ID();
+                System.out.println("dishID chosen: " + dishID);
+                try {
+                    daoOrderDetails.addDishByID(orderID, quantity, dishID);
+                } catch (Exception e) {
+                    DialogHelper.alert(panel, e.getMessage());
+                } finally {
+                    refreshAll();
+                    try {
+                        fetchDishes(order_choosen);
+                    } catch (Exception e) {
+                    }
+                }
             } catch (Exception e) {
+                e.printStackTrace();
             }
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}).start();
-        
+        }).start();
 
     }
 
@@ -243,6 +249,7 @@ new Thread(() -> {
             model.addRow(row);
             count++;
         }
+        calculateTotalPrice(order_choosen);
     }
 
 //    private void fillDishedFromOrder(){
@@ -329,13 +336,20 @@ new Thread(() -> {
     }
 
     public void setNote(int selectedRow, String text) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            daoOrder.setNote(selectedRow, text);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void search(String text, String toString) {
         throw new UnsupportedOperationException("Not supported yet.");
         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void calculateTotalPrice(int order_choosen) {
+//        Double price = daoOrderDetails.calculateTotalPrice(order_choosen);
     }
 
 }

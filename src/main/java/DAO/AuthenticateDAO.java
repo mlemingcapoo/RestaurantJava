@@ -46,12 +46,12 @@ public class AuthenticateDAO {
         return result;
     }
 
-    public String getUsername() {
+    public static String getUsername() {
 
         return username;
     }
 
-    public int getPermissonLevel() {
+    public static int getPermissonLevel() {
         return permissonLevel;
     }
 
@@ -59,7 +59,7 @@ public class AuthenticateDAO {
 //        this.permissonLevel = permissonLevel;
 //    }
     
-    public boolean isUserLocked() {
+    public static boolean isUserLocked() {
         return false;
     }
 
