@@ -43,6 +43,7 @@ public class ThanhToanControl {
     Frame parent;
     private String sdt;
     private String voucher;
+    private String payMethod;
     private int order_choosen;
     OrderDetailsDAO orderDao = new OrderDetailsDAO();
     HoiVienDAO hoiVienDao = new HoiVienDAO();
@@ -53,10 +54,11 @@ public class ThanhToanControl {
         this.parent = parent;
     }
 
-    public void setOrder(String sdt, String voucher, int order_choosen) {
+    public void setOrder(String sdt, String voucher, int order_choosen,String payMethod) {
         this.sdt = sdt;
         this.voucher = voucher;
         this.order_choosen = order_choosen;
+        this.payMethod = payMethod;
         System.out.println("order choosen:  " + this.order_choosen);
 
     }
@@ -98,7 +100,7 @@ public class ThanhToanControl {
             String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss"));
             dialog.lblNgayThanhToan.setText(formattedTime);
             dialog.lblNameNV.setText(AuthenticateDAO.getUsername());
-
+            dialog.lblPayMethod.setText(payMethod);
 //            dialog.lblGiamGiaAmount.setText(getVoucherAmount(voucher).toString());
 //            dialog.lblTotalPrice.setText(getTotalPrice(getVoucherAmount(voucher)).toString());
         } catch (Exception ex) {

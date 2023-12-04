@@ -165,6 +165,11 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="BtnQuanLyVoucher" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -184,7 +189,9 @@
                       <Component id="BtnQuanLyHoiVien" pref="42" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnQuanLyMon" pref="42" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="BtnQuanLyVoucher" pref="42" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="BtnCaiDat" pref="42" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                       <Component id="BtnDangXuat" pref="25" max="32767" attributes="0"/>
@@ -372,6 +379,28 @@
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="BtnQuanLyVoucher">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="American Typewriter" size="13" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; Voucher"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnQuanLyVoucherActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override protected void paintComponent(Graphics g) {&#xa;        if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {&#xa;            Graphics2D g2 = (Graphics2D) g.create();&#xa;            g2.setPaint(getBackground());&#xa;            g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(&#xa;                0, 0, getWidth() - 1, getHeight() - 1));&#xa;        g2.dispose();&#xa;    } super.paintComponent(g);}&#xa;    @Override public void updateUI() {&#xa;        super.updateUI();&#xa;        setOpaque(false);&#xa;&#xa;    }&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="BtnQuanLyVoucher.setBorder(new RoundedCornerBorder());"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>

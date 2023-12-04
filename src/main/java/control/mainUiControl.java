@@ -10,6 +10,7 @@ import frame.QuanLyHoiVienJPanel;
 import frame.QuanLyMonAnJPanel;
 import frame.QuanLyNhanVienJPanel;
 import frame.TableJPanel;
+import frame.VoucherJPanel;
 import frame.profile;
 import helper.DialogHelper;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,7 @@ public final class mainUiControl implements GUI_Interface {
     JPanel QLNNhanVien = new QuanLyNhanVienJPanel();
     OrderPanel QLBanHang = new OrderPanel();
     TableJPanel QLTable = new TableJPanel();
+    JPanel Vocher = new VoucherJPanel();
 
     JPanel Profile = new profile();
 
@@ -112,6 +114,7 @@ public final class mainUiControl implements GUI_Interface {
 //        panelNavigator.switchPanel(mainUI.panelDisplay, "");
         mainUI.panelDisplay.add(Profile, "Profile");
         mainUI.panelDisplay.add(QLTable, "Table");
+        mainUI.panelDisplay.add(Vocher, "Voucher");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         t.interrupt();
     }
@@ -249,6 +252,11 @@ public final class mainUiControl implements GUI_Interface {
     public void HoaDon() {
         throw new UnsupportedOperationException("Not supported yet.");
         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void QuanLyVoucher() {
+        
+        panelNavigator.switchPanel(mainUI.panelDisplay, "Voucher");
     }
 
 }

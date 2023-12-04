@@ -57,6 +57,8 @@ public class ThanhToanJDialog extends javax.swing.JDialog {
         lblNgayThanhToan = new javax.swing.JLabel();
         lblGiamGiaAmount = new javax.swing.JLabel();
         lblNameNV = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lblPayMethod = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -106,9 +108,9 @@ public class ThanhToanJDialog extends javax.swing.JDialog {
 
         jLabel5.setText("Mã BILL:");
 
-        jLabel6.setText("SĐT Hội Viên: ");
+        jLabel6.setText("SĐT Khách hàng:");
 
-        jLabel7.setText("Tên Hội Viên: ");
+        jLabel7.setText("Tên Khách hàng:");
 
         jLabel8.setText("Thanh toán ngày:");
 
@@ -137,6 +139,10 @@ public class ThanhToanJDialog extends javax.swing.JDialog {
 
         lblNameNV.setText("Không xác định");
 
+        jLabel11.setText("Hình thức thanh toán:");
+
+        lblPayMethod.setText("Chưa chọn");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,6 +155,9 @@ public class ThanhToanJDialog extends javax.swing.JDialog {
                         .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -189,11 +198,13 @@ public class ThanhToanJDialog extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNgayThanhToan)))))
-                .addGap(0, 212, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblNgayThanhToan))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPayMethod)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +241,11 @@ public class ThanhToanJDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(lblNameNV))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(lblPayMethod))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lblTotalPrice))
@@ -304,6 +319,7 @@ public class ThanhToanJDialog extends javax.swing.JDialog {
     public com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -317,6 +333,7 @@ public class ThanhToanJDialog extends javax.swing.JDialog {
     public javax.swing.JLabel lblMaBill;
     public javax.swing.JLabel lblNameNV;
     public javax.swing.JLabel lblNgayThanhToan;
+    public javax.swing.JLabel lblPayMethod;
     public javax.swing.JLabel lblSdtHoiVien;
     public javax.swing.JLabel lblTotalPrice;
     public javax.swing.JTable tblListOrdered;

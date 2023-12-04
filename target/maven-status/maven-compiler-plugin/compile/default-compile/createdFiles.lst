@@ -1,5 +1,6 @@
 frame/OrderPanel$12.class
 frame/QuanLyNhanVienJPanel$5.class
+GUI/mainUI$22.class
 GUI/mainUI$2.class
 control/QuanLyDoanhThuControl.class
 GUI/CustomerScreen.class
@@ -97,6 +98,7 @@ control/QuanLyMonAnControl.class
 frame/QuanLyMonAnJPanel$4.class
 frame/QuanLyMonAnJPanel.class
 model/Order.class
+control/OrderControl$LoadImageTask.class
 frame/OrderPanel$21.class
 Bill/InBill$2.class
 control/QuanLyNhanVienControl.class
@@ -181,6 +183,7 @@ frame/OrderPanel.class
 frame/LoginJPanel$2.class
 util/SQLThread.class
 frame/profile$1.class
+GUI/mainUI$23.class
 frame/QuanLyNhanVienJPanel$4.class
 GUI/mainUI$6.class
 model/OrderDetails.class

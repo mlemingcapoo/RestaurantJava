@@ -1,5 +1,6 @@
 package helper;
 
+import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -9,12 +10,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
  * @author catty
  */
-public class imgHelper {
+public class imgHelper implements TableCellRenderer{
 
     public static Image getAppIcon() {
         URL url = imgHelper.class.getResource("/icn/logo.png");
@@ -23,9 +27,11 @@ public class imgHelper {
 
     public static Image resize(Image originalImage, int targetWidth, int targetHeight) {
         Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
-        ImageIcon icon = new ImageIcon(resultingImage);
+//        ImageIcon icon = new ImageIcon(resultingImage);
         return resultingImage;
     }
+    
+    
 
 //    public static ImageIcon resize(Image originalImage, int width, int height) {
 //  // Use a BufferedImage for better quality
@@ -61,5 +67,17 @@ public class imgHelper {
         return new ImageIcon(path.getAbsolutePath());
     }
 
+    @Override
+  public Component getTableCellRendererComponent(
+                     JTable table, Object value, 
+                     boolean isSelected, boolean hasFocus,
+                     int row, int column) {
+
+    ImageIcon icon = (ImageIcon) value;
+    Image image = resize(icon.getImage(), 60, 40); 
+
+    JLabel label = new JLabel(new ImageIcon(image));
+    return label;
+  }
     
 }

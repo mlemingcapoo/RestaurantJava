@@ -4,7 +4,6 @@
  */
 package DAO;
 import helper.DBHelper;
-import helper.DialogHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +44,7 @@ public class NhanVienDao extends SQL<NhanVien, String> {
         }catch(Exception e){
 //           DialogHelper.showDialog(null, "Vui lòng kiểm tra lại kết nối mạng và bấm OK!");
             System.out.println("Connection was lost.. Trying to reconnect...");
+            
             new SQLThread().main(null);
         }
           return list;
