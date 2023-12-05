@@ -4,30 +4,40 @@
  */
 package GUI;
 
+import control.OrderControl;
+import frame.OrderPanel;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import util.panelNavigator;
 
 /**
  *
  * @author capoo
  */
-public final class menuu extends javax.swing.JFrame {
+public final class mainUI1 extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form menuu
      */
     int width;
-
-    public menuu() {
+    int height;
+    OrderPanel QLBanHang = new OrderPanel();
+    
+    public mainUI1() {
+        setUndecorated(true);
         GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         width = graphicsDevice.getDisplayMode().getWidth();
+        height = graphicsDevice.getDisplayMode().getHeight();
         y=width;
         initComponents();
 //        cardTrangChu.setVisible(true);
         cardDisplayWrapper.setVisible(true);
         jplMenuCover.setSize(410, 900);
-        this.setSize(500, 600);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         System.out.println("chieu rong man hinh: "+width);
+        panelDisplayCustomer.setSize(width, height);
+        panelDisplayCustomer.add(QLBanHang, "BanHang");
     }
     int x = 210;    //chieu rong
     int y = 300;    //chieu cao
@@ -44,7 +54,7 @@ public final class menuu extends javax.swing.JFrame {
                     try {
                         for (int i = 0; i <= 210; i++) {
                             jplMenuCover.setSize(i, y);
-                            Thread.sleep(2);
+                            Thread.sleep(1);
                         }
                     } catch (Exception e) {
                     }
@@ -63,7 +73,7 @@ public final class menuu extends javax.swing.JFrame {
                     try {
                         for (int i = 210; i >= 0; i--) {
                             jplMenuCover.setSize(i, y);
-                            Thread.sleep(2);
+                            Thread.sleep(1);
                         }
                     } catch (Exception e) {
                     }
@@ -88,6 +98,7 @@ public final class menuu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblCloseMenu = new javax.swing.JLabel();
+        lblOpenMenu1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lblTrangChu = new javax.swing.JLabel();
         lblTaiKhoan = new javax.swing.JLabel();
@@ -98,10 +109,9 @@ public final class menuu extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jpllMenuBar = new javax.swing.JPanel();
         absoluteWrapper = new javax.swing.JPanel();
-        lblOpenMenu2 = new javax.swing.JLabel();
         lblOpenMenu = new javax.swing.JLabel();
         cardDisplayWrapper = new javax.swing.JPanel();
-        lblOpenMenu1 = new javax.swing.JLabel();
+        panelDisplayCustomer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,6 +144,17 @@ public final class menuu extends javax.swing.JFrame {
         });
         jPanel2.add(lblCloseMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 2, 30, 30));
 
+        lblOpenMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
+        lblOpenMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblOpenMenu1MouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblOpenMenu1MouseReleased(evt);
+            }
+        });
+        jPanel2.add(lblOpenMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
         jplMenuCover.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 260));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -148,6 +169,9 @@ public final class menuu extends javax.swing.JFrame {
         lblTrangChu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblTrangChuMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblTrangChuMouseReleased(evt);
             }
         });
         jplMenuCover.add(lblTrangChu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 210, 30));
@@ -188,19 +212,6 @@ public final class menuu extends javax.swing.JFrame {
 
         absoluteWrapper.setBackground(new java.awt.Color(255, 255, 255));
         absoluteWrapper.setForeground(new java.awt.Color(255, 255, 255));
-        absoluteWrapper.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblOpenMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
-        lblOpenMenu2.setText("PUT PROFILE HERE");
-        lblOpenMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblOpenMenu2MouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lblOpenMenu2MouseReleased(evt);
-            }
-        });
-        absoluteWrapper.add(lblOpenMenu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         lblOpenMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
         lblOpenMenu.setText("PUT PROFILE HERE");
@@ -212,32 +223,49 @@ public final class menuu extends javax.swing.JFrame {
                 lblOpenMenuMouseReleased(evt);
             }
         });
-        absoluteWrapper.add(lblOpenMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+
+        javax.swing.GroupLayout absoluteWrapperLayout = new javax.swing.GroupLayout(absoluteWrapper);
+        absoluteWrapper.setLayout(absoluteWrapperLayout);
+        absoluteWrapperLayout.setHorizontalGroup(
+            absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(absoluteWrapperLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblOpenMenu)
+                .addContainerGap(545, Short.MAX_VALUE))
+        );
+        absoluteWrapperLayout.setVerticalGroup(
+            absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absoluteWrapperLayout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(lblOpenMenu)
+                .addContainerGap())
+        );
 
         cardDisplayWrapper.setBackground(new java.awt.Color(255, 153, 153));
-        cardDisplayWrapper.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblOpenMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
-        lblOpenMenu1.setText("Menu");
-        lblOpenMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblOpenMenu1MouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lblOpenMenu1MouseReleased(evt);
-            }
-        });
-        cardDisplayWrapper.add(lblOpenMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        panelDisplayCustomer.setBackground(new java.awt.Color(255, 255, 255));
+        panelDisplayCustomer.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout cardDisplayWrapperLayout = new javax.swing.GroupLayout(cardDisplayWrapper);
+        cardDisplayWrapper.setLayout(cardDisplayWrapperLayout);
+        cardDisplayWrapperLayout.setHorizontalGroup(
+            cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelDisplayCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        cardDisplayWrapperLayout.setVerticalGroup(
+            cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelDisplayCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(absoluteWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
+            .addComponent(absoluteWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jplMenuCover, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jplMenuCover, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cardDisplayWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -245,10 +273,10 @@ public final class menuu extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(absoluteWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(absoluteWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jplMenuCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jplMenuCover, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                     .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardDisplayWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -305,13 +333,12 @@ public final class menuu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lblOpenMenuMouseClicked
 
-    private void lblOpenMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpenMenu2MouseClicked
+    private void lblTrangChuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTrangChuMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_lblOpenMenu2MouseClicked
-
-    private void lblOpenMenu2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpenMenu2MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblOpenMenu2MouseReleased
+        panelNavigator.switchPanel(panelDisplayCustomer, "BanHang");
+        OrderControl control = new OrderControl(null);
+        control.init(QLBanHang);
+    }//GEN-LAST:event_lblTrangChuMouseReleased
 
     /**
      * @param args the command line arguments
@@ -330,21 +357,23 @@ public final class menuu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(menuu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(mainUI1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(menuu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(mainUI1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(menuu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(mainUI1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(menuu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(mainUI1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menuu().setVisible(true);
+                new mainUI1().setVisible(true);
             }
         });
     }
@@ -367,8 +396,8 @@ public final class menuu extends javax.swing.JFrame {
     private javax.swing.JLabel lblCloseMenu;
     private javax.swing.JLabel lblOpenMenu;
     private javax.swing.JLabel lblOpenMenu1;
-    private javax.swing.JLabel lblOpenMenu2;
     private javax.swing.JLabel lblTaiKhoan;
     private javax.swing.JLabel lblTrangChu;
+    private javax.swing.JPanel panelDisplayCustomer;
     // End of variables declaration//GEN-END:variables
 }
