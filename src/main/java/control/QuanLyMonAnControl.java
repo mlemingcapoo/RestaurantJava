@@ -2,11 +2,15 @@ package control;
 
 import DAO.FoodDAO;
 import frame.QuanLyMonAnJPanel;
+import helper.DialogHelper;
+import helper.LoadImageTask;
+import helper.imgHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import model.Food;
 
 /**
@@ -23,6 +27,7 @@ public class QuanLyMonAnControl {
     public void init(QuanLyMonAnJPanel panel) {
         this.panel = panel;
         refresh();
+        panel.tblDanhSachMonAn.setRowHeight(100);
     }
 
     public void refresh() {
@@ -33,10 +38,29 @@ public class QuanLyMonAnControl {
     public void fillDishes() {
         DefaultTableModel model = (DefaultTableModel) panel.tblDanhSachMonAn.getModel();
         model.setRowCount(0);
+        int rowIndex = 0;
         for (Food fd : food) {
             Object[] row = new Object[]{fd.getName(), fd.getPrice(), fd.getType(), fd.getImg(), fd.isIsLocked()};
             model.addRow(row);
+            rowIndex++;
         }
+
+        TableColumn column = panel.tblDanhSachMonAn.getColumnModel().getColumn(3);
+        column.setCellRenderer(new imgHelper());
+
+        for (int i = 0; i < rowIndex; i++) {
+            setImg(model, i, food.get(i).getImg());
+        }
+
+        panel.tblDanhSachMonAn.updateUI();
+    }
+
+    private void setImg(DefaultTableModel model, int rowIndex, String imgLink) {
+
+        Runnable loadTask = new LoadImageTask(model, rowIndex, imgLink);
+
+        new Thread(loadTask).start();
+
     }
 
     public void getMon() {
@@ -118,8 +142,12 @@ public class QuanLyMonAnControl {
     }
 
     public void fillToForm(int selectedRow) {
-        Food get = food.get(selectedRow);
-        setForm(get);
+        try {
+            Food get = food.get(selectedRow);
+            setForm(get);
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+        }
     }
 
     public void setForm(Food fd) {
@@ -165,17 +193,28 @@ public class QuanLyMonAnControl {
 
     public void xoaMon(int selectedRow) {
         System.out.println("xoa mon: " + selectedRow);
-        int dish_id = food.get(selectedRow).getDish_ID();
-        Food newFood = new Food();
-        newFood.setDish_ID(dish_id);
+        int dish_id = -1;
         try {
-            dao.delete(newFood);
-            clearForm();
-            helper.DialogHelper.alert(panel, "Xóa Món Thành Công!");
-        } catch (Exception ex) {
-            helper.DialogHelper.alert(panel, "Xóa món thất bại!");
-            Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+            if (dish_id < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            dish_id = food.get(selectedRow).getDish_ID();
+            if (DialogHelper.confirm(panel, "Xác nhận xoá món thứ " + (selectedRow + 1) + "?")) {
+                Food newFood = new Food();
+                newFood.setDish_ID(dish_id);
+                try {
+                    dao.delete(newFood);
+                    clearForm();
+                    helper.DialogHelper.alert(panel, "Xóa Món Thành Công!");
+                } catch (Exception ex) {
+                    helper.DialogHelper.alert(panel, "Xóa món thất bại!");
+                    Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (IndexOutOfBoundsException e) {
+
         }
+
     }
 
     public void clearForm() {
@@ -186,25 +225,31 @@ public class QuanLyMonAnControl {
     }
 
     public void timKiem(String tuKhoa, String type1) {
-        try {
-            String type = "%";
-            if (type1.equals("Chọn Loại")){
-                type = "%";
-            } else {
-                type = type1;
+        new Thread(() -> {
+            try {
+                try {
+                    String type = "%";
+                    if (type1.equals("Chọn Loại")) {
+                        type = "%";
+                    } else {
+                        type = type1;
+                    }
+                    List<Food> fd = dao.searchByNameAndType("%" + tuKhoa + "%", "%" + type + "%");
+                    System.out.println("Tu Khoa search: " + tuKhoa);
+                    System.out.println("Loai search: " + type1);
+                    DefaultTableModel model = (DefaultTableModel) panel.tblDanhSachMonAn.getModel();
+                    model.setRowCount(0);
+                    for (Food fd1 : fd) {
+                        Object[] row = new Object[]{fd1.getName(), fd1.getPrice(), fd1.getType(), fd1.getImg(), fd1.isIsLocked()};
+                        model.addRow(row);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            List<Food> fd = dao.searchByNameAndType("%"+tuKhoa+"%", "%"+type+"%");
-            System.out.println("Tu Khoa search: "+tuKhoa);
-            System.out.println("Loai search: "+type1);
-            DefaultTableModel model = (DefaultTableModel) panel.tblDanhSachMonAn.getModel();
-            model.setRowCount(0);
-            for (Food fd1 : fd) {
-                Object[] row = new Object[]{fd1.getName(), fd1.getPrice(), fd1.getType(), fd1.getImg(), fd1.isIsLocked()};
-                model.addRow(row);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }).start();
 
     }
 

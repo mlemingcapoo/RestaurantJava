@@ -156,9 +156,22 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblDanhSachMonAnMousePressed(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblDanhSachMonAnMouseReleased(evt);
+            }
+        });
+        tblDanhSachMonAn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblDanhSachMonAnKeyReleased(evt);
+            }
         });
         jScrollPane2.setViewportView(tblDanhSachMonAn);
         tblDanhSachMonAn.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        if (tblDanhSachMonAn.getColumnModel().getColumnCount() > 0) {
+            tblDanhSachMonAn.getColumnModel().getColumn(3).setMinWidth(150);
+            tblDanhSachMonAn.getColumnModel().getColumn(3).setPreferredWidth(160);
+            tblDanhSachMonAn.getColumnModel().getColumn(3).setMaxWidth(200);
+        }
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -392,7 +405,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 276, Short.MAX_VALUE)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 277, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -410,18 +423,18 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblDanhSachMonAnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMonAnMousePressed
-        selected = tblDanhSachMonAn.getSelectedRow();
-                control.fillToForm(selected);
+//        selected = tblDanhSachMonAn.getSelectedRow();
+                control.fillToForm(tblDanhSachMonAn.getSelectedRow());
 //        control.refresh();
     }//GEN-LAST:event_tblDanhSachMonAnMousePressed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        control.suaMon(selected);
+        control.suaMon(tblDanhSachMonAn.getSelectedRow());
         control.refresh();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        control.xoaMon(selected);
+        control.xoaMon(tblDanhSachMonAn.getSelectedRow());
         control.refresh();
     }//GEN-LAST:event_btnXoaActionPerformed
 
@@ -438,6 +451,16 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
    
     }//GEN-LAST:event_txtTimKiemInputMethodTextChanged
+
+    private void tblDanhSachMonAnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMonAnMouseReleased
+        // TODO add your handling code here:
+        control.fillToForm(tblDanhSachMonAn.getSelectedRow());
+    }//GEN-LAST:event_tblDanhSachMonAnMouseReleased
+
+    private void tblDanhSachMonAnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblDanhSachMonAnKeyReleased
+        // TODO add your handling code here:
+        control.fillToForm(tblDanhSachMonAn.getSelectedRow());
+    }//GEN-LAST:event_tblDanhSachMonAnKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

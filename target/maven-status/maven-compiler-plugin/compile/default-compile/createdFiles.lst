@@ -46,6 +46,7 @@ frame/QuanLyMonAnJPanel$12.class
 frame/OrderPanel$13.class
 frame/TableJPanel.class
 DAO/VoucherDAO.class
+control/CustomerControl.class
 SendMail/SendMail.class
 frame/QuanLyMonAnJPanel$7.class
 frame/VoucherJPanel$3.class
@@ -91,6 +92,7 @@ control/OrderControl.class
 DAO/TableDAO.class
 frame/QuanLyMonAnJPanel$5.class
 frame/OrderPanel$20.class
+frame/QuanLyMonAnJPanel$14.class
 frame/LoginJPanel$7.class
 Bill/InBill.class
 GUI/mainUI$1.class
@@ -98,7 +100,6 @@ control/QuanLyMonAnControl.class
 frame/QuanLyMonAnJPanel$4.class
 frame/QuanLyMonAnJPanel.class
 model/Order.class
-control/OrderControl$LoadImageTask.class
 frame/OrderPanel$21.class
 Bill/InBill$2.class
 control/QuanLyNhanVienControl.class
@@ -136,6 +137,7 @@ GUI/login$7.class
 frame/VoucherJPanel$7.class
 model/Music.class
 helper/DateHelper.class
+helper/CachingHelper.class
 frame/OrderPanel$6.class
 frame/TableJPanel$2.class
 GUI/mainUI.class
@@ -180,6 +182,7 @@ frame/TableJPanel$3.class
 GUI/login$3.class
 frame/LoginJPanel.class
 frame/OrderPanel.class
+helper/LoadImageTask.class
 frame/LoginJPanel$2.class
 util/SQLThread.class
 frame/profile$1.class
@@ -190,12 +193,14 @@ model/OrderDetails.class
 frame/OrderPanel$11.class
 frame/OrderPanel$26.class
 frame/QuanLyHoiVienJPanel$1.class
+frame/QuenMatKhauJPanel$1.class
 frame/QuanLyMonAnJPanel$10.class
 frame/QuanLyNhanVienJPanel$7.class
 DAO/FoodDAO.class
 SendMail/SendMail$3.class
 GUI/mainUI$20.class
 frame/DoiMatKhau$1.class
+frame/OrderPanel$29.class
 frame/TableJPanel$5.class
 model/Music$1.class
 GUI/mainUI$7.class
@@ -214,6 +219,7 @@ frame/QuanLyNhanVienJPanel$6.class
 frame/OrderPanel$10.class
 GUI/start.class
 helper/DialogHelper.class
+frame/OrderPanel$28.class
 DAO/BillDAO.class
 frame/ThanhToanJDialog$1.class
 util/panelNavigator.class

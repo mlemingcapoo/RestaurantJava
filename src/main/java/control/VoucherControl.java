@@ -56,15 +56,15 @@ public class VoucherControl {
     static List<Voucher> voucher = new ArrayList<>();
     DefaultTableModel Voucher = new DefaultTableModel();
     VoucherDAO vcdao = new VoucherDAO();
-    
+
 //KhachHang hoiVien = new KhachHang();
-static List<KhachHang> hv = new ArrayList<>();
-HoiVienDAO hvdao = new HoiVienDAO();
+    static List<KhachHang> hv = new ArrayList<>();
+    HoiVienDAO hvdao = new HoiVienDAO();
 
     public void init(VoucherJPanel panel) {
         VoucherControl.panel = panel;
         refresh();
-        
+
     }
 
     public void refresh() {
@@ -72,14 +72,14 @@ HoiVienDAO hvdao = new HoiVienDAO();
         fillDishes();
         fillHoiVien();
     }
-    
-    public void fillHoiVien(){
+
+    public void fillHoiVien() {
         hv.clear();
         hv = hvdao.selectAll();
         DefaultTableModel model = (DefaultTableModel) panel.tblHoiVien.getModel();
         model.setRowCount(0);
         for (KhachHang fd : hv) {
-            Object[] row = new Object[]{fd.getName(),fd.getSDT(),fd.getEmail()};
+            Object[] row = new Object[]{fd.getName(), fd.getSDT(), fd.getEmail()};
             model.addRow(row);
         }
         System.out.println("HoiVien filled");
@@ -187,7 +187,14 @@ HoiVienDAO hvdao = new HoiVienDAO();
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 500, 500);
 
-            File outputFile = new File("D:\\" + text + ".png");
+            File outputFile = null;
+            try {
+                outputFile = new File("D:\\" + text + ".png");
+            } catch (Exception e) {
+//                String pdfFolder = "/bill-files";
+                outputFile = new File(System.getProperty("user.dir") + "/" + text + ".png");
+            }
+            System.out.println("QR output: " + outputFile);
             MatrixToImageWriter.writeToPath(bitMatrix, "PNG", outputFile.toPath());
 
             System.out.println("QR code generated successfully for: " + text);
@@ -197,54 +204,53 @@ HoiVienDAO hvdao = new HoiVienDAO();
         }
     }
 
-   public String upload() {
-    String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
-    String imageUrl = "";
+    public String upload() {
+        String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
+        String imageUrl = "";
 
-    OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient();
 
-    RequestBody requestBody = new MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart("key", apiKey)
-            .addFormDataPart("image", newVoucher.getVCode() + ".png",
-                    //System.out.print("");
-                    RequestBody.create(new File("D:\\" + newVoucher.getVCode() + ".png"), MediaType.parse("image/png")))
-            .build();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("key", apiKey)
+                .addFormDataPart("image", newVoucher.getVCode() + ".png",
+                        //System.out.print("");
+                        RequestBody.create(new File("D:\\" + newVoucher.getVCode() + ".png"), MediaType.parse("image/png")))
+                .build();
 
-    Request request = new Request.Builder()
-            .url("https://api.imgbb.com/1/upload")
-            .post(requestBody)
-            .build();
+        Request request = new Request.Builder()
+                .url("https://api.imgbb.com/1/upload")
+                .post(requestBody)
+                .build();
 
-    try (Response response = client.newCall(request).execute()) {
-        if (response.isSuccessful()) {
-            String responseBody = response.body().string();
-            JSONObject jsonResponse = new JSONObject(responseBody);
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                JSONObject jsonResponse = new JSONObject(responseBody);
 
-            if (jsonResponse.has("data")) {
-                JSONObject dataObject = jsonResponse.getJSONObject("data");
-                if (dataObject.has("url")) {
-                    imageUrl = dataObject.getString("url");
-                    System.out.println("Image uploaded successfully");
-                    System.out.println("Image URL: " + imageUrl);
+                if (jsonResponse.has("data")) {
+                    JSONObject dataObject = jsonResponse.getJSONObject("data");
+                    if (dataObject.has("url")) {
+                        imageUrl = dataObject.getString("url");
+                        System.out.println("Image uploaded successfully");
+                        System.out.println("Image URL: " + imageUrl);
+                    } else {
+                        System.out.println("Error: 'url' not found in the response");
+                    }
                 } else {
-                    System.out.println("Error: 'url' not found in the response");
+                    System.out.println("Error: 'data' not found in the response");
                 }
             } else {
-                System.out.println("Error: 'data' not found in the response");
+                System.out.println("Error uploading image");
+                System.out.println("Response code: " + response.code());
             }
-        } else {
-            System.out.println("Error uploading image");
-            System.out.println("Response code: " + response.code());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error uploading image.");
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-        System.out.println("Error uploading image.");
+
+        return imageUrl;
     }
-
-    return imageUrl;
-}
-
 
     public void suaVoucher(int selectedRow) {
         try {
@@ -306,95 +312,93 @@ HoiVienDAO hvdao = new HoiVienDAO();
         }
     }
 
-   public void send() {
-    final String username = "infobasil.click@gmail.com";
-    final String password = "c g x u h r y g v j z p e x l q ";
+    public void send() {
+        final String username = "infobasil.click@gmail.com";
+        final String password = "c g x u h r y g v j z p e x l q ";
 
-    // Cấu hình các thuộc tính cho việc gửi email
-    Properties prop = new Properties();
-    prop.put("mail.smtp.host", "smtp.gmail.com");
-    prop.put("mail.smtp.port", "587");
-    prop.put("mail.smtp.auth", "true");
-    prop.put("mail.smtp.starttls.enable", "true"); // Kích hoạt TLS
+        // Cấu hình các thuộc tính cho việc gửi email
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); // Kích hoạt TLS
 
-    // Tạo phiên làm việc (Session) sử dụng thông tin đăng nhập
-    Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
-        protected PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication(username, password);
+        // Tạo phiên làm việc (Session) sử dụng thông tin đăng nhập
+        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        // Check if required fields are not empty
+        String recipientEmail = panel.txtMail.getText();
+        String subject = panel.txtTieuDe.getText();
+        String content = panel.txtNDung.getText();
+
+        if (recipientEmail.isEmpty() || subject.isEmpty() || content.isEmpty()) {
+            helper.DialogHelper.alert(panel, "Xin vui lòng điền đầy đủ thông tin vào các ô bắt buộc!");
+            return; // Do not proceed with sending the email
         }
-    });
 
-    // Check if required fields are not empty
-    String recipientEmail = panel.txtMail.getText();
-    String subject = panel.txtTieuDe.getText();
-    String content = panel.txtNDung.getText();
-
-    if (recipientEmail.isEmpty() || subject.isEmpty() || content.isEmpty()) {
-        helper.DialogHelper.alert(panel, "Xin vui lòng điền đầy đủ thông tin vào các ô bắt buộc!");
-        return; // Do not proceed with sending the email
-    }
-
-    // Check subject length
-    if (subject.length() > 100) {
-        helper.DialogHelper.alert(panel, "Chủ đề không thể vượt quá 100 ký tự.");
-        return; // Do not proceed with sending the email
-    }
-
-    // Check if there is a valid image link
-    String imagePath = upload();
-    if (imagePath != null && !imagePath.isEmpty()) {
-        try {
-            // Tạo đối tượng Message để xây dựng nội dung email
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
-            message.setSubject(subject);
-
-            // Tạo phần nội dung email dạng multipart
-            MimeMultipart multipart = new MimeMultipart();
-
-            // Thêm phần văn bản vào email
-            BodyPart textPart = new MimeBodyPart();
-            textPart.setContent(
-                    "<p style=\"font-family: 'Arial', sans-serif;\">" + content + "</p>"
-                            + "<p style=\"font-family: 'Arial', sans-serif;\">Mã Voucher của bạn là: " + newVoucher.getVCode() + "</p>"
-                            + "<p style=\"font-family: 'Arial', sans-serif;\">Ngày hết hạn là: " + panel.NgayHetHan.getDate() + "</p>",
-                    "text/html; charset=utf-8"
-            );
-            multipart.addBodyPart(textPart);
-
-            // Thêm phần ảnh vào email
-            BodyPart imagePart = new MimeBodyPart();
-            URL imageUrl = new URL(imagePath);
-            InputStream imageStream = imageUrl.openStream();
-            imagePart.setDataHandler(new DataHandler(new ByteArrayDataSource(imageStream, "image/jpeg")));
-            System.out.println("line 99");
-            imagePart.setFileName(newVoucher.getVCode() + ".jpg"); // You can set any file name here
-            multipart.addBodyPart(imagePart);
-System.out.println("line 100");
-            // Đặt nội dung của email là phần nội dung multipart vừa tạo
-            message.setContent(multipart);
-
-            // Gửi email
-            Transport.send(message);
-
-            // Hiển thị thông báo khi gửi thành công
-            helper.DialogHelper.alert(panel, "Gửi Thành Công !");
-            System.out.println("Done");
-
-        } catch (MessagingException | IOException e) {
-            e.printStackTrace();
-            helper.DialogHelper.alert(panel, "Error sending email: " + e.getMessage());
+        // Check subject length
+        if (subject.length() > 100) {
+            helper.DialogHelper.alert(panel, "Chủ đề không thể vượt quá 100 ký tự.");
+            return; // Do not proceed with sending the email
         }
-    } else {
-        helper.DialogHelper.alert(panel, "Please provide a valid image link.");
-    }
-}
 
+        // Check if there is a valid image link
+        String imagePath = upload();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            try {
+                // Tạo đối tượng Message để xây dựng nội dung email
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(username));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+                message.setSubject(subject);
+
+                // Tạo phần nội dung email dạng multipart
+                MimeMultipart multipart = new MimeMultipart();
+
+                // Thêm phần văn bản vào email
+                BodyPart textPart = new MimeBodyPart();
+                textPart.setContent(
+                        "<p style=\"font-family: 'Arial', sans-serif;\">" + content + "</p>"
+                        + "<p style=\"font-family: 'Arial', sans-serif;\">Mã Voucher của bạn là: " + newVoucher.getVCode() + "</p>"
+                        + "<p style=\"font-family: 'Arial', sans-serif;\">Ngày hết hạn là: " + panel.NgayHetHan.getDate() + "</p>",
+                        "text/html; charset=utf-8"
+                );
+                multipart.addBodyPart(textPart);
+
+                // Thêm phần ảnh vào email
+                BodyPart imagePart = new MimeBodyPart();
+                URL imageUrl = new URL(imagePath);
+                InputStream imageStream = imageUrl.openStream();
+                imagePart.setDataHandler(new DataHandler(new ByteArrayDataSource(imageStream, "image/jpeg")));
+                System.out.println("line 99");
+                imagePart.setFileName(newVoucher.getVCode() + ".jpg"); // You can set any file name here
+                multipart.addBodyPart(imagePart);
+                System.out.println("line 100");
+                // Đặt nội dung của email là phần nội dung multipart vừa tạo
+                message.setContent(multipart);
+
+                // Gửi email
+                Transport.send(message);
+
+                // Hiển thị thông báo khi gửi thành công
+                helper.DialogHelper.alert(panel, "Gửi Thành Công !");
+                System.out.println("Done");
+
+            } catch (MessagingException | IOException e) {
+                e.printStackTrace();
+                helper.DialogHelper.alert(panel, "Error sending email: " + e.getMessage());
+            }
+        } else {
+            helper.DialogHelper.alert(panel, "Please provide a valid image link.");
+        }
+    }
 
     public void fillMail(int selectedRow) {
         panel.txtMail.setText(hv.get(selectedRow).getEmail());
     }
 
-    
 }

@@ -18,6 +18,7 @@ public class OrderPanel extends javax.swing.JPanel {
     
     JPanel HoiVien = new QuanLyHoiVienJPanel();
     OrderControl control = new OrderControl();
+    int selectedDish=-1;
     
     /**
      * Creates new form ManHinhChinhJPanel
@@ -137,6 +138,7 @@ public class OrderPanel extends javax.swing.JPanel {
         if (tblDSDangOrder.getColumnModel().getColumnCount() > 0) {
             tblDSDangOrder.getColumnModel().getColumn(0).setResizable(false);
             tblDSDangOrder.getColumnModel().getColumn(1).setResizable(false);
+            tblDSDangOrder.getColumnModel().getColumn(1).setPreferredWidth(20);
             tblDSDangOrder.getColumnModel().getColumn(2).setResizable(false);
         }
 
@@ -444,12 +446,31 @@ public class OrderPanel extends javax.swing.JPanel {
             }
         });
         tblDSMonAn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDSMonAnMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblDSMonAnMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblDSMonAnMouseReleased(evt);
+            }
+        });
+        tblDSMonAn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblDSMonAnKeyReleased(evt);
             }
         });
         jScrollPane3.setViewportView(tblDSMonAn);
         tblDSMonAn.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tblDSMonAn.getColumnModel().getColumnCount() > 0) {
+            tblDSMonAn.getColumnModel().getColumn(1).setMinWidth(150);
+            tblDSMonAn.getColumnModel().getColumn(1).setMaxWidth(300);
+            tblDSMonAn.getColumnModel().getColumn(2).setMinWidth(50);
+            tblDSMonAn.getColumnModel().getColumn(2).setMaxWidth(100);
+            tblDSMonAn.getColumnModel().getColumn(3).setMinWidth(150);
+            tblDSMonAn.getColumnModel().getColumn(3).setMaxWidth(200);
+        }
 
         jPanel5.setBackground(new java.awt.Color(255, 204, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng Oder", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
@@ -687,6 +708,11 @@ public class OrderPanel extends javax.swing.JPanel {
                 tblDSOrderDangLamMousePressed(evt);
             }
         });
+        tblDSOrderDangLam.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblDSOrderDangLamKeyReleased(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblDSOrderDangLam);
         tblDSOrderDangLam.addMouseListener(new MouseAdapter(){
             public void mousePressed(MouseEvent mouseEvent){
@@ -700,7 +726,14 @@ public class OrderPanel extends javax.swing.JPanel {
         });
         tblDSOrderDangLam.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (tblDSOrderDangLam.getColumnModel().getColumnCount() > 0) {
+            tblDSOrderDangLam.getColumnModel().getColumn(0).setPreferredWidth(20);
             tblDSOrderDangLam.getColumnModel().getColumn(1).setResizable(false);
+            tblDSOrderDangLam.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblDSOrderDangLam.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tblDSOrderDangLam.getColumnModel().getColumn(3).setPreferredWidth(150);
+            tblDSOrderDangLam.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tblDSOrderDangLam.getColumnModel().getColumn(5).setPreferredWidth(100);
+            tblDSOrderDangLam.getColumnModel().getColumn(6).setPreferredWidth(150);
         }
 
         btnXoaOrder.setBackground(new java.awt.Color(255, 51, 51));
@@ -839,7 +872,8 @@ public class OrderPanel extends javax.swing.JPanel {
 
     private void tblDSMonAnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSMonAnMousePressed
         // TODO add your handling code here:
-        control.dishClicked(tblDSMonAn.getSelectedRow());
+//        control.dishClicked(tblDSMonAn.getSelectedRow());
+          selectedDish=tblDSMonAn.getSelectedRow();
     }//GEN-LAST:event_tblDSMonAnMousePressed
 
     private void tblDSDangOrderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSDangOrderMousePressed
@@ -870,7 +904,9 @@ public class OrderPanel extends javax.swing.JPanel {
     private void btnKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoaActionPerformed
         // TODO add your handling code here:
 //        control.addDish
-        control.addDish(tblDSMonAn.getSelectedRow(),Integer.parseInt(spinnerAmount.getValue().toString()));
+        control.addDish(selectedDish,Integer.parseInt(spinnerAmount.getValue().toString()));
+        spinnerAmount.setValue(1);
+//        selectedDish=-1;
     }//GEN-LAST:event_btnKhoaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -900,12 +936,33 @@ public class OrderPanel extends javax.swing.JPanel {
     private void btnMoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoActionPerformed
         // TODO add your handling code here:
         control.removeDishFromOrder(tblDSDangOrder.getSelectedRow(),Integer.parseInt(spinnerAmount.getValue().toString()));
+        spinnerAmount.setValue(1);
     }//GEN-LAST:event_btnMoActionPerformed
 
     private void spinnerAmountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_spinnerAmountFocusLost
         // TODO add your handling code here:
         control.changeDishAmount(spinnerAmount);
     }//GEN-LAST:event_spinnerAmountFocusLost
+
+    private void tblDSOrderDangLamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblDSOrderDangLamKeyReleased
+        // TODO add your handling code here:
+        control.viewPendingOrderClicked(tblDSOrderDangLam.getSelectedRow());
+    }//GEN-LAST:event_tblDSOrderDangLamKeyReleased
+
+    private void tblDSMonAnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblDSMonAnKeyReleased
+        // TODO add your handling code here:
+        selectedDish=tblDSMonAn.getSelectedRow();
+    }//GEN-LAST:event_tblDSMonAnKeyReleased
+
+    private void tblDSMonAnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSMonAnMouseClicked
+        // TODO add your handling code here:
+        selectedDish=tblDSMonAn.getSelectedRow();
+    }//GEN-LAST:event_tblDSMonAnMouseClicked
+
+    private void tblDSMonAnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSMonAnMouseReleased
+        // TODO add your handling code here:
+        selectedDish=tblDSMonAn.getSelectedRow();
+    }//GEN-LAST:event_tblDSMonAnMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

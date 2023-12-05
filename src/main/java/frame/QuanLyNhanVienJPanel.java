@@ -8,6 +8,7 @@ import Api_upload_image.upanh;
 import DAO.NhanVienDao;
 import control.QuanLyNhanVienControl;
 import helper.DateHelper;
+import helper.DialogHelper;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -91,25 +92,24 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         Date dt = new Date();
         dt = DateHelper.toDate(nv.getBirthday(), "YYYY-MM-DD");
         dateNgaySinh.setDate(dt);
-        System.out.println("tao  lấy dc " +nv.getSodienthoai()  +"|"+nv.getCccd() +"|"+nv.getAddress()+"|"+nv.getName()+"|"+nv.getCccd());
+        System.out.println("tao  lấy dc " + nv.getSodienthoai() + "|" + nv.getCccd() + "|" + nv.getAddress() + "|" + nv.getName() + "|" + nv.getCccd());
         txtSdt.setText(nv.getSodienthoai());
         txtCccd.setText(nv.getCccd());
         txtLinkAnh.setText(nv.getImg());
     }
 
-   public void fillTable() {
-    DefaultTableModel model = (DefaultTableModel) tblDanhSachNhanVien.getModel();
-    model.setRowCount(0);
-    
-    for (NhanVien nv : nhanvien) {
-        String role = nv.isRole() ? "Quản Lý" : "Nhân Viên";
-        String accountStatus = nv.isIsLooked() ? "Khoá" : "Mở";
-        
-        Object[] row = new Object[]{nv.getUser(), nv.getPass(), role, accountStatus};
-        model.addRow(row);
-    }
-}
+    public void fillTable() {
+        DefaultTableModel model = (DefaultTableModel) tblDanhSachNhanVien.getModel();
+        model.setRowCount(0);
 
+        for (NhanVien nv : nhanvien) {
+            String role = nv.isRole() ? "Quản Lý" : "Nhân Viên";
+            String accountStatus = nv.isIsLooked() ? "Khoá" : "Mở";
+
+            Object[] row = new Object[]{nv.getUser(), nv.getPass(), role, accountStatus};
+            model.addRow(row);
+        }
+    }
 
     public void getNV() {
 //       clearForm();
@@ -137,8 +137,9 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = dateFormat.format(date);
             String sdt = txtSdt.getText();
-            String  cccd =txtCccd.getText();
+            String cccd = txtCccd.getText();
             String img = txtLinkAnh.getText();
+            System.out.println("String img = txtLinkAnh.getText(): " + txtLinkAnh.getText());
             NhanVien newnhanvien = new NhanVien();
             newnhanvien.setUser(user);
             newnhanvien.setPass(pass);
@@ -155,8 +156,10 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             refresh();
             clearForm();
             System.out.println("done");
+            DialogHelper.alert(this, "Thêm mới thành công!");
         } catch (Exception ex) {
 //            helper.DialogHelper.alert(panel, "Đã xảy ra lỗi khi thêm món!");
+            DialogHelper.alert(this, "Thêm mới không thành công!");
             ex.printStackTrace(); // Handle the exception appropriately, e.g., show an error message
         }
     }
@@ -164,7 +167,12 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     public void SuaNV(int selectedRow) {
         System.out.println("tao o hang : " + selectedRow);
 
-        int maNV = nhanvien.get(selectedRow).getMaNV();
+        int maNV = -1;
+        try {
+            maNV = nhanvien.get(selectedRow).getMaNV();
+        } catch (Exception e) {
+            DialogHelper.alert(jPanel4, "Chọn nhân viên trong bảng để chỉnh sửa!");
+        }
         System.out.println("tao sua o id : " + maNV);
         try {
 
@@ -198,21 +206,28 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             updatedEmployee.setBirthday(formattedDate);
             updatedEmployee.setSodienthoai(txtSdt.getText());
             updatedEmployee.setCccd(txtCccd.getText());
+            updatedEmployee.setImg(txtLinkAnh.getText());
             dao.sua(updatedEmployee);
 
 //        clearForm();
 //        refresh();
-            System.out.println("Update successful");
+            DialogHelper.alert(this,"Cập nhật thành công!");
         } catch (Exception ex) {
             // Log or handle the exception appropriately
             ex.printStackTrace();
+            DialogHelper.alert(this,"Có lỗi khi cập nhật");
             System.out.println("Error updating employee");
         }
     }
 
     public void xoaMon(int selectedRow) {
         System.out.println("TaoXoaNV nhe :" + selectedRow);
-        int MaNV = nhanvien.get(selectedRow).getMaNV();
+        int MaNV = 0;
+        try {
+            MaNV = nhanvien.get(selectedRow).getMaNV();
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Chọn nhân viên trong bảng để xoá");
+        }
         System.out.println(" id tao ne :" + MaNV);
         NhanVien newNhanVien = new NhanVien();
         newNhanVien.setMaNV(MaNV);
@@ -224,11 +239,14 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 //            helper.DialogHelper.alert(QuanLyNhanVienJPanel, "Xóa Món Thành Công!");
         } catch (Exception ex) {
             System.out.println("Loi");
+            DialogHelper.alert(this, "Có lỗi khi xoá!");
 //            helper.DialogHelper.alert(panel, "Xóa món thất bại!");
 //            Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-public void upload(){
+
+    public void upload() {
+        String imageUrl = "";
         String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
 
         // Use a file chooser to let the user select the image file
@@ -263,62 +281,65 @@ public void upload(){
                 .post(requestBody)
                 .build();
 
-       try (Response response = client.newCall(request).execute()) {
-        if (response.isSuccessful()) {
-            String responseBody = response.body().string();
-            JSONObject jsonResponse = new JSONObject(responseBody);
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                JSONObject jsonResponse = new JSONObject(responseBody);
 
-            if (jsonResponse.has("data")) {
-                JSONObject dataObject = jsonResponse.getJSONObject("data");
-                
-                if (dataObject.has("image")) {
-                    JSONObject imageObject = dataObject.getJSONObject("image");
+                if (jsonResponse.has("data")) {
+                    JSONObject dataObject = jsonResponse.getJSONObject("data");
+                    if (dataObject.has("url")) {
+                        imageUrl = dataObject.getString("url");
+                    }
+                    if (dataObject.has("image")) {
+                        JSONObject imageObject = dataObject.getJSONObject("image");
 
-                    if (imageObject.has("filename")) {
-                        String filename = imageObject.getString("filename");
-                        System.out.println("Image uploaded successfully");
-                        System.out.println("Image Filename: " + filename);
-                        JOptionPane.showMessageDialog(this, "Tải Ảnh Thành Công !");
-                        txtLinkAnh.setText(filename);
+                        if (imageObject.has("filename")) {
+                            String filename = imageObject.getString("filename");
+                            System.out.println("Image uploaded successfully");
+                            System.out.println("Image Filename: " + filename);
+                            JOptionPane.showMessageDialog(this, "Tải Ảnh Thành Công !");
+                            txtLinkAnh.setText(imageUrl);
+                        } else {
+                            System.out.println("Error: 'filename' not found in the response");
+                        }
                     } else {
-                        System.out.println("Error: 'filename' not found in the response");
+                        System.out.println("Error: 'image' not found in the response");
                     }
                 } else {
-                    System.out.println("Error: 'image' not found in the response");
+                    System.out.println("Error: 'data' not found in the response");
                 }
             } else {
-                System.out.println("Error: 'data' not found in the response");
+                System.out.println("Error uploading image");
+                System.out.println("Response code: " + response.code());
             }
-        } else {
-            System.out.println("Error uploading image");
-            System.out.println("Response code: " + response.code());
+        } catch (IOException ex) {
+            Logger.getLogger(upanh.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (IOException ex) {
-        Logger.getLogger(upanh.class.getName()).log(Level.SEVERE, null, ex);
     }
-}
+
     public void timKiem(String tuKhoa, String type1) {
         try {
-        String type;
-        if ("Nhân Viên".equals(type1)) {
-            type = "0";
-        } else if ("QuảnLý".equals(type1)) {
-            type = "1";
-        } else {
-            type = "%";
-        }
-              List<NhanVien> nhanvien = dao.searchByNameAndType("%"+tuKhoa+"%", "%"+type+"%");
+            String type;
+            if ("Nhân Viên".equals(type1)) {
+                type = "0";
+            } else if ("QuảnLý".equals(type1)) {
+                type = "1";
+            } else {
+                type = "%";
+            }
+            List<NhanVien> nhanvien = dao.searchByNameAndType("%" + tuKhoa + "%", "%" + type + "%");
             System.out.println("Tu Khoa search: " + tuKhoa);
-          System.out.println("Loai search: "+type1);
+            System.out.println("Loai search: " + type1);
             DefaultTableModel model = (DefaultTableModel) tblDanhSachNhanVien.getModel();
             model.setRowCount(0);
-          for (NhanVien nv : nhanvien) {
-        String role = nv.isRole() ? "Quản Lý" : "Nhân Viên";
-        String accountStatus = nv.isIsLooked() ? "Khoá" : "Mở";
-        
-        Object[] row = new Object[]{nv.getUser(), nv.getPass(), role, accountStatus};
-        model.addRow(row);
-    }
+            for (NhanVien nv : nhanvien) {
+                String role = nv.isRole() ? "Quản Lý" : "Nhân Viên";
+                String accountStatus = nv.isIsLooked() ? "Khoá" : "Mở";
+
+                Object[] row = new Object[]{nv.getUser(), nv.getPass(), role, accountStatus};
+                model.addRow(row);
+            }
         } catch (Exception ex) {
             Logger.getLogger(QuanLyNhanVienJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -698,7 +719,7 @@ public void upload(){
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
-    timKiem (txtTimKiem.getText(), cboRole.getSelectedItem().toString());
+        timKiem(txtTimKiem.getText(), cboRole.getSelectedItem().toString());
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -714,7 +735,7 @@ public void upload(){
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
-upload();
+        upload();
     }//GEN-LAST:event_btnUploadActionPerformed
 
 

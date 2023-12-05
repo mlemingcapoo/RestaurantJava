@@ -4,19 +4,21 @@
  */
 package GUI;
 
+import control.CustomerControl;
+
 /**
  *
  * @author capoo
  */
 public class CustomerScreen extends javax.swing.JFrame {
-
+    CustomerControl control;
     /**
      * Creates new form CustomerScreen
      */
     public CustomerScreen() {
+        setUndecorated(true);
         initComponents();
-        setVisible(true);
-        
+        control = new CustomerControl(this);
     }
 
     /**
@@ -28,19 +30,14 @@ public class CustomerScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelCustomerDisplay = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
+        getContentPane().setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        panelCustomerDisplay.setLayout(new java.awt.CardLayout());
+        getContentPane().add(panelCustomerDisplay, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -81,5 +78,6 @@ public class CustomerScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JPanel panelCustomerDisplay;
     // End of variables declaration//GEN-END:variables
 }

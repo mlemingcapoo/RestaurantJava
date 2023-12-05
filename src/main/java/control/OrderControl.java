@@ -8,17 +8,15 @@ import GUI.mainUI;
 import frame.OrderPanel;
 import frame.ThanhToanJDialog;
 import helper.DialogHelper;
-import java.awt.Image;
-import java.net.URL;
+import helper.LoadImageTask;
+import helper.imgHelper;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import model.Food;
 import model.Order;
 import model.OrderDetails;
@@ -57,10 +55,13 @@ public class OrderControl {
 
     public void init(OrderPanel panel) {
         OrderControl.panel = panel;
+        panel.revalidate();
 
         try {
             //        panel.setVisible(false);
+
             refreshAll();
+
             System.out.println("refrshed all");
 //        panel.
 //        panel.tblDSMonAn.setModel(model);
@@ -72,22 +73,27 @@ public class OrderControl {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        panel.tblDSMonAn.setRowHeight(100);
+        panel.tblDSOrderDangLam.setRowHeight(30);
+//        panel.tblDSMonAn.getColumnModel().getColumn(3).setPreferredWidth(80);
+//        panel.tblDSMonAn.getColumnModel().getColumn(3).setWidth(50);
     }
 
     public void refreshAll() {
+
         foodModel.setRowCount(0);
-        Thread dish = new Thread(() -> {
-            getDishes();
-            try {
-                fetchDishes(order_choosen);
-            } catch (Exception e) {
-            }
-        });
-        dish.start();
+//        Thread dish = new Thread(() -> {
+//            getDishes();
+        try {
+            fetchDishes(order_choosen);
+        } catch (Exception e) {
+        }
+//        });
+//        dish.start();
 //        getPendingOrders();
-        fillDishes();
         fillPendingOrders();
+        getDishes();
+        fillDishes();
         panel.spinnerAmount.setValue(1);
     }
 
@@ -104,15 +110,23 @@ public class OrderControl {
         System.out.println("Hện có " + food.size() + " món ăn");
         DefaultTableModel model = (DefaultTableModel) panel.tblDSMonAn.getModel();
         model.setRowCount(0);
+
         int rowIndex = 0;
         for (Food fd : food) {
-            Object[] row = new Object[]{fd.getName(), fd.getPrice(), fd.getType()};
+            Object[] row = {fd.getName(), fd.getPrice(), fd.getType()};
             model.addRow(row);
-            setImg(model, rowIndex, fd.getImg());
-            
-            
             rowIndex++;
         }
+
+        TableColumn column = panel.tblDSMonAn.getColumnModel().getColumn(3);
+        column.setCellRenderer(new imgHelper());
+
+        for (int i = 0; i < rowIndex; i++) {
+            setImg(model, i, food.get(i).getImg());
+        }
+
+        panel.tblDSMonAn.updateUI();
+
     }
 
     public void payment() {
@@ -164,7 +178,7 @@ public class OrderControl {
     public void addDish(int selectedRow, int count) {
         new Thread(() -> {
             try {
-                getDishes();
+//                getDishes();
                 System.out.println("addDish clicked: " + selectedRow);
 //        Object data = table.getValueAt(row, 0);
                 int orderID = order_choosen;
@@ -183,7 +197,7 @@ public class OrderControl {
 //                    DialogHelper.alert(panel, );
                     System.out.println(e.getMessage());
                 } finally {
-                    refreshAll();
+//                    refreshAll();
                     try {
                         fetchDishes(order_choosen);
                     } catch (Exception e) {
@@ -219,7 +233,8 @@ public class OrderControl {
         } catch (Exception e) {
             DialogHelper.alert(panel, e.getMessage());
         } finally {
-            refreshAll();
+//            refreshAll();
+//            getPendingOrders();
             try {
                 fetchDishes(order_choosen);
             } catch (Exception e) {
@@ -229,6 +244,7 @@ public class OrderControl {
     }
 
     public void dishClicked(int selectedRow) {
+//        selectedDish = selectedRow;
         System.out.println("dish clicked: " + selectedRow);
         //handle -1 too pls
 //        refreshAll();
@@ -315,20 +331,31 @@ public class OrderControl {
     }
 
     public void deletePendingOrderClicked(int selectedRow) {
+
         order.clear();
         order = daoOrder.selectAllPending();
         System.out.println("order list size: " + order.size());
-        int order_ID = order.get(selectedRow).getOrder_ID();
-
+        int order_ID = -1;
         try {
-            OrderDetailsDAO.deleteAllDishes(order_ID);
-            daoOrder.delete(order_ID);
-            fillPendingOrders();
-            order_choosen = order.get(order.size() - 1).getOrder_ID();
-            fetchDishes(order_choosen);
+            if (order_ID<0) throw new IndexOutOfBoundsException();
+            order_ID = order.get(selectedRow).getOrder_ID();
+            if (DialogHelper.confirm(panel, "Xác nhận xoá đơn hàng thứ " + (selectedRow + 1) + "?")) {
+                try {
+                    OrderDetailsDAO.deleteAllDishes(order_ID);
+                    daoOrder.delete(order_ID);
+                    fillPendingOrders();
+                    order_choosen = order.get(order.size() - 1).getOrder_ID();
+                    fetchDishes(order_choosen);
+                } catch (Exception e) {
+                    System.out.println("line 355: " + e.getCause() + e.getMessage());
+//            DialogHelper.alert(panel, e.getMessage());
+
+                }
+            }
         } catch (Exception e) {
-            DialogHelper.alert(panel, e.getMessage());
+            DialogHelper.alert(panel, "Chọn 1 Đơn hàng muốn Xoá/Huỷ");
         }
+
     }
 
     public void viewPendingOrderClicked(int selectedRow) {
@@ -380,59 +407,13 @@ public class OrderControl {
     }
 
     private void setImg(DefaultTableModel model, int rowIndex, String imgLink) {
-        
+
         Runnable loadTask = new LoadImageTask(model, rowIndex, imgLink);
 
         new Thread(loadTask).start();
-  
-//        try {
-//            // Load image from URL
-//            URL url = new URL(imgLink);
-//            Image image = ImageIO.read(url);
-//
-//            // Create icon and set cell value
-//            ImageIcon icon = new ImageIcon(image);
-//            model.setValueAt(icon, rowIndex, 3); // 4th column index is 3
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (Exception ex) {
-//            Logger.getLogger(OrderControl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }
-
-    private static class LoadImageTask implements Runnable {
-
-        private DefaultTableModel model;
-  private int rowIndex;
-  private String imgLink;
-
-  public LoadImageTask(DefaultTableModel model, int rowIndex, String imgLink) {
-    this.model = model;
-    this.rowIndex = rowIndex; 
-    this.imgLink = imgLink;
-  }
-
-  @Override
-  public void run() {
-    try {
-      // existing image loading code
-       URL url = new URL(imgLink);
-            Image image = ImageIO.read(url);
-
-            // Create icon and set cell value
-            ImageIcon icon = new ImageIcon(image);
-            model.setValueAt(icon, rowIndex, 3); // 4th column index is 3
-
-      SwingUtilities.invokeLater(() -> {
-        model.setValueAt(icon, rowIndex, 3);  
-      });
-      
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
 
     }
+
+    
 
 }

@@ -18,7 +18,7 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author catty
  */
-public class imgHelper implements TableCellRenderer{
+public class imgHelper implements TableCellRenderer {
 
     public static Image getAppIcon() {
         URL url = imgHelper.class.getResource("/icn/logo.png");
@@ -30,8 +30,6 @@ public class imgHelper implements TableCellRenderer{
 //        ImageIcon icon = new ImageIcon(resultingImage);
         return resultingImage;
     }
-    
-    
 
 //    public static ImageIcon resize(Image originalImage, int width, int height) {
 //  // Use a BufferedImage for better quality
@@ -68,16 +66,20 @@ public class imgHelper implements TableCellRenderer{
     }
 
     @Override
-  public Component getTableCellRendererComponent(
-                     JTable table, Object value, 
-                     boolean isSelected, boolean hasFocus,
-                     int row, int column) {
+    public Component getTableCellRendererComponent(
+            JTable table, Object value,
+            boolean isSelected, boolean hasFocus,
+            int row, int column) {
+        JLabel label = null;
+        try {
+            ImageIcon icon = (ImageIcon) value;
+            Image image = resize(icon.getImage(), 150, 100);
 
-    ImageIcon icon = (ImageIcon) value;
-    Image image = resize(icon.getImage(), 60, 40); 
+            label = new JLabel(new ImageIcon(image));
+        } catch (Exception e) {
+//            System.out.println(e.toString());
+        }
+        return label;
+    }
 
-    JLabel label = new JLabel(new ImageIcon(image));
-    return label;
-  }
-    
 }
