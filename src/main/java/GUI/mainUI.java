@@ -157,6 +157,21 @@ private Music musicPlayer;
 
         }
     };
+    BtnQuanLyVoucher = new javax.swing.JButton(){
+        @Override protected void paintComponent(Graphics g) {
+            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setPaint(getBackground());
+                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                    0, 0, getWidth() - 1, getHeight() - 1));
+            g2.dispose();
+        } super.paintComponent(g);}
+        @Override public void updateUI() {
+            super.updateUI();
+            setOpaque(false);
+
+        }
+    };
     jPanel3 = new javax.swing.JPanel()
     ;
     BtnOrder = new javax.swing.JButton(){
@@ -315,6 +330,17 @@ private Music musicPlayer;
         }
     });
 
+    BtnQuanLyVoucher.setBorder(new RoundedCornerBorder());
+    BtnQuanLyVoucher.setBackground(new java.awt.Color(255, 204, 204));
+    BtnQuanLyVoucher.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
+    BtnQuanLyVoucher.setForeground(new java.awt.Color(102, 102, 102));
+    BtnQuanLyVoucher.setText("Quản Lý Voucher");
+    BtnQuanLyVoucher.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            BtnQuanLyVoucherActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
     jPanel4.setLayout(jPanel4Layout);
     jPanel4Layout.setHorizontalGroup(
@@ -348,6 +374,10 @@ private Music musicPlayer;
                 .addComponent(BtnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addContainerGap())
+        .addGroup(jPanel4Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(BtnQuanLyVoucher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())
     );
     jPanel4Layout.setVerticalGroup(
         jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,7 +396,9 @@ private Music musicPlayer;
             .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
             .addGap(18, 18, 18)
             .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-            .addGap(78, 78, 78)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(BtnQuanLyVoucher, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+            .addGap(24, 24, 24)
             .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
             .addGap(89, 89, 89)
             .addComponent(BtnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
@@ -571,6 +603,11 @@ private Music musicPlayer;
         BtnOrder.setBorder(new RoundedCornerBorder(Color.BLACK));
     }//GEN-LAST:event_BtnOrderMouseReleased
 
+    private void BtnQuanLyVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyVoucherActionPerformed
+        // TODO add your handling code here:
+        mainUI.QuanLyVoucher();
+    }//GEN-LAST:event_BtnQuanLyVoucherActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -620,6 +657,7 @@ private Music musicPlayer;
     public static javax.swing.JButton BtnQuanLyHoiVien;
     public static javax.swing.JButton BtnQuanLyMon;
     public static javax.swing.JButton BtnQuanLyNhanVien;
+    public static javax.swing.JButton BtnQuanLyVoucher;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

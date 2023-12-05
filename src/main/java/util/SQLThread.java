@@ -13,6 +13,7 @@ public class SQLThread implements Runnable {
 @Override
     public void run() {
         try {
+            JDBCManager.closeConnection();
             Connection con = JDBCManager.reconnect();
             System.out.println(con.toString());
         } catch (Exception e) {

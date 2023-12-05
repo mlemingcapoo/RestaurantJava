@@ -4,21 +4,7 @@
  */
 package frame;
 
-import Api_upload_image.upanh;
 import control.VoucherControl;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import org.json.JSONObject;
 //
 /**
  *
@@ -267,7 +253,7 @@ VoucherControl control = new VoucherControl();
         control.them();
         control.TaoQRVoucher();
         control.upload();
-   
+        control.refresh();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -282,13 +268,14 @@ VoucherControl control = new VoucherControl();
 
     private void btnsendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsendActionPerformed
        control.send();
+       control.refresh();
     }//GEN-LAST:event_btnsendActionPerformed
 
     private void tblHoiVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoiVienMousePressed
         // TODO add your handling code here:
         
         control.fillMail(tblHoiVien.getSelectedRow());
-         control.refresh();
+         
     }//GEN-LAST:event_tblHoiVienMousePressed
 
 

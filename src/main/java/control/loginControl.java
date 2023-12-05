@@ -24,17 +24,17 @@ public class loginControl {
             System.out.println("got it!: " + User.getText() + " " + password);
             boolean isLoggedIn = false;
             boolean connectionResetted = false;
-            try{
+            try {
                 isLoggedIn = auth.checkLogin(User.getText(), password);
-            } catch (SQLNonTransientConnectionException e){
+            } catch (SQLNonTransientConnectionException e) {
                 connectionResetted = true;
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             if (isLoggedIn) {
                 startMainUI(auth.getPermissonLevel());
                 System.out.println("logged in");
-            } else if (connectionResetted&&!isLoggedIn){
+            } else if (connectionResetted && !isLoggedIn) {
                 System.out.println("connection lost.");
                 DialogHelper.alert(login, "Mất kết nối!");
             } else {
@@ -44,18 +44,19 @@ public class loginControl {
         }
 
     }
-    
+
     public void startMainUI(int permissionLevel) {
-        if (permissionLevel<0){
+        if (permissionLevel < 0) {
             DialogHelper.alert(login, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
         } else {
             mainUI main = new mainUI();
-            login.dispose();
-            main.setMinimumSize(new Dimension(1044 , 720));
+            main.setMinimumSize(new Dimension(1044, 720));
             main.setVisible(true);
+            login.dispose();
+//            startCustomer();
         }
     }
-    
+
     private boolean validated() {
         System.out.println("validated?");
         //        Object[] lmao = {user};
@@ -72,12 +73,10 @@ public class loginControl {
         login.setVisible(true);
     }
 
-    private void startLocked() {
-        
-    }
+    
 
     public void forgorPass() {
-        
+
     }
 
 }

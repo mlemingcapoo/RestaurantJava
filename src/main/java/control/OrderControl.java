@@ -6,13 +6,17 @@ import DAO.OrderDetailsDAO;
 import DAO.SQL;
 import GUI.mainUI;
 import frame.OrderPanel;
+import frame.ThanhToanJDialog;
 import helper.DialogHelper;
+import helper.LoadImageTask;
+import helper.imgHelper;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import model.Food;
 import model.Order;
 import model.OrderDetails;
@@ -23,14 +27,15 @@ import model.orderedDishes;
  * @author capoo
  */
 public class OrderControl {
+
     mainUI parentFrame;
 
     public OrderControl(mainUI aThis) {
-        parentFrame=aThis;
+        parentFrame = aThis;
     }
 
     public OrderControl() {
-        
+
     }
     static List<Food> food = new ArrayList<>();
     static List<Order> order = new ArrayList<>();
@@ -50,35 +55,46 @@ public class OrderControl {
 
     public void init(OrderPanel panel) {
         OrderControl.panel = panel;
-        new Thread(() -> {
-            try {
-                //        panel.setVisible(false);
-                refreshAll();
-                System.out.println("refrshed all");
+        panel.revalidate();
+
+        try {
+            //        panel.setVisible(false);
+
+            refreshAll();
+
+            System.out.println("refrshed all");
 //        panel.
 //        panel.tblDSMonAn.setModel(model);
 //        fillPendingOrders();
-                viewPendingOrderClicked(order.size() - 1);
-                System.out.println("viewing laste record");
-                System.out.println("order choosen in init: " + order_choosen);
-                panel.revalidate();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-
+            viewPendingOrderClicked(order.size() - 1);
+            System.out.println("viewing laste record");
+            System.out.println("order choosen in init: " + order_choosen);
+            panel.revalidate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        panel.tblDSMonAn.setRowHeight(100);
+        panel.tblDSOrderDangLam.setRowHeight(30);
+//        panel.tblDSMonAn.getColumnModel().getColumn(3).setPreferredWidth(80);
+//        panel.tblDSMonAn.getColumnModel().getColumn(3).setWidth(50);
     }
 
     public void refreshAll() {
+
         foodModel.setRowCount(0);
-        getDishes();
-//        getPendingOrders();
-        fillDishes();
-        fillPendingOrders();
+//        Thread dish = new Thread(() -> {
+//            getDishes();
         try {
             fetchDishes(order_choosen);
         } catch (Exception e) {
         }
+//        });
+//        dish.start();
+//        getPendingOrders();
+        fillPendingOrders();
+        getDishes();
+        fillDishes();
+        panel.spinnerAmount.setValue(1);
     }
 
     public static void setSelectedRow(JTable table, int row) {
@@ -94,16 +110,31 @@ public class OrderControl {
         System.out.println("Hện có " + food.size() + " món ăn");
         DefaultTableModel model = (DefaultTableModel) panel.tblDSMonAn.getModel();
         model.setRowCount(0);
+
+        int rowIndex = 0;
         for (Food fd : food) {
-            Object[] row = new Object[]{fd.getName(), fd.getPrice(), fd.getType(), "-"};
+            Object[] row = {fd.getName(), fd.getPrice(), fd.getType()};
             model.addRow(row);
+            rowIndex++;
         }
+
+        TableColumn column = panel.tblDSMonAn.getColumnModel().getColumn(3);
+        column.setCellRenderer(new imgHelper());
+
+        for (int i = 0; i < rowIndex; i++) {
+            setImg(model, i, food.get(i).getImg());
+        }
+
+        panel.tblDSMonAn.updateUI();
+
     }
 
     public void payment() {
 //        order_choosen;
 //        order ;
-        new thanhToanControl(parentFrame).setOrder(order, order_choosen);
+        ThanhToanControl control2 = new ThanhToanControl(parentFrame);
+        control2.setOrder(panel.txtSDTHoiVien.getText(), panel.txtMaVocher.getText(), order_choosen, panel.cboHinhThucThanhToan.getSelectedItem().toString());
+        ThanhToanJDialog pay = new ThanhToanJDialog(parentFrame, true, control2);
     }
 
     public void createOrder() {
@@ -144,53 +175,66 @@ public class OrderControl {
 
     }
 
-    public void addDish(int selectedRow) {
-new Thread(() -> {
-    try {
-        getDishes();
-        System.out.println("addDish clicked: " + selectedRow);
-//        Object data = table.getValueAt(row, 0);
-        int orderID = order_choosen;
-        System.out.println("order chosen: " + order_choosen);
-        int quantity = 1;
-        int dishID = food.get(selectedRow).getDish_ID();
-        System.out.println("dishID chosen: " + dishID);
-        try {
-            daoOrderDetails.addDishByID(orderID, quantity, dishID);
-        } catch (Exception e) {
-            DialogHelper.alert(panel, e.getMessage());
-        } finally {
-            refreshAll();
+    public void addDish(int selectedRow, int count) {
+        new Thread(() -> {
             try {
-                fetchDishes(order_choosen);
+//                getDishes();
+                System.out.println("addDish clicked: " + selectedRow);
+//        Object data = table.getValueAt(row, 0);
+                int orderID = order_choosen;
+                System.out.println("order chosen: " + order_choosen);
+                int quantity = count;
+                int dishID = -1;
+                try {
+                    dishID = food.get(selectedRow).getDish_ID();
+                } catch (IndexOutOfBoundsException e) {
+                    DialogHelper.alert(parentFrame, "Phải chọn món trước khi bấm thêm!");
+                }
+                System.out.println("dishID chosen: " + dishID);
+                try {
+                    daoOrderDetails.addDishByID(orderID, quantity, dishID);
+                } catch (Exception e) {
+//                    DialogHelper.alert(panel, );
+                    System.out.println(e.getMessage());
+                } finally {
+//                    refreshAll();
+                    try {
+                        fetchDishes(order_choosen);
+                    } catch (Exception e) {
+                    }
+                }
             } catch (Exception e) {
+                e.printStackTrace();
             }
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}).start();
-        
+        }).start();
 
     }
 
-    public void removeDishFromOrder(int selectedRow) {
+    public void removeDishFromOrder(int selectedRow, int count) {
+        int orderID = -1;
+        int quantity = -1;
+        int dishID = -1;
         try {
             fetchDishes(order_choosen);
         } catch (Exception e) {
         }
-        System.out.println("removeDish clicked: " + selectedRow);
-        int orderID = order_choosen;
-        System.out.println("order chosen: " + order_choosen);
-        int quantity = 1;
-        int dishID = ordered.get(selectedRow).getDish_ID();
-        System.out.println("dishID chosen: " + dishID);
+        try {
+            System.out.println("removeDish clicked: " + selectedRow);
+            orderID = order_choosen;
+            System.out.println("order chosen: " + order_choosen);
+            quantity = count;
+            dishID = ordered.get(selectedRow).getDish_ID();
+            System.out.println("dishID chosen: " + dishID);
+        } catch (IndexOutOfBoundsException e) {
+            DialogHelper.alert(parentFrame, "Chọn 1 loại món để xoá khỏi DS các món đã order");
+        }
         try {
             daoOrderDetails.removeDishByID(orderID, quantity, dishID);
         } catch (Exception e) {
             DialogHelper.alert(panel, e.getMessage());
         } finally {
-            refreshAll();
+//            refreshAll();
+//            getPendingOrders();
             try {
                 fetchDishes(order_choosen);
             } catch (Exception e) {
@@ -200,6 +244,7 @@ new Thread(() -> {
     }
 
     public void dishClicked(int selectedRow) {
+//        selectedDish = selectedRow;
         System.out.println("dish clicked: " + selectedRow);
         //handle -1 too pls
 //        refreshAll();
@@ -212,8 +257,12 @@ new Thread(() -> {
 
     public void changeDishAmount(JSpinner value) {
         System.out.println("comboValue: " + value.getValue());
-        if (Integer.parseInt(value.getValue().toString()) < 0) {
-            value.setValue(0);
+        if (Integer.parseInt(value.getValue().toString()) < 1) {
+            value.setValue(1);
+        }
+        if (Integer.parseInt(value.getValue().toString()) > 100) {
+            value.setValue(100);
+//            DialogHelper.alert(parentFrame, "Số lượng tối đa là 100!");
         }
     }
 
@@ -243,6 +292,7 @@ new Thread(() -> {
             model.addRow(row);
             count++;
         }
+        calculateTotalPrice(order_choosen);
     }
 
 //    private void fillDishedFromOrder(){
@@ -281,20 +331,31 @@ new Thread(() -> {
     }
 
     public void deletePendingOrderClicked(int selectedRow) {
+
         order.clear();
         order = daoOrder.selectAllPending();
         System.out.println("order list size: " + order.size());
-        int order_ID = order.get(selectedRow).getOrder_ID();
-
+        int order_ID = -1;
         try {
-            OrderDetailsDAO.deleteAllDishes(order_ID);
-            daoOrder.delete(order_ID);
-            fillPendingOrders();
-            order_choosen = order.get(order.size() - 1).getOrder_ID();
-            fetchDishes(order_choosen);
+            if (order_ID<0) throw new IndexOutOfBoundsException();
+            order_ID = order.get(selectedRow).getOrder_ID();
+            if (DialogHelper.confirm(panel, "Xác nhận xoá đơn hàng thứ " + (selectedRow + 1) + "?")) {
+                try {
+                    OrderDetailsDAO.deleteAllDishes(order_ID);
+                    daoOrder.delete(order_ID);
+                    fillPendingOrders();
+                    order_choosen = order.get(order.size() - 1).getOrder_ID();
+                    fetchDishes(order_choosen);
+                } catch (Exception e) {
+                    System.out.println("line 355: " + e.getCause() + e.getMessage());
+//            DialogHelper.alert(panel, e.getMessage());
+
+                }
+            }
         } catch (Exception e) {
-            DialogHelper.alert(panel, e.getMessage());
+            DialogHelper.alert(panel, "Chọn 1 Đơn hàng muốn Xoá/Huỷ");
         }
+
     }
 
     public void viewPendingOrderClicked(int selectedRow) {
@@ -329,13 +390,30 @@ new Thread(() -> {
     }
 
     public void setNote(int selectedRow, String text) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            daoOrder.setNote(selectedRow, text);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void search(String text, String toString) {
         throw new UnsupportedOperationException("Not supported yet.");
         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    private void calculateTotalPrice(int order_choosen) {
+//        Double price = daoOrderDetails.calculateTotalPrice(order_choosen);
+    }
+
+    private void setImg(DefaultTableModel model, int rowIndex, String imgLink) {
+
+        Runnable loadTask = new LoadImageTask(model, rowIndex, imgLink);
+
+        new Thread(loadTask).start();
+
+    }
+
+    
 
 }

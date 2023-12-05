@@ -20,9 +20,10 @@ public class OrderDAO extends SQL<Order, String> {
 //    String UPDATE_SQL = "UPDATE Food SET Password = ?, FullName = ?, Role = ? WHERE MaNV = ?";
 
     String DELETE_SQL = "DELETE FROM `Order` WHERE order_ID = ?";
+    String UPDATE_ORDER = "UPDATE FROM `Order` SET `Order`.note = ? WHERE `Order`.order_ID = ?;";
 
     String SELECT_ALL_SQL = "SELECT * FROM Order";
-    String SELECT_ALL_PENDING_SQL = "SELECT * from `Order` WHERE `Order`.isCompleted = 0;";
+    String SELECT_ALL_PENDING_SQL = "SELECT * FROM `Order` WHERE `Order`.isCompleted = 0;";
 //    String SELECT_BY_ID_SQL = "SELECT * FROM Food WHERE FoodID = ?";
 
     @Override
@@ -97,6 +98,10 @@ public class OrderDAO extends SQL<Order, String> {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public void setNote(int selectedRow, String text) {
+        DBHelper.update(UPDATE_ORDER, selectedRow,text);
     }
 
 }

@@ -4,7 +4,6 @@
  */
 package TaoQR;
 
-import DAO.VoucherDAO;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -33,8 +32,8 @@ public void TaoQR() throws WriterException, IOException{
     
     QRCodeWriter qrCodeWriter = new QRCodeWriter();
     BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 500, 500);
-
-    File outputFile = new File("src\\SendMail\\2.png");
+    String pdfFolder = "/bill-files";
+    File outputFile = new File(System.getProperty("user.dir") + pdfFolder+"/Font_Anh/2.png");
     MatrixToImageWriter.writeToPath(bitMatrix, "PNG", outputFile.toPath());
 
     System.out.println("QR code generated successfully!");

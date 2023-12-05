@@ -4,42 +4,27 @@
  */
 package frame;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import java.io.FileOutputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import javax.swing.JOptionPane;
-import model.Order;
+import control.ThanhToanControl;
 
 /**
  *
  * @author capoo
  */
-public class thanhToanJDialog extends javax.swing.JDialog {
+public class ThanhToanJDialog extends javax.swing.JDialog {
+    private static ThanhToanControl control;
 
     /**
      * Creates new form thanhToanJDialog
+     * @param parent
+     * @param modal
+     * @param control
      */
-    public thanhToanJDialog(java.awt.Frame parent, boolean modal) {
+    public ThanhToanJDialog(java.awt.Frame parent, boolean modal, ThanhToanControl control) {
         super(parent, modal);
         initComponents();
-        setVisible(modal);
-    }
-    public void setOrder(List<Order> orders,int ID){
-        
+        ThanhToanJDialog.control=control;
+        control.setDialog(this);
+        setVisible(true);
     }
 
     /**
@@ -52,26 +37,34 @@ public class thanhToanJDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        bill = new javax.swing.JTable();
+        tblListOrdered = new javax.swing.JTable();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        btnConfirm = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblTotalPrice = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnAbort = new javax.swing.JButton();
+        lblMaBill = new javax.swing.JLabel();
+        lblSdtHoiVien = new javax.swing.JLabel();
+        lblHoiVien = new javax.swing.JLabel();
+        lblNgayThanhToan = new javax.swing.JLabel();
+        lblGiamGiaAmount = new javax.swing.JLabel();
+        lblNameNV = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lblPayMethod = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        bill.setModel(new javax.swing.table.DefaultTableModel(
+        tblListOrdered.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -87,13 +80,13 @@ public class thanhToanJDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(bill);
+        jScrollPane1.setViewportView(tblListOrdered);
 
-        jButton1.setFont(new java.awt.Font("American Typewriter", 1, 24)); // NOI18N
-        jButton1.setText("XÁC NHẬN");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirm.setFont(new java.awt.Font("American Typewriter", 1, 24)); // NOI18N
+        btnConfirm.setText("XÁC NHẬN");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnConfirmActionPerformed(evt);
             }
         });
 
@@ -102,21 +95,22 @@ public class thanhToanJDialog extends javax.swing.JDialog {
         jLabel1.setText("PAYMENT");
 
         jLabel2.setFont(new java.awt.Font("American Typewriter", 0, 13)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Vui lòng kiểm tra kĩ thông tin trước khi xác nhận");
 
         jLabel3.setFont(new java.awt.Font("American Typewriter", 3, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 102, 102));
         jLabel3.setText("THANH TOÁN:");
 
-        jLabel4.setFont(new java.awt.Font("American Typewriter", 3, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 102, 102));
-        jLabel4.setText("0000.0000đ");
+        lblTotalPrice.setFont(new java.awt.Font("American Typewriter", 3, 18)); // NOI18N
+        lblTotalPrice.setForeground(new java.awt.Color(255, 102, 102));
+        lblTotalPrice.setText("0000.0000đ");
 
         jLabel5.setText("Mã BILL:");
 
-        jLabel6.setText("SĐT Hội Viên: ");
+        jLabel6.setText("SĐT Khách hàng:");
 
-        jLabel7.setText("Tên Hội Viên: ");
+        jLabel7.setText("Tên Khách hàng:");
 
         jLabel8.setText("Thanh toán ngày:");
 
@@ -124,61 +118,92 @@ public class thanhToanJDialog extends javax.swing.JDialog {
 
         jLabel10.setText("Nhân viên thực hiện:");
 
-        jButton2.setFont(new java.awt.Font("American Typewriter", 1, 24)); // NOI18N
-        jButton2.setText("HUỶ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAbort.setFont(new java.awt.Font("American Typewriter", 1, 24)); // NOI18N
+        btnAbort.setText("HUỶ");
+        btnAbort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAbortActionPerformed(evt);
             }
         });
+
+        lblMaBill.setText("Không xác định");
+
+        lblSdtHoiVien.setForeground(new java.awt.Color(0, 0, 0));
+        lblSdtHoiVien.setText("Không");
+
+        lblHoiVien.setText("Khách Hàng");
+
+        lblNgayThanhToan.setText("Không xác định");
+
+        lblGiamGiaAmount.setText("Không");
+
+        lblNameNV.setText("Không xác định");
+
+        jLabel11.setText("Hình thức thanh toán:");
+
+        lblPayMethod.setText("Chưa chọn");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(135, 135, 135))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel8))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel9))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel10))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMaBill))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(198, 198, 198)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(btnAbort)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
+                                .addComponent(btnConfirm))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)))))
+                                .addComponent(lblTotalPrice))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNameNV))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblGiamGiaAmount))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblSdtHoiVien))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblHoiVien))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNgayThanhToan))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPayMethod)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -193,25 +218,41 @@ public class thanhToanJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lblMaBill))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(lblSdtHoiVien))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(lblHoiVien))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(lblNgayThanhToan))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(lblGiamGiaAmount))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(lblNameNV))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(lblPayMethod))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(lblTotalPrice))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnConfirm)
+                    .addComponent(btnAbort))
                 .addContainerGap())
         );
 
@@ -219,136 +260,15 @@ public class thanhToanJDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // Đường dẫn đến file font chữ tiếng Việt
-        String fontPath = "src\\Font_Anh\\UTM Swiss 721 Black Condensed.ttf";
+        control.confirm();
+    }//GEN-LAST:event_btnConfirmActionPerformed
 
-        // Tạo BaseFont từ file font chữ
-        BaseFont baseFont = null;
-        try {
-            baseFont = BaseFont.createFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        } catch (DocumentException | java.io.IOException e) {
-            e.printStackTrace();
-        }
-
-        // Tạo Font sử dụng BaseFont vừa tạo
-        Font vietnameseFont = new Font(baseFont, 12, Font.NORMAL);
-
-        // Tạo đối tượng Document mới
-        Document document = new Document();
-
-        try {
-            // Thiết lập PdfWriter và mở tài liệu
-            PdfWriter.getInstance(document, new FileOutputStream("src\\Bill\\bill.pdf"));
-            document.open();
-
-            // Lấy ngày và giờ hiện tại
-            DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss - dd/MM/yyyy");
-            Date date = new Date();
-            String formattedDate = dateFormat.format(date);
-
-            // Tạo các đoạn văn bản và font chữ
-            Paragraph hello = new Paragraph();
-            Paragraph wifi = new Paragraph();
-            Font boldFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
-            Font boldFont1 = new Font(Font.FontFamily.HELVETICA, 25, Font.BOLD);
-
-            // Tạo số ngẫu nhiên cho hóa đơn
-            Random random = new Random();
-            int random1 = 1000000 + random.nextInt(9999999);
-            int random2 = 1000000000 + random.nextInt(999999999);
-
-            // Thêm hình ảnh logo vào tài liệu
-            Image image2 = Image.getInstance("src\\Font_Anh\\2.png");
-            Image QR = Image.getInstance("src\\Font_Anh\\QR.png");
-            image2.setAbsolutePosition(500f, 790f);
-            image2.scaleAbsolute(100f, 50f);
-            QR.setAbsolutePosition(240, 330);
-            QR.scaleAbsolute(100, 100);
-            document.add(image2);
-            // Thêm thông báo cảm ơn và thông tin bổ sung
-            hello.add(new com.itextpdf.text.Chunk("Cảm ơn !!", vietnameseFont));
-            hello.setAlignment(Element.ALIGN_CENTER);
-            hello.setFont(vietnameseFont);
-            wifi.add(new com.itextpdf.text.Chunk("WiFi: " + random1));
-            wifi.setAlignment(Element.ALIGN_CENTER);
-            // Thêm tên cửa hàng và ngày/giờ
-            Paragraph text = new Paragraph("NHÓM 4", new Font(boldFont.getBaseFont(), 20, Font.BOLD | Font.NORMAL, vietnameseFont.getColor()));
-            text.setAlignment(Element.ALIGN_CENTER);
-
-            document.add(text);
-            document.add(new Paragraph("   "));
-            document.add(new Paragraph("   "));
-            document.add(new Paragraph("   "));
-            document.add(new Paragraph(formattedDate));
-
-            // Thêm thông tin hóa đơn
-            Paragraph line = new Paragraph("______________________________________________________________________________");
-            document.add(new Paragraph("Mã GD: " + random1, vietnameseFont));
-            document.add(new Paragraph("Tên: ", vietnameseFont));
-            document.add(new Paragraph("Số Điện Thoại: 0" + random2, vietnameseFont));
-            line.getFont().setStyle(Font.BOLD);
-            document.add(new Paragraph("   "));
-            document.add(line);
-            document.add(new Paragraph("   "));
-
-            // Thêm bảng chi tiết hàng hóa
-            PdfPTable itemsTable = new PdfPTable(3);
-            itemsTable.addCell(new PdfPCell(new Phrase("Tên", vietnameseFont)));
-            itemsTable.addCell(new PdfPCell(new Phrase("Số Lượng", vietnameseFont)));
-            itemsTable.addCell(new PdfPCell(new Phrase("Giá", vietnameseFont)));
-
-            // Điền dữ liệu vào bảng từ dữ liệu hóa đơn
-            int rowCount = bill.getRowCount();
-            if (rowCount > 0) {
-                for (int i = 0; i < rowCount; i++) {
-                    try {
-                        String id = (String) bill.getValueAt(i, 0);
-                        String name = (String) bill.getValueAt(i, 1);
-                        String price = (String) bill.getValueAt(i, 2);
-
-                        System.out.println("ID: " + id);
-
-                        itemsTable.addCell(new PdfPCell(new Phrase(id, vietnameseFont)));
-                        itemsTable.addCell(new PdfPCell(new Phrase(name, vietnameseFont)));
-                        itemsTable.addCell(new PdfPCell(new Phrase(price, vietnameseFont)));
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            document.add(itemsTable);
-
-            // Thêm tổng cộng
-            document.add(new Paragraph("   "));
-            Paragraph Trai = new Paragraph("Giá: " + random1 + " VND", new Font(boldFont.getBaseFont(), boldFont.getSize(), Font.BOLD | Font.NORMAL, vietnameseFont.getColor()));
-            Trai.setAlignment(Element.ALIGN_RIGHT);
-
-            document.add(Trai);
-            document.add(hello);
-            document.add(new Paragraph("   "));
-            document.add(wifi);
-            document.add(line);
-            document.add(QR);
-            // Đóng tài liệu
-            document.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Hiển thị thông báo thành công
-        System.out.println("Hóa đơn được tạo thành công.");
-        JOptionPane.showMessageDialog(null, "Hóa đơn được tạo thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAbortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbortActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAbortActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,20 +287,21 @@ public class thanhToanJDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(thanhToanJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThanhToanJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(thanhToanJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThanhToanJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(thanhToanJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThanhToanJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(thanhToanJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThanhToanJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                thanhToanJDialog dialog = new thanhToanJDialog(new javax.swing.JFrame(), true);
+                ThanhToanJDialog dialog = new ThanhToanJDialog(new javax.swing.JFrame(), true,control);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -393,20 +314,28 @@ public class thanhToanJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable bill;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JButton btnAbort;
+    private javax.swing.JButton btnConfirm;
+    public com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JLabel lblGiamGiaAmount;
+    public javax.swing.JLabel lblHoiVien;
+    public javax.swing.JLabel lblMaBill;
+    public javax.swing.JLabel lblNameNV;
+    public javax.swing.JLabel lblNgayThanhToan;
+    public javax.swing.JLabel lblPayMethod;
+    public javax.swing.JLabel lblSdtHoiVien;
+    public javax.swing.JLabel lblTotalPrice;
+    public javax.swing.JTable tblListOrdered;
     // End of variables declaration//GEN-END:variables
 }

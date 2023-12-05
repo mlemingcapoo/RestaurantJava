@@ -13,7 +13,8 @@ public class Bill {
     private String billDate;
     private String note;
     private int Ma_KH;
-    private int VCode;
+    private String VCode;
+    private String billCode;
 
     public int getBill_ID() {
         return bill_ID;
@@ -63,11 +64,21 @@ public class Bill {
         this.Ma_KH = Ma_KH;
     }
 
-    public int getVCode() {
+    public String getVCode() {
         return VCode;
     }
 
-    public void setVCode(int VCode) {
+    public void setVCode(String VCode) {
         this.VCode = VCode;
     }
+
+    public String getBillCode() {
+        return billCode;
+    }
+
+    public void setBillCode(String billCode) {
+        this.billCode = billCode;
+    }
+
+
 }
