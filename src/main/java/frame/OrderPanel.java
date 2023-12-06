@@ -4,6 +4,7 @@
  */
 package frame;
 
+import GUI.mainUI;
 import control.OrderControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -448,6 +449,12 @@ public class OrderPanel extends javax.swing.JPanel {
         tblDSMonAn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDSMonAnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblDSMonAnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                tblDSMonAnMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblDSMonAnMousePressed(evt);
@@ -963,6 +970,15 @@ public class OrderPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         selectedDish=tblDSMonAn.getSelectedRow();
     }//GEN-LAST:event_tblDSMonAnMouseReleased
+
+    private void tblDSMonAnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSMonAnMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblDSMonAnMouseExited
+
+    private void tblDSMonAnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSMonAnMouseEntered
+        // TODO add your handling code here:
+        mainUI.closeMenu();
+    }//GEN-LAST:event_tblDSMonAnMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

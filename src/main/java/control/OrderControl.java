@@ -55,7 +55,7 @@ public class OrderControl {
 
     public void init(OrderPanel panel) {
         OrderControl.panel = panel;
-        panel.revalidate();
+//        panel.revalidate();
 
         try {
             //        panel.setVisible(false);
@@ -69,7 +69,7 @@ public class OrderControl {
             viewPendingOrderClicked(order.size() - 1);
             System.out.println("viewing laste record");
             System.out.println("order choosen in init: " + order_choosen);
-            panel.revalidate();
+//            panel.revalidate();
         } catch (Exception e) {
             e.printStackTrace();
         }

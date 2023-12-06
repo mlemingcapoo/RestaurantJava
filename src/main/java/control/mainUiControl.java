@@ -14,6 +14,7 @@ import frame.TableJPanel;
 import frame.VoucherJPanel;
 import frame.profile;
 import helper.DialogHelper;
+import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
@@ -194,7 +195,7 @@ public final class mainUiControl implements GUI_Interface {
             System.out.println("external?: " + Arrays.toString(externalDevice.getConfigurations()));
             // Get bounds of external display
             Rectangle bounds = externalDevice.getDefaultConfiguration().getBounds();
-            
+
             customerFrame.setBounds(bounds);
             customerFrame.setVisible(true);
 
@@ -321,6 +322,11 @@ public final class mainUiControl implements GUI_Interface {
     public void QuanLyVoucher() {
 
         panelNavigator.switchPanel(mainUI.panelDisplay, "Voucher");
+    }
+
+    public void minimize(mainUI aThis) {
+        aThis.setState(Frame.ICONIFIED);
+
     }
 
 }

@@ -4,36 +4,113 @@
  */
 package GUI;
 
-
+import control.OrderControl;
 import control.mainUiControl;
+import frame.OrderPanel;
 import helper.RoundedCornerBorder;
 import helper.RoundedCornerBorder2;
 import java.awt.Color;
+import java.awt.Frame;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import model.Music;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.event.WindowEvent;
+import util.panelNavigator;
+
 
 
 /**
  *
  * @author capoo
  */
-public class mainUI extends javax.swing.JFrame {
-     mainUiControl mainUI;
-private Music musicPlayer;
-   
-    /**s
-     * Creates new form loginFrame1
+public final class mainUI extends javax.swing.JFrame {
+
+    /**
+     * Creates new form menuu
      */
+    int width;
+    int height;
+    OrderPanel QLBanHang = new OrderPanel();
+    mainUiControl mainUI;
+    boolean isMinimized;
+
     public mainUI() {
         setUndecorated(true);
+        GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        width = graphicsDevice.getDisplayMode().getWidth();
+        height = graphicsDevice.getDisplayMode().getHeight();
+        y = width;
         initComponents();
+//        cardTrangChu.setVisible(true);
+        cardDisplayWrapper.setVisible(true);
+        jplMenuCover.setSize(410, 900);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        System.out.println("chieu rong man hinh: " + width);
+        panelDisplay.setSize(width, height);
+        panelDisplay.add(QLBanHang, "BanHang");
         mainUI = new mainUiControl(this);
-//        musicPlayer = new Music(); // Instantiate your Music class
-//        musicPlayer.play(); // Call the play method
-//        new timerControl().timer();
+        
+        this.addWindowStateListener((WindowEvent e) -> {
+            if((e.getNewState() & Frame.ICONIFIED) == Frame.ICONIFIED) {
+                isMinimized = true;
+            } else if(isMinimized && (e.getNewState() == Frame.NORMAL)) {
+                isMinimized = false;
+                this.setExtendedState(MAXIMIZED_BOTH);
+            }   });
     }
+    static int x = 210;    //chieu rong
+    static int y = 300;    //chieu cao
 
+    
+    public static void openMenu() {
+
+        jplMenuCover.setSize(x, y);
+
+        if (x == 52) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+
+                        for (int i = 52; i <= 210; i++) {
+                            jplMenuCover.setSize(i, y);
+                            Thread.sleep(1);
+                        }
+
+                    } catch (Exception e) {
+                    }
+                }
+            }).start();
+            x = 210;
+        }
+    }
+    
+    
+
+    public static void closeMenu() {
+        jplMenuCover.setSize(x, y);
+        if (x == 210) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        for (int i = 210; i >= 52; i--) {
+                            jplMenuCover.setSize(i, y);
+                            Thread.sleep(1);
+                        
+                        }
+                        panelDisplay.repaint();
+//                        panelDisplayCustomer.revalidate();
+//                        toolBarSeparator.setVisible(true);
+                    } catch (Exception e) {
+                    }
+                }
+            }).start();
+            x = 52;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,9 +122,42 @@ private Music musicPlayer;
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        wrapper = new javax.swing.JPanel();
-        panelDisplay = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jplMenuCover = new javax.swing.JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                int[] start = {255, 233, 219};
+                Color startColor = new Color(start[0], start[1], start[2]);
+
+                Color endColor = new Color(255, 213, 39);
+                Graphics2D g2d = (Graphics2D) g;
+                GradientPaint gradient = new GradientPaint(
+                    0, 0, startColor,
+                    0, getHeight(), endColor
+                );
+                g2d.setPaint(gradient);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        jPanel2 = new javax.swing.JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                int[] start = {255, 255, 255};
+                Color startColor = new Color(start[0], start[1], start[2]);
+
+                Color endColor = new Color(255,235,212);
+                Graphics2D g2d = (Graphics2D) g;
+                GradientPaint gradient = new GradientPaint(
+                    0, 0, startColor,
+                    0, getHeight(), endColor
+                );
+                g2d.setPaint(gradient);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblCloseMenu = new javax.swing.JLabel();
+        lblOpenMenu1 = new javax.swing.JLabel();
         panelProfilePhoto = new javax.swing.JPanel() {
             @Override protected void paintComponent(Graphics g) {
                 if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
@@ -65,116 +175,36 @@ private Music musicPlayer;
             //    setBorder();
         }
     };
-    BtnDangXuat = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-
-        }
-    };
-    lblUsername = new javax.swing.JLabel();
-    lblRole = new javax.swing.JLabel();
-    BtnQuanLyNhanVien = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-
-        }
-    };
-    BtnQuanLyDoanhThu = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-
-        }
-    };
-    BtnQuanLyHoiVien = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-
-        }
-    };
-    BtnQuanLyMon = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-
-        }
-    };
-    BtnCaiDat = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-
-        }
-    };
-    BtnQuanLyVoucher = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-
-        }
-    };
-    jPanel3 = new javax.swing.JPanel()
-    ;
+    BtnQuanLyVoucher = new javax.swing.JLabel();
+    BtnQuanLyNhanVien = new javax.swing.JLabel();
+    BtnQuanLyDoanhThu = new javax.swing.JLabel();
+    BtnQuanLyHoiVien = new javax.swing.JLabel();
+    menuBarSeparator = new javax.swing.JSeparator();
+    BtnDangXuat = new javax.swing.JLabel();
+    BtnGioiThieu = new javax.swing.JLabel();
+    BtnCaiDat = new javax.swing.JLabel();
+    BtnQuanLyMon = new javax.swing.JLabel();
+    jpllMenuBar = new javax.swing.JPanel();
+    absoluteWrapper = new javax.swing.JPanel();
+    jButton2 = new javax.swing.JButton();
+    jButton3 = new javax.swing.JButton();
     BtnOrder = new javax.swing.JButton(){
+        @Override protected void paintComponent(Graphics g) {
+            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setPaint(getBackground());
+                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                    0, 0, getWidth() - 1, getHeight() - 1));
+            g2.dispose();
+        } super.paintComponent(g);}
+        @Override public void updateUI() {
+            super.updateUI();
+            setOpaque(false);
+
+        }
+    };
+    lblTime = new javax.swing.JLabel();
+    BtnHoaDon = new javax.swing.JButton(){
         @Override protected void paintComponent(Graphics g) {
             if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -204,44 +234,68 @@ private Music musicPlayer;
 
         }
     };
-    BtnHoaDon = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-
-        }
-    };
-    lblTime = new javax.swing.JLabel();
+    cardDisplayWrapper = new javax.swing.JPanel();
+    panelDisplay = new javax.swing.JPanel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-    jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-    wrapper.setPreferredSize(new java.awt.Dimension(888, 670));
-    wrapper.setLayout(new java.awt.CardLayout());
+    jplMenuCover.setBackground(new java.awt.Color(255, 204, 204));
+    jplMenuCover.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    jplMenuCover.setPreferredSize(new java.awt.Dimension(190, 590));
+    jplMenuCover.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            jplMenuCoverMouseEntered(evt);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            jplMenuCoverMouseExited(evt);
+        }
+    });
+    jplMenuCover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    panelDisplay.setBackground(new java.awt.Color(255, 153, 153));
-    panelDisplay.setBorder(new RoundedCornerBorder2(Color.BLACK));
-    panelDisplay.setLayout(new java.awt.CardLayout());
-    wrapper.add(panelDisplay, "card2");
+    jPanel2.setBackground(new java.awt.Color(204, 255, 255));
+    jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    jPanel2.setDoubleBuffered(false);
+    jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+    jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 8, -1, 83));
 
-    jPanel4.setBackground(new java.awt.Color(255, 153, 153));
-    jPanel4.setBorder(new RoundedCornerBorder2());
-    jPanel4.setForeground(new java.awt.Color(255, 204, 204));
+    jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+    jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel4.setText("User Name");
+    jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 120, -1));
+
+    lblCloseMenu.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+    lblCloseMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    lblCloseMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/thoat 24x24.png"))); // NOI18N
+    lblCloseMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            lblCloseMenuMouseClicked(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            lblCloseMenuMouseReleased(evt);
+        }
+    });
+    jPanel2.add(lblCloseMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 2, 30, 30));
+
+    lblOpenMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
+    lblOpenMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            lblOpenMenu1MouseClicked(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            lblOpenMenu1MouseReleased(evt);
+        }
+    });
+    jPanel2.add(lblOpenMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
     panelProfilePhoto.setBorder(new RoundedCornerBorder2());
     panelProfilePhoto.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             panelProfilePhotoMouseClicked(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            panelProfilePhotoMouseReleased(evt);
         }
     });
 
@@ -256,160 +310,105 @@ private Music musicPlayer;
         .addGap(0, 111, Short.MAX_VALUE)
     );
 
-    BtnDangXuat.setBorder(new RoundedCornerBorder());
-    BtnDangXuat.setBackground(new java.awt.Color(255, 204, 204));
-    BtnDangXuat.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnDangXuat.setForeground(new java.awt.Color(102, 102, 102));
-    BtnDangXuat.setText("Đăng ????");
-    BtnDangXuat.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnDangXuatActionPerformed(evt);
-        }
-    });
+    jPanel2.add(panelProfilePhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
 
-    lblUsername.setFont(new java.awt.Font("American Typewriter", 0, 13)); // NOI18N
-    lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    lblUsername.setText("User");
+    jplMenuCover.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 240));
 
-    lblRole.setFont(new java.awt.Font("American Typewriter", 0, 13)); // NOI18N
-    lblRole.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    lblRole.setText("Role");
-
-    BtnQuanLyNhanVien.setBackground(new java.awt.Color(255, 204, 204));
-    BtnQuanLyNhanVien.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnQuanLyNhanVien.setForeground(new java.awt.Color(102, 102, 102));
-    BtnQuanLyNhanVien.setText("Quản Lý Nhân Viên");
-    BtnQuanLyNhanVien.setBorder(new RoundedCornerBorder());
-    BtnQuanLyNhanVien.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnQuanLyNhanVienActionPerformed(evt);
-        }
-    });
-
-    BtnQuanLyDoanhThu.setBackground(new java.awt.Color(255, 204, 204));
-    BtnQuanLyDoanhThu.setBorder(new RoundedCornerBorder());
-    BtnQuanLyDoanhThu.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnQuanLyDoanhThu.setForeground(new java.awt.Color(102, 102, 102));
-    BtnQuanLyDoanhThu.setText("Quản Lý Doanh Thu");
-    BtnQuanLyDoanhThu.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnQuanLyDoanhThuActionPerformed(evt);
-        }
-    });
-
-    BtnQuanLyHoiVien.setBorder(new RoundedCornerBorder());
-    BtnQuanLyHoiVien.setBackground(new java.awt.Color(255, 204, 204));
-    BtnQuanLyHoiVien.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnQuanLyHoiVien.setForeground(new java.awt.Color(102, 102, 102));
-    BtnQuanLyHoiVien.setText("Quản Lý Hội Viên");
-    BtnQuanLyHoiVien.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnQuanLyHoiVienActionPerformed(evt);
-        }
-    });
-
-    BtnQuanLyMon.setBorder(new RoundedCornerBorder());
-    BtnQuanLyMon.setBackground(new java.awt.Color(255, 204, 204));
-    BtnQuanLyMon.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnQuanLyMon.setForeground(new java.awt.Color(102, 102, 102));
-    BtnQuanLyMon.setText("Quản Lý Món Ăn");
-    BtnQuanLyMon.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnQuanLyMonActionPerformed(evt);
-        }
-    });
-
-    BtnCaiDat.setBackground(new java.awt.Color(255, 204, 204));
-    BtnCaiDat.setBorder(new RoundedCornerBorder());
-    BtnCaiDat.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnCaiDat.setForeground(new java.awt.Color(102, 102, 102));
-    BtnCaiDat.setText("Cài Đặt");
-    BtnCaiDat.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnCaiDatActionPerformed(evt);
-        }
-    });
-
-    BtnQuanLyVoucher.setBorder(new RoundedCornerBorder());
-    BtnQuanLyVoucher.setBackground(new java.awt.Color(255, 204, 204));
-    BtnQuanLyVoucher.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnQuanLyVoucher.setForeground(new java.awt.Color(102, 102, 102));
+    BtnQuanLyVoucher.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+    BtnQuanLyVoucher.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     BtnQuanLyVoucher.setText("Quản Lý Voucher");
-    BtnQuanLyVoucher.addActionListener(new java.awt.event.ActionListener() {
+    jplMenuCover.add(BtnQuanLyVoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 150, 30));
+
+    BtnQuanLyNhanVien.setBackground(new java.awt.Color(255, 255, 255));
+    BtnQuanLyNhanVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+    BtnQuanLyNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    BtnQuanLyNhanVien.setText("Quản Lý Nhân Viên");
+    BtnQuanLyNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            BtnQuanLyNhanVienMouseClicked(evt);
+        }
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            BtnQuanLyNhanVienMouseEntered(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnQuanLyNhanVienMouseReleased(evt);
+        }
+    });
+    jplMenuCover.add(BtnQuanLyNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 150, 30));
+
+    BtnQuanLyDoanhThu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+    BtnQuanLyDoanhThu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    BtnQuanLyDoanhThu.setText("Quản Lý Doanh Thu");
+    BtnQuanLyDoanhThu.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            BtnQuanLyDoanhThuMouseClicked(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnQuanLyDoanhThuMouseReleased(evt);
+        }
+    });
+    jplMenuCover.add(BtnQuanLyDoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 150, 30));
+
+    BtnQuanLyHoiVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+    BtnQuanLyHoiVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    BtnQuanLyHoiVien.setText("Quản Lý Hội Viên");
+    jplMenuCover.add(BtnQuanLyHoiVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 150, 30));
+
+    menuBarSeparator.setForeground(new java.awt.Color(153, 153, 153));
+    jplMenuCover.add(menuBarSeparator, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 452, 210, 10));
+
+    BtnDangXuat.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+    BtnDangXuat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    BtnDangXuat.setText("Đăng Xuất");
+    jplMenuCover.add(BtnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, 150, 30));
+
+    BtnGioiThieu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+    BtnGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    BtnGioiThieu.setText("Giới Thiệu");
+    jplMenuCover.add(BtnGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, 150, 30));
+
+    BtnCaiDat.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+    BtnCaiDat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    BtnCaiDat.setText("Cài Đặt");
+    jplMenuCover.add(BtnCaiDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 150, 30));
+
+    BtnQuanLyMon.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+    BtnQuanLyMon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    BtnQuanLyMon.setText("Quản Lý Món Ăn");
+    jplMenuCover.add(BtnQuanLyMon, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 150, 30));
+
+    jpllMenuBar.setBackground(new java.awt.Color(255, 255, 255));
+    jpllMenuBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+    absoluteWrapper.setBackground(new java.awt.Color(255, 255, 255));
+    absoluteWrapper.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    absoluteWrapper.setForeground(new java.awt.Color(255, 255, 255));
+
+    jButton2.setBackground(new java.awt.Color(255, 255, 255));
+    jButton2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+    jButton2.setForeground(new java.awt.Color(255, 51, 51));
+    jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-close-window-48.png"))); // NOI18N
+    jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jButton2.setBorderPainted(false);
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnQuanLyVoucherActionPerformed(evt);
+            jButton2ActionPerformed(evt);
         }
     });
 
-    javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-    jPanel4.setLayout(jPanel4Layout);
-    jPanel4Layout.setHorizontalGroup(
-        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel4Layout.createSequentialGroup()
-            .addGap(37, 37, 37)
-            .addComponent(panelProfilePhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGap(35, 35, 35))
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblRole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addContainerGap())
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap())
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap())
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap())
-        .addGroup(jPanel4Layout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(BtnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addContainerGap())
-        .addGroup(jPanel4Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(BtnQuanLyVoucher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap())
-    );
-    jPanel4Layout.setVerticalGroup(
-        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel4Layout.createSequentialGroup()
-            .addGap(18, 18, 18)
-            .addComponent(panelProfilePhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(lblRole, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-            .addGap(66, 66, 66)
-            .addComponent(BtnQuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
-            .addComponent(BtnQuanLyDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
-            .addComponent(BtnQuanLyHoiVien, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
-            .addComponent(BtnQuanLyMon, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(BtnQuanLyVoucher, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-            .addGap(24, 24, 24)
-            .addComponent(BtnCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-            .addGap(89, 89, 89)
-            .addComponent(BtnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-            .addContainerGap())
-    );
+    jButton3.setBackground(new java.awt.Color(255, 255, 255));
+    jButton3.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+    jButton3.setForeground(new java.awt.Color(0, 153, 255));
+    jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minimize-window-48.png"))); // NOI18N
+    jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jButton3.setBorderPainted(false);
+    jButton3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton3ActionPerformed(evt);
+        }
+    });
 
-    jPanel3.setBackground(new java.awt.Color(255, 153, 153));
-    jPanel3.setBorder(new RoundedCornerBorder2());
-
-    BtnOrder.setBackground(new java.awt.Color(255, 204, 204));
-    BtnOrder.setBorder(new RoundedCornerBorder());
+    BtnOrder.setBackground(new java.awt.Color(255, 255, 255));
     BtnOrder.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
     BtnOrder.setForeground(new java.awt.Color(102, 102, 102));
     BtnOrder.setText("Order");
@@ -433,83 +432,135 @@ private Music musicPlayer;
         }
     });
 
-    BtnDatBan.setBackground(new java.awt.Color(255, 204, 204));
-    BtnDatBan.setBorder(new RoundedCornerBorder());
-    BtnDatBan.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnDatBan.setForeground(new java.awt.Color(102, 102, 102));
-    BtnDatBan.setText("Đặt Bàn");
-    BtnDatBan.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnDatBanActionPerformed(evt);
-        }
-    });
+    lblTime.setFont(new java.awt.Font("Herculanum", 0, 13)); // NOI18N
+    lblTime.setText("1-1-2000 | 00:00:00 AM");
 
-    BtnHoaDon.setBackground(new java.awt.Color(255, 204, 204));
+    BtnHoaDon.setBackground(new java.awt.Color(255, 255, 255));
     BtnHoaDon.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
     BtnHoaDon.setForeground(new java.awt.Color(102, 102, 102));
     BtnHoaDon.setText("Hoá Đơn");
-    BtnHoaDon.setBorder(new RoundedCornerBorder());
+    BtnHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            BtnHoaDonMouseEntered(evt);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            BtnHoaDonMouseExited(evt);
+        }
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+            BtnHoaDonMousePressed(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnHoaDonMouseReleased(evt);
+        }
+    });
     BtnHoaDon.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             BtnHoaDonActionPerformed(evt);
         }
     });
 
-    lblTime.setFont(new java.awt.Font("Herculanum", 0, 13)); // NOI18N
-    lblTime.setText("1-1-2000 | 00:00:00 AM");
+    BtnDatBan.setBackground(new java.awt.Color(255, 255, 255));
+    BtnDatBan.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
+    BtnDatBan.setForeground(new java.awt.Color(102, 102, 102));
+    BtnDatBan.setText("Đặt Bàn");
+    BtnDatBan.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            BtnDatBanMouseEntered(evt);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            BtnDatBanMouseExited(evt);
+        }
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+            BtnDatBanMousePressed(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnDatBanMouseReleased(evt);
+        }
+    });
+    BtnDatBan.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            BtnDatBanActionPerformed(evt);
+        }
+    });
 
-    javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-    jPanel3.setLayout(jPanel3Layout);
-    jPanel3Layout.setHorizontalGroup(
-        jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-            .addContainerGap()
+    javax.swing.GroupLayout absoluteWrapperLayout = new javax.swing.GroupLayout(absoluteWrapper);
+    absoluteWrapper.setLayout(absoluteWrapperLayout);
+    absoluteWrapperLayout.setHorizontalGroup(
+        absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(absoluteWrapperLayout.createSequentialGroup()
+            .addGap(81, 81, 81)
             .addComponent(lblTime)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+            .addGap(13, 13, 13)
+            .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+            .addGap(65, 65, 65)
+            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
-            .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
-            .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-            .addGap(335, 335, 335))
-    );
-    jPanel3Layout.setVerticalGroup(
-        jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel3Layout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(lblTime))
-                .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
+    );
+    absoluteWrapperLayout.setVerticalGroup(
+        absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(absoluteWrapperLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTime)
+                    .addComponent(BtnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnDatBan, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+
+    cardDisplayWrapper.setBackground(new java.awt.Color(255, 153, 153));
+    cardDisplayWrapper.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            cardDisplayWrapperMouseEntered(evt);
+        }
+    });
+
+    panelDisplay.setBackground(new java.awt.Color(255, 255, 255));
+    panelDisplay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    panelDisplay.setLayout(new java.awt.CardLayout());
+
+    javax.swing.GroupLayout cardDisplayWrapperLayout = new javax.swing.GroupLayout(cardDisplayWrapper);
+    cardDisplayWrapper.setLayout(cardDisplayWrapperLayout);
+    cardDisplayWrapperLayout.setHorizontalGroup(
+        cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
+    );
+    cardDisplayWrapperLayout.setVerticalGroup(
+        cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
     );
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(wrapper, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap())
+        .addComponent(absoluteWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGroup(jPanel1Layout.createSequentialGroup()
+            .addComponent(jplMenuCover, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 0, 0)
+            .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 0, 0)
+            .addComponent(cardDisplayWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel1Layout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(2, 2, 2)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(wrapper, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(absoluteWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 0, 0)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jplMenuCover, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cardDisplayWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 0, 0))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -524,65 +575,78 @@ private Music musicPlayer;
     );
 
     pack();
-    setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDangXuatActionPerformed
-        // TODO add your handling code here:
-        mainUI.DangXuat();
-    }//GEN-LAST:event_BtnDangXuatActionPerformed
+    private void lblCloseMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMenuMouseClicked
 
-    private void BtnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienActionPerformed
-        // TODO add your handling code here:
-        mainUI.QuanLyNhanVien();
-    }//GEN-LAST:event_BtnQuanLyNhanVienActionPerformed
+    }//GEN-LAST:event_lblCloseMenuMouseClicked
 
-    private void BtnQuanLyDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyDoanhThuActionPerformed
-        // TODO add your handling code here:
-        mainUI.QuanLyDoanhThu();
-    }//GEN-LAST:event_BtnQuanLyDoanhThuActionPerformed
+    private void BtnQuanLyNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienMouseClicked
+//        cardTrangChu.setVisible(true);
+//        cardDisplayWrapper.setVisible(true);
+    }//GEN-LAST:event_BtnQuanLyNhanVienMouseClicked
 
-    private void BtnQuanLyHoiVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyHoiVienActionPerformed
-        // TODO add your handling code here:
-        mainUI.QuanLyHoiVien();
-    }//GEN-LAST:event_BtnQuanLyHoiVienActionPerformed
+    private void BtnQuanLyDoanhThuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyDoanhThuMouseClicked
+//        cardTrangChu.setVisible(false);
 
-    private void BtnQuanLyMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyMonActionPerformed
-        // TODO add your handling code here:
-        mainUI.QuanLyMon();
-    }//GEN-LAST:event_BtnQuanLyMonActionPerformed
+    }//GEN-LAST:event_BtnQuanLyDoanhThuMouseClicked
 
-    private void BtnCaiDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCaiDatActionPerformed
-        mainUI.CaiDat();
-    }//GEN-LAST:event_BtnCaiDatActionPerformed
-
-    private void BtnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrderActionPerformed
+    private void lblCloseMenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMenuMouseReleased
         // TODO add your handling code here:
-        mainUI.Order(this);
+        closeMenu();
+    }//GEN-LAST:event_lblCloseMenuMouseReleased
+
+    private void lblOpenMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpenMenu1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblOpenMenu1MouseClicked
+
+    private void lblOpenMenu1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpenMenu1MouseReleased
+        // TODO add your handling code here:
+        openMenu();
+
+    }//GEN-LAST:event_lblOpenMenu1MouseReleased
+
+    private void BtnQuanLyNhanVienMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienMouseReleased
+        // TODO add your handling code here:
+        panelNavigator.switchPanel(panelDisplay, "BanHang");
+        OrderControl control = new OrderControl(null);
+        control.init(QLBanHang);
+        closeMenu();
+
+    }//GEN-LAST:event_BtnQuanLyNhanVienMouseReleased
+
+    private void BtnQuanLyDoanhThuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyDoanhThuMouseReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_BtnQuanLyDoanhThuMouseReleased
+
+    private void jplMenuCoverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMenuCoverMouseExited
+        // TODO add your handling code here:
+        System.out.println("mouse exited");
         
-    }//GEN-LAST:event_BtnOrderActionPerformed
+    }//GEN-LAST:event_jplMenuCoverMouseExited
 
-    private void BtnDatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDatBanActionPerformed
+    private void jplMenuCoverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMenuCoverMouseEntered
         // TODO add your handling code here:
-        mainUI.DatBan();
-    }//GEN-LAST:event_BtnDatBanActionPerformed
+        
+    }//GEN-LAST:event_jplMenuCoverMouseEntered
 
-    private void BtnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHoaDonActionPerformed
+    private void BtnQuanLyNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienMouseEntered
         // TODO add your handling code here:
-        mainUI.HoaDon();
-    }//GEN-LAST:event_BtnHoaDonActionPerformed
+        
+    }//GEN-LAST:event_BtnQuanLyNhanVienMouseEntered
 
-    private void panelProfilePhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseClicked
+    private void cardDisplayWrapperMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardDisplayWrapperMouseEntered
         // TODO add your handling code here:
-        mainUI.profile();
-    }//GEN-LAST:event_panelProfilePhotoMouseClicked
+        closeMenu();
+    }//GEN-LAST:event_cardDisplayWrapperMouseEntered
 
     private void BtnOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMouseEntered
         // TODO add your handling code here:
         System.out.println("entered");
         BtnOrder.setForeground(Color.BLACK);
         BtnOrder.setBorder(new RoundedCornerBorder(Color.BLACK));
-//        javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE;
+        //        javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE;
     }//GEN-LAST:event_BtnOrderMouseEntered
 
     private void BtnOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMouseExited
@@ -604,10 +668,72 @@ private Music musicPlayer;
         BtnOrder.setBorder(new RoundedCornerBorder(Color.BLACK));
     }//GEN-LAST:event_BtnOrderMouseReleased
 
-    private void BtnQuanLyVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuanLyVoucherActionPerformed
+    private void BtnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrderActionPerformed
         // TODO add your handling code here:
-        mainUI.QuanLyVoucher();
-    }//GEN-LAST:event_BtnQuanLyVoucherActionPerformed
+        mainUI.Order(this);
+
+    }//GEN-LAST:event_BtnOrderActionPerformed
+
+    private void panelProfilePhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseClicked
+        // TODO add your handling code here:
+        mainUI.profile();
+    }//GEN-LAST:event_panelProfilePhotoMouseClicked
+
+    private void panelProfilePhotoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelProfilePhotoMouseReleased
+
+    private void BtnHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHoaDonMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnHoaDonMouseEntered
+
+    private void BtnHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHoaDonMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnHoaDonMouseExited
+
+    private void BtnHoaDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHoaDonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnHoaDonMousePressed
+
+    private void BtnHoaDonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHoaDonMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnHoaDonMouseReleased
+
+    private void BtnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHoaDonActionPerformed
+        // TODO add your handling code here:
+        mainUI.HoaDon();
+    }//GEN-LAST:event_BtnHoaDonActionPerformed
+
+    private void BtnDatBanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDatBanMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnDatBanMouseEntered
+
+    private void BtnDatBanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDatBanMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnDatBanMouseExited
+
+    private void BtnDatBanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDatBanMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnDatBanMousePressed
+
+    private void BtnDatBanMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDatBanMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnDatBanMouseReleased
+
+    private void BtnDatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDatBanActionPerformed
+        // TODO add your handling code here:
+        mainUI.DatBan();
+    }//GEN-LAST:event_BtnDatBanActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        mainUI.DangXuat();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        mainUI.minimize(this);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -625,7 +751,13 @@ private Music musicPlayer;
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(mainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(mainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(mainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(mainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -636,39 +768,42 @@ private Music musicPlayer;
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new mainUI().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new mainUI().setVisible(true);
+            }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton BtnCaiDat;
-    public static javax.swing.JButton BtnDangXuat;
+    public static javax.swing.JLabel BtnCaiDat;
+    public static javax.swing.JLabel BtnDangXuat;
     public static javax.swing.JButton BtnDatBan;
+    public static javax.swing.JLabel BtnGioiThieu;
     public static javax.swing.JButton BtnHoaDon;
     public static javax.swing.JButton BtnOrder;
-    public static javax.swing.JButton BtnQuanLyDoanhThu;
-    public static javax.swing.JButton BtnQuanLyHoiVien;
-    public static javax.swing.JButton BtnQuanLyMon;
-    public static javax.swing.JButton BtnQuanLyNhanVien;
-    public static javax.swing.JButton BtnQuanLyVoucher;
+    public static javax.swing.JLabel BtnQuanLyDoanhThu;
+    public static javax.swing.JLabel BtnQuanLyHoiVien;
+    public static javax.swing.JLabel BtnQuanLyMon;
+    public static javax.swing.JLabel BtnQuanLyNhanVien;
+    public static javax.swing.JLabel BtnQuanLyVoucher;
+    private javax.swing.JPanel absoluteWrapper;
+    public static javax.swing.JPanel cardDisplayWrapper;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel3;
+    public static javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    public static javax.swing.JLabel lblRole;
+    private javax.swing.JPanel jPanel2;
+    public static javax.swing.JPanel jplMenuCover;
+    private javax.swing.JPanel jpllMenuBar;
+    private javax.swing.JLabel lblCloseMenu;
+    private javax.swing.JLabel lblOpenMenu1;
     public static javax.swing.JLabel lblTime;
-    public static javax.swing.JLabel lblUsername;
+    private javax.swing.JSeparator menuBarSeparator;
     public static javax.swing.JPanel panelDisplay;
     public static javax.swing.JPanel panelProfilePhoto;
-    public static javax.swing.JPanel wrapper;
     // End of variables declaration//GEN-END:variables
-
-
 }
