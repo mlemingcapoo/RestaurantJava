@@ -115,5 +115,12 @@
             <artifactId>AbsoluteLayout</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.java.timingframework/timingframework-swing -->
+<dependency>
+    <groupId>net.java.timingframework</groupId>
+    <artifactId>timingframework-swing</artifactId>
+    <version>7.3.1</version>
+</dependency>
+
     </dependencies>
 </project>

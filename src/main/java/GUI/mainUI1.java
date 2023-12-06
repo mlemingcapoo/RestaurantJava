@@ -6,6 +6,10 @@ package GUI;
 
 import control.OrderControl;
 import frame.OrderPanel;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import util.panelNavigator;
@@ -15,7 +19,6 @@ import util.panelNavigator;
  * @author capoo
  */
 public final class mainUI1 extends javax.swing.JFrame {
-    
 
     /**
      * Creates new form menuu
@@ -23,21 +26,22 @@ public final class mainUI1 extends javax.swing.JFrame {
     int width;
     int height;
     OrderPanel QLBanHang = new OrderPanel();
-    
+
     public mainUI1() {
         setUndecorated(true);
         GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         width = graphicsDevice.getDisplayMode().getWidth();
         height = graphicsDevice.getDisplayMode().getHeight();
-        y=width;
+        y = width;
         initComponents();
 //        cardTrangChu.setVisible(true);
         cardDisplayWrapper.setVisible(true);
         jplMenuCover.setSize(410, 900);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        System.out.println("chieu rong man hinh: "+width);
+        System.out.println("chieu rong man hinh: " + width);
         panelDisplayCustomer.setSize(width, height);
         panelDisplayCustomer.add(QLBanHang, "BanHang");
+        
     }
     int x = 210;    //chieu rong
     int y = 300;    //chieu cao
@@ -46,16 +50,20 @@ public final class mainUI1 extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public void openMenu() {
+
         jplMenuCover.setSize(x, y);
-        if (x == 0) {
+
+        if (x == 52) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        for (int i = 0; i <= 210; i++) {
+
+                        for (int i = 52; i <= 210; i++) {
                             jplMenuCover.setSize(i, y);
                             Thread.sleep(1);
                         }
+
                     } catch (Exception e) {
                     }
                 }
@@ -71,15 +79,18 @@ public final class mainUI1 extends javax.swing.JFrame {
                 @Override
                 public void run() {
                     try {
-                        for (int i = 210; i >= 0; i--) {
+                        for (int i = 210; i >= 52; i--) {
                             jplMenuCover.setSize(i, y);
                             Thread.sleep(1);
                         }
+                        panelDisplayCustomer.revalidate();
+                        panelDisplayCustomer.repaint();
+//                        toolBarSeparator.setVisible(true);
                     } catch (Exception e) {
                     }
                 }
             }).start();
-            x = 0;
+            x = 52;
         }
     }
 
@@ -93,8 +104,38 @@ public final class mainUI1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jplMenuCover = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jplMenuCover = new javax.swing.JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                int[] start = {255, 233, 219};
+                Color startColor = new Color(start[0], start[1], start[2]);
+
+                Color endColor = new Color(255, 213, 39);
+                Graphics2D g2d = (Graphics2D) g;
+                GradientPaint gradient = new GradientPaint(
+                    0, 0, startColor,
+                    0, getHeight(), endColor
+                );
+                g2d.setPaint(gradient);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        jPanel2 = new javax.swing.JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                int[] start = {255, 255, 255};
+                Color startColor = new Color(start[0], start[1], start[2]);
+
+                Color endColor = new Color(255,235,212);
+                Graphics2D g2d = (Graphics2D) g;
+                GradientPaint gradient = new GradientPaint(
+                    0, 0, startColor,
+                    0, getHeight(), endColor
+                );
+                g2d.setPaint(gradient);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblCloseMenu = new javax.swing.JLabel();
@@ -103,33 +144,37 @@ public final class mainUI1 extends javax.swing.JFrame {
         lblTrangChu = new javax.swing.JLabel();
         lblTaiKhoan = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        menuBarSeparator = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jpllMenuBar = new javax.swing.JPanel();
         absoluteWrapper = new javax.swing.JPanel();
-        lblOpenMenu = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         cardDisplayWrapper = new javax.swing.JPanel();
         panelDisplayCustomer = new javax.swing.JPanel();
+        toolBarSeparator = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jplMenuCover.setBackground(new java.awt.Color(204, 255, 204));
+        jplMenuCover.setBackground(new java.awt.Color(255, 204, 204));
         jplMenuCover.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jplMenuCover.setPreferredSize(new java.awt.Dimension(190, 590));
         jplMenuCover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setDoubleBuffered(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 8, -1, 83));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("User Name");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 103, 96, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 96, -1));
 
         lblCloseMenu.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblCloseMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -183,6 +228,9 @@ public final class mainUI1 extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblTaiKhoanMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblTaiKhoanMouseReleased(evt);
+            }
         });
         jplMenuCover.add(lblTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 210, 30));
 
@@ -190,7 +238,9 @@ public final class mainUI1 extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Hóa Đơn");
         jplMenuCover.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 210, 30));
-        jplMenuCover.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 452, 210, 10));
+
+        menuBarSeparator.setForeground(new java.awt.Color(153, 153, 153));
+        jplMenuCover.add(menuBarSeparator, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 452, 210, 10));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -211,50 +261,69 @@ public final class mainUI1 extends javax.swing.JFrame {
         jpllMenuBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         absoluteWrapper.setBackground(new java.awt.Color(255, 255, 255));
+        absoluteWrapper.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         absoluteWrapper.setForeground(new java.awt.Color(255, 255, 255));
 
-        lblOpenMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
-        lblOpenMenu.setText("PUT PROFILE HERE");
-        lblOpenMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblOpenMenuMouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lblOpenMenuMouseReleased(evt);
-            }
-        });
+        jButton1.setText("jButton1");
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 51, 51));
+        jButton2.setText("X");
+        jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton2.setBorderPainted(false);
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 153, 255));
+        jButton3.setText("_");
+        jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton3.setBorderPainted(false);
 
         javax.swing.GroupLayout absoluteWrapperLayout = new javax.swing.GroupLayout(absoluteWrapper);
         absoluteWrapper.setLayout(absoluteWrapperLayout);
         absoluteWrapperLayout.setHorizontalGroup(
             absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(absoluteWrapperLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblOpenMenu)
-                .addContainerGap(545, Short.MAX_VALUE))
+                .addGap(73, 73, 73)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         absoluteWrapperLayout.setVerticalGroup(
             absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absoluteWrapperLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(lblOpenMenu)
-                .addContainerGap())
+            .addGroup(absoluteWrapperLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(13, 13, 13))
         );
 
         cardDisplayWrapper.setBackground(new java.awt.Color(255, 153, 153));
 
         panelDisplayCustomer.setBackground(new java.awt.Color(255, 255, 255));
+        panelDisplayCustomer.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelDisplayCustomer.setLayout(new java.awt.CardLayout());
+
+        toolBarSeparator.setBackground(new java.awt.Color(102, 102, 102));
+        toolBarSeparator.setForeground(new java.awt.Color(153, 153, 153));
+        toolBarSeparator.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        panelDisplayCustomer.add(toolBarSeparator, "card2");
 
         javax.swing.GroupLayout cardDisplayWrapperLayout = new javax.swing.GroupLayout(cardDisplayWrapper);
         cardDisplayWrapper.setLayout(cardDisplayWrapperLayout);
         cardDisplayWrapperLayout.setHorizontalGroup(
             cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelDisplayCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelDisplayCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
         );
         cardDisplayWrapperLayout.setVerticalGroup(
             cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelDisplayCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelDisplayCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -263,23 +332,23 @@ public final class mainUI1 extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(absoluteWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jplMenuCover, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jplMenuCover, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(cardDisplayWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(absoluteWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jplMenuCover, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                    .addComponent(jplMenuCover, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
                     .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardDisplayWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -302,12 +371,12 @@ public final class mainUI1 extends javax.swing.JFrame {
 
     private void lblTrangChuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTrangChuMouseClicked
 //        cardTrangChu.setVisible(true);
-        cardDisplayWrapper.setVisible(false);
+//        cardDisplayWrapper.setVisible(true);
     }//GEN-LAST:event_lblTrangChuMouseClicked
 
     private void lblTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTaiKhoanMouseClicked
 //        cardTrangChu.setVisible(false);
-        cardDisplayWrapper.setVisible(true);
+
     }//GEN-LAST:event_lblTaiKhoanMouseClicked
 
     private void lblCloseMenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMenuMouseReleased
@@ -322,23 +391,22 @@ public final class mainUI1 extends javax.swing.JFrame {
     private void lblOpenMenu1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpenMenu1MouseReleased
         // TODO add your handling code here:
         openMenu();
+
     }//GEN-LAST:event_lblOpenMenu1MouseReleased
-
-    private void lblOpenMenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpenMenuMouseReleased
-        // TODO add your handling code here:
-        openMenu();
-    }//GEN-LAST:event_lblOpenMenuMouseReleased
-
-    private void lblOpenMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpenMenuMouseClicked
-
-    }//GEN-LAST:event_lblOpenMenuMouseClicked
 
     private void lblTrangChuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTrangChuMouseReleased
         // TODO add your handling code here:
         panelNavigator.switchPanel(panelDisplayCustomer, "BanHang");
         OrderControl control = new OrderControl(null);
         control.init(QLBanHang);
+        closeMenu();
+
     }//GEN-LAST:event_lblTrangChuMouseReleased
+
+    private void lblTaiKhoanMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTaiKhoanMouseReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lblTaiKhoanMouseReleased
 
     /**
      * @param args the command line arguments
@@ -381,6 +449,9 @@ public final class mainUI1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel absoluteWrapper;
     private javax.swing.JPanel cardDisplayWrapper;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
@@ -390,14 +461,14 @@ public final class mainUI1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel jplMenuCover;
     private javax.swing.JPanel jpllMenuBar;
     private javax.swing.JLabel lblCloseMenu;
-    private javax.swing.JLabel lblOpenMenu;
     private javax.swing.JLabel lblOpenMenu1;
     private javax.swing.JLabel lblTaiKhoan;
     private javax.swing.JLabel lblTrangChu;
+    private javax.swing.JSeparator menuBarSeparator;
     private javax.swing.JPanel panelDisplayCustomer;
+    private javax.swing.JSeparator toolBarSeparator;
     // End of variables declaration//GEN-END:variables
 }

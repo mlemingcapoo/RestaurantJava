@@ -26,6 +26,8 @@ public class main_class {
 //            JDBCManager.getConnection();
             System.out.println("done");
             new startControl().loading();
+//            mainUI1 hehe = new mainUI1();
+//            hehe.setVisible(true);
         } catch (Exception ex) {
 //            Logger.getLogger(main_class.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("NO INTERNET");

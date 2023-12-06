@@ -559,6 +559,7 @@ private Music musicPlayer;
     private void BtnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrderActionPerformed
         // TODO add your handling code here:
         mainUI.Order(this);
+        
     }//GEN-LAST:event_BtnOrderActionPerformed
 
     private void BtnDatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDatBanActionPerformed

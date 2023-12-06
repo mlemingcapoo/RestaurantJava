@@ -92,6 +92,7 @@ GUI/login$8.class
 control/mainUiControl$3.class
 control/OrderControl.class
 DAO/TableDAO.class
+GUI/mainUI1$9.class
 frame/QuanLyMonAnJPanel$5.class
 frame/OrderPanel$20.class
 frame/QuanLyMonAnJPanel$14.class
