@@ -12,6 +12,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.KhachHang;
 
@@ -53,7 +56,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         txtSDTHoiVien.setText(kh.getSDT());
         txtGmailHoiVien.setText(kh.getEmail());
         Date dt = new Date();
-        dt = DateHelper.toDate(kh.getBirthday(), "YYYY-MM-DD");
+        dt = DateHelper.toDate(kh.getBirthday(), "yyyy-MM-dd");
         NgaySinh.setDate(dt);
         System.out.println(kh.getEmail());
     }
@@ -153,8 +156,8 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
             int makh = KhachHang.get(selectedRow).getMaKH();
             KhachHang newKh = new KhachHang();
             newKh.setMaKH(makh);
-            newKh.setSDT(txtSDTHoiVien.getText());
             newKh.setName(txtTenHoiVien.getText());
+            newKh.setSDT(txtSDTHoiVien.getText());
             newKh.setEmail(txtGmailHoiVien.getText());
             Date date = NgaySinh.getDate();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -202,34 +205,58 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         }
     }
 
-//    public boolean validateForm(boolean chk) {
-//        if (txtTenHoiVien.getText().length() == 0) {
-//            helper.DialogHelper.alert(this, "Không được phép để trống tên!");
-//            txtTenHoiVien.requestFocus();
-//            return false;
-//        } else if (txtSDTHoiVien.getText().length() == 0) {
-//            helper.DialogHelper.alert(this, "Không được phép để trống số điện thoại!");
-//            txtSDTHoiVien.requestFocus();
-//            return false;
-//        } else if (txtSDTHoiVien.getText().matches("((84)|(0))\\d{9}")) {
-//            helper.DialogHelper.alert(this, "Sai định dạng số điện thoại!");
-//            txtSDTHoiVien.requestFocus();
-//            return false;
-//        } else if (txtGmailHoiVien.getText().length() == 0) {
-//            helper.DialogHelper.alert(this, "Không được phép để trống email!");
-//            txtGmailHoiVien.requestFocus();
-//            return false;
-//        } else if (txtGmailHoiVien.getText().matches("\\w+@\\w+(\\.\\w+){1,2}")) {
-//            helper.DialogHelper.alert(this, "Sai định dạng email!");
-//            txtGmailHoiVien.requestFocus();
-//            return false;
-//        } else if (NgaySinh.getDate() == null) {
-//            helper.DialogHelper.alert(this, "Ngày sinh lỗi!");
-//            NgaySinh.requestFocus();
-//            return false;
-//        }
-//        return true;
-//    }
+    public boolean validateForm(boolean chk) {
+        Pattern pattern = Pattern.compile("^((84)|(0))[0-9]{9}$");
+        String phone = txtSDTHoiVien.getText();
+        Matcher matcher = pattern.matcher(phone);
+        String emailRegex = "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
+        if (txtTenHoiVien.getText().length() == 0) {
+            helper.DialogHelper.alert(this, "Không được phép để trống tên!");
+            txtTenHoiVien.requestFocus();
+            return false;
+        } else if (txtTenHoiVien.getText().length() < 6) {
+            helper.DialogHelper.alert(this, "Tên không được ít hơn 6 kí tự");
+            txtTenHoiVien.requestFocus();
+            return false;
+        } else if (txtSDTHoiVien.getText().length() == 0) {
+            helper.DialogHelper.alert(this, "Không được phép để trống số điện thoại!");
+            txtSDTHoiVien.requestFocus();
+            return false;
+        } else if (txtSDTHoiVien.getText().length() < 10) {
+            helper.DialogHelper.alert(this, "Số điện thoại phải có độ dài ít nhất 10 kí tự");
+            txtSDTHoiVien.requestFocus();
+            return false;
+        } else if (!matcher.matches()) {
+            helper.DialogHelper.alert(this, "Số điện thoại không đúng định dạng");
+            txtSDTHoiVien.requestFocus();
+            return false;
+        } else if (txtGmailHoiVien.getText().length() == 0) {
+            helper.DialogHelper.alert(this, "Không được phép để trống email!");
+            txtGmailHoiVien.requestFocus();
+            return false;
+        } else if (!txtGmailHoiVien.getText().matches(emailRegex)) {
+            helper.DialogHelper.alert(this, "Sai định dạng email!");
+            txtGmailHoiVien.requestFocus();
+            return false;
+        } else if (NgaySinh.getDate() == null) {
+            helper.DialogHelper.alert(this, "Ngày sinh không đúng định dạng!");
+            NgaySinh.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean confirmAdd() {
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm không?",
+                "Xác nhận", JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
+    }
+
+    private boolean confirmEdit() {
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa không?",
+                "Xác nhận", JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -465,17 +492,21 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-//        if (validateForm(true)) {
-            themHV();
-            refresh();
-//        }
+        if (validateForm(true)) {
+            if (confirmAdd()) { 
+                themHV();
+                refresh();
+            }
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-//        if (validateForm(true)) {
-            suaHV1(selected);
-            refresh();
-//        }
+        if (validateForm(true)) {
+            if (confirmEdit()) {
+                suaHV1(selected);
+                refresh();
+            }
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

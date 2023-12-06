@@ -76,10 +76,10 @@ public class QuanLyMonAnControl {
         try {
             // Retrieve information from UI components
             String tenMon = panel.txtTenMon.getText().trim();
-            if (tenMon.isEmpty()) {
-                helper.DialogHelper.alert(panel, "Vui lòng nhập tên món!");
-                return;
-            }
+//            if (tenMon.isEmpty()) {
+//                helper.DialogHelper.alert(panel, "Vui lòng nhập tên món!");
+//                return;
+//            }
 
             float giaMon;
             try {
@@ -252,5 +252,32 @@ public class QuanLyMonAnControl {
         }).start();
 
     }
+
+    public boolean validateForm(boolean chk) {
+        float giaMon;
+        if (panel.txtTenMon.getText().length() == 0) {
+            helper.DialogHelper.alert(panel, "Không được phép để trống tên món!");
+            panel.txtTenMon.requestFocus();
+            return false;
+        } else if (panel.txtTenMon.getText().length() < 4) {
+            helper.DialogHelper.alert(panel, "Tên không được ít hơn 6 kí tự");
+            panel.txtTenMon.requestFocus();
+            return false;
+        } else if (panel.txtGiaMon.getText().length() == 0) {
+            helper.DialogHelper.alert(panel, "Không được phép để trống giá món!");
+            panel.txtGiaMon.requestFocus();
+            return false;
+        } else try {
+            giaMon = Float.parseFloat(panel.txtGiaMon.getText());
+        } catch (NumberFormatException ex) {
+            helper.DialogHelper.alert(panel, "Giá món phải là một số!");
+            return false;
+        }
+
+        return true;
+    }
+    
+    
+
 
 }
