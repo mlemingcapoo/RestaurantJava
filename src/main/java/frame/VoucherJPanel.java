@@ -48,13 +48,13 @@ VoucherControl control = new VoucherControl();
         txtNDung = new javax.swing.JTextArea();
         txtTieuDe = new javax.swing.JTextField();
         txtMail = new javax.swing.JTextField();
+        txtLinkAnh = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(255, 153, 153));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vocher", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
-        tblVoucher.setBackground(new java.awt.Color(255, 153, 153));
         tblVoucher.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -81,7 +81,7 @@ VoucherControl control = new VoucherControl();
         jScrollPane1.setViewportView(tblVoucher);
         tblVoucher.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        btnXoa.setBackground(new java.awt.Color(255, 153, 153));
+        btnXoa.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnXoa.setText("Xoá");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +89,7 @@ VoucherControl control = new VoucherControl();
             }
         });
 
-        btnSua.setBackground(new java.awt.Color(255, 153, 153));
+        btnSua.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +97,7 @@ VoucherControl control = new VoucherControl();
             }
         });
 
-        btnThem.setBackground(new java.awt.Color(255, 153, 153));
+        btnThem.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,15 +105,16 @@ VoucherControl control = new VoucherControl();
             }
         });
 
-        txtGiam.setBackground(new java.awt.Color(255, 153, 153));
+        txtGiam.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel1.setText("Ngày Hết Hạn");
 
+        jLabel2.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel2.setText("Giảm (%)");
 
         NgayHetHan.setBackground(new java.awt.Color(255, 153, 153));
 
-        tblHoiVien.setBackground(new java.awt.Color(255, 153, 153));
         tblHoiVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -132,7 +133,7 @@ VoucherControl control = new VoucherControl();
         jScrollPane2.setViewportView(tblHoiVien);
         tblHoiVien.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        btnsend.setBackground(new java.awt.Color(255, 153, 153));
+        btnsend.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnsend.setText("Send");
         btnsend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,15 +141,23 @@ VoucherControl control = new VoucherControl();
             }
         });
 
-        btnSendall.setBackground(new java.awt.Color(255, 153, 153));
+        btnSendall.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnSendall.setText("Send All");
 
         txtNDung.setColumns(20);
+        txtNDung.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         txtNDung.setRows(5);
-        txtNDung.setText("Vocher siêu ngon \n<Ngày hết hạn vocher điền tay =))>");
+        txtNDung.setText("Nội Dung");
         jScrollPane3.setViewportView(txtNDung);
 
-        txtTieuDe.setText("Cửa Hàng Tặng Mã voucher");
+        txtTieuDe.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
+        txtTieuDe.setText("Tiêu Đề");
+
+        txtMail.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
+        txtMail.setText("Email Người Nhận");
+
+        txtLinkAnh.setEditable(false);
+        txtLinkAnh.setText("Link Ảnh");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -178,16 +187,16 @@ VoucherControl control = new VoucherControl();
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtGiam)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(btnSendall)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnsend))
-                        .addComponent(jScrollPane3)
-                        .addComponent(txtTieuDe))
-                    .addComponent(txtMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnSendall)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnsend))
+                    .addComponent(jScrollPane3)
+                    .addComponent(txtTieuDe)
+                    .addComponent(txtMail, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                    .addComponent(txtLinkAnh))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -198,14 +207,16 @@ VoucherControl control = new VoucherControl();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
                         .addGap(25, 25, 25)
                         .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtLinkAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnsend)
                             .addComponent(btnSendall)))
@@ -221,7 +232,7 @@ VoucherControl control = new VoucherControl();
                             .addComponent(btnSua)
                             .addComponent(btnThem))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -295,6 +306,7 @@ VoucherControl control = new VoucherControl();
     public javax.swing.JTable tblHoiVien;
     public javax.swing.JTable tblVoucher;
     public static javax.swing.JTextField txtGiam;
+    public javax.swing.JTextField txtLinkAnh;
     public javax.swing.JTextField txtMail;
     public javax.swing.JTextArea txtNDung;
     public javax.swing.JTextField txtTieuDe;
