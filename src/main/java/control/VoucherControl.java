@@ -158,7 +158,7 @@ public class VoucherControl {
 
         double discount = Double.parseDouble(discountText);
         String voucherCode = generateRandomCode();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String formattedDate = dateFormat.format(date);
         Date expireDate = dateFormat.parse(formattedDate);
 
@@ -221,17 +221,16 @@ public class VoucherControl {
         }
     }
 
-    public String upload() {
-        String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
-        String imageUrl = "";
+ private final String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
+    private String imageUrl = "";
 
+    public String upload() {
         OkHttpClient client = new OkHttpClient();
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("key", apiKey)
                 .addFormDataPart("image", newVoucher.getVCode() + ".png",
-                        //System.out.print("");
                         RequestBody.create(new File("D:\\" + newVoucher.getVCode() + ".png"), MediaType.parse("image/png")))
                 .build();
 
@@ -249,6 +248,8 @@ public class VoucherControl {
                     JSONObject dataObject = jsonResponse.getJSONObject("data");
                     if (dataObject.has("url")) {
                         imageUrl = dataObject.getString("url");
+                        // Assuming panel.txtLinkAnh.getText() is the correct method to set text in your panel
+                        panel.txtLinkAnh.setText(imageUrl);
                         System.out.println("Image uploaded successfully");
                         System.out.println("Image URL: " + imageUrl);
                     } else {
@@ -364,6 +365,7 @@ public class VoucherControl {
         String recipientEmail = panel.txtMail.getText();
         String subject = panel.txtTieuDe.getText();
         String content = panel.txtNDung.getText();
+        String link = panel.txtLinkAnh.getText();
 
         if (!isValidEmail(recipientEmail)) {
             helper.DialogHelper.alert(panel, "Vui lòng nhập địa chỉ email hợp lệ.");
@@ -384,7 +386,10 @@ public class VoucherControl {
             helper.DialogHelper.alert(panel, "Nội dung phải có ít nhất 4 ký tự.");
             return;
         }
-
+if (link.isEmpty()) {
+        helper.DialogHelper.alert(panel, "Vui lòng nhập đường link ảnh QR.");
+        return;
+    }
         String imagePath = upload();
 
         try {
@@ -404,18 +409,24 @@ public class VoucherControl {
             );
             multipart.addBodyPart(textPart);
 
-            if (imagePath != null && !imagePath.isEmpty()) {
-                BodyPart imagePart = new MimeBodyPart();
-                URL imageUrl = new URL(imagePath);
-                InputStream imageStream = imageUrl.openStream();
-                imagePart.setDataHandler(new DataHandler(new ByteArrayDataSource(imageStream, "image/jpeg")));
-                imagePart.setFileName(newVoucher.getVCode() + ".jpg");
-                multipart.addBodyPart(imagePart);
-            } else {
-                // Display a message if no image is attached
-                helper.DialogHelper.alert(panel, "Chưa có ảnh QR được đính kèm!");
-                return;
-            }
+          if (imagePath != null && !imagePath.isEmpty()) {
+        BodyPart imagePart = new MimeBodyPart();
+        try {
+            URL imageUrl = new URL(link);
+            InputStream imageStream = imageUrl.openStream();
+            imagePart.setDataHandler(new DataHandler(new ByteArrayDataSource(imageStream, "image/jpeg")));
+            imagePart.setFileName(newVoucher.getVCode() + ".jpg");
+            multipart.addBodyPart(imagePart);
+        } catch (IOException e) {
+            e.printStackTrace();
+            helper.DialogHelper.alert(panel, "Lỗi khi đọc ảnh từ đường link: " + e.getMessage());
+            return;
+        }
+    } else {
+        // Display a message if no image is attached
+        helper.DialogHelper.alert(panel, "Chưa có ảnh QR được đính kèm!");
+        return;
+    }
 
             message.setContent(multipart);
 
@@ -429,7 +440,7 @@ public class VoucherControl {
             helper.DialogHelper.alert(panel, "Gửi Thành Công !");
             System.out.println("Done");
 
-        } catch (MessagingException | IOException e) {
+        } catch (MessagingException e) {
             e.printStackTrace();
             helper.DialogHelper.alert(panel, "Lỗi khi gửi email: " + e.getMessage());
         }
