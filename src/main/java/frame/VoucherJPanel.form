@@ -113,7 +113,7 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jScrollPane2" pref="273" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="291" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="txtMail" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -139,7 +139,7 @@
                               <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="390" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="398" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -205,6 +205,9 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="ff" type="rgb"/>
             </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="American Typewriter" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Xo&#xe1;"/>
           </Properties>
           <Events>
@@ -218,6 +221,9 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="American Typewriter" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
           </Properties>
@@ -233,6 +239,9 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="ff" type="rgb"/>
             </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="American Typewriter" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
           </Properties>
           <Events>
@@ -247,6 +256,9 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="ff" type="rgb"/>
             </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="American Typewriter" size="12" style="0"/>
+            </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -254,11 +266,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="American Typewriter" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ng&#xe0;y H&#x1ebf;t H&#x1ea1;n"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="American Typewriter" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Gi&#x1ea3;m (%)"/>
           </Properties>
         </Component>
@@ -329,6 +347,9 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="ff" type="rgb"/>
             </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="American Typewriter" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Send"/>
           </Properties>
           <Events>
@@ -339,6 +360,9 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="American Typewriter" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Send All"/>
           </Properties>
@@ -353,6 +377,9 @@
             <Component class="javax.swing.JTextArea" name="txtNDung">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="American Typewriter" size="12" style="0"/>
+                </Property>
                 <Property name="rows" type="int" value="5"/>
                 <Property name="text" type="java.lang.String" value="Vocher si&#xea;u ngon &#xa;&lt;Ng&#xe0;y h&#x1ebf;t h&#x1ea1;n vocher &#x111;i&#x1ec1;n tay =))&gt;"/>
               </Properties>
@@ -364,6 +391,9 @@
         </Container>
         <Component class="javax.swing.JTextField" name="txtTieuDe">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="American Typewriter" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="C&#x1eed;a H&#xe0;ng T&#x1eb7;ng M&#xe3; voucher"/>
           </Properties>
           <AuxValues>
@@ -371,6 +401,11 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtMail">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="American Typewriter" size="12" style="0"/>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
