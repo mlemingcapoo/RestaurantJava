@@ -329,4 +329,9 @@ public final class mainUiControl implements GUI_Interface {
 
     }
 
+    public void GioiThieu() {
+        throw new UnsupportedOperationException("Not supported yet.");
+        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

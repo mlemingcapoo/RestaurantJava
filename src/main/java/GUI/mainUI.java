@@ -4,7 +4,6 @@
  */
 package GUI;
 
-import control.OrderControl;
 import control.mainUiControl;
 import frame.OrderPanel;
 import helper.RoundedCornerBorder;
@@ -17,7 +16,6 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.WindowEvent;
-import util.panelNavigator;
 
 
 
@@ -317,6 +315,11 @@ public final class mainUI extends javax.swing.JFrame {
     BtnQuanLyVoucher.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnQuanLyVoucher.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     BtnQuanLyVoucher.setText("Quản Lý Voucher");
+    BtnQuanLyVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnQuanLyVoucherMouseReleased(evt);
+        }
+    });
     jplMenuCover.add(BtnQuanLyVoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 150, 30));
 
     BtnQuanLyNhanVien.setBackground(new java.awt.Color(255, 255, 255));
@@ -352,6 +355,11 @@ public final class mainUI extends javax.swing.JFrame {
     BtnQuanLyHoiVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnQuanLyHoiVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     BtnQuanLyHoiVien.setText("Quản Lý Hội Viên");
+    BtnQuanLyHoiVien.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnQuanLyHoiVienMouseReleased(evt);
+        }
+    });
     jplMenuCover.add(BtnQuanLyHoiVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 150, 30));
 
     menuBarSeparator.setForeground(new java.awt.Color(153, 153, 153));
@@ -360,21 +368,41 @@ public final class mainUI extends javax.swing.JFrame {
     BtnDangXuat.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnDangXuat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     BtnDangXuat.setText("Đăng Xuất");
+    BtnDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnDangXuatMouseReleased(evt);
+        }
+    });
     jplMenuCover.add(BtnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, 150, 30));
 
     BtnGioiThieu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     BtnGioiThieu.setText("Giới Thiệu");
+    BtnGioiThieu.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnGioiThieuMouseReleased(evt);
+        }
+    });
     jplMenuCover.add(BtnGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, 150, 30));
 
     BtnCaiDat.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnCaiDat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     BtnCaiDat.setText("Cài Đặt");
+    BtnCaiDat.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnCaiDatMouseReleased(evt);
+        }
+    });
     jplMenuCover.add(BtnCaiDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 150, 30));
 
     BtnQuanLyMon.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnQuanLyMon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     BtnQuanLyMon.setText("Quản Lý Món Ăn");
+    BtnQuanLyMon.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            BtnQuanLyMonMouseReleased(evt);
+        }
+    });
     jplMenuCover.add(BtnQuanLyMon, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 150, 30));
 
     jpllMenuBar.setBackground(new java.awt.Color(255, 255, 255));
@@ -508,8 +536,8 @@ public final class mainUI extends javax.swing.JFrame {
             .addContainerGap()
             .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTime)
                     .addComponent(BtnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnDatBan, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -608,16 +636,13 @@ public final class mainUI extends javax.swing.JFrame {
 
     private void BtnQuanLyNhanVienMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienMouseReleased
         // TODO add your handling code here:
-        panelNavigator.switchPanel(panelDisplay, "BanHang");
-        OrderControl control = new OrderControl(null);
-        control.init(QLBanHang);
-        closeMenu();
+        mainUI.QuanLyNhanVien();
 
     }//GEN-LAST:event_BtnQuanLyNhanVienMouseReleased
 
     private void BtnQuanLyDoanhThuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyDoanhThuMouseReleased
         // TODO add your handling code here:
-
+        mainUI.QuanLyDoanhThu();
     }//GEN-LAST:event_BtnQuanLyDoanhThuMouseReleased
 
     private void jplMenuCoverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMenuCoverMouseExited
@@ -734,6 +759,36 @@ public final class mainUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         mainUI.minimize(this);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void BtnQuanLyHoiVienMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyHoiVienMouseReleased
+        // TODO add your handling code here:
+        mainUI.QuanLyHoiVien();
+    }//GEN-LAST:event_BtnQuanLyHoiVienMouseReleased
+
+    private void BtnQuanLyMonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyMonMouseReleased
+        // TODO add your handling code here:
+        mainUI.QuanLyMon();
+    }//GEN-LAST:event_BtnQuanLyMonMouseReleased
+
+    private void BtnQuanLyVoucherMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyVoucherMouseReleased
+        // TODO add your handling code here:
+        mainUI.QuanLyVoucher();
+    }//GEN-LAST:event_BtnQuanLyVoucherMouseReleased
+
+    private void BtnDangXuatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDangXuatMouseReleased
+        // TODO add your handling code here:
+        mainUI.DangXuat();
+    }//GEN-LAST:event_BtnDangXuatMouseReleased
+
+    private void BtnCaiDatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCaiDatMouseReleased
+        // TODO add your handling code here:
+        mainUI.CaiDat();
+    }//GEN-LAST:event_BtnCaiDatMouseReleased
+
+    private void BtnGioiThieuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGioiThieuMouseReleased
+        // TODO add your handling code here:
+        mainUI.GioiThieu();
+    }//GEN-LAST:event_BtnGioiThieuMouseReleased
 
     /**
      * @param args the command line arguments
