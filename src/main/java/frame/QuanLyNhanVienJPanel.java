@@ -504,21 +504,26 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setBackground(new java.awt.Color(255, 153, 153));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        txtUser.setBackground(new java.awt.Color(255, 153, 153));
-        txtUser.setBorder(javax.swing.BorderFactory.createTitledBorder("Chỉnh Sửa"));
+        txtUser.setBackground(new java.awt.Color(255, 255, 255));
+        txtUser.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
         txtUser.setPreferredSize(new java.awt.Dimension(0, 0));
 
         jLabel2.setText("Tên Người Dùng ");
 
         jLabel3.setText("Mật Khẩu");
 
+        cboRole.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         cboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Quản Lý" }));
 
+        cboTrangThai.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "false", "true" }));
 
+        jLabel5.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel5.setText("Trang Thai");
+
+        txttaikhoan.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
 
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -526,8 +531,12 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
+        txtLinkAnh.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel6.setText("Link Ảnh");
 
+        btnUpload.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnUpload.setText("UPLOAD");
         btnUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -535,16 +544,30 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
+        txtHoTen.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
+
+        txtSdt.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
+
+        txtAdd.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
+
+        txtCccd.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel7.setText("Họ Và Tên");
 
+        jLabel8.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel8.setText("Ngày Sinh");
 
+        jLabel9.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel9.setText("Số Điện Thoại");
 
+        jLabel10.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel10.setText("Địa Chỉ");
 
+        jLabel11.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel11.setText("Căn Cước Công Dân");
 
+        jLabel4.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel4.setText("Role");
 
         javax.swing.GroupLayout txtUserLayout = new javax.swing.GroupLayout(txtUser);
@@ -654,13 +677,13 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11)
                         .addGap(51, 51, 51)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanel8.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm Kiếm"));
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
-        txtTimKiem.setBackground(new java.awt.Color(255, 153, 153));
+        txtTimKiem.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimKiemActionPerformed(evt);
@@ -672,6 +695,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
+        cboloai.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         cboloai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "role", "Nhân Viên", "Quản Lý" }));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -695,10 +719,10 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel5.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức Năng"));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
-        btnThem.setBackground(new java.awt.Color(255, 153, 153));
+        btnThem.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -706,7 +730,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnSua.setBackground(new java.awt.Color(255, 153, 153));
+        btnSua.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -714,7 +738,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnXoa.setBackground(new java.awt.Color(255, 153, 153));
+        btnXoa.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnXoa.setText("Xoá");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -746,7 +770,6 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addGap(8, 8, 8))
         );
 
-        tblDanhSachNhanVien.setBackground(new java.awt.Color(255, 153, 153));
         tblDanhSachNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -799,7 +822,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

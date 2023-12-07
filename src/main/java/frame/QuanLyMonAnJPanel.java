@@ -148,13 +148,12 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         };
         imgAnhMonAn = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 153, 153));
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1080, 720));
 
-        jPanel11.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách"));
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
-        tblDanhSachMonAn.setBackground(new java.awt.Color(255, 153, 153));
         tblDanhSachMonAn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -207,17 +206,17 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 343, Short.MAX_VALUE)
+            .addGap(0, 346, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel11Layout.createSequentialGroup()
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
-        jPanel12.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm Kiếm"));
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
-        txtTimKiem.setBackground(new java.awt.Color(255, 153, 153));
+        txtTimKiem.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         txtTimKiem.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
@@ -236,8 +235,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
             }
         });
 
-        cboChonLoaiMon.setBackground(new java.awt.Color(255, 153, 153));
-        cboChonLoaiMon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cboChonLoaiMon.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         cboChonLoaiMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại", "Food", "Drink", "Dessert" }));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -259,12 +257,11 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel13.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức Năng"));
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
         btnThem.setBorder(new RoundedCornerBorder());
-        btnThem.setBackground(new java.awt.Color(255, 153, 153));
-        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThem.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,8 +270,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         });
 
         btnSua.setBorder(new RoundedCornerBorder());
-        btnSua.setBackground(new java.awt.Color(255, 153, 153));
-        btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSua.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,8 +279,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         });
 
         btnXoa.setBorder(new RoundedCornerBorder());
-        btnXoa.setBackground(new java.awt.Color(255, 153, 153));
-        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXoa.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         btnXoa.setText("Xoá");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,28 +310,30 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
                 .addGap(5, 5, 5))
         );
 
-        jPanel14.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder("Chỉnh Sửa"));
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chỉnh Sửa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
         txtTenMon.setBorder(new RoundedCornerBorder());
-        txtTenMon.setBackground(new java.awt.Color(255, 153, 153));
         txtTenMon.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        jLabel9.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel9.setText("Tên Món");
 
-        txtGiaMon.setBackground(new java.awt.Color(255, 153, 153));
         txtGiaMon.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        jLabel10.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel10.setText("Giá Món");
 
+        aa3.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         aa3.setText("Loại");
 
-        cboLoaiMon.setBackground(new java.awt.Color(255, 153, 153));
+        cboLoaiMon.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         cboLoaiMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food", "Drink", "Dessert" }));
 
-        cboTrangThai.setBackground(new java.awt.Color(255, 153, 153));
+        cboTrangThai.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoạt Động", "Đã Tắt" }));
 
+        jLabel12.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel12.setText("Trạng Thái");
 
         lblAnh.setBorder(new RoundedCornerBorder2());
@@ -426,7 +423,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 277, Short.MAX_VALUE)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 280, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

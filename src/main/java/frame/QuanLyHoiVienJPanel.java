@@ -281,15 +281,15 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblQuanLyHoiVien = new javax.swing.JTable();
 
-        setBackground(new java.awt.Color(255, 153, 153));
+        setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(255, 204, 204));
         setMaximumSize(new java.awt.Dimension(652, 802));
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1080, 720));
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức Năng"));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
-        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThem.setFont(new java.awt.Font("American Typewriter", 0, 10)); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,7 +297,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSua.setFont(new java.awt.Font("American Typewriter", 0, 10)); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,7 +305,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXoa.setFont(new java.awt.Font("American Typewriter", 0, 10)); // NOI18N
         btnXoa.setText("Làm mới Form");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,8 +313,10 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel7.setText("Tìm Kiếm");
 
+        txtTimKiem.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimKiemKeyReleased(evt);
@@ -335,11 +337,11 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtTimKiem, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+                                .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)))
                         .addGap(12, 12, 12))))
         );
         jPanel7Layout.setVerticalGroup(
@@ -357,15 +359,25 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Hội Viên"));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hội Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
+        jLabel5.setFont(new java.awt.Font("American Typewriter", 0, 10)); // NOI18N
         jLabel5.setText("Tên Hội Viên");
 
+        jLabel6.setFont(new java.awt.Font("American Typewriter", 0, 10)); // NOI18N
         jLabel6.setText("Số Điện Thoại Hội Viên");
 
+        jLabel9.setFont(new java.awt.Font("American Typewriter", 0, 10)); // NOI18N
         jLabel9.setText("Gmail Hội Viên");
 
+        jLabel10.setFont(new java.awt.Font("American Typewriter", 0, 10)); // NOI18N
         jLabel10.setText("Ngày sinh");
+
+        txtTenHoiVien.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
+
+        txtSDTHoiVien.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
+
+        txtGmailHoiVien.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -460,7 +472,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

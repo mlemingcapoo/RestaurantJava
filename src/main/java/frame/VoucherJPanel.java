@@ -159,6 +159,8 @@ VoucherControl control = new VoucherControl();
         txtLinkAnh.setEditable(false);
         txtLinkAnh.setText("Link Ảnh");
 
+        txtMail.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
