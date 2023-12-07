@@ -9,21 +9,42 @@ import helper.RoundedCornerBorder;
 import helper.RoundedCornerBorder2;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author mynla
  */
 public class QuanLyMonAnJPanel extends javax.swing.JPanel {
+
     QuanLyMonAnControl control = new QuanLyMonAnControl();
     static int selected;
+
     /**
      * Creates new form ManHinhChinhJPanel
      */
     public QuanLyMonAnJPanel() {
         initComponents();
         control.init(this);
-        
+
+    }
+
+    private boolean confirmAdd() {
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm không?",
+                "Xác nhận", JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
+    }
+
+    private boolean confirmEdit() {
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa không?",
+                "Xác nhận", JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
+    }
+
+    private boolean confirmDelete() {
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa không?",
+                "Xác nhận", JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
     }
 
     /**
@@ -418,24 +439,34 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        control.themMon();
-        control.refresh();
+        if (control.validateForm(true)) {
+            if (confirmAdd()) {
+                control.themMon();
+                control.refresh();
+            }
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblDanhSachMonAnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMonAnMousePressed
 //        selected = tblDanhSachMonAn.getSelectedRow();
-                control.fillToForm(tblDanhSachMonAn.getSelectedRow());
+        control.fillToForm(tblDanhSachMonAn.getSelectedRow());
 //        control.refresh();
     }//GEN-LAST:event_tblDanhSachMonAnMousePressed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        control.suaMon(tblDanhSachMonAn.getSelectedRow());
-        control.refresh();
+        if (control.validateForm(true)) {
+            if (confirmEdit()) {
+                control.suaMon(tblDanhSachMonAn.getSelectedRow());
+                control.refresh();
+            }
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        control.xoaMon(tblDanhSachMonAn.getSelectedRow());
-        control.refresh();
+        if (confirmDelete()) {
+            control.xoaMon(tblDanhSachMonAn.getSelectedRow());
+            control.refresh();
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
@@ -444,12 +475,12 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
-        
+
     }//GEN-LAST:event_txtTimKiemActionPerformed
 
     private void txtTimKiemInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtTimKiemInputMethodTextChanged
         // TODO add your handling code here:
-   
+
     }//GEN-LAST:event_txtTimKiemInputMethodTextChanged
 
     private void tblDanhSachMonAnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMonAnMouseReleased
