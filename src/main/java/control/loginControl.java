@@ -49,6 +49,7 @@ public class loginControl {
     }
 
     public void threadLogin(JTextField User, JPasswordField Pass) {
+        
         try {
             char[] passwordChars = Pass.getPassword();
             String password = new String(passwordChars);
