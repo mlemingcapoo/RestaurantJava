@@ -57,6 +57,13 @@ public final class mainUI extends javax.swing.JFrame {
                 isMinimized = false;
                 this.setExtendedState(MAXIMIZED_BOTH);
             }   });
+        BtnOrder.setForeground(Color.darkGray);
+        BtnOrder.setBorder(new RoundedCornerBorder());
+        BtnDatBan.setForeground(Color.darkGray);
+        BtnDatBan.setBorder(new RoundedCornerBorder());
+        BtnHoaDon.setForeground(Color.darkGray);
+        BtnHoaDon.setBorder(new RoundedCornerBorder());
+//        jLabel4.setIconTextGap(100);
     }
     static int x = 210;    //chieu rong
     static int y = 300;    //chieu cao
@@ -259,9 +266,16 @@ public final class mainUI extends javax.swing.JFrame {
     jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 8, -1, 83));
 
     jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-    jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    jLabel4.setText("User Name");
-    jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 120, -1));
+    jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/User 2.png"))); // NOI18N
+    jLabel4.setText("     User Name");
+    jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+    jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            jLabel4MouseReleased(evt);
+        }
+    });
+    jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 170, 30));
 
     lblCloseMenu.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
     lblCloseMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -301,31 +315,33 @@ public final class mainUI extends javax.swing.JFrame {
     panelProfilePhoto.setLayout(panelProfilePhotoLayout);
     panelProfilePhotoLayout.setHorizontalGroup(
         panelProfilePhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 117, Short.MAX_VALUE)
+        .addGap(0, 120, Short.MAX_VALUE)
     );
     panelProfilePhotoLayout.setVerticalGroup(
         panelProfilePhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 111, Short.MAX_VALUE)
+        .addGap(0, 120, Short.MAX_VALUE)
     );
 
-    jPanel2.add(panelProfilePhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
+    jPanel2.add(panelProfilePhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 120, 120));
 
     jplMenuCover.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 240));
 
     BtnQuanLyVoucher.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnQuanLyVoucher.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnQuanLyVoucher.setText("Quản Lý Voucher");
+    BtnQuanLyVoucher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Rouble.png"))); // NOI18N
+    BtnQuanLyVoucher.setText("     Quản Lý Voucher");
     BtnQuanLyVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseReleased(java.awt.event.MouseEvent evt) {
             BtnQuanLyVoucherMouseReleased(evt);
         }
     });
-    jplMenuCover.add(BtnQuanLyVoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 150, 30));
+    jplMenuCover.add(BtnQuanLyVoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 180, 30));
 
     BtnQuanLyNhanVien.setBackground(new java.awt.Color(255, 255, 255));
     BtnQuanLyNhanVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnQuanLyNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnQuanLyNhanVien.setText("Quản Lý Nhân Viên");
+    BtnQuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nhanvien 24.png"))); // NOI18N
+    BtnQuanLyNhanVien.setText("     Quản Lý Nhân Viên");
     BtnQuanLyNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             BtnQuanLyNhanVienMouseClicked(evt);
@@ -337,11 +353,12 @@ public final class mainUI extends javax.swing.JFrame {
             BtnQuanLyNhanVienMouseReleased(evt);
         }
     });
-    jplMenuCover.add(BtnQuanLyNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 150, 30));
+    jplMenuCover.add(BtnQuanLyNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 30));
 
     BtnQuanLyDoanhThu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnQuanLyDoanhThu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnQuanLyDoanhThu.setText("Quản Lý Doanh Thu");
+    BtnQuanLyDoanhThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Report.png"))); // NOI18N
+    BtnQuanLyDoanhThu.setText("     Quản Lý Doanh Thu");
     BtnQuanLyDoanhThu.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             BtnQuanLyDoanhThuMouseClicked(evt);
@@ -350,60 +367,65 @@ public final class mainUI extends javax.swing.JFrame {
             BtnQuanLyDoanhThuMouseReleased(evt);
         }
     });
-    jplMenuCover.add(BtnQuanLyDoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 150, 30));
+    jplMenuCover.add(BtnQuanLyDoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 180, 30));
 
     BtnQuanLyHoiVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnQuanLyHoiVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnQuanLyHoiVien.setText("Quản Lý Hội Viên");
+    BtnQuanLyHoiVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Unknown person.png"))); // NOI18N
+    BtnQuanLyHoiVien.setText("     Quản Lý Hội Viên");
     BtnQuanLyHoiVien.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseReleased(java.awt.event.MouseEvent evt) {
             BtnQuanLyHoiVienMouseReleased(evt);
         }
     });
-    jplMenuCover.add(BtnQuanLyHoiVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 150, 30));
+    jplMenuCover.add(BtnQuanLyHoiVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 180, 30));
 
     menuBarSeparator.setForeground(new java.awt.Color(153, 153, 153));
     jplMenuCover.add(menuBarSeparator, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 452, 210, 10));
 
     BtnDangXuat.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnDangXuat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnDangXuat.setText("Đăng Xuất");
+    BtnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/đăng xuất 24.png"))); // NOI18N
+    BtnDangXuat.setText("     Đăng Xuất");
     BtnDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseReleased(java.awt.event.MouseEvent evt) {
             BtnDangXuatMouseReleased(evt);
         }
     });
-    jplMenuCover.add(BtnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, 150, 30));
+    jplMenuCover.add(BtnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 180, 30));
 
     BtnGioiThieu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnGioiThieu.setText("Giới Thiệu");
+    BtnGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Online.png"))); // NOI18N
+    BtnGioiThieu.setText("     Giới Thiệu");
     BtnGioiThieu.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseReleased(java.awt.event.MouseEvent evt) {
             BtnGioiThieuMouseReleased(evt);
         }
     });
-    jplMenuCover.add(BtnGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, 150, 30));
+    jplMenuCover.add(BtnGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 180, 30));
 
     BtnCaiDat.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnCaiDat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnCaiDat.setText("Cài Đặt");
+    BtnCaiDat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Monitor.png"))); // NOI18N
+    BtnCaiDat.setText("     Cài Đặt");
     BtnCaiDat.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseReleased(java.awt.event.MouseEvent evt) {
             BtnCaiDatMouseReleased(evt);
         }
     });
-    jplMenuCover.add(BtnCaiDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 150, 30));
+    jplMenuCover.add(BtnCaiDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 180, 30));
 
     BtnQuanLyMon.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
     BtnQuanLyMon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnQuanLyMon.setText("Quản Lý Món Ăn");
+    BtnQuanLyMon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Remove from basket.png"))); // NOI18N
+    BtnQuanLyMon.setText("     Quản Lý Món Ăn");
     BtnQuanLyMon.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseReleased(java.awt.event.MouseEvent evt) {
             BtnQuanLyMonMouseReleased(evt);
         }
     });
-    jplMenuCover.add(BtnQuanLyMon, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 150, 30));
+    jplMenuCover.add(BtnQuanLyMon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 180, 30));
 
     jpllMenuBar.setBackground(new java.awt.Color(255, 255, 255));
     jpllMenuBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -636,12 +658,13 @@ public final class mainUI extends javax.swing.JFrame {
 
     private void BtnQuanLyNhanVienMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienMouseReleased
         // TODO add your handling code here:
+        closeMenu();
         mainUI.QuanLyNhanVien();
-
     }//GEN-LAST:event_BtnQuanLyNhanVienMouseReleased
 
     private void BtnQuanLyDoanhThuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyDoanhThuMouseReleased
         // TODO add your handling code here:
+        closeMenu();
         mainUI.QuanLyDoanhThu();
     }//GEN-LAST:event_BtnQuanLyDoanhThuMouseReleased
 
@@ -695,17 +718,19 @@ public final class mainUI extends javax.swing.JFrame {
 
     private void BtnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrderActionPerformed
         // TODO add your handling code here:
+        closeMenu();
         mainUI.Order(this);
-
     }//GEN-LAST:event_BtnOrderActionPerformed
 
     private void panelProfilePhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseClicked
         // TODO add your handling code here:
-        mainUI.profile();
+        
     }//GEN-LAST:event_panelProfilePhotoMouseClicked
 
     private void panelProfilePhotoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseReleased
         // TODO add your handling code here:
+        closeMenu();
+        mainUI.profile();
     }//GEN-LAST:event_panelProfilePhotoMouseReleased
 
     private void BtnHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHoaDonMouseEntered
@@ -722,10 +747,12 @@ public final class mainUI extends javax.swing.JFrame {
 
     private void BtnHoaDonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHoaDonMouseReleased
         // TODO add your handling code here:
+        closeMenu();
     }//GEN-LAST:event_BtnHoaDonMouseReleased
 
     private void BtnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHoaDonActionPerformed
         // TODO add your handling code here:
+        closeMenu();
         mainUI.HoaDon();
     }//GEN-LAST:event_BtnHoaDonActionPerformed
 
@@ -747,48 +774,62 @@ public final class mainUI extends javax.swing.JFrame {
 
     private void BtnDatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDatBanActionPerformed
         // TODO add your handling code here:
+        closeMenu();
         mainUI.DatBan();
     }//GEN-LAST:event_BtnDatBanActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        closeMenu();
         mainUI.DangXuat();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        closeMenu();
         mainUI.minimize(this);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void BtnQuanLyHoiVienMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyHoiVienMouseReleased
         // TODO add your handling code here:
+        closeMenu();
         mainUI.QuanLyHoiVien();
     }//GEN-LAST:event_BtnQuanLyHoiVienMouseReleased
 
     private void BtnQuanLyMonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyMonMouseReleased
         // TODO add your handling code here:
+        closeMenu();
         mainUI.QuanLyMon();
     }//GEN-LAST:event_BtnQuanLyMonMouseReleased
 
     private void BtnQuanLyVoucherMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyVoucherMouseReleased
         // TODO add your handling code here:
+        closeMenu();
         mainUI.QuanLyVoucher();
     }//GEN-LAST:event_BtnQuanLyVoucherMouseReleased
 
     private void BtnDangXuatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDangXuatMouseReleased
         // TODO add your handling code here:
+        closeMenu();
         mainUI.DangXuat();
     }//GEN-LAST:event_BtnDangXuatMouseReleased
 
     private void BtnCaiDatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCaiDatMouseReleased
         // TODO add your handling code here:
+        closeMenu();
         mainUI.CaiDat();
     }//GEN-LAST:event_BtnCaiDatMouseReleased
 
     private void BtnGioiThieuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGioiThieuMouseReleased
         // TODO add your handling code here:
+        closeMenu();
         mainUI.GioiThieu();
     }//GEN-LAST:event_BtnGioiThieuMouseReleased
+
+    private void jLabel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseReleased
+        // TODO add your handling code here:
+        panelProfilePhotoMouseReleased(evt);
+    }//GEN-LAST:event_jLabel4MouseReleased
 
     /**
      * @param args the command line arguments

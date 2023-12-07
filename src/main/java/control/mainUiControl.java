@@ -108,7 +108,7 @@ public final class mainUiControl implements GUI_Interface {
         System.out.println("Perm level: " + dao.getPermissonLevel());
         enforePerm(dao.getPermissonLevel());
 
-        mainUI.BtnDangXuat.setText("Đăng xuất");
+//        mainUI.BtnDangXuat.setText("Đăng xuất");
         System.out.println("... loading frame into panelDisplay...");
         System.out.println("loading Settings");
         mainUI.panelDisplay.add(caiDat, "CaiDat");

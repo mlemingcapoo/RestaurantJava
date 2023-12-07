@@ -133,15 +133,22 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
-                    <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="User Name"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/images/User 2.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="     User Name"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MouseReleased"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="60" y="170" width="120" height="-1"/>
+                      <AbsoluteConstraints x="10" y="190" width="170" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -197,19 +204,19 @@
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="60" y="50" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="60" y="70" width="120" height="120"/>
                     </Constraint>
                   </Constraints>
 
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="117" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="120" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="111" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="120" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -222,7 +229,10 @@
                   <Font name="Times New Roman" size="14" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; Voucher"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/Rouble.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="     Qu&#x1ea3;n L&#xfd; Voucher"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnQuanLyVoucherMouseReleased"/>
@@ -232,7 +242,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="60" y="410" width="150" height="30"/>
+                  <AbsoluteConstraints x="10" y="410" width="180" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -245,7 +255,10 @@
                   <Font name="Times New Roman" size="14" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; Nh&#xe2;n Vi&#xea;n"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/Nhanvien 24.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="     Qu&#x1ea3;n L&#xfd; Nh&#xe2;n Vi&#xea;n"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnQuanLyNhanVienMouseClicked"/>
@@ -257,7 +270,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="60" y="250" width="150" height="30"/>
+                  <AbsoluteConstraints x="10" y="250" width="180" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -267,7 +280,10 @@
                   <Font name="Times New Roman" size="14" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; Doanh Thu"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/Report.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="     Qu&#x1ea3;n L&#xfd; Doanh Thu"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnQuanLyDoanhThuMouseClicked"/>
@@ -278,7 +294,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="60" y="290" width="150" height="30"/>
+                  <AbsoluteConstraints x="10" y="290" width="180" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -288,7 +304,10 @@
                   <Font name="Times New Roman" size="14" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; H&#x1ed9;i Vi&#xea;n"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/Unknown person.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="     Qu&#x1ea3;n L&#xfd; H&#x1ed9;i Vi&#xea;n"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnQuanLyHoiVienMouseReleased"/>
@@ -298,7 +317,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="60" y="330" width="150" height="30"/>
+                  <AbsoluteConstraints x="10" y="330" width="180" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -320,7 +339,10 @@
                   <Font name="Times New Roman" size="14" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng Xu&#x1ea5;t"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/&#x111;&#x103;ng xu&#x1ea5;t 24.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="     &#x110;&#x103;ng Xu&#x1ea5;t"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnDangXuatMouseReleased"/>
@@ -330,7 +352,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="60" y="560" width="150" height="30"/>
+                  <AbsoluteConstraints x="10" y="560" width="180" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -340,7 +362,10 @@
                   <Font name="Times New Roman" size="14" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Gi&#x1edb;i Thi&#x1ec7;u"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/Online.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="     Gi&#x1edb;i Thi&#x1ec7;u"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnGioiThieuMouseReleased"/>
@@ -350,7 +375,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="60" y="520" width="150" height="30"/>
+                  <AbsoluteConstraints x="10" y="520" width="180" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -360,7 +385,10 @@
                   <Font name="Times New Roman" size="14" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="C&#xe0;i &#x110;&#x1eb7;t"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/Monitor.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="     C&#xe0;i &#x110;&#x1eb7;t"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnCaiDatMouseReleased"/>
@@ -370,7 +398,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="60" y="480" width="150" height="30"/>
+                  <AbsoluteConstraints x="10" y="480" width="180" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -380,7 +408,10 @@
                   <Font name="Times New Roman" size="14" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; M&#xf3;n &#x102;n"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/Remove from basket.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="     Qu&#x1ea3;n L&#xfd; M&#xf3;n &#x102;n"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnQuanLyMonMouseReleased"/>
@@ -390,7 +421,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="60" y="370" width="150" height="30"/>
+                  <AbsoluteConstraints x="10" y="370" width="180" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
