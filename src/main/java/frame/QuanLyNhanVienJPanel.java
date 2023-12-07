@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +42,108 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 //        getNV();
         refresh();
 
+    }
+
+    public boolean validateQuanLyNhanVien() {
+        if (txttaikhoan.getText().equals("")) {
+            helper.DialogHelper.alert(this, " Tên người dùng không được để trống");
+            txttaikhoan.requestFocus();
+            return false;
+        }
+        if (txttaikhoan.getText().length() < 4) {
+            helper.DialogHelper.alert(this, "Tên người dùng không được nhỏ hơn 4 kí tự");
+            txttaikhoan.requestFocus();
+            return false;
+        }
+        if (txtPass.getText().equals("")) {
+            helper.DialogHelper.alert(this, " Mật Khẩu không được để trống");
+            txtPass.requestFocus();
+            return false;
+        }
+        if (txtPass.getText().length() < 4) {
+            helper.DialogHelper.alert(this, "Mật Khẩu không được nhỏ hơn 4 kí tự");
+            txtPass.requestFocus();
+            return false;
+        }
+        if (txtHoTen.getText().equals("")) {
+            helper.DialogHelper.alert(this, " Họ và Tên không được để trống");
+            txtHoTen.requestFocus();
+            return false;
+        }
+        if (txtHoTen.getText().length() < 6) {
+            helper.DialogHelper.alert(this, "Họ và Tên không được nhỏ hơn 6 kí tự");
+            txtHoTen.requestFocus();
+            return false;
+        }
+
+        try {
+            if (dateNgaySinh.getDate().toString().equals("")) {
+                helper.DialogHelper.alert(this, " Ngày Sinh không được để trống");
+                dateNgaySinh.requestFocus();
+                return false;
+            }
+        } catch (Exception e) {
+            helper.DialogHelper.alert(this, " Ngày Sinh phải đúng định dạng");
+            dateNgaySinh.requestFocus();
+            return false;
+        }
+
+        if (txtSdt.getText().equals("")) {
+            helper.DialogHelper.alert(this, " Sdt không được để trống");
+            txtPass.requestFocus();
+            return false;
+        }
+        if (txtSdt.getText().length() < 10) {
+            helper.DialogHelper.alert(this, " Số điện Thoại không được nhỏ hơn 10 kí tự");
+            txtSdt.requestFocus();
+            return false;
+        }
+
+        Pattern pattern = Pattern.compile("^((84)|(0))[0-9]{9}$");
+
+        String phone = txtSdt.getText();
+
+        Matcher matcher = pattern.matcher(phone);
+        if (!matcher.matches()) {
+            helper.DialogHelper.alert(this, "Số điện thoại không đúng định dạng");
+            txtSdt.requestFocus();
+            return false;
+        }
+
+        if (txtAdd.getText().equals("")) {
+            helper.DialogHelper.alert(this, " Địa chỉ không được để trống");
+            txtAdd.requestFocus();
+            return false;
+        }
+        if (txtAdd.getText().length() < 12) {
+            helper.DialogHelper.alert(this, "Địa chỉ  không được nhỏ hơn 12 kí tự");
+            txtAdd.requestFocus();
+            return false;
+        }
+        if (txtCccd.getText().equals("")) {
+            helper.DialogHelper.alert(this, " Cccd không được để trống");
+            txtCccd.requestFocus();
+            return false;
+        }
+        try {
+            String Cccd = txtCccd.getText();
+        } catch (NumberFormatException e) {
+            helper.DialogHelper.alert(this, " Cccd phải là số ");
+            txtCccd.requestFocus();
+            return false;
+        }
+        if (txtCccd.getText().length() < 12) {
+            helper.DialogHelper.alert(this, "Cccd không được nhỏ hơn 12 kí tự");
+            txtCccd.requestFocus();
+            return false;
+        }
+        if (!txtCccd.getText().toString().matches("\\d+")) {
+
+            helper.DialogHelper.alert(this, "CCCD chỉ được nhập số");
+            txtCccd.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     public void refresh() {
@@ -211,11 +315,11 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 
 //        clearForm();
 //        refresh();
-            DialogHelper.alert(this,"Cập nhật thành công!");
+            DialogHelper.alert(this, "Cập nhật thành công!");
         } catch (Exception ex) {
             // Log or handle the exception appropriately
             ex.printStackTrace();
-            DialogHelper.alert(this,"Có lỗi khi cập nhật");
+            DialogHelper.alert(this, "Có lỗi khi cập nhật");
             System.out.println("Error updating employee");
         }
     }
@@ -406,9 +510,9 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         txtUser.setBorder(javax.swing.BorderFactory.createTitledBorder("Chỉnh Sửa"));
         txtUser.setPreferredSize(new java.awt.Dimension(0, 0));
 
-        jLabel2.setText("User");
+        jLabel2.setText("Tên Người Dùng ");
 
-        jLabel3.setText("Pass");
+        jLabel3.setText("Mật Khẩu");
 
         cboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Quản Lý" }));
 
@@ -469,9 +573,9 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                             .addGroup(txtUserLayout.createSequentialGroup()
                                 .addGroup(txtUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel4))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(76, 76, 76)))
                 .addGroup(txtUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -705,7 +809,14 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        themNV();
+
+        if (validateQuanLyNhanVien()) {
+            if (DialogHelper.confirm(this, "Bạn có muốn thêm không?")) {
+                themNV();
+
+            }
+        }
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblDanhSachNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachNhanVienMousePressed
@@ -714,8 +825,14 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblDanhSachNhanVienMousePressed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        SuaNV(tblDanhSachNhanVien.getSelectedRow());
-        refresh();
+
+        if (validateQuanLyNhanVien()) {
+            if (DialogHelper.confirm(this, "Bạn có muốn sửa không?")) {
+                SuaNV(tblDanhSachNhanVien.getSelectedRow());
+                refresh();
+
+            }
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
@@ -723,7 +840,12 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        xoaMon(tblDanhSachNhanVien.getSelectedRow());
+
+        if (DialogHelper.confirm(this, "Bạn có muốn xóa không?")) {
+            xoaMon(tblDanhSachNhanVien.getSelectedRow());
+            refresh();
+
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
