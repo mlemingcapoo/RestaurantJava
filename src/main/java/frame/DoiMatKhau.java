@@ -60,36 +60,46 @@ public class DoiMatKhau extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        jLabel1.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         jLabel1.setText("Số Điện Thoại ");
 
         txtSDT.setBorder(new RoundedCornerBorder());
+        txtSDT.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         txtSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSDTActionPerformed(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         jLabel2.setText("MK Cũ");
 
+        jLabel3.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         jLabel3.setText("Mk Mới ");
 
+        jLabel4.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         jLabel4.setText("Nhập Lại Mk Mới ");
 
-        btnThayDoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThayDoi.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         btnThayDoi.setText("Thay Đổi");
 
+        txtMKCu.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         txtMKCu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMKCuActionPerformed(evt);
             }
         });
 
-        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtMKMoi.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
+
+        txtMKMoi2.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
+
+        btnHuy.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         btnHuy.setText("Huỷ");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DoiMatKhau-SDT.png"))); // NOI18N
@@ -179,7 +189,7 @@ public class DoiMatKhau extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -49,12 +49,11 @@ VoucherControl control = new VoucherControl();
         txtTieuDe = new javax.swing.JTextField();
         txtMail = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(255, 153, 153));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vocher", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
-        tblVoucher.setBackground(new java.awt.Color(255, 153, 153));
         tblVoucher.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -81,7 +80,7 @@ VoucherControl control = new VoucherControl();
         jScrollPane1.setViewportView(tblVoucher);
         tblVoucher.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        btnXoa.setBackground(new java.awt.Color(255, 153, 153));
+        btnXoa.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnXoa.setText("Xoá");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +88,7 @@ VoucherControl control = new VoucherControl();
             }
         });
 
-        btnSua.setBackground(new java.awt.Color(255, 153, 153));
+        btnSua.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +96,7 @@ VoucherControl control = new VoucherControl();
             }
         });
 
-        btnThem.setBackground(new java.awt.Color(255, 153, 153));
+        btnThem.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,15 +104,16 @@ VoucherControl control = new VoucherControl();
             }
         });
 
-        txtGiam.setBackground(new java.awt.Color(255, 153, 153));
+        txtGiam.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel1.setText("Ngày Hết Hạn");
 
+        jLabel2.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         jLabel2.setText("Giảm (%)");
 
         NgayHetHan.setBackground(new java.awt.Color(255, 153, 153));
 
-        tblHoiVien.setBackground(new java.awt.Color(255, 153, 153));
         tblHoiVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -132,7 +132,7 @@ VoucherControl control = new VoucherControl();
         jScrollPane2.setViewportView(tblHoiVien);
         tblHoiVien.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        btnsend.setBackground(new java.awt.Color(255, 153, 153));
+        btnsend.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnsend.setText("Send");
         btnsend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,15 +140,19 @@ VoucherControl control = new VoucherControl();
             }
         });
 
-        btnSendall.setBackground(new java.awt.Color(255, 153, 153));
+        btnSendall.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnSendall.setText("Send All");
 
         txtNDung.setColumns(20);
+        txtNDung.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         txtNDung.setRows(5);
         txtNDung.setText("Vocher siêu ngon \n<Ngày hết hạn vocher điền tay =))>");
         jScrollPane3.setViewportView(txtNDung);
 
+        txtTieuDe.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         txtTieuDe.setText("Cửa Hàng Tặng Mã voucher");
+
+        txtMail.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -198,7 +202,7 @@ VoucherControl control = new VoucherControl();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
                         .addGap(25, 25, 25)
                         .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -221,7 +225,7 @@ VoucherControl control = new VoucherControl();
                             .addComponent(btnSua)
                             .addComponent(btnThem))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
