@@ -42,6 +42,7 @@ public class JDBCManager {
     }
 
     public static Connection reconnect() throws SQLException, Exception{
+        connection.close();
         connection = DriverManager.getConnection(url + db_name, usr, psw);
         return getConnection();
     }
