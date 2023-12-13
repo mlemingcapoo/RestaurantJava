@@ -22,7 +22,6 @@ DAO/AuthenticateDAO.class
 frame/TableJPanel.class
 frame/VoucherJPanel$3.class
 frame/QuanLyMonAnJPanel$1.class
-GUI/mainUI$30.class
 frame/profile$2.class
 control/TableControl.class
 frame/OrderPanel$19.class
@@ -70,6 +69,7 @@ model/Music.class
 helper/DateHelper.class
 helper/CachingHelper.class
 frame/OrderPanel$6.class
+control/mainUiControl$5.class
 GUI/mainUI.class
 DAO/JDBCManager.class
 frame/VoucherJPanel.class
@@ -158,9 +158,9 @@ helper/RoundedCornerBorder.class
 frame/ThanhToanJDialog.class
 frame/QuanLyNhanVienJPanel$1.class
 model/NhanVien.class
+control/mainUiControl$4.class
 Api_upload_image/upanh.class
 frame/QuanLyMonAnJPanel$2.class
-GUI/mainUI$31.class
 helper/util.class
 GUI/mainUI$26.class
 frame/OrderPanel$2.class
