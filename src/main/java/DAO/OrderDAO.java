@@ -20,7 +20,7 @@ public class OrderDAO extends SQL<Order, String> {
 //    String UPDATE_SQL = "UPDATE Food SET Password = ?, FullName = ?, Role = ? WHERE MaNV = ?";
 
     String DELETE_SQL = "DELETE FROM `Order` WHERE order_ID = ?";
-    String UPDATE_ORDER = "UPDATE FROM `Order` SET `Order`.note = ? WHERE `Order`.order_ID = ?;";
+    String UPDATE_ORDER = "UPDATE `Order` SET `Order`.note = ? WHERE `Order`.order_ID = ?;";
 
     String SELECT_ALL_SQL = "SELECT * FROM Order";
     String SELECT_ALL_PENDING_SQL = "SELECT * FROM `Order` WHERE `Order`.isCompleted = 0;";
@@ -44,7 +44,7 @@ public class OrderDAO extends SQL<Order, String> {
                 newOrder.setIsCompleted(rs.getBoolean(4));
                 list.add(newOrder);
             }
-            System.out.println("OrderID at index 0: " + list.get(0).getOrder_ID());;
+//            System.out.println("OrderID at index 0: " + list.get(0).getOrder_ID());;
         } catch (Exception e) {
             DialogHelper.showDialog(null, "Vui lòng kiểm tra lại kết nối mạng và bấm OK!");
             System.out.println("Connection was lost.. Trying to reconnect...");

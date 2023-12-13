@@ -38,7 +38,7 @@ public class FoodDAO
                 newFood.setDish_ID(rs.getInt(1));
                 newFood.setName(rs.getString(2));
                 newFood.setPrice(rs.getFloat(3));
-                newFood.setType(rs.getString(4));
+                newFood.setType(rs.getInt(4));
                 newFood.setIsLocked(rs.getBoolean(5));
                 newFood.setImg(rs.getString(6));
                 list.add(newFood);
