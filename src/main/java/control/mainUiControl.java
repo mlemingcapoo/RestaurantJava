@@ -2,7 +2,14 @@ package control;
 
 import DAO.AuthenticateDAO;
 import GUI.CustomerScreen;
+import GUI.StingJFame;
 import GUI.mainUI;
+import static GUI.mainUI.BtnDatBan;
+import static GUI.mainUI.BtnHoaDon;
+import static GUI.mainUI.BtnOrder;
+import static GUI.mainUI.cardDisplayWrapper;
+import static GUI.mainUI.jplMenuCover;
+import static GUI.mainUI.panelDisplay;
 import frame.CaiDatJPanel;
 import frame.LoginJPanel;
 import frame.OrderPanel;
@@ -12,14 +19,19 @@ import frame.QuanLyMonAnJPanel;
 import frame.QuanLyNhanVienJPanel;
 import frame.TableJPanel;
 import frame.VoucherJPanel;
+import frame.blank_frame;
 import frame.profile;
 import helper.DialogHelper;
+import helper.RoundedCornerBorder;
+import java.awt.Color;
 import java.awt.Frame;
+import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -35,7 +47,12 @@ import util.panelNavigator;
  * @author capoo
  */
 public final class mainUiControl implements GUI_Interface {
+    
+     int width;
+    int height;
+    boolean isMinimized;
 
+//    OrderPanel QLBanHang = new OrderPanel();
     JPanel caiDat = new CaiDatJPanel();
 //    JPanel DoiMatKhau = new DoiMatKhau();
     JPanel LoginJPanel = new LoginJPanel();
@@ -44,18 +61,19 @@ public final class mainUiControl implements GUI_Interface {
     JPanel QLMonAn = new QuanLyMonAnJPanel();
     JPanel QLNNhanVien = new QuanLyNhanVienJPanel();
     OrderPanel QLBanHang = new OrderPanel();
+    blank_frame init = new blank_frame();
     TableJPanel QLTable = new TableJPanel();
     JPanel Vocher = new VoucherJPanel();
     CustomerScreen customerFrame = new CustomerScreen();
     JPanel Profile = new profile();
 
-    public static mainUI frame;
+    public static mainUI mainUI;
     private final AuthenticateDAO dao = new AuthenticateDAO();
     Thread t;
     ExecutorService executor = Executors.newFixedThreadPool(1);
 
     public mainUiControl(mainUI frame) {
-        mainUiControl.frame = frame;
+        mainUiControl.mainUI = frame;
 
         executor.submit(new Runnable() {
             @Override
@@ -104,6 +122,14 @@ public final class mainUiControl implements GUI_Interface {
 
     @Override
     public void init() {
+        GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        width = graphicsDevice.getDisplayMode().getWidth();
+        height = graphicsDevice.getDisplayMode().getHeight();
+        y = width;
+        System.out.println("chieu rong man hinh: " + width);
+        panelDisplay.setSize(width, height);
+
+        
         System.out.println("a wild thread has started... " + t.isAlive());
         System.out.println("Perm level: " + dao.getPermissonLevel());
         enforePerm(dao.getPermissonLevel());
@@ -124,6 +150,7 @@ public final class mainUiControl implements GUI_Interface {
         System.out.println("loading NhanVien");
         mainUI.panelDisplay.add(QLNNhanVien, "NhanVien");
         System.out.println("loading BanHang");
+//        panelDisplay.add(QLBanHang, "BanHang");
         mainUI.panelDisplay.add(QLBanHang, "BanHang");
 
 //      panelNavigator.switchPanel(mainUI.panelDisplay, "");
@@ -134,12 +161,91 @@ public final class mainUiControl implements GUI_Interface {
         System.out.println("loading voucher");
         mainUI.panelDisplay.add(Vocher, "Voucher");
         System.out.println("setting full screen");
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mainUI.panelDisplay.add(init,"blank");
+        
+        mainUI.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        System.out.println("interupting thread....");
 //        t.interrupt();
+        
+        
+//        System.out.println("All Done!!!!!!!"); 
+
+cardDisplayWrapper.setVisible(true);
+        jplMenuCover.setSize(410, 900);
+        mainUI.setExtendedState(mainUI.MAXIMIZED_BOTH);
+        
+        
+        panelDisplay.add(init, "blank");
+        
+        
+        mainUI.addWindowStateListener((WindowEvent e) -> {
+            if((e.getNewState() & Frame.ICONIFIED) == Frame.ICONIFIED) {
+                isMinimized = true;
+            } else if(isMinimized && (e.getNewState() == Frame.NORMAL)) {
+                isMinimized = false;
+                mainUI.setExtendedState(MAXIMIZED_BOTH);
+            }   });
+        BtnOrder.setForeground(Color.darkGray);
+        BtnOrder.setBorder(new RoundedCornerBorder());
+        BtnDatBan.setForeground(Color.darkGray);
+        BtnDatBan.setBorder(new RoundedCornerBorder());
+        BtnHoaDon.setForeground(Color.darkGray);
+        BtnHoaDon.setBorder(new RoundedCornerBorder());
+        panelNavigator.switchPanel(mainUI.panelDisplay, "blank");
         System.out.println("starting customer screen");
         startCustomer();
-//        System.out.println("All Done!!!!!!!"); 
+    }
+    
+    static int x = 210;    //chieu rong
+    static int y = 300;    //chieu cao
+
+    
+    public static void openMenu() {
+
+        jplMenuCover.setSize(x, y);
+
+        if (x == 52) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+
+                        for (int i = 52; i <= 210; i++) {
+                            jplMenuCover.setSize(i, y);
+                            Thread.sleep(1);
+                        }
+
+                    } catch (Exception e) {
+                    }
+                }
+            }).start();
+            x = 210;
+        }
+    }
+    
+    
+
+    public static void closeMenu() {
+        jplMenuCover.setSize(x, y);
+        if (x == 210) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        for (int i = 210; i >= 52; i--) {
+                            jplMenuCover.setSize(i, y);
+                            Thread.sleep(1);
+                        
+                        }
+                        panelDisplay.repaint();
+//                        panelDisplayCustomer.revalidate();
+//                        toolBarSeparator.setVisible(true);
+                    } catch (Exception e) {
+                    }
+                }
+            }).start();
+            x = 52;
+        }
     }
 
     @Override
@@ -153,14 +259,14 @@ public final class mainUiControl implements GUI_Interface {
     @Override
     public void showFrame(JFrame frame) {
         System.out.println("lmao");
-        mainUiControl.frame = (mainUI) frame;
+        mainUiControl.mainUI = (mainUI) frame;
         frame.setVisible(true);
 
     }
 
     public void DangXuat() {
 //        panelNavigator.switchPanel(mainUI.panelDisplay, "Login");
-        frame.dispose();
+        mainUI.dispose();
         new loginControl().init();
         customerFrame.dispose();
     }
@@ -202,7 +308,7 @@ public final class mainUiControl implements GUI_Interface {
 //            login.dispose();
         } else {
             System.out.println("No external display found...");
-            DialogHelper.alert(frame, "Phần mềm khuyến nghị cài đặt thêm màn hình thứ 2 để sử dụng tính năng màn hình khách!");
+            DialogHelper.alert(mainUI, "Phần mềm khuyến nghị cài đặt thêm màn hình thứ 2 để sử dụng tính năng màn hình khách!");
         }
     }
 
@@ -233,7 +339,8 @@ public final class mainUiControl implements GUI_Interface {
     }
 
     public void CaiDat() {
-        panelNavigator.switchPanel(mainUI.panelDisplay, "CaiDat");
+//        panelNavigator.switchPanel(mainUI.panelDisplay, "CaiDat");
+        new StingJFame().setVisible(true);
     }
 
     @Override
@@ -271,7 +378,7 @@ public final class mainUiControl implements GUI_Interface {
         if (permissonLevel < 0) {
             mainUI.BtnDangXuat.setEnabled(true);
 //            DialogHelper.showDialog(frame, "");
-            DialogHelper.alert(frame, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
+            DialogHelper.alert(mainUI, "Tài khoản này đã bị khoá! Vui lòng liên hệ với quản trị.");
             System.out.println("vai lon?");
 //            System.exit();
 //            hideFrame(frame);

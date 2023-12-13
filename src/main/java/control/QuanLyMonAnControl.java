@@ -89,7 +89,7 @@ public class QuanLyMonAnControl {
                 return;
             }
 
-            String loaiMon = (String) panel.cboLoaiMon.getSelectedItem();
+            int loaiMon = panel.cboLoaiMon.getSelectedIndex();
             int trangThaiIndex = panel.cboTrangThai.getSelectedIndex();
             boolean trangThai = (trangThaiIndex == 1);
 
@@ -111,19 +111,19 @@ public class QuanLyMonAnControl {
             Food newFood = new Food();
             newFood.setName(tenMon);
             newFood.setPrice(giaMon);
-
+            newFood.setType(loaiMon);
             // Map the selected item from the combo box to the appropriate type
-            switch (loaiMon.toLowerCase()) {
-                case "food":
-                    newFood.setType("Food");
-                    break;
-                case "drink":
-                    newFood.setType("Drink");
-                    break;
-                case "dessert":
-                    newFood.setType("Dessert");
-                    break;
-            }
+//            switch (loaiMon.toLowerCase()) {
+//                case "food":
+//                    newFood.setType("Food");
+//                    break;
+//                case "drink":
+//                    newFood.setType("Drink");
+//                    break;
+//                case "dessert":
+//                    newFood.setType("Dessert");
+//                    break;
+//            }
 
             newFood.setIsLocked(trangThai);
             newFood.setImg(imgPath);
@@ -171,7 +171,7 @@ public class QuanLyMonAnControl {
         newFood.setDish_ID(dish_id);
         newFood.setName(panel.txtTenMon.getText());
         newFood.setPrice(Float.parseFloat(panel.txtGiaMon.getText()));
-        newFood.setType(panel.cboLoaiMon.getSelectedItem().toString());
+        newFood.setType(panel.cboLoaiMon.getSelectedIndex());
         switch (panel.cboTrangThai.getSelectedIndex()) {
             case 1:
                 newFood.setIsLocked(true);
