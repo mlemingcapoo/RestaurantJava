@@ -19,7 +19,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Food;
 import model.Order;
-import model.OrderDetails;
 import model.orderedDishes;
 
 /**
@@ -39,7 +38,7 @@ public class OrderControl {
     }
     static List<Food> food = new ArrayList<>();
     static List<Order> order = new ArrayList<>();
-    static List<OrderDetails> orderDetails = new ArrayList<>();
+//    static List<OrderDetails> orderDetails = new ArrayList<>();
     static List<orderedDishes> ordered = new ArrayList<>();
 
     OrderDAO daoOrder = new OrderDAO();
@@ -82,19 +81,20 @@ public class OrderControl {
     public void refreshAll() {
 
         foodModel.setRowCount(0);
-//        Thread dish = new Thread(() -> {
+        Thread dish = new Thread(() -> {
 //            getDishes();
         try {
             fetchDishes(order_choosen);
         } catch (Exception e) {
         }
-//        });
-//        dish.start();
+        });
+        dish.start();
 //        getPendingOrders();
         fillPendingOrders();
         getDishes();
         fillDishes();
         panel.spinnerAmount.setValue(1);
+        dish.interrupt();
     }
 
     public static void setSelectedRow(JTable table, int row) {
@@ -201,6 +201,7 @@ public class OrderControl {
                     try {
                         fetchDishes(order_choosen);
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             } catch (Exception e) {
@@ -317,6 +318,7 @@ public class OrderControl {
         }
 //        model.setRowCount(0);
         fillDishes();
+//        fillOrderForm(orderID);
     }
 
     private void fillDishes() {
@@ -337,8 +339,10 @@ public class OrderControl {
         System.out.println("order list size: " + order.size());
         int order_ID = -1;
         try {
-            if (order_ID<0) throw new IndexOutOfBoundsException();
             order_ID = order.get(selectedRow).getOrder_ID();
+            if (order_ID < 0) {
+                throw new IndexOutOfBoundsException();
+            }
             if (DialogHelper.confirm(panel, "Xác nhận xoá đơn hàng thứ " + (selectedRow + 1) + "?")) {
                 try {
                     OrderDetailsDAO.deleteAllDishes(order_ID);
@@ -354,6 +358,7 @@ public class OrderControl {
             }
         } catch (Exception e) {
             DialogHelper.alert(panel, "Chọn 1 Đơn hàng muốn Xoá/Huỷ");
+            e.printStackTrace();
         }
 
     }
@@ -364,12 +369,18 @@ public class OrderControl {
             order.clear();
             order = daoOrder.selectAllPending();
             System.out.println("order list size: " + order.size());
-            int order_ID = order.get(selectedRow).getOrder_ID();
+            int order_ID=-1;
+            try {
+                order_ID = order.get(selectedRow).getOrder_ID();
+            } catch (Exception e) {
+            }
             System.out.println("orderID in viewpending order: " + order_ID);
             order_choosen = order_ID;
             fetchDishes(order_ID);
+            fillOrderForm(selectedRow);
             System.out.println("viewPendingOrder got choosen ID: " + order_choosen);
         } catch (Exception ex) {
+            ex.printStackTrace();
             DialogHelper.alert(panel, "Không tìm thấy order nào, vui lòng kiểm tra kết nối!");
         }
     }
@@ -392,6 +403,7 @@ public class OrderControl {
     public void setNote(int selectedRow, String text) {
         try {
             daoOrder.setNote(selectedRow, text);
+            DialogHelper.alert(panel, "success?");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -414,6 +426,13 @@ public class OrderControl {
 
     }
 
-    
+    private void fillOrderForm(int selected) {
+        try {
+            panel.txtOrderNote.setText(order.get(selected).getNote());
+
+        } catch (Exception e) {
+//            e.printStackTrace();
+        }
+    }
 
 }
