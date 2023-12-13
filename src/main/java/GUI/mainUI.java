@@ -5,19 +5,12 @@
 package GUI;
 
 import control.mainUiControl;
-import frame.OrderPanel;
 import helper.RoundedCornerBorder;
 import helper.RoundedCornerBorder2;
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.event.WindowEvent;
-
-
 
 /**
  *
@@ -28,93 +21,12 @@ public final class mainUI extends javax.swing.JFrame {
     /**
      * Creates new form menuu
      */
-    int width;
-    int height;
-    OrderPanel QLBanHang = new OrderPanel();
     mainUiControl mainUI;
-    boolean isMinimized;
 
     public mainUI() {
         setUndecorated(true);
-        GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        width = graphicsDevice.getDisplayMode().getWidth();
-        height = graphicsDevice.getDisplayMode().getHeight();
-        y = width;
         initComponents();
-//        cardTrangChu.setVisible(true);
-        cardDisplayWrapper.setVisible(true);
-        jplMenuCover.setSize(410, 900);
-        this.setExtendedState(this.MAXIMIZED_BOTH);
-        System.out.println("chieu rong man hinh: " + width);
-        panelDisplay.setSize(width, height);
-        panelDisplay.add(QLBanHang, "BanHang");
         mainUI = new mainUiControl(this);
-        
-        this.addWindowStateListener((WindowEvent e) -> {
-            if((e.getNewState() & Frame.ICONIFIED) == Frame.ICONIFIED) {
-                isMinimized = true;
-            } else if(isMinimized && (e.getNewState() == Frame.NORMAL)) {
-                isMinimized = false;
-                this.setExtendedState(MAXIMIZED_BOTH);
-            }   });
-        BtnOrder.setForeground(Color.darkGray);
-        BtnOrder.setBorder(new RoundedCornerBorder());
-        BtnDatBan.setForeground(Color.darkGray);
-        BtnDatBan.setBorder(new RoundedCornerBorder());
-        BtnHoaDon.setForeground(Color.darkGray);
-        BtnHoaDon.setBorder(new RoundedCornerBorder());
-//        jLabel4.setIconTextGap(100);
-    }
-    static int x = 210;    //chieu rong
-    static int y = 300;    //chieu cao
-
-    
-    public static void openMenu() {
-
-        jplMenuCover.setSize(x, y);
-
-        if (x == 52) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-
-                        for (int i = 52; i <= 210; i++) {
-                            jplMenuCover.setSize(i, y);
-                            Thread.sleep(1);
-                        }
-
-                    } catch (Exception e) {
-                    }
-                }
-            }).start();
-            x = 210;
-        }
-    }
-    
-    
-
-    public static void closeMenu() {
-        jplMenuCover.setSize(x, y);
-        if (x == 210) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        for (int i = 210; i >= 52; i--) {
-                            jplMenuCover.setSize(i, y);
-                            Thread.sleep(1);
-                        
-                        }
-                        panelDisplay.repaint();
-//                        panelDisplayCustomer.revalidate();
-//                        toolBarSeparator.setVisible(true);
-                    } catch (Exception e) {
-                    }
-                }
-            }).start();
-            x = 52;
-        }
     }
 
     /**
@@ -643,7 +555,7 @@ public final class mainUI extends javax.swing.JFrame {
 
     private void lblCloseMenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMenuMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
     }//GEN-LAST:event_lblCloseMenuMouseReleased
 
     private void lblOpenMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpenMenu1MouseClicked
@@ -652,41 +564,41 @@ public final class mainUI extends javax.swing.JFrame {
 
     private void lblOpenMenu1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpenMenu1MouseReleased
         // TODO add your handling code here:
-        openMenu();
+        mainUI.openMenu();
 
     }//GEN-LAST:event_lblOpenMenu1MouseReleased
 
     private void BtnQuanLyNhanVienMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.QuanLyNhanVien();
     }//GEN-LAST:event_BtnQuanLyNhanVienMouseReleased
 
     private void BtnQuanLyDoanhThuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyDoanhThuMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.QuanLyDoanhThu();
     }//GEN-LAST:event_BtnQuanLyDoanhThuMouseReleased
 
     private void jplMenuCoverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMenuCoverMouseExited
         // TODO add your handling code here:
         System.out.println("mouse exited");
-        
+
     }//GEN-LAST:event_jplMenuCoverMouseExited
 
     private void jplMenuCoverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMenuCoverMouseEntered
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jplMenuCoverMouseEntered
 
     private void BtnQuanLyNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyNhanVienMouseEntered
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_BtnQuanLyNhanVienMouseEntered
 
     private void cardDisplayWrapperMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardDisplayWrapperMouseEntered
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
     }//GEN-LAST:event_cardDisplayWrapperMouseEntered
 
     private void BtnOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMouseEntered
@@ -718,18 +630,18 @@ public final class mainUI extends javax.swing.JFrame {
 
     private void BtnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrderActionPerformed
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.Order(this);
     }//GEN-LAST:event_BtnOrderActionPerformed
 
     private void panelProfilePhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_panelProfilePhotoMouseClicked
 
     private void panelProfilePhotoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.profile();
     }//GEN-LAST:event_panelProfilePhotoMouseReleased
 
@@ -747,12 +659,12 @@ public final class mainUI extends javax.swing.JFrame {
 
     private void BtnHoaDonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHoaDonMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
     }//GEN-LAST:event_BtnHoaDonMouseReleased
 
     private void BtnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHoaDonActionPerformed
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.HoaDon();
     }//GEN-LAST:event_BtnHoaDonActionPerformed
 
@@ -774,55 +686,55 @@ public final class mainUI extends javax.swing.JFrame {
 
     private void BtnDatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDatBanActionPerformed
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.DatBan();
     }//GEN-LAST:event_BtnDatBanActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.DangXuat();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.minimize(this);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void BtnQuanLyHoiVienMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyHoiVienMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.QuanLyHoiVien();
     }//GEN-LAST:event_BtnQuanLyHoiVienMouseReleased
 
     private void BtnQuanLyMonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyMonMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.QuanLyMon();
     }//GEN-LAST:event_BtnQuanLyMonMouseReleased
 
     private void BtnQuanLyVoucherMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyVoucherMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.QuanLyVoucher();
     }//GEN-LAST:event_BtnQuanLyVoucherMouseReleased
 
     private void BtnDangXuatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDangXuatMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.DangXuat();
     }//GEN-LAST:event_BtnDangXuatMouseReleased
 
     private void BtnCaiDatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCaiDatMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.CaiDat();
     }//GEN-LAST:event_BtnCaiDatMouseReleased
 
     private void BtnGioiThieuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGioiThieuMouseReleased
         // TODO add your handling code here:
-        closeMenu();
+        mainUI.closeMenu();
         mainUI.GioiThieu();
     }//GEN-LAST:event_BtnGioiThieuMouseReleased
 
