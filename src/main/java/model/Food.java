@@ -10,7 +10,7 @@ public class Food {
     private int dish_ID;
     private String name;
     private float price;
-    private String type;
+    private int type;
     private boolean isLocked;
     private String img;
     
@@ -47,11 +47,11 @@ public class Food {
         this.price = price;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
