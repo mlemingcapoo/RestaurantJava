@@ -44,7 +44,7 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lblTotalPayment = new javax.swing.JLabel();
         smileyFace = new javax.swing.JLabel();
-        cboTable = new javax.swing.JComboBox<>();
+        cboTableName = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -152,8 +152,8 @@ public class OrderPanel extends javax.swing.JPanel {
         smileyFace.setForeground(new java.awt.Color(51, 51, 51));
         smileyFace.setText("VND");
 
-        cboTable.setForeground(new java.awt.Color(0, 0, 0));
-        cboTable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Khách mang về", "Bàn...", " " }));
+        cboTableName.setForeground(new java.awt.Color(0, 0, 0));
+        cboTableName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Khách mang về", "Bàn...", " " }));
 
         jLabel6.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
         jLabel6.setText("GIAO ĐẾN BÀN...");
@@ -175,7 +175,7 @@ public class OrderPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(cboTable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cboTableName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -185,7 +185,7 @@ public class OrderPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addGap(2, 2, 2)
-                .addComponent(cboTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboTableName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -595,7 +595,7 @@ public class OrderPanel extends javax.swing.JPanel {
         txtTienKhachMat.setEditable(false);
         txtTienKhachMat.setBackground(new java.awt.Color(51, 51, 51));
         txtTienKhachMat.setForeground(new java.awt.Color(255, 255, 255));
-        txtTienKhachMat.setText("Chưa có hoá đơn");
+        txtTienKhachMat.setText("Chưa có");
         txtTienKhachMat.setMargin(null);
         txtTienKhachMat.setMaximumSize(null);
 
@@ -991,7 +991,7 @@ public class OrderPanel extends javax.swing.JPanel {
     public static javax.swing.JButton btnThanhtoan;
     public static javax.swing.JButton btnXoaOrder;
     public javax.swing.JComboBox<String> cboHinhThucThanhToan;
-    private javax.swing.JComboBox<String> cboTable;
+    public javax.swing.JComboBox<String> cboTableName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     public static javax.swing.JButton jButton9;
@@ -1021,7 +1021,7 @@ public class OrderPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JLabel lblTotalPayment;
+    public javax.swing.JLabel lblTotalPayment;
     public javax.swing.JLabel smileyFace;
     public javax.swing.JSpinner spinnerAmount;
     public javax.swing.JTable tblDSDangOrder;

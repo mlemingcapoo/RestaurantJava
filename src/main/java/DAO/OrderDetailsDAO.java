@@ -82,12 +82,16 @@ public class OrderDetailsDAO extends SQL<OrderDetails, String> {
     }
 
     public Double calculateTotalPrice(int order_choosen) throws Exception {
+        Double totalPrice = 0.0;
+        try{
 //        DBHelper.executeProc("calculateTotalPriceByOrderID",order_choosen);
         ResultSet query = DBHelper.query("SELECT calculateTotalPriceByOrderID(" + order_choosen + ")");
-        Double totalPrice = 0.0;
+            totalPrice = 0.0;
         while (query.next()) {
             totalPrice = query.getDouble(1);
             System.out.println("Total orders: " + totalPrice);
+        }}catch(Exception e){
+//            e.printStackTrace();
         }
         return totalPrice;
     }

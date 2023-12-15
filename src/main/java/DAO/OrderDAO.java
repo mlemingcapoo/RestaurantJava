@@ -41,6 +41,7 @@ public class OrderDAO extends SQL<Order, String> {
                 newOrder.setBill_ID(rs.getInt(2));
                 newOrder.setNote(rs.getString(3));
                 newOrder.setIsCompleted(rs.getBoolean(4));
+                newOrder.setDateCreated(rs.getString(5));
                 list.add(newOrder);
             }
 //            System.out.println("OrderID at index 0: " + list.get(0).getOrder_ID());;
@@ -64,7 +65,7 @@ public class OrderDAO extends SQL<Order, String> {
             newOrder.setBill_ID(rs.getInt(2));
             newOrder.setNote(rs.getString(3));
             newOrder.setIsCompleted(rs.getBoolean(4));
-            newOrder.setDateCreated(rs.getDate(5));
+            newOrder.setDateCreated(rs.getString(5));
             list.add(newOrder);
         }
         System.out.println("orderID at index 0: " + list.get(0).getOrder_ID());;

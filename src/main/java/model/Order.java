@@ -2,8 +2,6 @@
 
 package model;
 
-import java.sql.Date;
-
 /**
  *
  * @author capoo
@@ -13,7 +11,7 @@ public class Order {
     private int bill_ID;
     private String note;
     private boolean isCompleted;
-    private Date dateCreated;
+    private String dateCreated;
 
     public int getOrder_ID() {
         return order_ID;
@@ -47,11 +45,11 @@ public class Order {
         this.note = note;
     }
 
-    public void setDateCreated(Date date) {
+    public void setDateCreated(String date) {
         this.dateCreated = date;
     }
     
-    public Date getDateCreated(){
+    public String getDateCreated(){
         return dateCreated;
     } 
     

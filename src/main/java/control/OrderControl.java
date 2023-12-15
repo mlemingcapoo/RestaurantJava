@@ -1,10 +1,11 @@
 package control;
 
 import DAO.FoodDAO;
-import DAO.JDBCManager;
 import DAO.OrderDAO;
 import DAO.OrderDetailsDAO;
+import DAO.TableDAO;
 import GUI.mainUI;
+import static control.TableControl.tables;
 import frame.OrderPanel;
 import frame.ThanhToanJDialog;
 import helper.DialogHelper;
@@ -12,10 +13,11 @@ import helper.FoodHelper;
 import helper.LoadImageTask;
 import helper.LoadingHelper;
 import helper.imgHelper;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -24,6 +26,7 @@ import javax.swing.table.TableColumn;
 import model.Food;
 import model.FoodType;
 import model.Order;
+import model.Tables;
 import model.orderedDishes;
 import util.SQLThread;
 
@@ -51,6 +54,7 @@ public class OrderControl {
     OrderDAO daoOrder = new OrderDAO();
     FoodDAO dao = new FoodDAO();
     OrderDetailsDAO daoOrderDetails = new OrderDetailsDAO();
+    TableDAO daoTables = new TableDAO();
 
     static Scan_QR_Control scanqr = new Scan_QR_Control();
     private static OrderPanel panel;
@@ -80,6 +84,15 @@ public class OrderControl {
             System.out.println("viewing laste record");
             System.out.println("order choosen in init: " + order_choosen);
 //            panel.revalidate();
+            new Thread(() -> {
+                try {
+
+                    fillTables();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,13 +101,13 @@ public class OrderControl {
 //        panel.tblDSMonAn.getColumnModel().getColumn(3).setPreferredWidth(80);
 //        panel.tblDSMonAn.getColumnModel().getColumn(3).setWidth(50);
 
-        try {
-            JDBCManager.closeConnection();
-            new SQLThread().main(null);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            JDBCManager.closeConnection();
+//            new SQLThread().main(null);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void refreshAll() {
@@ -233,8 +246,8 @@ public class OrderControl {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
-        loading.setLoadingStatus(false);
+
+            loading.setLoadingStatus(false);
         }).start();
 
     }
@@ -243,48 +256,46 @@ public class OrderControl {
         LoadingHelper loading = new LoadingHelper("Removing");
         loading.setLoadingStatus(true);
         new Thread(() -> {
-    try {
-        int orderID = -1;
-        int quantity = -1;
-        int dishID = -1;
-        try {
-            fetchDishes(order_choosen);
-        } catch (Exception e) {
-            throw e;
-        }
-        try {
-            System.out.println("removeDish clicked: " + selectedRow);
-            orderID = order_choosen;
-            System.out.println("order chosen: " + order_choosen);
-            quantity = count;
-            dishID = ordered.get(selectedRow).getDish_ID();
-            System.out.println("dishID chosen: " + dishID);
-        } catch (IndexOutOfBoundsException e) {
-            DialogHelper.alert(parentFrame, "Chọn 1 loại món để xoá khỏi DS các món đã order");
-        }
-        try {
-            daoOrderDetails.removeDishByID(orderID, quantity, dishID);
-        } catch (Exception e) {
-            throw e;
-        } finally {
+            try {
+                int orderID = -1;
+                int quantity = -1;
+                int dishID = -1;
+                try {
+                    fetchDishes(order_choosen);
+                } catch (Exception e) {
+                    throw e;
+                }
+                try {
+                    System.out.println("removeDish clicked: " + selectedRow);
+                    orderID = order_choosen;
+                    System.out.println("order chosen: " + order_choosen);
+                    quantity = count;
+                    dishID = ordered.get(selectedRow).getDish_ID();
+                    System.out.println("dishID chosen: " + dishID);
+                } catch (IndexOutOfBoundsException e) {
+                    DialogHelper.alert(parentFrame, "Chọn 1 loại món để xoá khỏi DS các món đã order");
+                }
+                try {
+                    daoOrderDetails.removeDishByID(orderID, quantity, dishID);
+                } catch (Exception e) {
+                    throw e;
+                } finally {
 //            refreshAll();
 //            getPendingOrders();
-            try {
-                fetchDishes(order_choosen);
-                loading.setLoadingStatus(false);
+                    try {
+                        fetchDishes(order_choosen);
+                        loading.setLoadingStatus(false);
+                    } catch (Exception e) {
+                        throw e;
+                    }
+                }
             } catch (Exception e) {
-                throw e;
+                LoadingHelper loading1 = new LoadingHelper("Mất kết nối");
+                loading.setLoadingStatus(true);
+                new SQLThread().main(null);
+                e.printStackTrace();
             }
-        }
-    } catch (Exception e) {
-        LoadingHelper loading1 = new LoadingHelper("Mất kết nối");
-        loading.setLoadingStatus(true);
-        new SQLThread().main(null);
-        e.printStackTrace();
-    }
-}).start();
-
-        
+        }).start();
 
     }
 
@@ -337,7 +348,7 @@ public class OrderControl {
             model.addRow(row);
             count++;
         }
-        calculateTotalPrice(order_choosen);
+
     }
 
     private void fetchDishes(int orderID) throws SQLException, Exception {
@@ -349,9 +360,12 @@ public class OrderControl {
                     ordered.clear();
                     ordered = daoOrderDetails.getOrderedDish(orderID);
                     System.out.println("Hện có " + ordered.size() + " số order con trong orderID: " + orderID);
-                    fillDishes();
+
                 } catch (Exception e) {
                     System.out.println("order này trống.");
+//                    fillDishes();
+                } finally {
+                    fillDishes();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -359,9 +373,7 @@ public class OrderControl {
         }).start();
 
 //        model.setRowCount(0);
-        
 //        fillOrderForm(orderID);
-
     }
 
     private void fillDishes() {
@@ -429,7 +441,17 @@ public class OrderControl {
                 }
                 fillOrderForm(selectedRow);
                 System.out.println("viewPendingOrder got choosen ID: " + order_choosen);
-                loading.setLoadingStatus(false);
+                final int orderid = order_ID;
+                new Thread(() -> {
+                    try {
+                        String pricee = calculateTotalPrice(orderid).toString();
+                        panel.lblTotalPayment.setText(pricee);
+                        panel.txtTienKhachMat.setText(pricee);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+
             }).start();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -471,8 +493,37 @@ public class OrderControl {
         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void calculateTotalPrice(int order_choosen) {
-//        Double price = daoOrderDetails.calculateTotalPrice(order_choosen);
+    private Double calculateTotalPrice(int order_choosen) {
+        LoadingHelper loading = new LoadingHelper("Updating");
+        Double price = 0.0;
+        try {
+            price = daoOrderDetails.calculateTotalPrice(order_choosen);
+            loading.setLoadingStatus(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return price;
+    }
+
+    public void fillTables() {
+        panel.cboTableName.removeAllItems();
+        System.out.println("filling table tabe...");
+//        DefaultTableModel model = (DefaultTableModel) panel.tblListBan.getModel();
+//        model.setRowCount(0);
+        tables.clear();
+        tables = daoTables.selectAll();
+        for (Tables fd : tables) {
+//            int listOrder = 0;
+            try {
+                System.out.println("searching orderamount table tabe...");
+//                listOrder = dao.getOrderListByTableID(fd.getTable_ID());
+            } catch (Exception ex) {
+                System.out.println("what table? " + ex.getMessage());
+            }
+//            Object[] row = new Object[]{fd.getTable_ID(), fd.getTableName(), listOrder};
+//            model.addRow(row);
+            panel.cboTableName.addItem(fd.getTableName());
+        }
     }
 
     private void setImg(DefaultTableModel model, int rowIndex, String imgLink) {
@@ -494,7 +545,7 @@ public class OrderControl {
 
     private String getTotalAmount(int order_ID) {
         Double amount = 0.1;
-
+        amount = calculateTotalPrice(order_ID);
         return amount.toString();
     }
 
@@ -506,15 +557,18 @@ public class OrderControl {
         return null;
     }
 
-    private String getDate(Date dateCreated) {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM");
-        String format = "?";
+    private String getDate(String dateCreated) {
+        System.out.println("date: " + dateCreated);
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        String formattedDate = "?";
         try {
-            format = sdf.format(dateCreated);
-        } catch (Exception e) {
-            e.getMessage();
+            Date date = inputFormat.parse(dateCreated);
+            formattedDate = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        return format;
+        return formattedDate;
     }
 
 }

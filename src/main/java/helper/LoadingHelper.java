@@ -47,6 +47,7 @@ public class LoadingHelper<T extends Component> {
     }
 
     public void setLoadingStatus(boolean isLoading) {
+        try{
         if (isLoading) {
 
             ImageIcon gif = new ImageIcon(getClass().getResource("/images/loading.gif"));
@@ -58,6 +59,9 @@ public class LoadingHelper<T extends Component> {
         } else {
             loadingIndicator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Accept.png"))); // NOI18N
             loadingIndicator.setText("Updated");
+        }
+        }catch(Exception e){
+            System.out.println("line 64 loading helper: "+e.getMessage());
         }
     }
 
