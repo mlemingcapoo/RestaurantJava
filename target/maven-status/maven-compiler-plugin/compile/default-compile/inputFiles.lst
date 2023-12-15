@@ -43,11 +43,13 @@
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/DoiMatKhau.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/startControl.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/GUI/CustomerScreen.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/loadingFrame.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/DAO/FoodDAO.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/QuanLyHoiVienControl.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/DAO/SQL.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/GUI/mainUI.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/model/Music.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/helper/LoadingHelper.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/DAO/OrderDetailsDAO.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/TableControl.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/helper/LoadImageTask.java

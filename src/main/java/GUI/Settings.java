@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package GUI;
+
+import helper.DialogHelper;
+import helper.LoadingHelper;
 import java.util.Properties;
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -14,6 +17,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +32,75 @@ public class Settings extends javax.swing.JDialog {
     public Settings(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public void sendMail() {
+        final String username = "infobasil.click@gmail.com";
+        final String password = "c g x u h r y g v j z p e x l q ";
+
+        // Cấu hình các thuộc tính cho việc gửi email
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); // Kích hoạt TLS
+
+        // Tạo phiên làm việc (Session) sử dụng thông tin đăng nhập
+        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            // Tạo đối tượng Message để xây dựng nội dung email
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+
+            // Chia các địa chỉ email thành mảng và thêm vào message
+            String[] toRecipients = txtMailto.getText().split(",");
+            InternetAddress[] toAddresses = new InternetAddress[toRecipients.length];
+            for (int i = 0; i < toRecipients.length; i++) {
+                toAddresses[i] = new InternetAddress(toRecipients[i].trim());
+            }
+            message.setRecipients(Message.RecipientType.TO, toAddresses);
+
+            // Kiểm tra xem có địa chỉ email CC hay không
+            String ccInput = txtCC.getText().trim();
+            if (!ccInput.isEmpty()) {
+                // Nếu có địa chỉ email CC, chia thành mảng và thêm vào message
+                String[] ccRecipients = ccInput.split(",");
+                InternetAddress[] ccAddresses = new InternetAddress[ccRecipients.length];
+                for (int i = 0; i < ccRecipients.length; i++) {
+                    ccAddresses[i] = new InternetAddress(ccRecipients[i].trim());
+                }
+                message.setRecipients(Message.RecipientType.CC, ccAddresses);
+            }
+
+            message.setSubject(txtNdchinh.getText());
+
+            // Tạo phần nội dung email dạng multipart
+            MimeMultipart multipart = new MimeMultipart();
+
+            // Thêm phần văn bản vào email
+            BodyPart textPart = new MimeBodyPart();
+            textPart.setText(txtNdchinh.getText());
+            multipart.addBodyPart(textPart);
+
+            // Đặt nội dung của email là phần nội dung multipart vừa tạo
+            message.setContent(multipart);
+
+            // Gửi email
+            Transport.send(message);
+
+            // Hiển thị thông báo khi gửi thành công
+            JOptionPane.showMessageDialog(this, "done");
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            DialogHelper.alert(this, "Vui lòng nhập đủ thông tin\n" + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -204,72 +277,23 @@ public class Settings extends javax.swing.JDialog {
     }//GEN-LAST:event_txtndActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        final String username = "infobasil.click@gmail.com";
-        final String password = "c g x u h r y g v j z p e x l q ";
 
-        // Cấu hình các thuộc tính cho việc gửi email
-        Properties prop = new Properties();
-        prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", "587");
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.starttls.enable", "true"); // Kích hoạt TLS
+        new Thread(() -> {
+            try {
 
-        // Tạo phiên làm việc (Session) sử dụng thông tin đăng nhập
-        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                LoadingHelper<JDialog> helper = new LoadingHelper<>(this,"Sending mail...");
+                helper.showLoadingDialog();
+
+                jButton2.setEnabled(false);
+                Thread.sleep(5000);
+//                sendMail();
+                jButton2.setEnabled(true);
+                helper.done();
+                
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        });
-
-        try {
-            // Tạo đối tượng Message để xây dựng nội dung email
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-
-            // Chia các địa chỉ email thành mảng và thêm vào message
-            String[] toRecipients = txtMailto.getText().split(",");
-            InternetAddress[] toAddresses = new InternetAddress[toRecipients.length];
-            for (int i = 0; i < toRecipients.length; i++) {
-                toAddresses[i] = new InternetAddress(toRecipients[i].trim());
-            }
-            message.setRecipients(Message.RecipientType.TO, toAddresses);
-
-            // Kiểm tra xem có địa chỉ email CC hay không
-            String ccInput = txtCC.getText().trim();
-            if (!ccInput.isEmpty()) {
-                // Nếu có địa chỉ email CC, chia thành mảng và thêm vào message
-                String[] ccRecipients = ccInput.split(",");
-                InternetAddress[] ccAddresses = new InternetAddress[ccRecipients.length];
-                for (int i = 0; i < ccRecipients.length; i++) {
-                    ccAddresses[i] = new InternetAddress(ccRecipients[i].trim());
-                }
-                message.setRecipients(Message.RecipientType.CC, ccAddresses);
-            }
-
-            message.setSubject(txtNdchinh.getText());
-
-            // Tạo phần nội dung email dạng multipart
-            MimeMultipart multipart = new MimeMultipart();
-
-            // Thêm phần văn bản vào email
-            BodyPart textPart = new MimeBodyPart();
-            textPart.setText(txtNdchinh.getText());
-            multipart.addBodyPart(textPart);
-
-            // Đặt nội dung của email là phần nội dung multipart vừa tạo
-            message.setContent(multipart);
-
-            // Gửi email
-            Transport.send(message);
-
-            // Hiển thị thông báo khi gửi thành công
-            JOptionPane.showMessageDialog(this, "done");
-            System.out.println("Done");
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-
+        }).start();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

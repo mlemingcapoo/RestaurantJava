@@ -3,9 +3,11 @@ package control;
 import DAO.AuthenticateDAO;
 import GUI.mainUI;
 import helper.DialogHelper;
+import helper.LoadingHelper;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -18,9 +20,18 @@ public class loginControl {
     private static GUI.login login;
     AuthenticateDAO auth = new AuthenticateDAO();
     boolean isLoggedIn = false;
+    
 
     public void login(JTextField User, JPasswordField Pass) {
-        if (validated()) {
+        new Thread(() -> {
+            try {
+
+                LoadingHelper<JFrame> helper = new LoadingHelper<>(login,"Đang đăng nhập...\nVui lòng đợi");
+                helper.showLoadingDialog();
+
+//                 jButton2.setEnabled(false);
+                //action
+                if (validated()) {
 
             boolean connectionResetted = false;
 //            try {
@@ -45,6 +56,18 @@ public class loginControl {
                 DialogHelper.alert(login, "Thông tin đăng nhập không đúng!");
             }
         }
+//                 jButton2.setEnabled(true);
+                helper.done();
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+        
+        
+        
+        
+        
 
     }
 
