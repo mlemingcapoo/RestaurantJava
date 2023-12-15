@@ -64,6 +64,7 @@ public class OrderDAO extends SQL<Order, String> {
             newOrder.setBill_ID(rs.getInt(2));
             newOrder.setNote(rs.getString(3));
             newOrder.setIsCompleted(rs.getBoolean(4));
+            newOrder.setDateCreated(rs.getDate(5));
             list.add(newOrder);
         }
         System.out.println("orderID at index 0: " + list.get(0).getOrder_ID());;
@@ -99,8 +100,8 @@ public class OrderDAO extends SQL<Order, String> {
         return list;
     }
 
-    public void setNote(int selectedRow, String text) {
-        DBHelper.update(UPDATE_ORDER, selectedRow,text);
+    public void setNote(int order_ID, String text) {
+        DBHelper.update(UPDATE_ORDER, text,order_ID);
     }
 
 }

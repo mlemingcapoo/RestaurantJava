@@ -375,12 +375,6 @@ public final class mainUiControl implements GUI_Interface {
                 OrderControl control = new OrderControl(aThis);
                 control.init(QLBanHang);
                 mainUI.btnOrder.setEnabled(true);
-//                LoadingHelper<JDialog> helper = new LoadingHelper<>(this,"Sending mail...");
-//                helper.showLoadingDialog();
-//                 jButton2.setEnabled(false);
-                //action
-//                 jButton2.setEnabled(true);
-//                helper.done();
             } catch (Exception e) {
                 e.printStackTrace();
             }

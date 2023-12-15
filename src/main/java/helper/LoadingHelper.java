@@ -23,7 +23,12 @@ public class LoadingHelper<T extends Component> {
     }
     
     public LoadingHelper(String info) {
+        try {
         loadingIndicator.setText(info);
+            
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 
     public void showLoadingDialog() {

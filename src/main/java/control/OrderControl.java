@@ -12,7 +12,9 @@ import helper.FoodHelper;
 import helper.LoadImageTask;
 import helper.LoadingHelper;
 import helper.imgHelper;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JSpinner;
@@ -55,6 +57,7 @@ public class OrderControl {
     FoodDAO foodDao = new FoodDAO();
     DefaultTableModel foodModel = new DefaultTableModel();
     int selectedOrder;
+    Double totalAmount;
 
     private static int order_choosen;
 
@@ -88,7 +91,7 @@ public class OrderControl {
         try {
             JDBCManager.closeConnection();
             new SQLThread().main(null);
-                    
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -194,6 +197,8 @@ public class OrderControl {
     }
 
     public void addDish(int selectedRow, int count) {
+        LoadingHelper loading = new LoadingHelper("Adding");
+        loading.setLoadingStatus(true);
         new Thread(() -> {
             try {
 //                getDishes();
@@ -214,6 +219,9 @@ public class OrderControl {
                 } catch (Exception e) {
 //                    DialogHelper.alert(panel, );
                     System.out.println(e.getMessage());
+                    LoadingHelper loading1 = new LoadingHelper("Add Failed");
+                    loading.setLoadingStatus(true);
+                    new SQLThread().main(null);
                 } finally {
 //                    refreshAll();
                     try {
@@ -225,17 +233,24 @@ public class OrderControl {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            
+        loading.setLoadingStatus(false);
         }).start();
 
     }
 
     public void removeDishFromOrder(int selectedRow, int count) {
+        LoadingHelper loading = new LoadingHelper("Removing");
+        loading.setLoadingStatus(true);
+        new Thread(() -> {
+    try {
         int orderID = -1;
         int quantity = -1;
         int dishID = -1;
         try {
             fetchDishes(order_choosen);
         } catch (Exception e) {
+            throw e;
         }
         try {
             System.out.println("removeDish clicked: " + selectedRow);
@@ -250,15 +265,26 @@ public class OrderControl {
         try {
             daoOrderDetails.removeDishByID(orderID, quantity, dishID);
         } catch (Exception e) {
-            DialogHelper.alert(panel, e.getMessage());
+            throw e;
         } finally {
 //            refreshAll();
 //            getPendingOrders();
             try {
                 fetchDishes(order_choosen);
+                loading.setLoadingStatus(false);
             } catch (Exception e) {
+                throw e;
             }
         }
+    } catch (Exception e) {
+        LoadingHelper loading1 = new LoadingHelper("Mất kết nối");
+        loading.setLoadingStatus(true);
+        new SQLThread().main(null);
+        e.printStackTrace();
+    }
+}).start();
+
+        
 
     }
 
@@ -307,38 +333,35 @@ public class OrderControl {
         model.setRowCount(0);
         int count = 1;
         for (Order od : order) {
-            Object[] row = new Object[]{count, od.getOrder_ID(), od.getNote()};
+            Object[] row = new Object[]{count, od.getOrder_ID(), od.getNote(), getTotalAmount(od.getOrder_ID()), getTableName(od.getOrder_ID()), getStatus(od.isIsCompleted()), getDate(od.getDateCreated())};
             model.addRow(row);
             count++;
         }
         calculateTotalPrice(order_choosen);
     }
 
-//    private void fillDishedFromOrder(){
-//        System.out.println("Hện có " + ordered.size() + " đơn chưa hoàn tất, hoặc mới tạo");
-//        DefaultTableModel model = (DefaultTableModel) panel.tblDSOrderDangLam.getModel();
-//        model.setRowCount(0);
-//        int count =1;
-//        for (orderedDishes od : ordered) {
-//            Object[] row = new Object[]{count,od.get};
-//            model.addRow(row);
-//            count++;
-//        }
-//    }
     private void fetchDishes(int orderID) throws SQLException, Exception {
         LoadingHelper loading = new LoadingHelper("Đang tải");
         loading.setLoadingStatus(true);
-        try {
-            ordered.clear();
-            ordered = daoOrderDetails.getOrderedDish(orderID);
-            System.out.println("Hện có " + ordered.size() + " số order con trong orderID: " + orderID);
-        } catch (Exception e) {
-            System.out.println("order này trống.");
-        }
+        new Thread(() -> {
+            try {
+                try {
+                    ordered.clear();
+                    ordered = daoOrderDetails.getOrderedDish(orderID);
+                    System.out.println("Hện có " + ordered.size() + " số order con trong orderID: " + orderID);
+                    fillDishes();
+                } catch (Exception e) {
+                    System.out.println("order này trống.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
 //        model.setRowCount(0);
-        fillDishes();
+        
 //        fillOrderForm(orderID);
-//        loading.setLoadingStatus(false);
+
     }
 
     private void fillDishes() {
@@ -350,6 +373,7 @@ public class OrderControl {
             model.addRow(row);
             count++;
         }
+
     }
 
     public void deletePendingOrderClicked(int selectedRow) {
@@ -384,21 +408,29 @@ public class OrderControl {
     }
 
     public void viewPendingOrderClicked(int selectedRow) {
-        selectedOrder = selectedRow;
+        LoadingHelper loading = new LoadingHelper("Fetching...");
         try {
-            order.clear();
-            order = daoOrder.selectAllPending();
-            System.out.println("order list size: " + order.size());
-            int order_ID = -1;
-            try {
-                order_ID = order.get(selectedRow).getOrder_ID();
-            } catch (Exception e) {
-            }
-            System.out.println("orderID in viewpending order: " + order_ID);
-            order_choosen = order_ID;
-            fetchDishes(order_ID);
-            fillOrderForm(selectedRow);
-            System.out.println("viewPendingOrder got choosen ID: " + order_choosen);
+            new Thread(() -> {
+                selectedOrder = selectedRow;
+                order.clear();
+                order = daoOrder.selectAllPending();
+                System.out.println("order list size: " + order.size());
+                int order_ID = -1;
+                try {
+                    order_ID = order.get(selectedRow).getOrder_ID();
+                } catch (Exception e) {
+                }
+                System.out.println("orderID in viewpending order: " + order_ID);
+                order_choosen = order_ID;
+                try {
+                    fetchDishes(order_ID);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                fillOrderForm(selectedRow);
+                System.out.println("viewPendingOrder got choosen ID: " + order_choosen);
+                loading.setLoadingStatus(false);
+            }).start();
         } catch (Exception ex) {
             ex.printStackTrace();
             DialogHelper.alert(panel, "Không tìm thấy order nào, vui lòng kiểm tra kết nối!");
@@ -421,9 +453,14 @@ public class OrderControl {
     }
 
     public void setNote(int selectedRow, String text) {
+        LoadingHelper load = new LoadingHelper("Saving...");
+        int order_ID = order_choosen;
         try {
-            daoOrder.setNote(selectedRow, text);
-            DialogHelper.alert(panel, "success?");
+
+            daoOrder.setNote(order_ID, text);
+            DialogHelper.alert(panel, "Đã lưu note!");
+            fillDishes();
+            load.setLoadingStatus(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -453,6 +490,31 @@ public class OrderControl {
         } catch (Exception e) {
 //            e.printStackTrace();
         }
+    }
+
+    private String getTotalAmount(int order_ID) {
+        Double amount = 0.1;
+
+        return amount.toString();
+    }
+
+    private String getStatus(boolean isCompleted) {
+        return isCompleted ? "Đã hoàn thành" : "Chưa xong";
+    }
+
+    private String getTableName(int order_ID) {
+        return null;
+    }
+
+    private String getDate(Date dateCreated) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM");
+        String format = "?";
+        try {
+            format = sdf.format(dateCreated);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return format;
     }
 
 }

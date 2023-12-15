@@ -20,15 +20,17 @@ public class SQLThread implements Runnable {
             load.setLoadingStatus(false);
         } catch (Exception e) {
             LoadingHelper load = new LoadingHelper("Mất kết nối");
+            load.setLoadingStatus(true);
             System.out.println(e.toString());
             while (true) {
                 System.out.println("trying.... to recommect....");
                 try {
-                    Thread.sleep(5000);
+                    JDBCManager.closeConnection();
+                    Thread.sleep(2000);
                     new SQLThread().main(null);
                     break;
                 } catch (Exception e1) {
-
+                    
                 }
             }
         }

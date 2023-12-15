@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public class JDBCManager {
     
-    private static final String url = "jdbc:mariadb://103.252.137.126:3306/"; // MySQL URL and port
+    private static final String url = "jdbc:mariadb://103.252.137.187:3306/"; // MySQL URL and port
     private static final String db_name = "hnguyenmanhidvn_DuAn1"; // Database name
     private static final String usr = "hnguyenmanhidvn_DuAn1"; // Database username
     private static final String psw = "hnguyenmanhidvn_DuAn1"; // Database password
