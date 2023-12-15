@@ -17,10 +17,11 @@ public class BillDAO extends SQL<Bill, String> {
 //    String INSERT_SQL = "INSERT INTO Food(MaNV, Password, FullName, Role) VALUES(?,?,?,?)";
 //    String UPDATE_SQL = "UPDATE Food SET Password = ?, FullName = ?, Role = ? WHERE MaNV = ?";
 
-    String DELETE_SQL = "DELETE FROM `Bill` WHERE order_ID = ?";
+    String DELETE_SQL = "DELETE FROM `Bill` WHERE bill_ID = ?";
 
     String SELECT_ALL_SQL = "SELECT * FROM Bill";
-    String SELECT_ALL_PENDING_SQL = "SELECT * from `Bill` WHERE `Bill`.isCompleted = 0;";
+    String SELECT_ALL_PENDING_SQL = "SELECT * from `Bill` WHERE `Bill`.status = 0;";
+    String SELECT_ALL_PAID_SQL = "SELECT * from `Bill` WHERE `Bill`.status = 1;";
 //    String SELECT_BY_ID_SQL = "SELECT * FROM Food WHERE FoodID = ?";
 
     @Override
@@ -43,6 +44,7 @@ public class BillDAO extends SQL<Bill, String> {
                 newBill.setMa_KH(rs.getInt(6));
                 newBill.setVCode(rs.getString(7));
                 newBill.setBillCode(rs.getString(8));
+                newBill.setStatus(rs.getInt(9));
                 list.add(newBill);
             }
 //            System.out.println("BillID at index 0: " + list.get(0).getBill_ID());;
@@ -59,6 +61,10 @@ public class BillDAO extends SQL<Bill, String> {
 
     public List<Bill> selectAllPending() {
         return this.selectBySQL(SELECT_ALL_PENDING_SQL);
+    }
+    
+    public List<Bill> selectAllPaid() {
+        return this.selectBySQL(SELECT_ALL_PAID_SQL);
     }
 
     public void delete(int order_ID) {
@@ -82,5 +88,9 @@ public class BillDAO extends SQL<Bill, String> {
 
     public static void deleteAllDishes(int order_ID) throws Exception{
         DBHelper.executeProc("deleteAllDishesByOrderID",order_ID);
+    }
+
+    public void addBill(int orderID,int userID, double amount, String billDate, String note, int ma_kh, String VCode, String billCode) throws Exception{
+        DBHelper.executeProc("addBill",orderID,userID,amount,billDate,note,ma_kh,VCode,billCode);
     }
 }

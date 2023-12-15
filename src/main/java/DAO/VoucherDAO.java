@@ -17,6 +17,7 @@ public class VoucherDAO extends SQL<Voucher, String> {
     String SELECT_ALL_SQL = "SELECT * FROM Voucher";
     String INSERT_SQL = "CALL ThemVoucher(?,?,?)";
     String UPDATE_SQL="CALL SuaVoucher(?,?,?)";
+    String SELECT_PERCENT="SELECT discountPercent FROM Voucher WHERE VCode like ?";
 
     @Override
     public List<Voucher> selectAll() {
@@ -57,6 +58,20 @@ public class VoucherDAO extends SQL<Voucher, String> {
 
     public void deleteById(int voucher) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Double getDiscountPercent(String voucher) {
+        Double percent=0.0;
+        try {
+            ResultSet rs = DBHelper.query(SELECT_PERCENT, voucher);
+            while(rs.next()){
+                percent = rs.getDouble(1);
+                break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return percent;
     }
 
 }

@@ -12,13 +12,18 @@ import helper.DialogHelper;
 import helper.FoodHelper;
 import helper.LoadImageTask;
 import helper.LoadingHelper;
+import helper.NumberHelper;
 import helper.imgHelper;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +31,7 @@ import javax.swing.table.TableColumn;
 import model.Food;
 import model.FoodType;
 import model.Order;
+import model.OrdersWithTable;
 import model.Tables;
 import model.orderedDishes;
 import util.SQLThread;
@@ -45,23 +51,26 @@ public class OrderControl {
     public OrderControl() {
 
     }
+    private static OrderPanel panel;
+    
     static List<Food> food = new ArrayList<>();
     static List<Order> order = new ArrayList<>();
     static List<FoodType> types = new ArrayList<>();
 //    static List<OrderDetails> orderDetails = new ArrayList<>();
+    static List<OrdersWithTable> orderWithTable = new ArrayList<>();
     static List<orderedDishes> ordered = new ArrayList<>();
 
-    OrderDAO daoOrder = new OrderDAO();
-    FoodDAO dao = new FoodDAO();
     OrderDetailsDAO daoOrderDetails = new OrderDetailsDAO();
     TableDAO daoTables = new TableDAO();
+    OrderDAO daoOrder = new OrderDAO();
+    FoodDAO dao = new FoodDAO();
+    FoodDAO foodDao = new FoodDAO();
+    
 
     static Scan_QR_Control scanqr = new Scan_QR_Control();
-    private static OrderPanel panel;
-    FoodDAO foodDao = new FoodDAO();
     DefaultTableModel foodModel = new DefaultTableModel();
-    int selectedOrder;
-    Double totalAmount;
+    static int selectedOrder;
+    static Double totalAmount;
 
     private static int order_choosen;
 
@@ -88,6 +97,7 @@ public class OrderControl {
                 try {
 
                     fillTables();
+                    
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -111,7 +121,7 @@ public class OrderControl {
     }
 
     public void refreshAll() {
-
+        fetchTables();
         foodModel.setRowCount(0);
         Thread dish = new Thread(() -> {
 //            getDishes();
@@ -139,7 +149,7 @@ public class OrderControl {
     public void getDishes() {
 
         food.clear();
-        food = dao.selectAll();
+        food = dao.selectAllUnlocked();
         types.clear();
         types = foodDao.getTypeNameList();
         System.out.println("Hện có " + food.size() + " món ăn");
@@ -148,7 +158,8 @@ public class OrderControl {
 
         int rowIndex = 0;
         for (Food fd : food) {
-            Object[] row = {fd.getName(), fd.getPrice(), FoodHelper.getTypeName(fd.getType(), types)};
+
+            Object[] row = {fd.getName(), NumberHelper.formatNumber(fd.getPrice().toString()), FoodHelper.getTypeName(fd.getType(), types)};
             model.addRow(row);
             rowIndex++;
         }
@@ -167,7 +178,7 @@ public class OrderControl {
 //        order_choosen;
 //        order ;
         ThanhToanControl control2 = new ThanhToanControl(parentFrame);
-        control2.setOrder(panel.txtSDTHoiVien.getText(), panel.txtMaVocher.getText(), order_choosen, panel.cboHinhThucThanhToan.getSelectedItem().toString());
+        control2.setOrder(panel.txtSDTHoiVien.getText(), panel.txtMaVocher.getText(), order_choosen, panel.cboHinhThucThanhToan.getSelectedItem().toString(), panel.lblTotalPayment.getText(), panel.cboTableName.getSelectedItem().toString());
         ThanhToanJDialog pay = new ThanhToanJDialog(parentFrame, true, control2);
     }
 
@@ -181,29 +192,42 @@ public class OrderControl {
 
     public void calculate() {
         System.out.println("started cal");
-        Double tienKhach = 0.0;
+        BigDecimal tienKhach = BigDecimal.ZERO;
         try {
             String converted = panel.txtTienKhachDua.getText();
-            if (converted.length() > 7) {
-                converted = converted.substring(0, 7);
-            }
-            tienKhach = Double.valueOf(converted);
+//            if (converted.length() > 7) {
+//                converted = converted.substring(0, 7);
+//            }
+            tienKhach = BigDecimal.valueOf(Long.parseLong(converted));
         } catch (NumberFormatException | NullPointerException e) {
             DialogHelper.alert(panel, "Nhập số tiền hợp lệ (VD: 24000)");
         }
-        Double tienBill = 0.0;
+        BigDecimal tienBill = BigDecimal.ZERO;
         try {
-            tienBill = Double.valueOf(panel.txtTienKhachMat.getText());
+            tienBill = BigDecimal.valueOf(Double.parseDouble(panel.txtTienKhachMat.getText()));
         } catch (NumberFormatException | NullPointerException e) {
             DialogHelper.alert(panel, "Hoá đơn không có phí");
-            tienKhach = 0.0;
+            tienKhach = BigDecimal.ZERO;
         }
-        Double traKhach = 0.0;
+        BigDecimal traKhach = BigDecimal.ZERO;
         try {
-            traKhach = tienKhach - tienBill;
+            traKhach = tienKhach.subtract(tienBill);
+            if (traKhach.compareTo(BigDecimal.ZERO) < 0) {
+                throw new NumberFormatException("Number cannot be negative");
+            }
+            panel.txtTraKhach.setText(
+                    NumberHelper.formatNumber(
+                            traKhach.toString()
+                    )
+                    + " VND"
+            );
         } catch (Exception e) {
+//            DialogHelper.alert(panel, "Khách chưa đưa đủ tiền!");
+            String tienKhachMat = traKhach.toString().substring(1, traKhach.toString().length() - 0);
+            panel.txtTraKhach.setText("Thiếu: " + NumberHelper.formatNumber(
+                    tienKhachMat) + " VND"
+            );
         }
-        panel.txtTraKhach.setText(traKhach.toString());
 
         System.out.println("da tinh tien thoi, tien thua");
 
@@ -221,14 +245,16 @@ public class OrderControl {
                 System.out.println("order chosen: " + order_choosen);
                 int quantity = count;
                 int dishID = -1;
+                BigDecimal amount = BigDecimal.ZERO;
                 try {
                     dishID = food.get(selectedRow).getDish_ID();
+                    amount = food.get(selectedRow).getPrice();
                 } catch (IndexOutOfBoundsException e) {
                     DialogHelper.alert(parentFrame, "Phải chọn món trước khi bấm thêm!");
                 }
                 System.out.println("dishID chosen: " + dishID);
                 try {
-                    daoOrderDetails.addDishByID(orderID, quantity, dishID);
+                    daoOrderDetails.addDishByID(orderID, quantity, dishID,amount);
                 } catch (Exception e) {
 //                    DialogHelper.alert(panel, );
                     System.out.println(e.getMessage());
@@ -246,7 +272,14 @@ public class OrderControl {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            fillPendingOrders();
+            new Thread(() -> {
+                try {
+                    setTotalPrice(order_choosen);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
             loading.setLoadingStatus(false);
         }).start();
 
@@ -295,6 +328,15 @@ public class OrderControl {
                 new SQLThread().main(null);
                 e.printStackTrace();
             }
+            fillPendingOrders();
+            new Thread(() -> {
+                try {
+                    setTotalPrice(order_choosen);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+            loading.setLoadingStatus(false);
         }).start();
 
     }
@@ -340,14 +382,24 @@ public class OrderControl {
 
         DefaultTableModel model = (DefaultTableModel) panel.tblDSOrderDangLam.getModel();
         order.clear();
-        order = daoOrder.selectAllPending();
-        model.setRowCount(0);
-        int count = 1;
-        for (Order od : order) {
-            Object[] row = new Object[]{count, od.getOrder_ID(), od.getNote(), getTotalAmount(od.getOrder_ID()), getTableName(od.getOrder_ID()), getStatus(od.isIsCompleted()), getDate(od.getDateCreated())};
-            model.addRow(row);
-            count++;
+//        new Thread(() -> {
+        try {
+            order = daoOrder.selectAllPending();
+            model.setRowCount(0);
+            int count = 1;
+            for (Order od : order) {
+
+                Object[] row = new Object[]{count, od.getOrder_ID(), od.getNote(), NumberHelper.formatNumber(calculateTotalPrice(od.getOrder_ID()).toString()), getTableName(od.getOrder_ID()), getStatus(od.getBill_ID()), getDate(od.getDateCreated())};
+                model.addRow(row);
+                count++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            panel.tblDSOrderDangLam.repaint();
+            panel.tblDSOrderDangLam.revalidate();
         }
+//        }).start();
 
     }
 
@@ -381,7 +433,8 @@ public class OrderControl {
         model.setRowCount(0);
         int count = 1;
         for (orderedDishes od : ordered) {
-            Object[] row = new Object[]{od.getFoodName(), od.getQuantity(), od.getPrice()};
+            
+            Object[] row = new Object[]{od.getFoodName(), od.getQuantity(), NumberHelper.formatNumber(od.getPrice().toString())};
             model.addRow(row);
             count++;
         }
@@ -426,6 +479,7 @@ public class OrderControl {
                 selectedOrder = selectedRow;
                 order.clear();
                 order = daoOrder.selectAllPending();
+                
                 System.out.println("order list size: " + order.size());
                 int order_ID = -1;
                 try {
@@ -444,9 +498,9 @@ public class OrderControl {
                 final int orderid = order_ID;
                 new Thread(() -> {
                     try {
-                        String pricee = calculateTotalPrice(orderid).toString();
-                        panel.lblTotalPayment.setText(pricee);
-                        panel.txtTienKhachMat.setText(pricee);
+                        setTotalPrice(orderid);
+                        setCboTableName(order_choosen);
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -457,6 +511,22 @@ public class OrderControl {
             ex.printStackTrace();
             DialogHelper.alert(panel, "Không tìm thấy order nào, vui lòng kiểm tra kết nối!");
         }
+    }
+    
+    private void setCboTableName(int order_choosen) {
+        
+        if(!getTableName(order_choosen).equals("")){
+            panel.cboTableName.setSelectedItem(getTableName(order_choosen));
+        }else{
+            panel.cboTableName.setSelectedIndex(0);
+        }
+        
+    }
+
+    public void setTotalPrice(int orderid) {
+        String price = calculateTotalPrice(orderid).toString();
+        panel.lblTotalPayment.setText(price);
+        panel.txtTienKhachMat.setText(price);
     }
 
     public void scanQR(OrderPanel aThis) {
@@ -482,6 +552,7 @@ public class OrderControl {
             daoOrder.setNote(order_ID, text);
             DialogHelper.alert(panel, "Đã lưu note!");
             fillDishes();
+            fillPendingOrders();
             load.setLoadingStatus(false);
         } catch (Exception e) {
             e.printStackTrace();
@@ -493,20 +564,41 @@ public class OrderControl {
         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private Double calculateTotalPrice(int order_choosen) {
+//    private BigDecimal calculateTotalPrice(int order_choosen) {
+//        LoadingHelper loading = new LoadingHelper("Updating");
+//        BigDecimal price = BigDecimal.ZERO;
+//        try {
+//            price = daoOrderDetails.calculateTotalPrice(order_choosen);
+//            loading.setLoadingStatus(false);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return price;
+//    }
+    private Integer calculateTotalPrice(int order_choosen) {
+
         LoadingHelper loading = new LoadingHelper("Updating");
-        Double price = 0.0;
+        BigDecimal price = BigDecimal.ZERO;
+
         try {
             price = daoOrderDetails.calculateTotalPrice(order_choosen);
+
+            // Set scale to avoid ".0"
+            price = price.setScale(2, RoundingMode.HALF_UP);
+
             loading.setLoadingStatus(false);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return price;
+
+        return price.intValue();
+
     }
 
     public void fillTables() {
         panel.cboTableName.removeAllItems();
+        panel.cboTableName.addItem("Khách mang về");
         System.out.println("filling table tabe...");
 //        DefaultTableModel model = (DefaultTableModel) panel.tblListBan.getModel();
 //        model.setRowCount(0);
@@ -543,18 +635,34 @@ public class OrderControl {
         }
     }
 
-    private String getTotalAmount(int order_ID) {
-        Double amount = 0.1;
-        amount = calculateTotalPrice(order_ID);
-        return amount.toString();
+    private String getStatus(int billID) {
+        boolean isCompleted = false;
+        try {
+            if (billID!=0){
+//                DialogHelper.alert(panel, String.valueOf(billID));
+            isCompleted = true;
+        }
+        } catch (Exception e) {
+        }
+        return isCompleted ? "Chưa Thanh Toán" : "Chưa Xong";
     }
 
-    private String getStatus(boolean isCompleted) {
-        return isCompleted ? "Đã hoàn thành" : "Chưa xong";
+    private void fetchTables() {
+        orderWithTable.clear();
+        orderWithTable = daoOrder.getOrdersWithTableName();
+//        DialogHelper.alert(panel, "3"+orderWithTable.get(0).getTableName());
     }
 
     private String getTableName(int order_ID) {
-        return null;
+        String tableName = "";
+//        DialogHelper.alert(panel, "1"+tableName+order_ID);
+        for (OrdersWithTable od : orderWithTable) {
+            if (od.getOrder_ID() == order_ID) {
+                tableName = od.getTableName();
+//        DialogHelper.alert(panel, "2"+tableName+od.getOrder_ID());
+            }
+        }
+        return tableName;
     }
 
     private String getDate(String dateCreated) {
@@ -569,6 +677,30 @@ public class OrderControl {
             e.printStackTrace();
         }
         return formattedDate;
+    }
+
+    public void setTable() {
+        try {
+            int cboIdOrder = order_choosen;
+            Integer TableIndex = panel.cboTableName.getSelectedIndex()-1;
+//            DialogHelper.alert(panel, TableIndex.toString()+cboIdOrder);
+            try {
+                int TableID = tables.get(TableIndex).getTable_ID();
+                daoTables.setTableByOrderID(cboIdOrder,TableID);
+            } catch (Exception e) {
+                daoTables.setNullTableByOrderID(cboIdOrder);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(TableControl.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally{
+            fetchTables();
+            fillPendingOrders();
+        }
+    }
+
+    public void datBan() {
+        
     }
 
 }

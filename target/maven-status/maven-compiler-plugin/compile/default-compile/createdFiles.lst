@@ -191,6 +191,7 @@ control/QuanLyNhanVienControl.class
 frame/OrderPanel$16.class
 main/testClass.class
 frame/CaiDatJPanel.class
+frame/HoaDonJPanel.class
 model/Voucher.class
 frame/QuanLyHoiVienJPanel$6.class
 frame/QuanLyMonAnJPanel$15.class
@@ -211,6 +212,7 @@ frame/VoucherJPanel$1.class
 frame/QuanLyMonAnJPanel$9.class
 frame/QuenMatKhauJPanel.class
 model/KhachHang.class
+helper/NumberHelper.class
 frame/VoucherJPanel$2.class
 GUI/txtMailto.class
 frame/QuanLyMonAnJPanel$8.class
@@ -234,13 +236,13 @@ GUI/mainUI$23.class
 frame/OrderPanel$26.class
 frame/QuanLyMonAnJPanel$10.class
 GUI/mainUI$20.class
-frame/OrderPanel$29.class
 frame/TableJPanel$5.class
 model/Music$1.class
 DAO/DoanhThuDAO.class
 frame/ThanhToanJDialog$2.class
 frame/DoiMatKhau.class
 frame/OrderPanel$27.class
+control/ThanhToanControl$1.class
 GUI/mainUI$17.class
 model/OrdersWithTable.class
 helper/DialogHelper.class

@@ -6,8 +6,6 @@ package frame;
 
 import DAO.TableDAO;
 import control.TableControl;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -284,16 +282,7 @@ TableDAO dao = new TableDAO();
 //        control.refresh();
 
         control.refresh();
-        System.out.println(tblListBan.getSelectedRow());
-        if(evt.getSource() == btnDeleteTable) {
-            try {
-                dao.delete(tblListBan.getSelectedRow());
-            } catch (Exception ex) {
-                Logger.getLogger(TableJPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.out.println("FUCK");
-            
-        };
+        
     }//GEN-LAST:event_btnDeleteTableActionPerformed
 
     private void btnAddTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTableActionPerformed

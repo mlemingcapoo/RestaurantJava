@@ -27,10 +27,14 @@ public class SQLThread implements Runnable {
                 try {
                     JDBCManager.closeConnection();
                     Thread.sleep(2000);
-                    new SQLThread().main(null);
+//                    new SQLThread().main(null);
+                    System.out.println("reconnecting...");
+                    Connection con = JDBCManager.getConnection();
+                    load.setLoadingStatus(false);
+                    System.out.println("about to done!");
                     break;
                 } catch (Exception e1) {
-                    
+
                 }
             }
         }

@@ -15,6 +15,15 @@ public class Bill {
     private int Ma_KH;
     private String VCode;
     private String billCode;
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public int getBill_ID() {
         return bill_ID;

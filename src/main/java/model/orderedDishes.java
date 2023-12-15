@@ -2,6 +2,8 @@
 
 package model;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author capoo
@@ -10,7 +12,7 @@ public class orderedDishes {
 
     private int Dish_ID;
     private String foodName;
-    private Double price;
+    private BigDecimal price;
     private int quantity;
 
     public String getFoodName() {
@@ -21,11 +23,11 @@ public class orderedDishes {
         this.foodName = foodName;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

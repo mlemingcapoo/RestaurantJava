@@ -7,6 +7,7 @@ import helper.DialogHelper;
 import helper.FoodHelper;
 import helper.LoadImageTask;
 import helper.imgHelper;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -88,9 +89,9 @@ public class QuanLyMonAnControl {
 //                return;
 //            }
 
-            float giaMon;
+            BigDecimal giaMon;
             try {
-                giaMon = Float.parseFloat(panel.txtGiaMon.getText());
+                giaMon = BigDecimal.valueOf(Double.parseDouble(panel.txtGiaMon.getText()));
             } catch (NumberFormatException ex) {
                 helper.DialogHelper.alert(panel, "Giá món phải là một số!");
                 return;
@@ -183,7 +184,7 @@ public class QuanLyMonAnControl {
             Food newFood = new Food();
             newFood.setDish_ID(dish_id);
             newFood.setName(panel.txtTenMon.getText());
-            newFood.setPrice(Float.parseFloat(panel.txtGiaMon.getText()));
+            newFood.setPrice(BigDecimal.valueOf(Double.parseDouble(panel.txtGiaMon.getText())));
             newFood.setType(getTypeID(panel.cboLoaiMon.getSelectedItem().toString()));
             switch (panel.cboTrangThai.getSelectedIndex()) {
                 case 1:

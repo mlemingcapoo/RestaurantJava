@@ -103,8 +103,8 @@ public class TableControl {
         System.out.println("what2?");
         try {
             System.out.println("what0?");
-            int selectedRow = panel.tblListBan.getSelectedRow();
-
+            int selectedRow = TableJPanel.tblListBan.getSelectedRow();
+            
             dao.delete(selectedRow);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -114,6 +114,17 @@ public class TableControl {
 //            e.printStackTrace();
 //        }
     }
+    
+//    public void delTable(){
+//        System.out.println(tblListBan.getSelectedRow());
+//            try {
+//                dao.delete(tblListBan.getSelectedRow());
+//            } catch (Exception ex) {
+//                Logger.getLogger(TableJPanel.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            System.out.println("FUCK");
+//            
+//    }
 
     private void getFillOrders() {
         fillComboOrders();

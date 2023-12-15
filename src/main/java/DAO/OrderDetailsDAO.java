@@ -2,6 +2,7 @@ package DAO;
 
 import helper.DBHelper;
 import helper.DialogHelper;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class OrderDetailsDAO extends SQL<OrderDetails, String> {
             orderedDishes orderList = new orderedDishes();
             orderList.setDish_ID(rs.getInt(1));
             orderList.setFoodName(rs.getString(2));
-            orderList.setPrice(rs.getDouble(3));
+            orderList.setPrice(rs.getBigDecimal(3));
             orderList.setQuantity(rs.getInt(4));
             list.add(orderList);
         }
@@ -67,9 +68,9 @@ public class OrderDetailsDAO extends SQL<OrderDetails, String> {
 //    public void addDishByID(int orderID, int quantity, int dishID) throws Exception{
 //        DBHelper.executeProc("addDishByOrderID", orderID,quantity,dishID);
 //    }
-    public void addDishByID(int orderID, int quantity, int dishID) throws Exception {
+    public void addDishByID(int orderID, int quantity, int dishID, BigDecimal amount) throws Exception {
 //    for(int i = 0; i < quantity; i++) {
-        DBHelper.executeProc("addDishByOrderID", orderID, quantity, dishID);
+        DBHelper.executeProc("addDishByOrderID", orderID, quantity, dishID, amount);
 //    }
     }
 
@@ -81,14 +82,14 @@ public class OrderDetailsDAO extends SQL<OrderDetails, String> {
         DBHelper.executeProc("deleteAllDishesByOrderID", order_ID);
     }
 
-    public Double calculateTotalPrice(int order_choosen) throws Exception {
-        Double totalPrice = 0.0;
+    public BigDecimal calculateTotalPrice(int order_choosen) throws Exception {
+        BigDecimal totalPrice=BigDecimal.ZERO;
         try{
 //        DBHelper.executeProc("calculateTotalPriceByOrderID",order_choosen);
         ResultSet query = DBHelper.query("SELECT calculateTotalPriceByOrderID(" + order_choosen + ")");
-            totalPrice = 0.0;
+            totalPrice = BigDecimal.ZERO;
         while (query.next()) {
-            totalPrice = query.getDouble(1);
+            totalPrice = BigDecimal.valueOf(query.getDouble(1));
             System.out.println("Total orders: " + totalPrice);
         }}catch(Exception e){
 //            e.printStackTrace();

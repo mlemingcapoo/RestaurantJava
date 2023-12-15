@@ -18,6 +18,7 @@ public class FoodDAO
     String UPDATE_SQL = "UPDATE Food SET Password = ?, FullName = ?, Role = ? WHERE MaNV = ?";
 //    String DELETE_SQL = "DELETE FROM Food WHERE MaNV = ?";
     String SELECT_ALL_SQL = "SELECT * FROM Food";
+    String SELECT_ALL_SQL_EXCEPT = "SELECT * FROM Food WHERE isLocked = 0";
     String SELECT_BY_ID_SQL = "SELECT * FROM Food WHERE FoodID = ?";
     String INSERT_SQL = "CALL ThemMonAn(?,?,?,?,?)";
     String UPDATEMONAN_SQL = "CALL CapNhatMonAn(?,?,?,?,?,?)";
@@ -29,6 +30,11 @@ public class FoodDAO
     public List<Food> selectAll() {
         return this.selectBySQL(SELECT_ALL_SQL);
     }
+    
+    
+    public List<Food> selectAllUnlocked() {
+        return this.selectBySQL(SELECT_ALL_SQL_EXCEPT);
+    }
 
     @Override
     protected List<Food> selectBySQL(String sql, Object... args) {
@@ -39,7 +45,7 @@ public class FoodDAO
                 Food newFood = new Food();
                 newFood.setDish_ID(rs.getInt(1));
                 newFood.setName(rs.getString(2));
-                newFood.setPrice(rs.getFloat(3));
+                newFood.setPrice(rs.getBigDecimal(3));
                 newFood.setType(rs.getInt(4));
                 newFood.setIsLocked(rs.getBoolean(5));
                 newFood.setImg(rs.getString(6));

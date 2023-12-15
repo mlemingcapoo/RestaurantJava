@@ -2,6 +2,8 @@
 
 package model;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author capoo
@@ -9,7 +11,7 @@ package model;
 public class Food {
     private int dish_ID;
     private String name;
-    private float price;
+    private BigDecimal price;
     private int type;
     private boolean isLocked;
     private String img;
@@ -39,11 +41,11 @@ public class Food {
         this.name = name;
     }
 
-    public float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

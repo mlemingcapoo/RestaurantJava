@@ -46,6 +46,7 @@
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/loadingFrame.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/DAO/FoodDAO.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/QuanLyHoiVienControl.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/HoaDonJPanel.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/DAO/SQL.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/GUI/mainUI.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/model/Music.java
@@ -86,5 +87,6 @@
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/TableJPanel.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/model/OrdersWithTable.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/helper/DialogHelper.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/helper/NumberHelper.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/Scan_QR_Control.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/GUI/start.java

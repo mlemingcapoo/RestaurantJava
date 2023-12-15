@@ -29,6 +29,7 @@ public class AuthenticateDAO {
                     username = value.getString(2);
                     permissonLevel = value.getInt(4);
                     id = value.getInt(1);
+                    name = value.getString(7);
                     if (value.getBoolean(5)){
                         permissonLevel = -1;
                     }
@@ -50,14 +51,19 @@ public class AuthenticateDAO {
 
         return username;
     }
+    
+    public static int getUserID() {
+
+        return id;
+    }
 
     public static int getPermissonLevel() {
         return permissonLevel;
     }
 
-//    public void setPermissonLevel(int permissonLevel) {
-//        this.permissonLevel = permissonLevel;
-//    }
+    public String getName() {
+        return name;
+    }
     
     public static boolean isUserLocked() {
         return false;

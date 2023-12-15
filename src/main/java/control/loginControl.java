@@ -72,10 +72,10 @@ public class loginControl {
             String password = new String(passwordChars);
 //            System.out.println("got it!: " + User.getText() + " " + password);
             isLoggedIn = auth.checkLogin(User.getText(), password);
-            while (!isLoggedIn) {
-                System.out.println("not logged in, attempting...");
-                threadLogin(User, Pass);
-            }
+//            while (!isLoggedIn) {
+                System.out.println("not logged in...");
+//                threadLogin(User, Pass);
+//            }
         } catch (SQLNonTransientConnectionException e){
             connectionResetted = true;
 //            DialogHelper.alert(login, "Lỗi kết nối...");

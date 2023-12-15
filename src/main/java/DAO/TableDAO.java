@@ -35,8 +35,8 @@ public class TableDAO extends SQL<Tables, String> {
             while (rs.next()) {
                 Tables newTable = new Tables();
                 newTable.setTable_ID(rs.getInt(1));
-                newTable.setOrder_ID(rs.getInt(2));
-                newTable.setTableName(rs.getString(3));
+//                newTable.setOrder_ID(rs.getInt(2));
+                newTable.setTableName(rs.getString(2));
                 list.add(newTable);
             }
             System.out.println("TableID at index 0: " + list.get(0).getTable_ID());;
@@ -58,8 +58,8 @@ e.printStackTrace();
         while (rs.next()) {
             Tables newTable = new Tables();
             newTable.setTable_ID(rs.getInt(1));
-            newTable.setOrder_ID(rs.getInt(2));
-            newTable.setTableName(rs.getString(3));
+//            newTable.setOrder_ID(rs.getInt(2));
+            newTable.setTableName(rs.getString(2));
             list.add(newTable);
         }
 //        System.out.println("TableID at index 0: " + list.get(0).getTable_ID());;
@@ -97,6 +97,10 @@ e.printStackTrace();
 
     public void setTableByOrderID(int cboIdOrder, int TableID) throws Exception {
         DBHelper.executeProc("setTableByOrderID", cboIdOrder,TableID);
+    }
+
+    public void setNullTableByOrderID(int orderID) throws Exception{
+        DBHelper.executeProc("setNullTableByOrderID", orderID);
     }
 
 }
