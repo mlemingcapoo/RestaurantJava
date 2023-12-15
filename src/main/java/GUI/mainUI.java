@@ -105,7 +105,7 @@ public final class mainUI extends javax.swing.JFrame {
     absoluteWrapper = new javax.swing.JPanel();
     jButton2 = new javax.swing.JButton();
     jButton3 = new javax.swing.JButton();
-    BtnOrder = new javax.swing.JButton(){
+    btnOrder = new javax.swing.JButton(){
         @Override protected void paintComponent(Graphics g) {
             if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -151,6 +151,9 @@ public final class mainUI extends javax.swing.JFrame {
 
         }
     };
+    jSeparator1 = new javax.swing.JSeparator();
+    statusWrapper = new javax.swing.JPanel();
+    loadingIndicator = new javax.swing.JLabel();
     cardDisplayWrapper = new javax.swing.JPanel();
     panelDisplay = new javax.swing.JPanel();
 
@@ -370,31 +373,32 @@ public final class mainUI extends javax.swing.JFrame {
         }
     });
 
-    BtnOrder.setBackground(new java.awt.Color(255, 255, 255));
-    BtnOrder.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnOrder.setForeground(new java.awt.Color(102, 102, 102));
-    BtnOrder.setText("Order");
-    BtnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+    btnOrder.setBackground(new java.awt.Color(255, 255, 255));
+    btnOrder.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
+    btnOrder.setForeground(new java.awt.Color(102, 102, 102));
+    btnOrder.setText("Order");
+    btnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseEntered(java.awt.event.MouseEvent evt) {
-            BtnOrderMouseEntered(evt);
+            btnOrderMouseEntered(evt);
         }
         public void mouseExited(java.awt.event.MouseEvent evt) {
-            BtnOrderMouseExited(evt);
+            btnOrderMouseExited(evt);
         }
         public void mousePressed(java.awt.event.MouseEvent evt) {
-            BtnOrderMousePressed(evt);
+            btnOrderMousePressed(evt);
         }
         public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnOrderMouseReleased(evt);
+            btnOrderMouseReleased(evt);
         }
     });
-    BtnOrder.addActionListener(new java.awt.event.ActionListener() {
+    btnOrder.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnOrderActionPerformed(evt);
+            btnOrderActionPerformed(evt);
         }
     });
 
     lblTime.setFont(new java.awt.Font("Herculanum", 0, 13)); // NOI18N
+    lblTime.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     lblTime.setText("1-1-2000 | 00:00:00 AM");
 
     BtnHoaDon.setBackground(new java.awt.Color(255, 255, 255));
@@ -445,20 +449,54 @@ public final class mainUI extends javax.swing.JFrame {
         }
     });
 
+    jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
+    jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
+    jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+    statusWrapper.setBackground(new java.awt.Color(255, 255, 255));
+
+    loadingIndicator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Accept.png"))); // NOI18N
+    loadingIndicator.setText("Updated");
+    loadingIndicator.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            loadingIndicatorMouseReleased(evt);
+        }
+    });
+
+    javax.swing.GroupLayout statusWrapperLayout = new javax.swing.GroupLayout(statusWrapper);
+    statusWrapper.setLayout(statusWrapperLayout);
+    statusWrapperLayout.setHorizontalGroup(
+        statusWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(statusWrapperLayout.createSequentialGroup()
+            .addGap(5, 5, 5)
+            .addComponent(loadingIndicator, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+            .addContainerGap())
+    );
+    statusWrapperLayout.setVerticalGroup(
+        statusWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(statusWrapperLayout.createSequentialGroup()
+            .addComponent(loadingIndicator, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 0, Short.MAX_VALUE))
+    );
+
     javax.swing.GroupLayout absoluteWrapperLayout = new javax.swing.GroupLayout(absoluteWrapper);
     absoluteWrapper.setLayout(absoluteWrapperLayout);
     absoluteWrapperLayout.setHorizontalGroup(
         absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(absoluteWrapperLayout.createSequentialGroup()
-            .addGap(81, 81, 81)
-            .addComponent(lblTime)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+            .addContainerGap()
+            .addComponent(statusWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(5, 5, 5)
+            .addComponent(lblTime, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+            .addGap(0, 0, 0)
+            .addComponent(btnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
             .addGap(13, 13, 13)
-            .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+            .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-            .addGap(65, 65, 65)
+            .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+            .addGap(18, 18, 18)
             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -466,17 +504,21 @@ public final class mainUI extends javax.swing.JFrame {
     );
     absoluteWrapperLayout.setVerticalGroup(
         absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absoluteWrapperLayout.createSequentialGroup()
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTime, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnHoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnDatBan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnOrder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addContainerGap())
         .addGroup(absoluteWrapperLayout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTime)
-                    .addComponent(BtnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnDatBan, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(statusWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 0, Short.MAX_VALUE))
     );
 
     cardDisplayWrapper.setBackground(new java.awt.Color(255, 153, 153));
@@ -494,11 +536,11 @@ public final class mainUI extends javax.swing.JFrame {
     cardDisplayWrapper.setLayout(cardDisplayWrapperLayout);
     cardDisplayWrapperLayout.setHorizontalGroup(
         cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
+        .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     cardDisplayWrapperLayout.setVerticalGroup(
         cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+        .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -519,7 +561,7 @@ public final class mainUI extends javax.swing.JFrame {
             .addComponent(absoluteWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(0, 0, 0)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jplMenuCover, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                .addComponent(jplMenuCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(cardDisplayWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGap(0, 0, 0))
@@ -601,38 +643,38 @@ public final class mainUI extends javax.swing.JFrame {
         mainUI.closeMenu();
     }//GEN-LAST:event_cardDisplayWrapperMouseEntered
 
-    private void BtnOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMouseEntered
+    private void btnOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseEntered
         // TODO add your handling code here:
         System.out.println("entered");
-        BtnOrder.setForeground(Color.BLACK);
-        BtnOrder.setBorder(new RoundedCornerBorder(Color.BLACK));
+        btnOrder.setForeground(Color.BLACK);
+        btnOrder.setBorder(new RoundedCornerBorder(Color.BLACK));
         //        javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE;
-    }//GEN-LAST:event_BtnOrderMouseEntered
+    }//GEN-LAST:event_btnOrderMouseEntered
 
-    private void BtnOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMouseExited
+    private void btnOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseExited
         // TODO add your handling code here:
         System.out.println("exited");
-        BtnOrder.setForeground(Color.darkGray);
-        BtnOrder.setBorder(new RoundedCornerBorder());
-    }//GEN-LAST:event_BtnOrderMouseExited
+        btnOrder.setForeground(Color.darkGray);
+        btnOrder.setBorder(new RoundedCornerBorder());
+    }//GEN-LAST:event_btnOrderMouseExited
 
-    private void BtnOrderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMousePressed
+    private void btnOrderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMousePressed
         // TODO add your handling code here:
-        BtnOrder.setForeground(Color.red);
-        BtnOrder.setBorder(new RoundedCornerBorder(Color.red));
-    }//GEN-LAST:event_BtnOrderMousePressed
+        btnOrder.setForeground(Color.red);
+        btnOrder.setBorder(new RoundedCornerBorder(Color.red));
+    }//GEN-LAST:event_btnOrderMousePressed
 
-    private void BtnOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnOrderMouseReleased
+    private void btnOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseReleased
         // TODO add your handling code here:
-        BtnOrder.setForeground(Color.BLACK);
-        BtnOrder.setBorder(new RoundedCornerBorder(Color.BLACK));
-    }//GEN-LAST:event_BtnOrderMouseReleased
+        btnOrder.setForeground(Color.BLACK);
+        btnOrder.setBorder(new RoundedCornerBorder(Color.BLACK));
+    }//GEN-LAST:event_btnOrderMouseReleased
 
-    private void BtnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrderActionPerformed
+    private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
         mainUI.closeMenu();
         mainUI.Order(this);
-    }//GEN-LAST:event_BtnOrderActionPerformed
+    }//GEN-LAST:event_btnOrderActionPerformed
 
     private void panelProfilePhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseClicked
         // TODO add your handling code here:
@@ -743,6 +785,11 @@ public final class mainUI extends javax.swing.JFrame {
         panelProfilePhotoMouseReleased(evt);
     }//GEN-LAST:event_jLabel4MouseReleased
 
+    private void loadingIndicatorMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loadingIndicatorMouseReleased
+        // TODO add your handling code here:
+        mainUI.refreshCon();
+    }//GEN-LAST:event_loadingIndicatorMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -791,13 +838,13 @@ public final class mainUI extends javax.swing.JFrame {
     public static javax.swing.JButton BtnDatBan;
     public static javax.swing.JLabel BtnGioiThieu;
     public static javax.swing.JButton BtnHoaDon;
-    public static javax.swing.JButton BtnOrder;
     public static javax.swing.JLabel BtnQuanLyDoanhThu;
     public static javax.swing.JLabel BtnQuanLyHoiVien;
     public static javax.swing.JLabel BtnQuanLyMon;
     public static javax.swing.JLabel BtnQuanLyNhanVien;
     public static javax.swing.JLabel BtnQuanLyVoucher;
     private javax.swing.JPanel absoluteWrapper;
+    public static javax.swing.JButton btnOrder;
     public static javax.swing.JPanel cardDisplayWrapper;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -805,13 +852,16 @@ public final class mainUI extends javax.swing.JFrame {
     public static javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JPanel jplMenuCover;
     private javax.swing.JPanel jpllMenuBar;
     private javax.swing.JLabel lblCloseMenu;
     private javax.swing.JLabel lblOpenMenu1;
     public static javax.swing.JLabel lblTime;
+    public static javax.swing.JLabel loadingIndicator;
     private javax.swing.JSeparator menuBarSeparator;
     public static javax.swing.JPanel panelDisplay;
     public static javax.swing.JPanel panelProfilePhoto;
+    public static javax.swing.JPanel statusWrapper;
     // End of variables declaration//GEN-END:variables
 }

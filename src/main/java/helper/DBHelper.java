@@ -39,6 +39,8 @@ public class DBHelper {
     }
 
     public static ResultSet query(String sql, Object... args) throws SQLException, ClassNotFoundException, Exception {
+//        JDBCManager.closeConnection();
+//        JDBCManager.getConnection();
         PreparedStatement stmt = DBHelper.getStmt(sql, args);
         return stmt.executeQuery();
     }
@@ -86,6 +88,7 @@ public class DBHelper {
     }
 
     public static ResultSet executeProc(String procName, Object... args) throws Exception {
+        
         StringBuilder sb = new StringBuilder();
         Connection conn = JDBCManager.getConnection();
         CallableStatement stmt = null;
@@ -110,9 +113,11 @@ public class DBHelper {
         }
         System.out.println("ảgs: " + args.length);
         System.out.println(stmt);
+        
         stmt.execute();
+        
         return stmt.getResultSet();
-
+        
     }
     
     public static String removeComma(String str) {

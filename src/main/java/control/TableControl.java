@@ -4,6 +4,7 @@ import DAO.OrderDAO;
 import DAO.TableDAO;
 import frame.TableJPanel;
 import helper.DialogHelper;
+import helper.LoadingHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,7 +29,14 @@ public class TableControl {
 
     void init(TableJPanel panel) {
         TableControl.panel = panel;
+        new Thread(() -> {
+    try {
         refresh();
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}).start();
 //        fillTables();
     }
 
@@ -37,6 +45,8 @@ public class TableControl {
         tables = dao.selectAll();
         fillTables();
         getFillOrders();
+        LoadingHelper loading = new LoadingHelper("Updating");
+        loading.setLoadingStatus(false);
     }
 
     public void fillTables() {

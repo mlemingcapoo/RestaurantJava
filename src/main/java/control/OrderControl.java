@@ -1,6 +1,7 @@
 package control;
 
 import DAO.FoodDAO;
+import DAO.JDBCManager;
 import DAO.OrderDAO;
 import DAO.OrderDetailsDAO;
 import GUI.mainUI;
@@ -9,6 +10,7 @@ import frame.ThanhToanJDialog;
 import helper.DialogHelper;
 import helper.FoodHelper;
 import helper.LoadImageTask;
+import helper.LoadingHelper;
 import helper.imgHelper;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import model.Food;
 import model.FoodType;
 import model.Order;
 import model.orderedDishes;
+import util.SQLThread;
 
 /**
  *
@@ -52,11 +55,12 @@ public class OrderControl {
     FoodDAO foodDao = new FoodDAO();
     DefaultTableModel foodModel = new DefaultTableModel();
     int selectedOrder;
-    
 
     private static int order_choosen;
 
     public void init(OrderPanel panel) {
+        LoadingHelper loading = new LoadingHelper("Updating");
+        loading.setLoadingStatus(true);
         OrderControl.panel = panel;
 //        panel.revalidate();
 
@@ -80,6 +84,14 @@ public class OrderControl {
         panel.tblDSOrderDangLam.setRowHeight(30);
 //        panel.tblDSMonAn.getColumnModel().getColumn(3).setPreferredWidth(80);
 //        panel.tblDSMonAn.getColumnModel().getColumn(3).setWidth(50);
+
+        try {
+            JDBCManager.closeConnection();
+            new SQLThread().main(null);
+                    
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void refreshAll() {
@@ -87,10 +99,10 @@ public class OrderControl {
         foodModel.setRowCount(0);
         Thread dish = new Thread(() -> {
 //            getDishes();
-        try {
-            fetchDishes(order_choosen);
-        } catch (Exception e) {
-        }
+            try {
+                fetchDishes(order_choosen);
+            } catch (Exception e) {
+            }
         });
         dish.start();
 //        getPendingOrders();
@@ -106,11 +118,10 @@ public class OrderControl {
         int viewRow = table.convertRowIndexToView(row);
         table.setRowSelectionInterval(viewRow, viewRow);
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     public void getDishes() {
+
         food.clear();
         food = dao.selectAll();
         types.clear();
@@ -121,7 +132,7 @@ public class OrderControl {
 
         int rowIndex = 0;
         for (Food fd : food) {
-            Object[] row = {fd.getName(), fd.getPrice(), FoodHelper.getTypeName(fd.getType(),types)};
+            Object[] row = {fd.getName(), fd.getPrice(), FoodHelper.getTypeName(fd.getType(), types)};
             model.addRow(row);
             rowIndex++;
         }
@@ -132,7 +143,6 @@ public class OrderControl {
         for (int i = 0; i < rowIndex; i++) {
             setImg(model, i, food.get(i).getImg());
         }
-
         panel.tblDSMonAn.updateUI();
 
     }
@@ -316,7 +326,8 @@ public class OrderControl {
 //        }
 //    }
     private void fetchDishes(int orderID) throws SQLException, Exception {
-
+        LoadingHelper loading = new LoadingHelper("Đang tải");
+        loading.setLoadingStatus(true);
         try {
             ordered.clear();
             ordered = daoOrderDetails.getOrderedDish(orderID);
@@ -327,6 +338,7 @@ public class OrderControl {
 //        model.setRowCount(0);
         fillDishes();
 //        fillOrderForm(orderID);
+//        loading.setLoadingStatus(false);
     }
 
     private void fillDishes() {
@@ -366,7 +378,7 @@ public class OrderControl {
             }
         } catch (Exception e) {
             DialogHelper.alert(panel, "Chọn 1 Đơn hàng muốn Xoá/Huỷ");
-            e.printStackTrace();
+            new SQLThread().main(null);
         }
 
     }
@@ -377,7 +389,7 @@ public class OrderControl {
             order.clear();
             order = daoOrder.selectAllPending();
             System.out.println("order list size: " + order.size());
-            int order_ID=-1;
+            int order_ID = -1;
             try {
                 order_ID = order.get(selectedRow).getOrder_ID();
             } catch (Exception e) {

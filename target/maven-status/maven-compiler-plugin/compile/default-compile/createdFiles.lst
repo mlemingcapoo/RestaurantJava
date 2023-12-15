@@ -24,6 +24,7 @@ DAO/AuthenticateDAO.class
 frame/TableJPanel.class
 frame/VoucherJPanel$3.class
 frame/QuanLyMonAnJPanel$1.class
+GUI/mainUI$30.class
 frame/profile$2.class
 control/TableControl.class
 frame/OrderPanel$19.class

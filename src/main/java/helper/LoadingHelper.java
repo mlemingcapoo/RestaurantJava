@@ -1,7 +1,9 @@
 package helper;
 
+import static GUI.mainUI.loadingIndicator;
 import static frame.loadingFrame.loadingText;
 import java.awt.Component;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
 /**
@@ -14,10 +16,14 @@ public class LoadingHelper<T extends Component> {
     static private JDialog dialog;
     Thread loading;
 
-    public LoadingHelper(T parent,String info) {
+    public LoadingHelper(T parent, String info) {
         dialog = new frame.loadingFrame(null, true);
         dialog.setLocationRelativeTo(parent);
         loadingText.setText(info);
+    }
+    
+    public LoadingHelper(String info) {
+        loadingIndicator.setText(info);
     }
 
     public void showLoadingDialog() {
@@ -33,6 +39,21 @@ public class LoadingHelper<T extends Component> {
         });
         loading.start();
 
+    }
+
+    public void setLoadingStatus(boolean isLoading) {
+        if (isLoading) {
+
+            ImageIcon gif = new ImageIcon(getClass().getResource("/images/loading.gif"));
+
+// Set gif on label
+            loadingIndicator.setIcon(gif);
+
+//            loadingIndicator.setText("Updating");
+        } else {
+            loadingIndicator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Accept.png"))); // NOI18N
+            loadingIndicator.setText("Updated");
+        }
     }
 
     public void done() {

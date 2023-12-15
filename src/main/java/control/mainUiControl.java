@@ -6,7 +6,7 @@ import GUI.Settings;
 import GUI.mainUI;
 import static GUI.mainUI.BtnDatBan;
 import static GUI.mainUI.BtnHoaDon;
-import static GUI.mainUI.BtnOrder;
+import static GUI.mainUI.btnOrder;
 import static GUI.mainUI.cardDisplayWrapper;
 import static GUI.mainUI.jplMenuCover;
 import static GUI.mainUI.panelDisplay;
@@ -22,6 +22,7 @@ import frame.VoucherJPanel;
 import frame.blank_frame;
 import frame.profile;
 import helper.DialogHelper;
+import helper.LoadingHelper;
 import helper.RoundedCornerBorder;
 import java.awt.Color;
 import java.awt.Frame;
@@ -40,6 +41,7 @@ import java.util.concurrent.Executors;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import util.SQLThread;
 import util.panelNavigator;
 
 /**
@@ -47,8 +49,8 @@ import util.panelNavigator;
  * @author capoo
  */
 public final class mainUiControl implements GUI_Interface {
-    
-     int width;
+
+    int width;
     int height;
     boolean isMinimized;
 
@@ -130,7 +132,6 @@ public final class mainUiControl implements GUI_Interface {
         System.out.println("chieu rong man hinh: " + width);
         panelDisplay.setSize(width, height);
 
-        
         System.out.println("a wild thread has started... " + t.isAlive());
         System.out.println("Perm level: " + dao.getPermissonLevel());
         enforePerm(dao.getPermissonLevel());
@@ -162,32 +163,29 @@ public final class mainUiControl implements GUI_Interface {
         System.out.println("loading voucher");
         mainUI.panelDisplay.add(Vocher, "Voucher");
         System.out.println("setting full screen");
-        mainUI.panelDisplay.add(init,"blank");
-        
+        mainUI.panelDisplay.add(init, "blank");
+
         mainUI.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        System.out.println("interupting thread....");
 //        t.interrupt();
-        
-        
-//        System.out.println("All Done!!!!!!!"); 
 
-cardDisplayWrapper.setVisible(true);
+//        System.out.println("All Done!!!!!!!"); 
+        cardDisplayWrapper.setVisible(true);
         jplMenuCover.setSize(410, 900);
         mainUI.setExtendedState(mainUI.MAXIMIZED_BOTH);
-        
-        
+
         panelDisplay.add(init, "blank");
-        
-        
+
         mainUI.addWindowStateListener((WindowEvent e) -> {
-            if((e.getNewState() & Frame.ICONIFIED) == Frame.ICONIFIED) {
+            if ((e.getNewState() & Frame.ICONIFIED) == Frame.ICONIFIED) {
                 isMinimized = true;
-            } else if(isMinimized && (e.getNewState() == Frame.NORMAL)) {
+            } else if (isMinimized && (e.getNewState() == Frame.NORMAL)) {
                 isMinimized = false;
                 mainUI.setExtendedState(MAXIMIZED_BOTH);
-            }   });
-        BtnOrder.setForeground(Color.darkGray);
-        BtnOrder.setBorder(new RoundedCornerBorder());
+            }
+        });
+        btnOrder.setForeground(Color.darkGray);
+        btnOrder.setBorder(new RoundedCornerBorder());
         BtnDatBan.setForeground(Color.darkGray);
         BtnDatBan.setBorder(new RoundedCornerBorder());
         BtnHoaDon.setForeground(Color.darkGray);
@@ -196,11 +194,10 @@ cardDisplayWrapper.setVisible(true);
         System.out.println("starting customer screen");
         startCustomer();
     }
-    
+
     static int x = 210;    //chieu rong
     static int y = 300;    //chieu cao
 
-    
     public static void openMenu() {
 
         jplMenuCover.setSize(x, y);
@@ -223,8 +220,6 @@ cardDisplayWrapper.setVisible(true);
             x = 210;
         }
     }
-    
-    
 
     public static void closeMenu() {
         jplMenuCover.setSize(x, y);
@@ -236,7 +231,7 @@ cardDisplayWrapper.setVisible(true);
                         for (int i = 210; i >= 52; i--) {
                             jplMenuCover.setSize(i, y);
                             Thread.sleep(1);
-                        
+
                         }
                         panelDisplay.repaint();
 //                        panelDisplayCustomer.revalidate();
@@ -341,8 +336,8 @@ cardDisplayWrapper.setVisible(true);
 
     public void CaiDat() {
 //        panelNavigator.switchPanel(mainUI.panelDisplay, "CaiDat");
-        parent=mainUI;
-        new Settings(parent,true).setVisible(true);
+        parent = mainUI;
+        new Settings(parent, true).setVisible(true);
     }
 
     @Override
@@ -363,15 +358,34 @@ cardDisplayWrapper.setVisible(true);
     }
 
     public void DatBan() {
+        LoadingHelper loading = new LoadingHelper("Updating");
+        loading.setLoadingStatus(true);
         panelNavigator.switchPanel(mainUI.panelDisplay, "Table");
         TableControl control = new TableControl();
         control.init(QLTable);
     }
 
     public void Order(mainUI aThis) {
-        panelNavigator.switchPanel(mainUI.panelDisplay, "BanHang");
-        OrderControl control = new OrderControl(aThis);
-        control.init(QLBanHang);
+        LoadingHelper loading = new LoadingHelper("Updating");
+        loading.setLoadingStatus(true);
+        mainUI.btnOrder.setEnabled(false);
+        new Thread(() -> {
+            try {
+                panelNavigator.switchPanel(mainUI.panelDisplay, "BanHang");
+                OrderControl control = new OrderControl(aThis);
+                control.init(QLBanHang);
+                mainUI.btnOrder.setEnabled(true);
+//                LoadingHelper<JDialog> helper = new LoadingHelper<>(this,"Sending mail...");
+//                helper.showLoadingDialog();
+//                 jButton2.setEnabled(false);
+                //action
+//                 jButton2.setEnabled(true);
+//                helper.done();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
     }
 
     public void enforePerm(int permissonLevel) {
@@ -401,7 +415,7 @@ cardDisplayWrapper.setVisible(true);
         mainUI.BtnQuanLyHoiVien.setEnabled(false);
         mainUI.BtnQuanLyDoanhThu.setEnabled(false);
         mainUI.BtnQuanLyNhanVien.setEnabled(false);
-        mainUI.BtnOrder.setEnabled(false);
+        mainUI.btnOrder.setEnabled(false);
         mainUI.panelProfilePhoto.setVisible(false);
     }
 
@@ -413,7 +427,7 @@ cardDisplayWrapper.setVisible(true);
             mainUI.BtnDatBan.setEnabled(true);
 //            mainUI.BtnQuanLyBanHang.setEnabled(true);
             mainUI.BtnQuanLyHoiVien.setEnabled(true);
-            mainUI.BtnOrder.setEnabled(true);
+            mainUI.btnOrder.setEnabled(true);
             mainUI.panelProfilePhoto.setVisible(true);
         }
         if (level >= 1) {
@@ -440,6 +454,12 @@ cardDisplayWrapper.setVisible(true);
 
     public void GioiThieu() {
         panelNavigator.switchPanel(mainUI.panelDisplay, "blank");
+    }
+
+    public void refreshCon() {
+        LoadingHelper loading = new LoadingHelper("Refreshing");
+        loading.setLoadingStatus(true);
+        new SQLThread().main(null);
     }
 
 }

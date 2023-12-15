@@ -23,8 +23,8 @@ public class JDBCManager {
     
     public static Connection getConnection() throws ClassNotFoundException, SQLException, Exception {
         System.out.println("getting Connection...");
-        if (connection == null) {
-            System.out.println("connection is null, try connecting...");
+        if (true) {
+            System.out.println("try connecting...");
             try {
                 // Load the JDBC driver 
 //                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

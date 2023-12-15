@@ -1,7 +1,6 @@
 package DAO;
 
 import helper.DBHelper;
-import helper.DialogHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,7 @@ public class OrderDAO extends SQL<Order, String> {
             }
 //            System.out.println("OrderID at index 0: " + list.get(0).getOrder_ID());;
         } catch (Exception e) {
-            DialogHelper.showDialog(null, "Vui lòng kiểm tra lại kết nối mạng và bấm OK!");
+//            DialogHelper.showDialog(null, "Vui lòng kiểm tra lại kết nối mạng và bấm OK!");
             System.out.println("Connection was lost.. Trying to reconnect...");
             new SQLThread().main(null);
 //            throw new RuntimeException(e);

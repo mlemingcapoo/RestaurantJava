@@ -29,24 +29,32 @@ public class loadingFrame extends javax.swing.JDialog {
     private void initComponents() {
 
         loadingText = new javax.swing.JLabel();
+        loadingText1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         loadingText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loadingText.setText("LOADING");
+        loadingText.setText("ĐANG TẢI...");
+        loadingText.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        loadingText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loadingText1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/loading-2.gif"))); // NOI18N
+        loadingText1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(loadingText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+            .addComponent(loadingText1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(loadingText, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(loadingText1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loadingText, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
         );
 
         pack();
@@ -96,5 +104,6 @@ public class loadingFrame extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel loadingText;
+    public static javax.swing.JLabel loadingText1;
     // End of variables declaration//GEN-END:variables
 }

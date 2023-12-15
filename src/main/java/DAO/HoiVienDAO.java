@@ -1,7 +1,6 @@
 package DAO;
 
 import helper.DBHelper;
-import helper.DialogHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class HoiVienDAO extends SQL<KhachHang, String> {
             }
 //            System.out.println("Ma_KH at index 0: " + list.get(0).getMa_KH());;
         } catch (Exception e) {
-            DialogHelper.showDialog(null, "Vui lòng kiểm tra lại kết nối mạng và bấm OK!");
+//            DialogHelper.showDialog(null, "Vui lòng kiểm tra lại kết nối mạng và bấm OK!");
             System.out.println("Connection was lost.. Trying to reconnect...");
             new SQLThread().main(null);
 //            throw new RuntimeException(e);

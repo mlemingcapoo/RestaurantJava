@@ -285,8 +285,8 @@ public class Settings extends javax.swing.JDialog {
                 helper.showLoadingDialog();
 
                 jButton2.setEnabled(false);
-                Thread.sleep(5000);
-//                sendMail();
+//                Thread.sleep(5000);
+                sendMail();
                 jButton2.setEnabled(true);
                 helper.done();
                 

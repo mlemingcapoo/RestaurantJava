@@ -5,8 +5,7 @@ import GUI.mainUI;
 import helper.DialogHelper;
 import helper.LoadingHelper;
 import java.awt.Dimension;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.SQLNonTransientConnectionException;
 import javax.swing.JFrame;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -20,6 +19,7 @@ public class loginControl {
     private static GUI.login login;
     AuthenticateDAO auth = new AuthenticateDAO();
     boolean isLoggedIn = false;
+    boolean connectionResetted = false;
     
 
     public void login(JTextField User, JPasswordField Pass) {
@@ -33,7 +33,7 @@ public class loginControl {
                 //action
                 if (validated()) {
 
-            boolean connectionResetted = false;
+            
 //            try {
 //                isLoggedIn = auth.checkLogin(User.getText(), password);
 //
@@ -82,8 +82,12 @@ public class loginControl {
                 System.out.println("not logged in, attempting...");
                 threadLogin(User, Pass);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(loginControl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLNonTransientConnectionException e){
+            connectionResetted = true;
+//            DialogHelper.alert(login, "Lỗi kết nối...");
+        } 
+        catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

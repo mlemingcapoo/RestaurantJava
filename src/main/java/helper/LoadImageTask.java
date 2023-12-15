@@ -26,9 +26,9 @@ public class LoadImageTask implements Runnable {
 
     @Override
     public void run() {
+        
         new Thread(() -> {
             try {
-
                 String imgKey = imgLink;
                 Image image;
                 if (imageCache.containsKey(imgKey)) {
@@ -65,6 +65,7 @@ public class LoadImageTask implements Runnable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            
         }).start();
     }
 
