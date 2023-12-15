@@ -237,6 +237,16 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
 
         cboChonLoaiMon.setFont(new java.awt.Font("American Typewriter", 1, 12)); // NOI18N
         cboChonLoaiMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại", "Food", "Drink", "Dessert" }));
+        cboChonLoaiMon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cboChonLoaiMonMouseExited(evt);
+            }
+        });
+        cboChonLoaiMon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboChonLoaiMonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -328,7 +338,6 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         aa3.setText("Loại");
 
         cboLoaiMon.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
-        cboLoaiMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food", "Drink", "Dessert" }));
 
         cboTrangThai.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoạt Động", "Đã Tắt" }));
@@ -489,6 +498,16 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         control.fillToForm(tblDanhSachMonAn.getSelectedRow());
     }//GEN-LAST:event_tblDanhSachMonAnKeyReleased
+
+    private void cboChonLoaiMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChonLoaiMonActionPerformed
+        // TODO add your handling code here:
+//        
+    }//GEN-LAST:event_cboChonLoaiMonActionPerformed
+
+    private void cboChonLoaiMonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboChonLoaiMonMouseExited
+        // TODO add your handling code here:
+        control.timKiem(txtTimKiem.getText(), cboChonLoaiMon.getSelectedItem().toString());
+    }//GEN-LAST:event_cboChonLoaiMonMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

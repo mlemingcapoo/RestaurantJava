@@ -1,9 +1,8 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * trungpvpp02786
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package GUI;
-
 import java.util.Properties;
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -19,14 +18,15 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author mynla
+ * @author capoo
  */
-public class StingJFame extends javax.swing.JFrame {
+public class Settings extends javax.swing.JDialog {
 
     /**
-     * Creates new form StingJFame
+     * Creates new form Settings
      */
-    public StingJFame() {
+    public Settings(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -60,6 +60,11 @@ public class StingJFame extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đổi Tên Shop", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jButton1.setText("Đổi");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Tên Shop");
 
@@ -158,7 +163,7 @@ public class StingJFame extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2))
         );
 
@@ -190,79 +195,82 @@ public class StingJFame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     final String username = "infobasil.click@gmail.com";
-final String password = "c g x u h r y g v j z p e x l q ";
-
-// Cấu hình các thuộc tính cho việc gửi email
-Properties prop = new Properties();
-prop.put("mail.smtp.host", "smtp.gmail.com");
-prop.put("mail.smtp.port", "587");
-prop.put("mail.smtp.auth", "true");
-prop.put("mail.smtp.starttls.enable", "true"); // Kích hoạt TLS
-
-// Tạo phiên làm việc (Session) sử dụng thông tin đăng nhập
-Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
-    protected PasswordAuthentication getPasswordAuthentication() {
-        return new PasswordAuthentication(username, password);
-    }
-});
-
-try {
-    // Tạo đối tượng Message để xây dựng nội dung email
-    Message message = new MimeMessage(session);
-    message.setFrom(new InternetAddress(username));
-
-    // Chia các địa chỉ email thành mảng và thêm vào message
-    String[] toRecipients = txtMailto.getText().split(",");
-    InternetAddress[] toAddresses = new InternetAddress[toRecipients.length];
-    for (int i = 0; i < toRecipients.length; i++) {
-        toAddresses[i] = new InternetAddress(toRecipients[i].trim());
-    }
-    message.setRecipients(Message.RecipientType.TO, toAddresses);
-
-    // Kiểm tra xem có địa chỉ email CC hay không
-    String ccInput = txtCC.getText().trim();
-    if (!ccInput.isEmpty()) {
-        // Nếu có địa chỉ email CC, chia thành mảng và thêm vào message
-        String[] ccRecipients = ccInput.split(",");
-        InternetAddress[] ccAddresses = new InternetAddress[ccRecipients.length];
-        for (int i = 0; i < ccRecipients.length; i++) {
-            ccAddresses[i] = new InternetAddress(ccRecipients[i].trim());
-        }
-        message.setRecipients(Message.RecipientType.CC, ccAddresses);
-    }
-
-    message.setSubject(txtNdchinh.getText());
-
-    // Tạo phần nội dung email dạng multipart
-    MimeMultipart multipart = new MimeMultipart();
-
-    // Thêm phần văn bản vào email
-    BodyPart textPart = new MimeBodyPart();
-    textPart.setText(txtNdchinh.getText());
-    multipart.addBodyPart(textPart);
-
-    // Đặt nội dung của email là phần nội dung multipart vừa tạo
-    message.setContent(multipart);
-
-    // Gửi email
-    Transport.send(message);
-
-    // Hiển thị thông báo khi gửi thành công
-    JOptionPane.showMessageDialog(this, "done");
-    System.out.println("Done");
-
-} catch (MessagingException e) {
-    e.printStackTrace();
-}
-
-
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtndActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtndActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        final String username = "infobasil.click@gmail.com";
+        final String password = "c g x u h r y g v j z p e x l q ";
+
+        // Cấu hình các thuộc tính cho việc gửi email
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); // Kích hoạt TLS
+
+        // Tạo phiên làm việc (Session) sử dụng thông tin đăng nhập
+        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            // Tạo đối tượng Message để xây dựng nội dung email
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+
+            // Chia các địa chỉ email thành mảng và thêm vào message
+            String[] toRecipients = txtMailto.getText().split(",");
+            InternetAddress[] toAddresses = new InternetAddress[toRecipients.length];
+            for (int i = 0; i < toRecipients.length; i++) {
+                toAddresses[i] = new InternetAddress(toRecipients[i].trim());
+            }
+            message.setRecipients(Message.RecipientType.TO, toAddresses);
+
+            // Kiểm tra xem có địa chỉ email CC hay không
+            String ccInput = txtCC.getText().trim();
+            if (!ccInput.isEmpty()) {
+                // Nếu có địa chỉ email CC, chia thành mảng và thêm vào message
+                String[] ccRecipients = ccInput.split(",");
+                InternetAddress[] ccAddresses = new InternetAddress[ccRecipients.length];
+                for (int i = 0; i < ccRecipients.length; i++) {
+                    ccAddresses[i] = new InternetAddress(ccRecipients[i].trim());
+                }
+                message.setRecipients(Message.RecipientType.CC, ccAddresses);
+            }
+
+            message.setSubject(txtNdchinh.getText());
+
+            // Tạo phần nội dung email dạng multipart
+            MimeMultipart multipart = new MimeMultipart();
+
+            // Thêm phần văn bản vào email
+            BodyPart textPart = new MimeBodyPart();
+            textPart.setText(txtNdchinh.getText());
+            multipart.addBodyPart(textPart);
+
+            // Đặt nội dung của email là phần nội dung multipart vừa tạo
+            message.setContent(multipart);
+
+            // Gửi email
+            Transport.send(message);
+
+            // Hiển thị thông báo khi gửi thành công
+            JOptionPane.showMessageDialog(this, "done");
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,20 +289,30 @@ try {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StingJFame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StingJFame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StingJFame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StingJFame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StingJFame().setVisible(true);
+                Settings dialog = new Settings(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

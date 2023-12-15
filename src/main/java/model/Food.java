@@ -62,4 +62,5 @@ public class Food {
     public void setIsLocked(boolean isLocked) {
         this.isLocked = isLocked;
     }
+
 }

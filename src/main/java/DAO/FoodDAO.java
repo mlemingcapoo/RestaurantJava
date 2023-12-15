@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.Food;
+import model.FoodType;
 
 /**
  *
@@ -21,7 +22,8 @@ public class FoodDAO
     String INSERT_SQL = "CALL ThemMonAn(?,?,?,?,?)";
     String UPDATEMONAN_SQL = "CALL CapNhatMonAn(?,?,?,?,?,?)";
     String DELETE_SQL = "CALL XoaMonAn(?)";
-    String TIMKIEM_SQL = "SELECT * FROM `Food` WHERE name like ? and type like ?";
+    String TIMKIEM_SQL = "SELECT * FROM `Food` WHERE name like ? and type_ID = ?";
+    String TIMKIEM_SQL2 = "SELECT * FROM `Food` WHERE name like ? and type_ID like ?";
 
     @Override
     public List<Food> selectAll() {
@@ -45,7 +47,7 @@ public class FoodDAO
             }
 //            System.out.println("dish name at index 0: " + list.get(0).getName());;
         } catch (Exception e) {
-            System.out.println("line 48 FoodDAO: "+e.getMessage());
+            System.out.println("line 48 FoodDAO: " + e.getMessage());
         }
 
         return list;
@@ -65,8 +67,33 @@ public class FoodDAO
         DBHelper.executeProc("XoaMonAn", food.getDish_ID());
     }
 
-    public List<Food> searchByNameAndType(String name, String type) throws Exception {
-        return selectBySQL(TIMKIEM_SQL, name, type);
+    public List<Food> searchByNameAndType(String name, int type) throws Exception {
+        List<Food> selectBySQL;
+        if (type == 0) {
+            selectBySQL = selectBySQL(TIMKIEM_SQL2, name, "%");
+        } else {
+            selectBySQL = selectBySQL(TIMKIEM_SQL, name, type);
 
+        }
+
+        return selectBySQL;
+
+    }
+
+    public List<FoodType> getTypeNameList() {
+        String typeName[] = null;
+        List<FoodType> list = new ArrayList<>();
+        try {
+            ResultSet rs = DBHelper.query("SELECT * FROM FoodType");
+            while (rs.next()) {
+                FoodType type = new FoodType();
+                type.setType_id(rs.getInt(1));
+                type.setType(rs.getString(2));
+                list.add(type);
+            }
+        } catch (Exception e) {
+            System.out.println("line 79 FOODDAO: " + e.getMessage());
+        }
+        return list;
     }
 }

@@ -2,7 +2,7 @@ package control;
 
 import DAO.AuthenticateDAO;
 import GUI.CustomerScreen;
-import GUI.StingJFame;
+import GUI.Settings;
 import GUI.mainUI;
 import static GUI.mainUI.BtnDatBan;
 import static GUI.mainUI.BtnHoaDon;
@@ -68,6 +68,7 @@ public final class mainUiControl implements GUI_Interface {
     JPanel Profile = new profile();
 
     public static mainUI mainUI;
+    static JFrame parent;
     private final AuthenticateDAO dao = new AuthenticateDAO();
     Thread t;
     ExecutorService executor = Executors.newFixedThreadPool(1);
@@ -340,7 +341,8 @@ cardDisplayWrapper.setVisible(true);
 
     public void CaiDat() {
 //        panelNavigator.switchPanel(mainUI.panelDisplay, "CaiDat");
-        new StingJFame().setVisible(true);
+        parent=mainUI;
+        new Settings(parent,true).setVisible(true);
     }
 
     @Override
@@ -437,8 +439,7 @@ cardDisplayWrapper.setVisible(true);
     }
 
     public void GioiThieu() {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        panelNavigator.switchPanel(mainUI.panelDisplay, "blank");
     }
 
 }

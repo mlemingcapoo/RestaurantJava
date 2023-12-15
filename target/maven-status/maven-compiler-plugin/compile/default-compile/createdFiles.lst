@@ -3,7 +3,6 @@ frame/QuanLyNhanVienJPanel$5.class
 GUI/mainUI$22.class
 GUI/mainUI$2.class
 GUI/CustomerScreen.class
-GUI/StingJFame$1.class
 frame/DoiMatKhau$3.class
 frame/OrderPanel$25.class
 TaoQR/QuetQR.class
@@ -34,14 +33,18 @@ frame/VoucherJPanel$5.class
 control/mainUiControl$1.class
 GUI/login$6.class
 control/startControl.class
+GUI/Settings$4.class
 frame/OrderPanel$23.class
 GUI/mainUI$11.class
 model/Tables.class
+frame/QuanLyMonAnJPanel$16.class
 frame/OrderPanel$14.class
 helper/BuffImgHelper.class
 GUI/login$10.class
 frame/OrderPanel$17.class
+GUI/Settings$1.class
 control/mainUiControl$3.class
+model/FoodType.class
 GUI/mainUI$27.class
 frame/OrderPanel$20.class
 Bill/InBill.class
@@ -54,6 +57,7 @@ TaoQR/QuetQR$1.class
 frame/LoginJPanel$8.class
 frame/OrderPanel$1.class
 frame/LoginJPanel$10.class
+GUI/Settings$3.class
 frame/LoginJPanel$6.class
 frame/QuanLyMonAnJPanel$3.class
 helper/PanelHelper.class
@@ -98,6 +102,7 @@ frame/QuanLyNhanVienJPanel$4.class
 GUI/mainUI$6.class
 model/OrderDetails.class
 frame/OrderPanel$11.class
+GUI/Settings.class
 frame/QuanLyHoiVienJPanel$1.class
 frame/QuenMatKhauJPanel$1.class
 frame/QuanLyNhanVienJPanel$7.class
@@ -113,7 +118,6 @@ frame/DoiMatKhau$2.class
 frame/QuanLyNhanVienJPanel$6.class
 frame/OrderPanel$10.class
 GUI/start.class
-GUI/StingJFame.class
 frame/OrderPanel$7.class
 SendMail/SendMail$1.class
 frame/LoginJPanel$1.class
@@ -138,6 +142,7 @@ frame/QuanLyHoiVienJPanel.class
 frame/LoginJPanel$4.class
 frame/QuanLyNhanVienJPanel.class
 control/loginControl.class
+GUI/Settings$5.class
 model/Bill.class
 model/Food.class
 GUI/mainUI$3.class
@@ -148,7 +153,6 @@ control/CustomerControl.class
 SendMail/SendMail.class
 frame/QuanLyMonAnJPanel$7.class
 GUI/login$5.class
-GUI/StingJFame$2.class
 frame/Scan_QR$1.class
 frame/OrderPanel$24.class
 GUI/login.class
@@ -160,6 +164,7 @@ frame/QuanLyNhanVienJPanel$1.class
 model/NhanVien.class
 control/mainUiControl$4.class
 Api_upload_image/upanh.class
+GUI/Settings$5$1.class
 frame/QuanLyMonAnJPanel$2.class
 helper/util.class
 GUI/mainUI$26.class
@@ -175,6 +180,7 @@ frame/LoginJPanel$7.class
 GUI/mainUI$1.class
 control/QuanLyMonAnControl.class
 model/Order.class
+GUI/Settings$2.class
 frame/OrderPanel$21.class
 control/QuanLyNhanVienControl.class
 frame/OrderPanel$16.class
@@ -182,6 +188,7 @@ main/testClass.class
 frame/CaiDatJPanel.class
 model/Voucher.class
 frame/QuanLyHoiVienJPanel$6.class
+frame/QuanLyMonAnJPanel$15.class
 frame/profile$5.class
 GUI/mainUI$10.class
 frame/VoucherJPanel$6.class
@@ -194,7 +201,6 @@ model/Music$2.class
 DAO/OrderDetailsDAO.class
 frame/ThanhToanJDialog$3.class
 frame/TableJPanel$2.class
-GUI/StingJFame$4.class
 GUI/mainUI$18.class
 frame/VoucherJPanel$1.class
 frame/QuanLyMonAnJPanel$9.class
@@ -206,7 +212,6 @@ frame/QuanLyMonAnJPanel$8.class
 GUI/mainUI$24.class
 frame/TableJPanel$1.class
 frame/QuanLyBanHangJPanel.class
-GUI/StingJFame$3.class
 control/mainUiControl.class
 GUI/mainUI$13.class
 frame/TableJPanel$6.class
@@ -215,6 +220,7 @@ helper/RoundedCornerBorder2.class
 frame/ThanhToanJDialog$4.class
 GUI/mainUI$19.class
 frame/TableJPanel$3.class
+helper/FoodHelper.class
 frame/LoginJPanel.class
 frame/OrderPanel.class
 frame/profile$1.class

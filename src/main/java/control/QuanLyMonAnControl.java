@@ -1,8 +1,10 @@
 package control;
 
 import DAO.FoodDAO;
+import static control.OrderControl.types;
 import frame.QuanLyMonAnJPanel;
 import helper.DialogHelper;
+import helper.FoodHelper;
 import helper.LoadImageTask;
 import helper.imgHelper;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Food;
+import model.FoodType;
 
 /**
  *
@@ -28,10 +31,14 @@ public class QuanLyMonAnControl {
         this.panel = panel;
         refresh();
         panel.tblDanhSachMonAn.setRowHeight(100);
+        panel.cboChonLoaiMon.setSelectedItem("Tất cả");
     }
 
     public void refresh() {
         getMon();
+        types.clear();
+        types = dao.getTypeNameList();
+        fillTypeList(types);
         fillDishes();
     }
 
@@ -40,7 +47,7 @@ public class QuanLyMonAnControl {
         model.setRowCount(0);
         int rowIndex = 0;
         for (Food fd : food) {
-            Object[] row = new Object[]{fd.getName(), fd.getPrice(), fd.getType(), fd.getImg(), fd.isIsLocked()};
+            Object[] row = new Object[]{fd.getName(), fd.getPrice(), FoodHelper.getTypeName(fd.getType(), types), fd.getImg(), getTrangThai(fd.isIsLocked())};
             model.addRow(row);
             rowIndex++;
         }
@@ -89,7 +96,7 @@ public class QuanLyMonAnControl {
                 return;
             }
 
-            int loaiMon = panel.cboLoaiMon.getSelectedIndex();
+            int IDloaiMon = types.get(panel.cboLoaiMon.getSelectedIndex()).getType_id();
             int trangThaiIndex = panel.cboTrangThai.getSelectedIndex();
             boolean trangThai = (trangThaiIndex == 1);
 
@@ -97,7 +104,7 @@ public class QuanLyMonAnControl {
 
             // Check if the image path is empty or null, set a default image link
             if (imgPath == null || imgPath.isEmpty()) {
-                imgPath = "https://example.com/default-image.jpg"; // Replace with your default image link
+                imgPath = "https://toppng.com/free-image/clipart-free-seaweed-clipart-draw-food-placeholder-PNG-free-PNG-Images_183132"; // Replace with default image link
             }
 
             // Check if the food item with the same name already exists
@@ -111,7 +118,7 @@ public class QuanLyMonAnControl {
             Food newFood = new Food();
             newFood.setName(tenMon);
             newFood.setPrice(giaMon);
-            newFood.setType(loaiMon);
+            newFood.setType(IDloaiMon);
             // Map the selected item from the combo box to the appropriate type
 //            switch (loaiMon.toLowerCase()) {
 //                case "food":
@@ -153,7 +160,7 @@ public class QuanLyMonAnControl {
     public void setForm(Food fd) {
         panel.txtTenMon.setText(fd.getName());
         panel.txtGiaMon.setText(String.valueOf(fd.getPrice()));
-        panel.cboLoaiMon.setSelectedItem(fd.getType());
+        panel.cboLoaiMon.setSelectedItem(types.get(panel.cboLoaiMon.getSelectedIndex()).getType_id());
         switch (String.valueOf(fd.isIsLocked())) {
             case "true":
                 panel.cboTrangThai.setSelectedIndex(1);
@@ -164,27 +171,35 @@ public class QuanLyMonAnControl {
         }
     }
 
+    public String getTrangThai(boolean status) {
+        return status ? "Khoá" : "Đang mở";
+    }
+
     public void suaMon(int selectedRow) {
-        System.out.println("sua mon: " + selectedRow);
-        int dish_id = food.get(selectedRow).getDish_ID();
-        Food newFood = new Food();
-        newFood.setDish_ID(dish_id);
-        newFood.setName(panel.txtTenMon.getText());
-        newFood.setPrice(Float.parseFloat(panel.txtGiaMon.getText()));
-        newFood.setType(panel.cboLoaiMon.getSelectedIndex());
-        switch (panel.cboTrangThai.getSelectedIndex()) {
-            case 1:
-                newFood.setIsLocked(true);
-                break;
-            case 0:
-                newFood.setIsLocked(false);
-                break;
-        }
-        newFood.setImg(food.get(selectedRow).getImg());
+        int dish_id = -1;
         try {
+            System.out.println("sua mon: " + selectedRow);
+            dish_id = food.get(selectedRow).getDish_ID();
+            Food newFood = new Food();
+            newFood.setDish_ID(dish_id);
+            newFood.setName(panel.txtTenMon.getText());
+            newFood.setPrice(Float.parseFloat(panel.txtGiaMon.getText()));
+            newFood.setType(getTypeID(panel.cboLoaiMon.getSelectedItem().toString()));
+            switch (panel.cboTrangThai.getSelectedIndex()) {
+                case 1:
+                    newFood.setIsLocked(true);
+                    break;
+                case 0:
+                    newFood.setIsLocked(false);
+                    break;
+            }
+            newFood.setImg(food.get(selectedRow).getImg());
+
             dao.update(newFood);
             clearForm();
             helper.DialogHelper.alert(panel, "Sửa món thành công!!!");
+        } catch (IndexOutOfBoundsException ie) {
+            helper.DialogHelper.alert(panel, "Vui lòng chọn món cần sửa!!!");
         } catch (Exception ex) {
             helper.DialogHelper.alert(panel, "Xảy ra lỗi khi sửa món!!!");
             Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
@@ -224,25 +239,42 @@ public class QuanLyMonAnControl {
         panel.cboTrangThai.setSelectedIndex(0);
     }
 
-    public void timKiem(String tuKhoa, String type1) {
+    public void timKiem(String tuKhoa, String foodTypeName) {
         new Thread(() -> {
             try {
+                int type1 = 0;
+                for (FoodType food1 : types) {
+                    if (foodTypeName.equals(food1.getType())) {
+                        type1 = food1.getType_id();
+                    }
+                }
+
                 try {
-                    String type = "%";
-                    if (type1.equals("Chọn Loại")) {
-                        type = "%";
+                    int type = 0;
+                    if (foodTypeName.equalsIgnoreCase("Tất cả")) {
+                        type = 0;
                     } else {
                         type = type1;
                     }
-                    List<Food> fd = dao.searchByNameAndType("%" + tuKhoa + "%", "%" + type + "%");
+                    List<Food> fd = dao.searchByNameAndType("%" + tuKhoa + "%", type);
                     System.out.println("Tu Khoa search: " + tuKhoa);
                     System.out.println("Loai search: " + type1);
                     DefaultTableModel model = (DefaultTableModel) panel.tblDanhSachMonAn.getModel();
                     model.setRowCount(0);
+                    int rowIndex=0;
                     for (Food fd1 : fd) {
-                        Object[] row = new Object[]{fd1.getName(), fd1.getPrice(), fd1.getType(), fd1.getImg(), fd1.isIsLocked()};
+                        Object[] row = new Object[]{fd1.getName(), fd1.getPrice(), FoodHelper.getTypeName(fd1.getType(), types), fd1.getImg(), getTrangThai(fd1.isIsLocked())};
                         model.addRow(row);
+                        rowIndex++;
                     }
+                    TableColumn column = panel.tblDanhSachMonAn.getColumnModel().getColumn(3);
+                    column.setCellRenderer(new imgHelper());
+
+                    for (int i = 0; i < rowIndex; i++) {
+                        setImg(model, i, food.get(i).getImg());
+                    }
+
+                    panel.tblDanhSachMonAn.updateUI();
                 } catch (Exception ex) {
                     Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -276,8 +308,25 @@ public class QuanLyMonAnControl {
 
         return true;
     }
-    
-    
 
+    private void fillTypeList(List<FoodType> types) {
+        panel.cboLoaiMon.removeAllItems();
+        panel.cboChonLoaiMon.removeAllItems();
+        for (FoodType type : types) {
+            panel.cboLoaiMon.addItem(type.getType());
+            panel.cboChonLoaiMon.addItem(type.getType());
+        }
+        panel.cboChonLoaiMon.addItem("Tất cả");
+    }
+
+    private int getTypeID(String selectedItem) {
+        int typeID = 0;
+        for (FoodType food1 : types) {
+            if (selectedItem.equalsIgnoreCase(food1.getType())) {
+                typeID = food1.getType_id();
+            }
+        }
+        return typeID;
+    }
 
 }

@@ -3,11 +3,11 @@ package control;
 import DAO.FoodDAO;
 import DAO.OrderDAO;
 import DAO.OrderDetailsDAO;
-import DAO.SQL;
 import GUI.mainUI;
 import frame.OrderPanel;
 import frame.ThanhToanJDialog;
 import helper.DialogHelper;
+import helper.FoodHelper;
 import helper.LoadImageTask;
 import helper.imgHelper;
 import java.sql.SQLException;
@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Food;
+import model.FoodType;
 import model.Order;
 import model.orderedDishes;
 
@@ -38,17 +39,20 @@ public class OrderControl {
     }
     static List<Food> food = new ArrayList<>();
     static List<Order> order = new ArrayList<>();
+    static List<FoodType> types = new ArrayList<>();
 //    static List<OrderDetails> orderDetails = new ArrayList<>();
     static List<orderedDishes> ordered = new ArrayList<>();
 
     OrderDAO daoOrder = new OrderDAO();
+    FoodDAO dao = new FoodDAO();
     OrderDetailsDAO daoOrderDetails = new OrderDetailsDAO();
 
     static Scan_QR_Control scanqr = new Scan_QR_Control();
     private static OrderPanel panel;
-    SQL dao = new FoodDAO();
+    FoodDAO foodDao = new FoodDAO();
     DefaultTableModel foodModel = new DefaultTableModel();
     int selectedOrder;
+    
 
     private static int order_choosen;
 
@@ -102,18 +106,22 @@ public class OrderControl {
         int viewRow = table.convertRowIndexToView(row);
         table.setRowSelectionInterval(viewRow, viewRow);
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     public void getDishes() {
         food.clear();
         food = dao.selectAll();
+        types.clear();
+        types = foodDao.getTypeNameList();
         System.out.println("Hện có " + food.size() + " món ăn");
         DefaultTableModel model = (DefaultTableModel) panel.tblDSMonAn.getModel();
         model.setRowCount(0);
 
         int rowIndex = 0;
         for (Food fd : food) {
-            Object[] row = {fd.getName(), fd.getPrice(), fd.getType()};
+            Object[] row = {fd.getName(), fd.getPrice(), FoodHelper.getTypeName(fd.getType(),types)};
             model.addRow(row);
             rowIndex++;
         }
