@@ -518,10 +518,10 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         cboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Quản Lý" }));
 
         cboTrangThai.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
-        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "false", "true" }));
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mở", "Khoá" }));
 
         jLabel5.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
-        jLabel5.setText("Trang Thai");
+        jLabel5.setText("Trạng Thái");
 
         txttaikhoan.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
 
@@ -534,7 +534,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         txtLinkAnh.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
-        jLabel6.setText("Link Ảnh");
+        jLabel6.setText("Uploading Ảnh (Hoặc dán link)");
 
         btnUpload.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
         btnUpload.setText("UPLOAD");
@@ -677,7 +677,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11)
                         .addGap(51, 51, 51)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));

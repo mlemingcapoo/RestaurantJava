@@ -195,7 +195,8 @@ public final class mainUiControl implements GUI_Interface {
         BtnHoaDon.setBorder(new RoundedCornerBorder());
         panelNavigator.switchPanel(mainUI.panelDisplay, "blank");
         System.out.println("starting customer screen");
-        startCustomer();
+//        panelNavigator.switchPanel(mainUI.panelDisplay, "");
+//        startCustomer();
     }
 
     static int x = 210;    //chieu rong
@@ -307,7 +308,7 @@ public final class mainUiControl implements GUI_Interface {
 //            login.dispose();
         } else {
             System.out.println("No external display found...");
-            DialogHelper.alert(mainUI, "Phần mềm khuyến nghị cài đặt thêm màn hình thứ 2 để sử dụng tính năng màn hình khách!");
+//            DialogHelper.alert(mainUI, "Phần mềm khuyến nghị cài đặt thêm màn hình thứ 2 để sử dụng tính năng màn hình khách!");
         }
     }
 

@@ -27,19 +27,13 @@ public class blank_frame extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
 
         setLayout(new java.awt.CardLayout());
-
-        jLabel2.setText("WELCOME...");
-        jPanel2.add(jLabel2);
-
         add(jPanel2, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

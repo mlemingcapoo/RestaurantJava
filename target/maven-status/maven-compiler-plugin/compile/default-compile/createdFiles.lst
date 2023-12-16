@@ -8,6 +8,7 @@ frame/OrderPanel$25.class
 TaoQR/QuetQR.class
 frame/OrderPanel$3.class
 frame/TableJPanel$4.class
+frame/HoaDonJPanel$7.class
 DAO/OrderDAO.class
 frame/QuanLyHoiVienJPanel$5.class
 frame/loadingFrame.class
@@ -109,6 +110,7 @@ frame/QuanLyNhanVienJPanel$4.class
 GUI/mainUI$6.class
 model/OrderDetails.class
 frame/OrderPanel$11.class
+frame/DoiMatKhau$4.class
 GUI/Settings.class
 frame/QuanLyHoiVienJPanel$1.class
 frame/QuenMatKhauJPanel$1.class

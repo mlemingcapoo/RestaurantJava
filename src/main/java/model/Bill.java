@@ -16,6 +16,7 @@ public class Bill {
     private String VCode;
     private String billCode;
     private int status;
+    private int order_ID;
 
     public int getStatus() {
         return status;
@@ -103,6 +104,16 @@ public class Bill {
         }
         return status;
     }
+
+    public int getOrder_ID() {
+        return order_ID;
+    }
+
+    public void setOrder_ID(int order_ID) {
+        this.order_ID = order_ID;
+    }
+
+
 
 
 }

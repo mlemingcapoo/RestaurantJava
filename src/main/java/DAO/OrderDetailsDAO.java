@@ -60,7 +60,7 @@ public class OrderDetailsDAO extends SQL<OrderDetails, String> {
             orderList.setQuantity(rs.getInt(4));
             list.add(orderList);
         }
-        System.out.println("ordered food name at index 0: " + list.get(0).getFoodName());
+//        System.out.println("ordered food name at index 0: " + list.get(0).getFoodName());
 
         return list;
     }

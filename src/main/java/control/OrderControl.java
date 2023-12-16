@@ -177,9 +177,18 @@ public class OrderControl {
     public void payment() {
 //        order_choosen;
 //        order ;
+        if(order_choosen<0){
+            boolean confirm = DialogHelper.confirm(panel, "Chưa tạo đơn nào, bạn có muốn xác nhận tạo đơn mới?");
+            if(confirm){
+                newEmptyOrder();
+            }
+        } else {
+            
         ThanhToanControl control2 = new ThanhToanControl(parentFrame);
         control2.setOrder(panel.txtSDTHoiVien.getText(), panel.txtMaVocher.getText(), order_choosen, panel.cboHinhThucThanhToan.getSelectedItem().toString(), panel.lblTotalPayment.getText(), panel.cboTableName.getSelectedItem().toString(),panel.txtOrderNote.getText());
         ThanhToanJDialog pay = new ThanhToanJDialog(parentFrame, true, control2);
+        fillPendingOrders();
+        }
     }
 
     public void createOrder() {
@@ -234,7 +243,13 @@ public class OrderControl {
     }
 
     public void addDish(int selectedRow, int count) {
-        LoadingHelper loading = new LoadingHelper("Adding");
+        if(order_choosen<0){
+            boolean confirm = DialogHelper.confirm(panel, "Chưa tạo đơn nào, bạn có muốn xác nhận tạo đơn mới?");
+            if(confirm){
+                newEmptyOrder();
+            }
+        } else {
+            LoadingHelper loading = new LoadingHelper("Adding");
         loading.setLoadingStatus(true);
         new Thread(() -> {
             try {
@@ -282,11 +297,15 @@ public class OrderControl {
             }).start();
             loading.setLoadingStatus(false);
         }).start();
+        }
 
     }
 
     public void removeDishFromOrder(int selectedRow, int count) {
-        LoadingHelper loading = new LoadingHelper("Removing");
+        if(order_choosen<0){
+            DialogHelper.alert(panel, "Hiện không có đơn nào để xoá món!");
+        } else {
+            LoadingHelper loading = new LoadingHelper("Removing");
         loading.setLoadingStatus(true);
         new Thread(() -> {
             try {
@@ -338,6 +357,7 @@ public class OrderControl {
             }).start();
             loading.setLoadingStatus(false);
         }).start();
+        }
 
     }
 
@@ -379,6 +399,7 @@ public class OrderControl {
 
     private void fillPendingOrders() {
         System.out.println("Hện có " + order.size() + " đơn chưa hoàn tất, hoặc mới tạo");
+        if(order.size()<=0){order_choosen=-1;}
 
         DefaultTableModel model = (DefaultTableModel) panel.tblDSOrderDangLam.getModel();
         order.clear();
@@ -415,6 +436,7 @@ public class OrderControl {
 
                 } catch (Exception e) {
                     System.out.println("order này trống.");
+                    
 //                    fillDishes();
                 } finally {
                     fillDishes();
@@ -442,14 +464,22 @@ public class OrderControl {
     }
 
     public void deletePendingOrderClicked(int selectedRow) {
-
-        order.clear();
+        if(order_choosen<0){
+            DialogHelper.alert(panel, "Không có đơn nào để xoá");
+        } else{
+            
+        int order_ID = -1;
+        order_ID = order.get(selectedRow).getOrder_ID();
+        boolean isBillCreated=false;
+        isBillCreated=daoOrder.isBillCreated(order_ID);
+        if(isBillCreated){
+        try {
+            order.clear();
         order = daoOrder.selectAllPending();
         System.out.println("order list size: " + order.size());
-        int order_ID = -1;
-        try {
-            order_ID = order.get(selectedRow).getOrder_ID();
+            
             if (order_ID < 0) {
+                
                 throw new IndexOutOfBoundsException();
             }
             if (DialogHelper.confirm(panel, "Xác nhận xoá đơn hàng thứ " + (selectedRow + 1) + "?")) {
@@ -462,12 +492,16 @@ public class OrderControl {
                 } catch (Exception e) {
                     System.out.println("line 355: " + e.getCause() + e.getMessage());
 //            DialogHelper.alert(panel, e.getMessage());
-
+                    
                 }
             }
         } catch (Exception e) {
             DialogHelper.alert(panel, "Chọn 1 Đơn hàng muốn Xoá/Huỷ");
             new SQLThread().main(null);
+        }
+        } else{
+            DialogHelper.alert(panel, "Hoá đơn chờ đã được tạo, không thể thao tác thêm.");
+        }
         }
 
     }
