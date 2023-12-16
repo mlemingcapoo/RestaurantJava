@@ -7,13 +7,20 @@ package frame;
 import DAO.BillDAO;
 import DAO.HoiVienDAO;
 import DAO.NhanVienDao;
+import DAO.OrderDAO;
+import DAO.OrderDetailsDAO;
 import helper.DateHelper;
 import helper.DialogHelper;
+import helper.LoadingHelper;
+import helper.NumberHelper;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.Bill;
 import model.NhanVien;
+import model.orderedDishes;
 
 /**
  *
@@ -22,9 +29,12 @@ import model.NhanVien;
 public class HoaDonJPanel extends javax.swing.JPanel {
 
     BillDAO dao = new BillDAO();
+    OrderDAO orderDao = new OrderDAO();
+    OrderDetailsDAO odDao = new OrderDetailsDAO();
     NhanVienDao nvdao = new NhanVienDao();
     HoiVienDAO hvdao = new HoiVienDAO();
     static List<Bill> billList = new ArrayList<>();
+    static List<orderedDishes> orders = new ArrayList<>();
 
     /**
      * Creates new form HoaDonJPanel
@@ -50,26 +60,23 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         cboFilter = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jButton3 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jButton4 = new javax.swing.JButton();
+        oldOrderList = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
 
         tblBillList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "bill_id", "NV Trực", "Tổng Tiền", "Ngày Tạo", "Note", "Tên KH", "Voucher", "Mã Bill", "Trạng Thái"
+                "bill_id", "NV Trực", "Tổng Tiền", "Ngày Tạo", "Note", "Tên KH", "Voucher", "Mã Bill", "Trạng Thái", "Mã Đơn"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -108,18 +115,30 @@ public class HoaDonJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Tìm Kiếm:");
 
-        jButton1.setText("?");
+        jButton1.setText("Huỷ Đơn");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Tách Hoá Đơn");
+        oldOrderList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jButton3.setText("Mở File trong OS");
+            },
+            new String [] {
+                "Tên món", "Số lượng", "Gộp giá"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
 
-        jButton4.setText("Quét QR Hoá Đơn");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(oldOrderList);
 
         jButton5.setText("Xác Nhận Thanh Toán");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -135,28 +154,19 @@ public class HoaDonJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(404, 404, 404)
                         .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -170,24 +180,30 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                     .addComponent(cboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblBillListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBillListMouseReleased
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        int selectedRow = tblBillList.getSelectedRow();
+
+// Get the value from the first column of the selected row
+        Object order_ID = tblBillList.getValueAt(selectedRow, 9);
+        fetchOrders(order_ID);
     }//GEN-LAST:event_tblBillListMouseReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblBillList.getSelectedRow();
+
+// Get the value from the first column of the selected row
+        Object order_ID = tblBillList.getValueAt(selectedRow, 9);
+        fetchOrders(order_ID);
+        removeBill(order_ID);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cboFilterPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboFilterPopupMenuWillBecomeInvisible
@@ -202,12 +218,16 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (DialogHelper.confirm(this, "Xác nhận hoàn tất đơn?")) {
             int selectedRow = tblBillList.getSelectedRow();
-
-// Get the value from the first column of the selected row
-            Object billID = tblBillList.getValueAt(selectedRow, 0);
-
-// Call the closeBill function with the obtained value
-            closeBill(Integer.valueOf(billID.toString()));
+            try {
+                Object billID = tblBillList.getValueAt(selectedRow, 0);
+                Object orderID = tblBillList.getValueAt(selectedRow, 9);
+                closeBill(Integer.valueOf(billID.toString()), Integer.valueOf(orderID.toString()));
+            } catch (Exception e) {
+                DialogHelper.alert(jLabel1, "Có lỗi khi xác nhận...");
+                e.printStackTrace();
+            }
+            fetchFull();
+            fillTable(billList);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -215,14 +235,11 @@ public class HoaDonJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboFilter;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable oldOrderList;
     private javax.swing.JTable tblBillList;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
@@ -230,6 +247,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
     private void fetchFull() {
         billList.clear();
         billList = dao.selectAll();
+        cboFilter.removeAllItems();
         cboFilter.addItem("Chưa Thanh Toán");
         cboFilter.addItem("Đã Thanh Toán");
     }
@@ -239,6 +257,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
             try {
                 fetchFull();
                 fillTable(billList);
+//                fetchOrders(order_ID);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -251,7 +270,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblBillList.getModel();
         model.setRowCount(0);
         for (Bill bill : billList) {
-            Object[] row = {bill.getBill_ID(), getNhanVienName(bill.getUser_ID(), nvList), bill.getAmount(), DateHelper.formatTime(bill.getBillDate()), bill.getNote(), getTenKH(bill.getMa_KH()), bill.getVCode(), bill.getBillCode(), bill.getStatusName()};
+            Object[] row = {bill.getBill_ID(), getNhanVienName(bill.getUser_ID(), nvList), NumberHelper.formatNumber("" + (bill.getAmount())), DateHelper.formatTime(bill.getBillDate()), bill.getNote(), getTenKH(bill.getMa_KH()), bill.getVCode(), bill.getBillCode(), bill.getStatusName(), bill.getOrder_ID()};
             model.addRow(row);
         }
     }
@@ -272,8 +291,53 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         return tenKH;
     }
 
-    private void closeBill(Integer billID) {
-        dao.setStatus(billID,1);
+    private void closeBill(Integer billID, Integer orderID) {
+        dao.setStatus(billID, 1);
+        orderDao.setStatus(orderID, 1);
+    }
+
+    private void fetchOrders(Object order_ID) {
+        try {
+            orders.clear();
+            orders = odDao.getOrderedDish(Integer.parseInt(order_ID.toString()));
+            fillOrderList(orders);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void fillOrderList(List<orderedDishes> ordered) {
+        DefaultTableModel model = (DefaultTableModel) oldOrderList.getModel();
+        model.setRowCount(0);
+        int count = 1;
+        for (orderedDishes od : ordered) {
+
+            Object[] row = new Object[]{od.getFoodName(), od.getQuantity(), NumberHelper.formatNumber(od.getPrice().toString())};
+            model.addRow(row);
+            count++;
+        }
+
+    }
+
+    @SuppressWarnings("Unchecked")
+    private void removeBill(Object order_ID) {
+        if (DialogHelper.confirm(jButton5, "Chắc chắn huỷ đơn " + order_ID.toString())) {
+            LoadingHelper load = new LoadingHelper(jButton5, "Loading...");
+            new Thread(() -> {
+                try {
+                    load.showLoadingDialog();
+                    dao.removeBillAndOrder(Integer.parseInt(order_ID.toString()));
+                    billList.clear();
+                    billList = dao.selectAll();
+                    load.done();
+                    DialogHelper.alert(jButton5, "Huỷ thành công.");
+                    fetchFull();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
+        }
     }
 
 }

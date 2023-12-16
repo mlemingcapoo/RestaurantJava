@@ -107,4 +107,25 @@ public class OrderDAO extends SQL<Order, String> {
         DBHelper.update(UPDATE_ORDER, text,order_ID);
     }
 
+    public void setStatus(Integer orderID, int status) {
+        DBHelper.update("UPDATE `Order` SET isCompleted = ? WHERE order_ID = ?", status,orderID);
+    }
+
+    public boolean isBillCreated(int order_ID) {
+//        boolean result = false;
+                int bill_ID=0;
+        List<Order> list = selectBySQL("SELECT * FROM `Order` WHERE `Order`.order_ID = ?",order_ID);
+        for (Order order : list) {
+            if(order.getOrder_ID()==order_ID){
+                try {
+                bill_ID = order.getBill_ID();
+                    System.out.println("yeah no shit bill"+bill_ID);
+                } catch (Exception e) {
+                    bill_ID=0;
+                }
+            }
+        }
+        return bill_ID==0;
+    }
+
 }
