@@ -13,7 +13,7 @@ import util.SQLThread;
 public class NhanVienDao extends SQL<NhanVien, String> {
       String SELECT_ALL_SQL = "SELECT * FROM User";
     String INSERT_SQL ="CALL ThemNhanVien(?,?,?,?)";
-     String TIMKIEM_SQL = "SELECT * FROM `User` WHERE UserName  LIKE ? AND role = ? ";
+     String TIMKIEM_SQL = "SELECT * FROM `User` WHERE UserName LIKE ? AND role = ? ";
 
     @Override
     public List<NhanVien> selectAll() {
@@ -62,6 +62,12 @@ public  void sua(NhanVien nhanvien)throws Exception{
 
     public void delete(NhanVien nhanvien) throws Exception {
         DBHelper.executeProc("XoaNguoiDungVaThongTin",nhanvien.getMaNV());
+    }
+
+    public List<NhanVien> searchNameByID(int user_ID) {
+          List<NhanVien> selectBySQL = selectBySQL("SELECT * FROM NhanVien WHERE user_ID = ?",user_ID);
+          
+        return selectBySQL;
     }
     }
    

@@ -11,6 +11,7 @@ import static GUI.mainUI.cardDisplayWrapper;
 import static GUI.mainUI.jplMenuCover;
 import static GUI.mainUI.panelDisplay;
 import frame.CaiDatJPanel;
+import frame.HoaDonJPanel;
 import frame.LoginJPanel;
 import frame.OrderPanel;
 import frame.QuanLyDoanhThuJPanel;
@@ -68,6 +69,7 @@ public final class mainUiControl implements GUI_Interface {
     JPanel Vocher = new VoucherJPanel();
     CustomerScreen customerFrame = new CustomerScreen();
     JPanel Profile = new profile();
+    HoaDonJPanel HoaDon = new HoaDonJPanel();
 
     public static mainUI mainUI;
     static JFrame parent;
@@ -162,6 +164,7 @@ public final class mainUiControl implements GUI_Interface {
         mainUI.panelDisplay.add(QLTable, "Table");
         System.out.println("loading voucher");
         mainUI.panelDisplay.add(Vocher, "Voucher");
+        mainUI.panelDisplay.add(HoaDon, "HoaDon");
         System.out.println("setting full screen");
         mainUI.panelDisplay.add(init, "blank");
 
@@ -432,8 +435,8 @@ public final class mainUiControl implements GUI_Interface {
     }
 
     public void HoaDon() {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        panelNavigator.switchPanel(mainUI.panelDisplay, "HoaDon");
+        HoaDon.init();
     }
 
     public void QuanLyVoucher() {

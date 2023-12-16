@@ -1,9 +1,10 @@
-
-
 package helper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 /**
@@ -12,9 +13,10 @@ import java.util.Date;
  */
 public class DateHelper {
 // date/time processing
+
     static SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
 
-   public static Date toDate(String date, String... pattern) {
+    public static Date toDate(String date, String... pattern) {
         try {
             if (pattern.length > 0) {
 
@@ -55,13 +57,35 @@ public class DateHelper {
     public static Date now() {
         return new Date();
     }
-    
-    public static boolean isValidFormat(String date){
+
+    public static boolean isValidFormat(String date) {
         try {
             Date chk = formater.parse(date);
             return true;
         } catch (ParseException e) {
-            return  false;
+            return false;
         }
     }
+
+    public static String formartTime(LocalDateTime currentTime) {
+        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a"));
+        return formattedTime;
+    }
+
+    public static String formatTime(String currentTime) {
+
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+  try {
+    LocalDateTime time = LocalDateTime.parse(currentTime, formatter);
+
+    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a");
+
+    return time.format(outputFormatter);
+
+  } catch (DateTimeParseException e) {
+    return "Invalid time format"; 
+  }
+
+}
 }

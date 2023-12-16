@@ -4,17 +4,32 @@
  */
 package frame;
 
+import DAO.BillDAO;
+import DAO.NhanVienDao;
+import helper.DateHelper;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Bill;
+import model.NhanVien;
+
 /**
  *
  * @author capoo
  */
 public class HoaDonJPanel extends javax.swing.JPanel {
 
+    BillDAO dao = new BillDAO();
+    NhanVienDao nvdao = new NhanVienDao();
+    static List<Bill> billList = new ArrayList<>();
+
     /**
      * Creates new form HoaDonJPanel
      */
     public HoaDonJPanel() {
         initComponents();
+
+        init();
     }
 
     /**
@@ -26,19 +41,202 @@ public class HoaDonJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblBillList = new javax.swing.JTable();
+        txtSearch = new javax.swing.JTextField();
+        cboFilter = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jButton4 = new javax.swing.JButton();
+
+        tblBillList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "bill_id", "NV Trực", "Tổng Tiền", "Ngày Tạo", "Note", "Mã KH", "Voucher", "Mã Hoá Đơn", "Trạng Thái"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblBillList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblBillListMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblBillList);
+        if (tblBillList.getColumnModel().getColumnCount() > 0) {
+            tblBillList.getColumnModel().getColumn(0).setMinWidth(1);
+            tblBillList.getColumnModel().getColumn(0).setPreferredWidth(1);
+            tblBillList.getColumnModel().getColumn(0).setMaxWidth(1);
+            tblBillList.getColumnModel().getColumn(1).setResizable(false);
+            tblBillList.getColumnModel().getColumn(1).setPreferredWidth(0);
+        }
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
+        cboFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc" }));
+        cboFilter.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                cboFilterPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        jLabel1.setText("Tìm Kiếm:");
+
+        jButton1.setText("Xem File Hoá Đơn");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Tách Hoá Đơn");
+
+        jButton3.setText("Mở File trong OS");
+
+        jButton4.setText("Quét QR Hoá Đơn");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 937, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3))
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblBillListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBillListMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblBillListMouseReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cboFilterPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboFilterPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboFilterPopupMenuWillBecomeInvisible
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cboFilter;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tblBillList;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    private void fetchFull() {
+        billList.clear();
+        billList = dao.selectAll();
+        cboFilter.addItem("Chưa Thanh Toán");
+        cboFilter.addItem("Đã Thanh Toán");
+    }
+
+    public void init() {
+        new Thread(() -> {
+            try {
+                fetchFull();
+                fillTable(billList);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+    }
+
+    private void fillTable(List<Bill> billList) {
+        List<NhanVien> nvList = nvdao.selectAll();
+        DefaultTableModel model = (DefaultTableModel) tblBillList.getModel();
+        model.setRowCount(0);
+        for (Bill bill : billList) {
+            Object[] row = {bill.getBill_ID(), getNhanVienName(bill.getUser_ID(),nvList), bill.getAmount(), DateHelper.formatTime(bill.getBillDate()), bill.getNote(), bill.getMa_KH(), bill.getVCode(), bill.getBillCode(), bill.getStatus()};
+            model.addRow(row);
+        }
+    }
+
+    private String getNhanVienName(int user_ID,List<NhanVien> nvList) {
+        String name ="";
+        for (NhanVien nhanVien : nvList) {
+            if (nhanVien.getMaNV()==user_ID){
+                name = nhanVien.getName();
+            }
+        }
+        return name;
+    }
+
 }

@@ -21,6 +21,7 @@ frame/QuanLyDoanhThuJPanel.class
 frame/QuanLyMonAnJPanel$11.class
 frame/blank_frame.class
 DAO/AuthenticateDAO.class
+frame/HoaDonJPanel$2.class
 frame/TableJPanel.class
 frame/VoucherJPanel$3.class
 frame/QuanLyMonAnJPanel$1.class
@@ -48,9 +49,11 @@ GUI/login$10.class
 frame/OrderPanel$17.class
 GUI/Settings$1.class
 control/mainUiControl$3.class
+frame/HoaDonJPanel$5.class
 model/FoodType.class
 GUI/mainUI$27.class
 frame/OrderPanel$20.class
+frame/HoaDonJPanel$4.class
 Bill/InBill.class
 frame/QuanLyMonAnJPanel$4.class
 frame/QuanLyMonAnJPanel.class
@@ -147,6 +150,7 @@ frame/LoginJPanel$4.class
 frame/loadingFrame$1.class
 frame/QuanLyNhanVienJPanel.class
 control/loginControl.class
+frame/HoaDonJPanel$1.class
 GUI/Settings$5.class
 model/Bill.class
 model/Food.class
@@ -162,6 +166,7 @@ frame/Scan_QR$1.class
 frame/OrderPanel$24.class
 GUI/login.class
 frame/OrderPanel$4.class
+frame/HoaDonJPanel$3.class
 frame/QuanLyHoiVienJPanel$4.class
 helper/RoundedCornerBorder.class
 frame/ThanhToanJDialog.class
