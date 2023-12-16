@@ -178,7 +178,7 @@ public class OrderControl {
 //        order_choosen;
 //        order ;
         ThanhToanControl control2 = new ThanhToanControl(parentFrame);
-        control2.setOrder(panel.txtSDTHoiVien.getText(), panel.txtMaVocher.getText(), order_choosen, panel.cboHinhThucThanhToan.getSelectedItem().toString(), panel.lblTotalPayment.getText(), panel.cboTableName.getSelectedItem().toString());
+        control2.setOrder(panel.txtSDTHoiVien.getText(), panel.txtMaVocher.getText(), order_choosen, panel.cboHinhThucThanhToan.getSelectedItem().toString(), panel.lblTotalPayment.getText(), panel.cboTableName.getSelectedItem().toString(),panel.txtOrderNote.getText());
         ThanhToanJDialog pay = new ThanhToanJDialog(parentFrame, true, control2);
     }
 

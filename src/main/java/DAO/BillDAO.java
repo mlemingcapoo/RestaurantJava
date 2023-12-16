@@ -93,4 +93,8 @@ public class BillDAO extends SQL<Bill, String> {
     public void addBill(int orderID,int userID, double amount, String billDate, String note, int ma_kh, String VCode, String billCode) throws Exception{
         DBHelper.executeProc("addBill",orderID,userID,amount,billDate,note,ma_kh,VCode,billCode);
     }
+
+    public void setStatus(Integer billID,int status) {
+        DBHelper.update("UPDATE Bill SET status = ? WHERE bill_ID = ?", status,billID);
+    }
 }

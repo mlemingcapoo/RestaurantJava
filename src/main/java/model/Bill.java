@@ -89,5 +89,20 @@ public class Bill {
         this.billCode = billCode;
     }
 
+    public String getStatusName() {
+        String status="";
+        switch (this.status) {
+            case 0:
+                status="Chưa hoàn tất";
+                break;
+            case 1:
+                status="Đã hoàn tất";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        return status;
+    }
+
 
 }

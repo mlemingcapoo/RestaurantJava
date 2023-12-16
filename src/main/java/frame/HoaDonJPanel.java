@@ -5,8 +5,10 @@
 package frame;
 
 import DAO.BillDAO;
+import DAO.HoiVienDAO;
 import DAO.NhanVienDao;
 import helper.DateHelper;
+import helper.DialogHelper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +23,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
 
     BillDAO dao = new BillDAO();
     NhanVienDao nvdao = new NhanVienDao();
+    HoiVienDAO hvdao = new HoiVienDAO();
     static List<Bill> billList = new ArrayList<>();
 
     /**
@@ -52,6 +55,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         tblBillList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,7 +65,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "bill_id", "NV Trực", "Tổng Tiền", "Ngày Tạo", "Note", "Mã KH", "Voucher", "Mã Hoá Đơn", "Trạng Thái"
+                "bill_id", "NV Trực", "Tổng Tiền", "Ngày Tạo", "Note", "Tên KH", "Voucher", "Mã Bill", "Trạng Thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -82,7 +86,6 @@ public class HoaDonJPanel extends javax.swing.JPanel {
             tblBillList.getColumnModel().getColumn(0).setMinWidth(1);
             tblBillList.getColumnModel().getColumn(0).setPreferredWidth(1);
             tblBillList.getColumnModel().getColumn(0).setMaxWidth(1);
-            tblBillList.getColumnModel().getColumn(1).setResizable(false);
             tblBillList.getColumnModel().getColumn(1).setPreferredWidth(0);
         }
 
@@ -105,7 +108,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Tìm Kiếm:");
 
-        jButton1.setText("Xem File Hoá Đơn");
+        jButton1.setText("?");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -118,6 +121,13 @@ public class HoaDonJPanel extends javax.swing.JPanel {
 
         jButton4.setText("Quét QR Hoá Đơn");
 
+        jButton5.setText("Xác Nhận Thanh Toán");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,25 +136,27 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -160,9 +172,10 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                     .addComponent(jScrollPane3))
                 .addContainerGap())
@@ -185,6 +198,19 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchKeyReleased
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        if (DialogHelper.confirm(this, "Xác nhận hoàn tất đơn?")) {
+            int selectedRow = tblBillList.getSelectedRow();
+
+// Get the value from the first column of the selected row
+            Object billID = tblBillList.getValueAt(selectedRow, 0);
+
+// Call the closeBill function with the obtained value
+            closeBill(Integer.valueOf(billID.toString()));
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboFilter;
@@ -192,6 +218,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -224,19 +251,29 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblBillList.getModel();
         model.setRowCount(0);
         for (Bill bill : billList) {
-            Object[] row = {bill.getBill_ID(), getNhanVienName(bill.getUser_ID(),nvList), bill.getAmount(), DateHelper.formatTime(bill.getBillDate()), bill.getNote(), bill.getMa_KH(), bill.getVCode(), bill.getBillCode(), bill.getStatus()};
+            Object[] row = {bill.getBill_ID(), getNhanVienName(bill.getUser_ID(), nvList), bill.getAmount(), DateHelper.formatTime(bill.getBillDate()), bill.getNote(), getTenKH(bill.getMa_KH()), bill.getVCode(), bill.getBillCode(), bill.getStatusName()};
             model.addRow(row);
         }
     }
 
-    private String getNhanVienName(int user_ID,List<NhanVien> nvList) {
-        String name ="";
+    private String getNhanVienName(int user_ID, List<NhanVien> nvList) {
+        String name = "";
         for (NhanVien nhanVien : nvList) {
-            if (nhanVien.getMaNV()==user_ID){
+            if (nhanVien.getMaNV() == user_ID) {
                 name = nhanVien.getName();
             }
         }
         return name;
+    }
+
+    private Object getTenKH(int ma_KH) {
+        String tenKH = "";
+        tenKH = hvdao.getNameByID(ma_KH);
+        return tenKH;
+    }
+
+    private void closeBill(Integer billID) {
+        dao.setStatus(billID,1);
     }
 
 }

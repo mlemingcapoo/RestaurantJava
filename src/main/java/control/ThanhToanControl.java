@@ -47,8 +47,8 @@ public class ThanhToanControl {
 
     ThanhToanJDialog dialog;
     Frame parent;
-    private String sdt;
-    private String voucher;
+    private String sdt="Không cung cấp";
+    private String voucher="Không";
     private String payMethod;
     private int order_choosen;
     private BigDecimal totalPayment;
@@ -67,13 +67,14 @@ public class ThanhToanControl {
         this.parent = parent;
     }
 
-    public void setOrder(String sdt, String voucher, int order_choosen, String payMethod, String totalPayment, String tableName) {
+    public void setOrder(String sdt, String voucher, int order_choosen, String payMethod, String totalPayment, String tableName, String note) {
         this.sdt = sdt;
         this.voucher = voucher;
         this.order_choosen = order_choosen;
         this.payMethod = payMethod;
         this.totalPayment = BigDecimal.valueOf(Double.parseDouble(totalPayment));
         this.tableName = tableName;
+        this.note=note;
         System.out.println("order choosenn:  " + this.order_choosen);
 
     }
@@ -143,7 +144,7 @@ public class ThanhToanControl {
     private void insertBill() {
         try {
             LocalDateTime currentTime = LocalDateTime.now();
-            billDAO.addBill(order_choosen, AuthenticateDAO.getUserID(), totalPayment.doubleValue(), currentTime.toString(), note, 0, voucher, dialog.lblMaBill.getText());
+            billDAO.addBill(order_choosen, AuthenticateDAO.getUserID(), totalPayment.doubleValue(), currentTime.toString(), note, getID(sdt), voucher, dialog.lblMaBill.getText());
         } catch (Exception ex) {
             Logger.getLogger(ThanhToanControl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -315,6 +316,11 @@ public class ThanhToanControl {
 
         // Hiển thị thông báo thành công
 //        System.exit(0);
+    }
+
+    private int getID(String sdt) {
+        int idByPhone = hoiVienDao.getIdByPhone(sdt);
+        return idByPhone;
     }
 
 }

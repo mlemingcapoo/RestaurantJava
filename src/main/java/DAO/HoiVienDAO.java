@@ -66,4 +66,26 @@ public class HoiVienDAO extends SQL<KhachHang, String> {
         }
         return name;
     }
+
+    public int getIdByPhone(String sdt) {
+        int id=0;
+        List<KhachHang> list = selectAll();
+        for (KhachHang kh : list) {
+            if(kh.getSDT().equals(sdt)){
+                id=kh.getMaKH();
+            }
+        }
+        return id;
+    }
+
+    public String getNameByID(int ma_KH) {
+        String name = "Ko cung cấp";
+        try {
+            List<KhachHang> selectBySQL = selectBySQL("SELECT * FROM KhachHang WHERE Ma_KH = ?", ma_KH);
+            name = selectBySQL.get(0).getName();
+        } catch (Exception e) {
+            return "Ko cung cấp";
+        }
+        return name;
+    }
 }
