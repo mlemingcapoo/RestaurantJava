@@ -143,6 +143,7 @@ public class OrderPanel extends javax.swing.JPanel {
             tblDSDangOrder.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        cboTableName.setBackground(new java.awt.Color(255, 255, 255));
         cboTableName.setForeground(new java.awt.Color(0, 0, 0));
         cboTableName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Khách mang về", "Bàn...", " " }));
         cboTableName.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
@@ -211,6 +212,8 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
         jLabel10.setText("Voucher");
 
+        txtMaVocher.setBackground(new java.awt.Color(255, 255, 255));
+        txtMaVocher.setForeground(new java.awt.Color(0, 0, 0));
         txtMaVocher.setMaximumSize(null);
         txtMaVocher.setMinimumSize(null);
         txtMaVocher.setPreferredSize(null);
@@ -228,6 +231,7 @@ public class OrderPanel extends javax.swing.JPanel {
             }
         });
 
+        cboHinhThucThanhToan.setBackground(new java.awt.Color(255, 255, 255));
         cboHinhThucThanhToan.setForeground(new java.awt.Color(0, 0, 0));
         cboHinhThucThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa chọn", "Chuyển Khoản", "Tiền Mặt" }));
         cboHinhThucThanhToan.setMaximumSize(null);
@@ -296,7 +300,8 @@ public class OrderPanel extends javax.swing.JPanel {
 
         jCheckBox1.setText("Dùng Điểm");
 
-        txtSDTHoiVien.setForeground(new java.awt.Color(255, 255, 255));
+        txtSDTHoiVien.setBackground(new java.awt.Color(255, 255, 255));
+        txtSDTHoiVien.setForeground(new java.awt.Color(0, 0, 0));
         txtSDTHoiVien.setMinimumSize(null);
         txtSDTHoiVien.setPreferredSize(null);
 
@@ -534,7 +539,8 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
         jLabel12.setText("Loại");
 
-        txtTimMonAn.setForeground(new java.awt.Color(255, 255, 255));
+        txtTimMonAn.setBackground(new java.awt.Color(255, 255, 255));
+        txtTimMonAn.setForeground(new java.awt.Color(0, 0, 0));
         txtTimMonAn.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimMonAnKeyReleased(evt);

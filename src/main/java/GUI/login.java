@@ -58,21 +58,6 @@ Music test = new Music();
 
             }
         };
-        jLabel4 = new javax.swing.JLabel(){
-            @Override protected void paintComponent(Graphics g) {
-                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                    Graphics2D g2 = (Graphics2D) g.create();
-                    g2.setPaint(getBackground());
-                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                        0, 0, getWidth() - 1, getHeight() - 1));
-                g2.dispose();
-            } super.paintComponent(g);}
-            @Override public void updateUI() {
-                super.updateUI();
-                setOpaque(false);
-
-            }
-        };
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblTaiKhoan = new javax.swing.JLabel();
@@ -146,18 +131,6 @@ Music test = new Music();
             }
         });
         jPanel3.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 149, 36));
-
-        jLabel4.setBackground(new java.awt.Color(70, 73, 75));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Quên Mật Khẩu ?");
-        jLabel4.setBorder(new helper.RoundedCornerBorder());
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("UTM Swiss 721 Black Condensed", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -238,11 +211,6 @@ Music test = new Music();
         control.login(txtUser, txtPass);
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        control.forgorPass();
-
-    }//GEN-LAST:event_jLabel4MouseClicked
-
     private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
         // TODO add your handling code here:
         btnDangNhapActionPerformed(evt);
@@ -292,7 +260,6 @@ Music test = new Music();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;
-    public static javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

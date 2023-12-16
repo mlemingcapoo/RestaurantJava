@@ -4,12 +4,8 @@
  */
 package frame;
 
-import DAO.DoanhThuDAO;
 import DAO.ThongKeDao;
 import helper.DBHelper;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 import model.ThongKe;
 
@@ -136,7 +132,7 @@ public void TongThang() {
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Thống Kê Chi Tiết"));
         jPanel12.setRequestFocusEnabled(false);
 
-        tblQuanLyChiTiet.setBackground(new java.awt.Color(255, 153, 153));
+        tblQuanLyChiTiet.setBackground(new java.awt.Color(255, 204, 204));
         tblQuanLyChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -166,7 +162,7 @@ public void TongThang() {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel7.setBackground(new java.awt.Color(255, 204, 204));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức năng"));
 
         cboChucNung.setBackground(new java.awt.Color(255, 153, 153));
@@ -190,7 +186,7 @@ public void TongThang() {
                 .addGap(16, 16, 16))
         );
 
-        jPanel6.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel6.setBackground(new java.awt.Color(255, 204, 204));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Tổng"));
 
         jPanel9.setBackground(new java.awt.Color(255, 153, 153));
@@ -256,7 +252,7 @@ public void TongThang() {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(lblThang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(lblThang, javax.swing.GroupLayout.PREFERRED_SIZE, 15, Short.MAX_VALUE)
                 .addGap(28, 28, 28))
         );
 
@@ -282,8 +278,6 @@ public void TongThang() {
                     .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(17, 17, 17))
         );
-
-        jPanel10.getAccessibleContext().setAccessibleName("Tuần");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

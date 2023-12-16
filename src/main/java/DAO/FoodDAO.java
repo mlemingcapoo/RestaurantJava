@@ -1,9 +1,12 @@
 package DAO;
 
 import helper.DBHelper;
+import helper.DialogHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Food;
 import model.FoodType;
 
@@ -101,5 +104,16 @@ public class FoodDAO
             System.out.println("line 79 FOODDAO: " + e.getMessage());
         }
         return list;
+    }
+
+    public void setStatus(int dish_ID, int status) {
+        try {
+            DialogHelper.alert(null, dish_ID+" "+status);
+            ResultSet rs = DBHelper.query("UPDATE `Food` SET isLocked = ? WHERE dish_ID = ?", status,dish_ID);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FoodDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(FoodDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

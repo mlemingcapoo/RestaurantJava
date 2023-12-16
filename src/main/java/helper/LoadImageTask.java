@@ -63,7 +63,7 @@ public class LoadImageTask implements Runnable {
 
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
             
         }).start();

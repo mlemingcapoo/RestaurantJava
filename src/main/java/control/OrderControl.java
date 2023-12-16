@@ -569,13 +569,12 @@ public class OrderControl {
     }
 
     public void lockDish(int selectedRow) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        dao.setStatus(food.get(selectedRow).getDish_ID(),1);
     }
 
     public void unlockDish(int selectedRow) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        dao.setStatus(food.get(selectedRow).getDish_ID(),0);
+        
     }
 
     public void setNote(int selectedRow, String text) {
@@ -593,9 +592,55 @@ public class OrderControl {
         }
     }
 
-    public void search(String text, String toString) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    public void search(String tuKhoa, String foodTypeName) {
+        new Thread(() -> {
+            try {
+                int type1 = 0;
+                for (FoodType food1 : types) {
+                    if (foodTypeName.equals(food1.getType())) {
+                        type1 = food1.getType_id();
+                    }
+                }
+
+                try {
+                    int type = 0;
+                    if (foodTypeName.equalsIgnoreCase("Tất cả")) {
+                        type = 0;
+                    } else {
+                        type = type1;
+                    }
+                    List<Food> fd = dao.searchByNameAndType("%" + tuKhoa + "%", type);
+                    System.out.println("Tu Khoa search: " + tuKhoa);
+                    System.out.println("Loai search: " + type1);
+                    DefaultTableModel model = (DefaultTableModel) panel.tblDSMonAn.getModel();
+                    model.setRowCount(0);
+                    int rowIndex=0;
+                    for (Food fd1 : fd) {
+                        Object[] row = new Object[]{fd1.getName(), fd1.getPrice(), FoodHelper.getTypeName(fd1.getType(), types), fd1.getImg(), getTrangThai(fd1.isIsLocked())};
+                        model.addRow(row);
+                        rowIndex++;
+                    }
+                    TableColumn column = panel.tblDSMonAn.getColumnModel().getColumn(3);
+                    column.setCellRenderer(new imgHelper());
+
+                    for (int i = 0; i < rowIndex; i++) {
+                        setImg(model, i, food.get(i).getImg());
+                    }
+
+                    panel.tblDSMonAn.updateUI();
+                } catch (Exception ex) {
+                    Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+    }
+    
+    public String getTrangThai(boolean status) {
+        return status ? "Khoá" : "Đang mở";
     }
 
 //    private BigDecimal calculateTotalPrice(int order_choosen) {

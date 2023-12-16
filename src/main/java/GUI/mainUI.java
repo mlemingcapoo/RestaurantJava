@@ -6,7 +6,6 @@ package GUI;
 
 import control.mainUiControl;
 import helper.RoundedCornerBorder;
-import helper.RoundedCornerBorder2;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -72,10 +71,19 @@ public final class mainUI extends javax.swing.JFrame {
             }
         };
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         lblCloseMenu = new javax.swing.JLabel();
         lblOpenMenu1 = new javax.swing.JLabel();
-        panelProfilePhoto = new javax.swing.JPanel() {
+        BtnQuanLyVoucher = new javax.swing.JLabel();
+        BtnQuanLyHoiVien = new javax.swing.JLabel();
+        BtnQuanLyNhanVien = new javax.swing.JLabel();
+        menuBarSeparator = new javax.swing.JSeparator();
+        BtnDangXuat = new javax.swing.JLabel();
+        BtnQuanLyMon = new javax.swing.JLabel();
+        jpllMenuBar = new javax.swing.JPanel();
+        absoluteWrapper = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        btnOrder = new javax.swing.JButton(){
             @Override protected void paintComponent(Graphics g) {
                 if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
                     Graphics2D g2 = (Graphics2D) g.create();
@@ -83,502 +91,401 @@ public final class mainUI extends javax.swing.JFrame {
                     g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
                         0, 0, getWidth() - 1, getHeight() - 1));
                 g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
+
             }
-            super.paintComponent(g);
-        }
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
-            //    setBorder();
-        }
-    };
-    BtnQuanLyVoucher = new javax.swing.JLabel();
-    BtnQuanLyNhanVien = new javax.swing.JLabel();
-    BtnQuanLyDoanhThu = new javax.swing.JLabel();
-    BtnQuanLyHoiVien = new javax.swing.JLabel();
-    menuBarSeparator = new javax.swing.JSeparator();
-    BtnDangXuat = new javax.swing.JLabel();
-    BtnGioiThieu = new javax.swing.JLabel();
-    BtnCaiDat = new javax.swing.JLabel();
-    BtnQuanLyMon = new javax.swing.JLabel();
-    jpllMenuBar = new javax.swing.JPanel();
-    absoluteWrapper = new javax.swing.JPanel();
-    jButton2 = new javax.swing.JButton();
-    jButton3 = new javax.swing.JButton();
-    btnOrder = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
+        };
+        lblTime = new javax.swing.JLabel();
+        BtnHoaDon = new javax.swing.JButton(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
 
-        }
-    };
-    lblTime = new javax.swing.JLabel();
-    BtnHoaDon = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
+            }
+        };
+        BtnDatBan = new javax.swing.JButton(){
+            @Override protected void paintComponent(Graphics g) {
+                if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setPaint(getBackground());
+                    g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+                        0, 0, getWidth() - 1, getHeight() - 1));
+                g2.dispose();
+            } super.paintComponent(g);}
+            @Override public void updateUI() {
+                super.updateUI();
+                setOpaque(false);
 
-        }
-    };
-    BtnDatBan = new javax.swing.JButton(){
-        @Override protected void paintComponent(Graphics g) {
-            if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setPaint(getBackground());
-                g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
-                    0, 0, getWidth() - 1, getHeight() - 1));
-            g2.dispose();
-        } super.paintComponent(g);}
-        @Override public void updateUI() {
-            super.updateUI();
-            setOpaque(false);
+            }
+        };
+        jSeparator1 = new javax.swing.JSeparator();
+        statusWrapper = new javax.swing.JPanel();
+        loadingIndicator = new javax.swing.JLabel();
+        cardDisplayWrapper = new javax.swing.JPanel();
+        panelDisplay = new javax.swing.JPanel();
 
-        }
-    };
-    jSeparator1 = new javax.swing.JSeparator();
-    statusWrapper = new javax.swing.JPanel();
-    loadingIndicator = new javax.swing.JLabel();
-    cardDisplayWrapper = new javax.swing.JPanel();
-    panelDisplay = new javax.swing.JPanel();
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-    jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jplMenuCover.setBackground(new java.awt.Color(255, 204, 204));
+        jplMenuCover.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jplMenuCover.setPreferredSize(new java.awt.Dimension(190, 590));
+        jplMenuCover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplMenuCoverMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplMenuCoverMouseExited(evt);
+            }
+        });
+        jplMenuCover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jplMenuCover.setBackground(new java.awt.Color(255, 204, 204));
-    jplMenuCover.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    jplMenuCover.setPreferredSize(new java.awt.Dimension(190, 590));
-    jplMenuCover.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseEntered(java.awt.event.MouseEvent evt) {
-            jplMenuCoverMouseEntered(evt);
-        }
-        public void mouseExited(java.awt.event.MouseEvent evt) {
-            jplMenuCoverMouseExited(evt);
-        }
-    });
-    jplMenuCover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setDoubleBuffered(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 8, -1, 83));
 
-    jPanel2.setBackground(new java.awt.Color(204, 255, 255));
-    jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    jPanel2.setDoubleBuffered(false);
-    jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-    jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 8, -1, 83));
+        lblCloseMenu.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblCloseMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCloseMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/thoat 24x24.png"))); // NOI18N
+        lblCloseMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCloseMenuMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblCloseMenuMouseReleased(evt);
+            }
+        });
+        jPanel2.add(lblCloseMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 2, 30, 30));
 
-    jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-    jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/User 2.png"))); // NOI18N
-    jLabel4.setText("     User Name");
-    jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-    jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            jLabel4MouseReleased(evt);
-        }
-    });
-    jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 170, 30));
+        lblOpenMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
+        lblOpenMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblOpenMenu1MouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblOpenMenu1MouseReleased(evt);
+            }
+        });
+        jPanel2.add(lblOpenMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-    lblCloseMenu.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-    lblCloseMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    lblCloseMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/thoat 24x24.png"))); // NOI18N
-    lblCloseMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            lblCloseMenuMouseClicked(evt);
-        }
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            lblCloseMenuMouseReleased(evt);
-        }
-    });
-    jPanel2.add(lblCloseMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 2, 30, 30));
+        BtnQuanLyVoucher.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BtnQuanLyVoucher.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnQuanLyVoucher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Rouble.png"))); // NOI18N
+        BtnQuanLyVoucher.setText("     Quản Lý Voucher");
+        BtnQuanLyVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BtnQuanLyVoucherMouseReleased(evt);
+            }
+        });
+        jPanel2.add(BtnQuanLyVoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 180, 30));
 
-    lblOpenMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
-    lblOpenMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            lblOpenMenu1MouseClicked(evt);
-        }
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            lblOpenMenu1MouseReleased(evt);
-        }
-    });
-    jPanel2.add(lblOpenMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        BtnQuanLyHoiVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BtnQuanLyHoiVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnQuanLyHoiVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Unknown person.png"))); // NOI18N
+        BtnQuanLyHoiVien.setText("     Quản Lý Hội Viên");
+        BtnQuanLyHoiVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BtnQuanLyHoiVienMouseReleased(evt);
+            }
+        });
+        jPanel2.add(BtnQuanLyHoiVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 180, 30));
 
-    panelProfilePhoto.setBorder(new RoundedCornerBorder2());
-    panelProfilePhoto.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            panelProfilePhotoMouseClicked(evt);
-        }
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            panelProfilePhotoMouseReleased(evt);
-        }
-    });
+        jplMenuCover.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 240));
 
-    javax.swing.GroupLayout panelProfilePhotoLayout = new javax.swing.GroupLayout(panelProfilePhoto);
-    panelProfilePhoto.setLayout(panelProfilePhotoLayout);
-    panelProfilePhotoLayout.setHorizontalGroup(
-        panelProfilePhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 120, Short.MAX_VALUE)
-    );
-    panelProfilePhotoLayout.setVerticalGroup(
-        panelProfilePhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 120, Short.MAX_VALUE)
-    );
+        BtnQuanLyNhanVien.setBackground(new java.awt.Color(255, 255, 255));
+        BtnQuanLyNhanVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BtnQuanLyNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnQuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nhanvien 24.png"))); // NOI18N
+        BtnQuanLyNhanVien.setText("     Quản Lý Nhân Viên");
+        BtnQuanLyNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnQuanLyNhanVienMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnQuanLyNhanVienMouseEntered(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BtnQuanLyNhanVienMouseReleased(evt);
+            }
+        });
+        jplMenuCover.add(BtnQuanLyNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 180, 30));
 
-    jPanel2.add(panelProfilePhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 120, 120));
+        menuBarSeparator.setForeground(new java.awt.Color(153, 153, 153));
+        jplMenuCover.add(menuBarSeparator, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 452, 210, 10));
 
-    jplMenuCover.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 240));
+        BtnDangXuat.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BtnDangXuat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/đăng xuất 24.png"))); // NOI18N
+        BtnDangXuat.setText("     Đăng Xuất");
+        BtnDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BtnDangXuatMouseReleased(evt);
+            }
+        });
+        jplMenuCover.add(BtnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 180, 30));
 
-    BtnQuanLyVoucher.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-    BtnQuanLyVoucher.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnQuanLyVoucher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Rouble.png"))); // NOI18N
-    BtnQuanLyVoucher.setText("     Quản Lý Voucher");
-    BtnQuanLyVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnQuanLyVoucherMouseReleased(evt);
-        }
-    });
-    jplMenuCover.add(BtnQuanLyVoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 180, 30));
+        BtnQuanLyMon.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BtnQuanLyMon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnQuanLyMon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Remove from basket.png"))); // NOI18N
+        BtnQuanLyMon.setText("     Quản Lý Món Ăn");
+        BtnQuanLyMon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BtnQuanLyMonMouseReleased(evt);
+            }
+        });
+        jplMenuCover.add(BtnQuanLyMon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 30));
 
-    BtnQuanLyNhanVien.setBackground(new java.awt.Color(255, 255, 255));
-    BtnQuanLyNhanVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-    BtnQuanLyNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnQuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nhanvien 24.png"))); // NOI18N
-    BtnQuanLyNhanVien.setText("     Quản Lý Nhân Viên");
-    BtnQuanLyNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            BtnQuanLyNhanVienMouseClicked(evt);
-        }
-        public void mouseEntered(java.awt.event.MouseEvent evt) {
-            BtnQuanLyNhanVienMouseEntered(evt);
-        }
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnQuanLyNhanVienMouseReleased(evt);
-        }
-    });
-    jplMenuCover.add(BtnQuanLyNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 30));
+        jpllMenuBar.setBackground(new java.awt.Color(255, 255, 255));
+        jpllMenuBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    BtnQuanLyDoanhThu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-    BtnQuanLyDoanhThu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnQuanLyDoanhThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Report.png"))); // NOI18N
-    BtnQuanLyDoanhThu.setText("     Quản Lý Doanh Thu");
-    BtnQuanLyDoanhThu.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            BtnQuanLyDoanhThuMouseClicked(evt);
-        }
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnQuanLyDoanhThuMouseReleased(evt);
-        }
-    });
-    jplMenuCover.add(BtnQuanLyDoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 180, 30));
+        absoluteWrapper.setBackground(new java.awt.Color(255, 255, 255));
+        absoluteWrapper.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        absoluteWrapper.setForeground(new java.awt.Color(255, 255, 255));
 
-    BtnQuanLyHoiVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-    BtnQuanLyHoiVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnQuanLyHoiVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Unknown person.png"))); // NOI18N
-    BtnQuanLyHoiVien.setText("     Quản Lý Hội Viên");
-    BtnQuanLyHoiVien.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnQuanLyHoiVienMouseReleased(evt);
-        }
-    });
-    jplMenuCover.add(BtnQuanLyHoiVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 180, 30));
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 51, 51));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-close-window-48.png"))); // NOI18N
+        jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton2.setBorderPainted(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-    menuBarSeparator.setForeground(new java.awt.Color(153, 153, 153));
-    jplMenuCover.add(menuBarSeparator, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 452, 210, 10));
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 153, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minimize-window-48.png"))); // NOI18N
+        jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton3.setBorderPainted(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-    BtnDangXuat.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-    BtnDangXuat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/đăng xuất 24.png"))); // NOI18N
-    BtnDangXuat.setText("     Đăng Xuất");
-    BtnDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnDangXuatMouseReleased(evt);
-        }
-    });
-    jplMenuCover.add(BtnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 180, 30));
+        btnOrder.setBackground(new java.awt.Color(255, 255, 255));
+        btnOrder.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
+        btnOrder.setForeground(new java.awt.Color(102, 102, 102));
+        btnOrder.setText("Order");
+        btnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnOrderMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnOrderMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnOrderMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnOrderMouseReleased(evt);
+            }
+        });
+        btnOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderActionPerformed(evt);
+            }
+        });
 
-    BtnGioiThieu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-    BtnGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Online.png"))); // NOI18N
-    BtnGioiThieu.setText("     Giới Thiệu");
-    BtnGioiThieu.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnGioiThieuMouseReleased(evt);
-        }
-    });
-    jplMenuCover.add(BtnGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 180, 30));
+        lblTime.setFont(new java.awt.Font("Herculanum", 0, 13)); // NOI18N
+        lblTime.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTime.setText("1-1-2000 | 00:00:00 AM");
 
-    BtnCaiDat.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-    BtnCaiDat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnCaiDat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Monitor.png"))); // NOI18N
-    BtnCaiDat.setText("     Cài Đặt");
-    BtnCaiDat.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnCaiDatMouseReleased(evt);
-        }
-    });
-    jplMenuCover.add(BtnCaiDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 180, 30));
+        BtnHoaDon.setBackground(new java.awt.Color(255, 255, 255));
+        BtnHoaDon.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
+        BtnHoaDon.setForeground(new java.awt.Color(102, 102, 102));
+        BtnHoaDon.setText("Hoá Đơn");
+        BtnHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnHoaDonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnHoaDonMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BtnHoaDonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BtnHoaDonMouseReleased(evt);
+            }
+        });
+        BtnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHoaDonActionPerformed(evt);
+            }
+        });
 
-    BtnQuanLyMon.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-    BtnQuanLyMon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    BtnQuanLyMon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Remove from basket.png"))); // NOI18N
-    BtnQuanLyMon.setText("     Quản Lý Món Ăn");
-    BtnQuanLyMon.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnQuanLyMonMouseReleased(evt);
-        }
-    });
-    jplMenuCover.add(BtnQuanLyMon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 180, 30));
+        BtnDatBan.setBackground(new java.awt.Color(255, 255, 255));
+        BtnDatBan.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
+        BtnDatBan.setForeground(new java.awt.Color(102, 102, 102));
+        BtnDatBan.setText("Đặt Bàn");
+        BtnDatBan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnDatBanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnDatBanMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BtnDatBanMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BtnDatBanMouseReleased(evt);
+            }
+        });
+        BtnDatBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDatBanActionPerformed(evt);
+            }
+        });
 
-    jpllMenuBar.setBackground(new java.awt.Color(255, 255, 255));
-    jpllMenuBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
+        jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-    absoluteWrapper.setBackground(new java.awt.Color(255, 255, 255));
-    absoluteWrapper.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    absoluteWrapper.setForeground(new java.awt.Color(255, 255, 255));
+        statusWrapper.setBackground(new java.awt.Color(255, 255, 255));
 
-    jButton2.setBackground(new java.awt.Color(255, 255, 255));
-    jButton2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-    jButton2.setForeground(new java.awt.Color(255, 51, 51));
-    jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-close-window-48.png"))); // NOI18N
-    jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-    jButton2.setBorderPainted(false);
-    jButton2.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton2ActionPerformed(evt);
-        }
-    });
+        loadingIndicator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Accept.png"))); // NOI18N
+        loadingIndicator.setText("Updated");
+        loadingIndicator.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                loadingIndicatorMouseReleased(evt);
+            }
+        });
 
-    jButton3.setBackground(new java.awt.Color(255, 255, 255));
-    jButton3.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-    jButton3.setForeground(new java.awt.Color(0, 153, 255));
-    jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minimize-window-48.png"))); // NOI18N
-    jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-    jButton3.setBorderPainted(false);
-    jButton3.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton3ActionPerformed(evt);
-        }
-    });
+        javax.swing.GroupLayout statusWrapperLayout = new javax.swing.GroupLayout(statusWrapper);
+        statusWrapper.setLayout(statusWrapperLayout);
+        statusWrapperLayout.setHorizontalGroup(
+            statusWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statusWrapperLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(loadingIndicator, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        statusWrapperLayout.setVerticalGroup(
+            statusWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statusWrapperLayout.createSequentialGroup()
+                .addComponent(loadingIndicator, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
-    btnOrder.setBackground(new java.awt.Color(255, 255, 255));
-    btnOrder.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    btnOrder.setForeground(new java.awt.Color(102, 102, 102));
-    btnOrder.setText("Order");
-    btnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseEntered(java.awt.event.MouseEvent evt) {
-            btnOrderMouseEntered(evt);
-        }
-        public void mouseExited(java.awt.event.MouseEvent evt) {
-            btnOrderMouseExited(evt);
-        }
-        public void mousePressed(java.awt.event.MouseEvent evt) {
-            btnOrderMousePressed(evt);
-        }
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            btnOrderMouseReleased(evt);
-        }
-    });
-    btnOrder.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnOrderActionPerformed(evt);
-        }
-    });
-
-    lblTime.setFont(new java.awt.Font("Herculanum", 0, 13)); // NOI18N
-    lblTime.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    lblTime.setText("1-1-2000 | 00:00:00 AM");
-
-    BtnHoaDon.setBackground(new java.awt.Color(255, 255, 255));
-    BtnHoaDon.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnHoaDon.setForeground(new java.awt.Color(102, 102, 102));
-    BtnHoaDon.setText("Hoá Đơn");
-    BtnHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseEntered(java.awt.event.MouseEvent evt) {
-            BtnHoaDonMouseEntered(evt);
-        }
-        public void mouseExited(java.awt.event.MouseEvent evt) {
-            BtnHoaDonMouseExited(evt);
-        }
-        public void mousePressed(java.awt.event.MouseEvent evt) {
-            BtnHoaDonMousePressed(evt);
-        }
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnHoaDonMouseReleased(evt);
-        }
-    });
-    BtnHoaDon.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnHoaDonActionPerformed(evt);
-        }
-    });
-
-    BtnDatBan.setBackground(new java.awt.Color(255, 255, 255));
-    BtnDatBan.setFont(new java.awt.Font("American Typewriter", 1, 13)); // NOI18N
-    BtnDatBan.setForeground(new java.awt.Color(102, 102, 102));
-    BtnDatBan.setText("Đặt Bàn");
-    BtnDatBan.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseEntered(java.awt.event.MouseEvent evt) {
-            BtnDatBanMouseEntered(evt);
-        }
-        public void mouseExited(java.awt.event.MouseEvent evt) {
-            BtnDatBanMouseExited(evt);
-        }
-        public void mousePressed(java.awt.event.MouseEvent evt) {
-            BtnDatBanMousePressed(evt);
-        }
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            BtnDatBanMouseReleased(evt);
-        }
-    });
-    BtnDatBan.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            BtnDatBanActionPerformed(evt);
-        }
-    });
-
-    jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
-    jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
-    jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-    statusWrapper.setBackground(new java.awt.Color(255, 255, 255));
-
-    loadingIndicator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Accept.png"))); // NOI18N
-    loadingIndicator.setText("Updated");
-    loadingIndicator.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            loadingIndicatorMouseReleased(evt);
-        }
-    });
-
-    javax.swing.GroupLayout statusWrapperLayout = new javax.swing.GroupLayout(statusWrapper);
-    statusWrapper.setLayout(statusWrapperLayout);
-    statusWrapperLayout.setHorizontalGroup(
-        statusWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(statusWrapperLayout.createSequentialGroup()
-            .addGap(5, 5, 5)
-            .addComponent(loadingIndicator, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-            .addContainerGap())
-    );
-    statusWrapperLayout.setVerticalGroup(
-        statusWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(statusWrapperLayout.createSequentialGroup()
-            .addComponent(loadingIndicator, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, Short.MAX_VALUE))
-    );
-
-    javax.swing.GroupLayout absoluteWrapperLayout = new javax.swing.GroupLayout(absoluteWrapper);
-    absoluteWrapper.setLayout(absoluteWrapperLayout);
-    absoluteWrapperLayout.setHorizontalGroup(
-        absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(absoluteWrapperLayout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(statusWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(5, 5, 5)
-            .addComponent(lblTime, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-            .addGap(0, 0, 0)
-            .addComponent(btnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-            .addGap(13, 13, 13)
-            .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
-            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap())
-    );
-    absoluteWrapperLayout.setVerticalGroup(
-        absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absoluteWrapperLayout.createSequentialGroup()
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblTime, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(BtnHoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(BtnDatBan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnOrder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap())
-        .addGroup(absoluteWrapperLayout.createSequentialGroup()
-            .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout absoluteWrapperLayout = new javax.swing.GroupLayout(absoluteWrapper);
+        absoluteWrapper.setLayout(absoluteWrapperLayout);
+        absoluteWrapperLayout.setHorizontalGroup(
+            absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(absoluteWrapperLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(statusWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(0, 0, Short.MAX_VALUE))
-    );
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(lblTime, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(btnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                .addGap(13, 13, 13)
+                .addComponent(BtnDatBan, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        absoluteWrapperLayout.setVerticalGroup(
+            absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absoluteWrapperLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTime, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnHoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnDatBan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOrder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(absoluteWrapperLayout.createSequentialGroup()
+                .addGroup(absoluteWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(statusWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
-    cardDisplayWrapper.setBackground(new java.awt.Color(255, 153, 153));
-    cardDisplayWrapper.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseEntered(java.awt.event.MouseEvent evt) {
-            cardDisplayWrapperMouseEntered(evt);
-        }
-    });
+        cardDisplayWrapper.setBackground(new java.awt.Color(255, 153, 153));
+        cardDisplayWrapper.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cardDisplayWrapperMouseEntered(evt);
+            }
+        });
 
-    panelDisplay.setBackground(new java.awt.Color(255, 255, 255));
-    panelDisplay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    panelDisplay.setLayout(new java.awt.CardLayout());
+        panelDisplay.setBackground(new java.awt.Color(255, 255, 255));
+        panelDisplay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelDisplay.setLayout(new java.awt.CardLayout());
 
-    javax.swing.GroupLayout cardDisplayWrapperLayout = new javax.swing.GroupLayout(cardDisplayWrapper);
-    cardDisplayWrapper.setLayout(cardDisplayWrapperLayout);
-    cardDisplayWrapperLayout.setHorizontalGroup(
-        cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
-    cardDisplayWrapperLayout.setVerticalGroup(
-        cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
+        javax.swing.GroupLayout cardDisplayWrapperLayout = new javax.swing.GroupLayout(cardDisplayWrapper);
+        cardDisplayWrapper.setLayout(cardDisplayWrapperLayout);
+        cardDisplayWrapperLayout.setHorizontalGroup(
+            cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        cardDisplayWrapperLayout.setVerticalGroup(
+            cardDisplayWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-    jPanel1Layout.setHorizontalGroup(
-        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(absoluteWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGroup(jPanel1Layout.createSequentialGroup()
-            .addComponent(jplMenuCover, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, 0)
-            .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, 0)
-            .addComponent(cardDisplayWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
-    jPanel1Layout.setVerticalGroup(
-        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel1Layout.createSequentialGroup()
-            .addComponent(absoluteWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, 0)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jplMenuCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(absoluteWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jplMenuCover, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(cardDisplayWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGap(0, 0, 0))
-    );
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(absoluteWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jplMenuCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpllMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardDisplayWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
+        );
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-    pack();
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCloseMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMenuMouseClicked
@@ -589,11 +496,6 @@ public final class mainUI extends javax.swing.JFrame {
 //        cardTrangChu.setVisible(true);
 //        cardDisplayWrapper.setVisible(true);
     }//GEN-LAST:event_BtnQuanLyNhanVienMouseClicked
-
-    private void BtnQuanLyDoanhThuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyDoanhThuMouseClicked
-//        cardTrangChu.setVisible(false);
-
-    }//GEN-LAST:event_BtnQuanLyDoanhThuMouseClicked
 
     private void lblCloseMenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMenuMouseReleased
         // TODO add your handling code here:
@@ -615,12 +517,6 @@ public final class mainUI extends javax.swing.JFrame {
         mainUI.closeMenu();
         mainUI.QuanLyNhanVien();
     }//GEN-LAST:event_BtnQuanLyNhanVienMouseReleased
-
-    private void BtnQuanLyDoanhThuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuanLyDoanhThuMouseReleased
-        // TODO add your handling code here:
-        mainUI.closeMenu();
-        mainUI.QuanLyDoanhThu();
-    }//GEN-LAST:event_BtnQuanLyDoanhThuMouseReleased
 
     private void jplMenuCoverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMenuCoverMouseExited
         // TODO add your handling code here:
@@ -675,17 +571,6 @@ public final class mainUI extends javax.swing.JFrame {
         mainUI.closeMenu();
         mainUI.Order(this);
     }//GEN-LAST:event_btnOrderActionPerformed
-
-    private void panelProfilePhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_panelProfilePhotoMouseClicked
-
-    private void panelProfilePhotoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilePhotoMouseReleased
-        // TODO add your handling code here:
-        mainUI.closeMenu();
-        mainUI.profile();
-    }//GEN-LAST:event_panelProfilePhotoMouseReleased
 
     private void BtnHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHoaDonMouseEntered
         // TODO add your handling code here:
@@ -768,23 +653,6 @@ public final class mainUI extends javax.swing.JFrame {
         mainUI.DangXuat();
     }//GEN-LAST:event_BtnDangXuatMouseReleased
 
-    private void BtnCaiDatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCaiDatMouseReleased
-        // TODO add your handling code here:
-        mainUI.closeMenu();
-        mainUI.CaiDat();
-    }//GEN-LAST:event_BtnCaiDatMouseReleased
-
-    private void BtnGioiThieuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGioiThieuMouseReleased
-        // TODO add your handling code here:
-        mainUI.closeMenu();
-        mainUI.GioiThieu();
-    }//GEN-LAST:event_BtnGioiThieuMouseReleased
-
-    private void jLabel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseReleased
-        // TODO add your handling code here:
-        panelProfilePhotoMouseReleased(evt);
-    }//GEN-LAST:event_jLabel4MouseReleased
-
     private void loadingIndicatorMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loadingIndicatorMouseReleased
         // TODO add your handling code here:
         mainUI.refreshCon();
@@ -833,12 +701,9 @@ public final class mainUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JLabel BtnCaiDat;
     public static javax.swing.JLabel BtnDangXuat;
     public static javax.swing.JButton BtnDatBan;
-    public static javax.swing.JLabel BtnGioiThieu;
     public static javax.swing.JButton BtnHoaDon;
-    public static javax.swing.JLabel BtnQuanLyDoanhThu;
     public static javax.swing.JLabel BtnQuanLyHoiVien;
     public static javax.swing.JLabel BtnQuanLyMon;
     public static javax.swing.JLabel BtnQuanLyNhanVien;
@@ -849,7 +714,6 @@ public final class mainUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel3;
-    public static javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
@@ -861,7 +725,6 @@ public final class mainUI extends javax.swing.JFrame {
     public static javax.swing.JLabel loadingIndicator;
     private javax.swing.JSeparator menuBarSeparator;
     public static javax.swing.JPanel panelDisplay;
-    public static javax.swing.JPanel panelProfilePhoto;
     public static javax.swing.JPanel statusWrapper;
     // End of variables declaration//GEN-END:variables
 }

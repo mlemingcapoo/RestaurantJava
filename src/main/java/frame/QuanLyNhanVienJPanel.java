@@ -504,9 +504,9 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 204, 204));
 
-        txtUser.setBackground(new java.awt.Color(255, 255, 255));
+        txtUser.setBackground(new java.awt.Color(255, 204, 204));
         txtUser.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
         txtUser.setPreferredSize(new java.awt.Dimension(0, 0));
 
@@ -680,7 +680,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBackground(new java.awt.Color(255, 204, 204));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
         txtTimKiem.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
@@ -719,7 +719,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBackground(new java.awt.Color(255, 204, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
         btnThem.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N

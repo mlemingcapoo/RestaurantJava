@@ -54,7 +54,7 @@ JPanel DoiMatKhau = new DoiMatKhau();
 
         setBackground(new java.awt.Color(255, 204, 204));
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         btnDoiMatKhau.setBackground(new java.awt.Color(255, 153, 153));
@@ -84,12 +84,12 @@ JPanel DoiMatKhau = new DoiMatKhau();
             }
         });
 
-        jTextPane1.setBackground(new java.awt.Color(255, 153, 153));
+        jTextPane1.setBackground(new java.awt.Color(255, 204, 204));
         jScrollPane1.setViewportView(jTextPane1);
 
         jLabel5.setText("Ghi Chú");
 
-        jPanel3.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

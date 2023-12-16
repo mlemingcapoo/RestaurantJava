@@ -60,6 +60,7 @@
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/loginControl.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/main/testClass.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/CaiDatControl.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/DAO/ThongKeDao.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/model/Food.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/OrderPanel.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/helper/DBHelper.java
@@ -78,6 +79,7 @@
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/helper/util.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/main/main_class.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/helper/BuffImgHelper.java
+/Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/model/ThongKe.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/control/mainUiControl.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/profile.java
 /Users/capoo/NetBeansProjects/RestaurantJava/src/main/java/frame/QuanLyMonAnJPanel.java

@@ -56,13 +56,14 @@ public class HoaDonJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBillList = new javax.swing.JTable();
-        txtSearch = new javax.swing.JTextField();
-        cboFilter = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         oldOrderList = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 204, 204));
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 204, 204));
 
         tblBillList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,31 +97,14 @@ public class HoaDonJPanel extends javax.swing.JPanel {
             tblBillList.getColumnModel().getColumn(1).setPreferredWidth(0);
         }
 
-        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearchKeyReleased(evt);
-            }
-        });
-
-        cboFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc" }));
-        cboFilter.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
-            }
-            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
-                cboFilterPopupMenuWillBecomeInvisible(evt);
-            }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-            }
-        });
-
-        jLabel1.setText("Tìm Kiếm:");
-
         jButton1.setText("Huỷ Đơn");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 204, 204));
 
         oldOrderList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,16 +141,11 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(404, 404, 404)
+                        .addGap(341, 341, 341)
                         .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(444, 444, 444)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -176,9 +155,6 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
                     .addComponent(jButton1)
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,14 +182,6 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         removeBill(order_ID);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void cboFilterPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboFilterPopupMenuWillBecomeInvisible
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboFilterPopupMenuWillBecomeInvisible
-
-    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchKeyReleased
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         if (DialogHelper.confirm(this, "Xác nhận hoàn tất đơn?")) {
@@ -223,7 +191,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                 Object orderID = tblBillList.getValueAt(selectedRow, 9);
                 closeBill(Integer.valueOf(billID.toString()), Integer.valueOf(orderID.toString()));
             } catch (Exception e) {
-                DialogHelper.alert(jLabel1, "Có lỗi khi xác nhận...");
+                DialogHelper.alert(jButton5, "Có lỗi khi xác nhận...");
                 e.printStackTrace();
             }
             fetchFull();
@@ -233,23 +201,20 @@ public class HoaDonJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cboFilter;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable oldOrderList;
     private javax.swing.JTable tblBillList;
-    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
     private void fetchFull() {
         billList.clear();
         billList = dao.selectAll();
-        cboFilter.removeAllItems();
-        cboFilter.addItem("Chưa Thanh Toán");
-        cboFilter.addItem("Đã Thanh Toán");
+//        cboFilter.removeAllItems();
+//        cboFilter.addItem("Chưa Thanh Toán");
+//        cboFilter.addItem("Đã Thanh Toán");
     }
 
     public void init() {
@@ -338,6 +303,10 @@ public class HoaDonJPanel extends javax.swing.JPanel {
             }).start();
 
         }
+    }
+
+    private void searchFood(String text, String toString) {
+        
     }
 
 }

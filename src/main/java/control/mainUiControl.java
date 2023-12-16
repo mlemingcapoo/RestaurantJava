@@ -353,7 +353,7 @@ public final class mainUiControl implements GUI_Interface {
 
     public void profile() {
         panelNavigator.switchPanel(mainUI.panelDisplay, "Profile");
-
+        
     }
 
     public void GiaoCa() {
@@ -403,35 +403,35 @@ public final class mainUiControl implements GUI_Interface {
     }
 
     public static void lockAllBtn() {
-        mainUI.BtnCaiDat.setEnabled(false);
+//        mainUI.BtnCaiDat.setVisible(false);
 //        mainUI.BtnGiaoCa.setEnabled(false);
-        mainUI.BtnHoaDon.setEnabled(false);
+        mainUI.BtnHoaDon.setVisible(false);
 //        frame.BtnDangXuat.setEnabled(false);
-        mainUI.BtnDatBan.setEnabled(false);
+        mainUI.BtnDatBan.setVisible(false);
 //        mainUI.BtnQuanLyBanHang.setEnabled(false);
-        mainUI.BtnQuanLyMon.setEnabled(false);
-        mainUI.BtnQuanLyHoiVien.setEnabled(false);
-        mainUI.BtnQuanLyDoanhThu.setEnabled(false);
-        mainUI.BtnQuanLyNhanVien.setEnabled(false);
-        mainUI.btnOrder.setEnabled(false);
-        mainUI.panelProfilePhoto.setVisible(false);
+        mainUI.BtnQuanLyMon.setVisible(false);
+        mainUI.BtnQuanLyHoiVien.setVisible(false);
+//        mainUI.BtnQuanLyDoanhThu.setEnabled(false);
+        mainUI.BtnQuanLyNhanVien.setVisible(false);
+        mainUI.btnOrder.setVisible(false);
+//        mainUI.panelProfilePhoto.setVisible(false);
     }
 
     private void unlockPerm(int level) {
         if (level >= 0) {
-            mainUI.BtnCaiDat.setEnabled(true);
+//            mainUI.BtnCaiDat.setVisible(true);
 //            mainUI.BtnGiaoCa.setEnabled(true);
-            mainUI.BtnHoaDon.setEnabled(true);
-            mainUI.BtnDatBan.setEnabled(true);
+            mainUI.BtnHoaDon.setVisible(true);
+            mainUI.BtnDatBan.setVisible(true);
 //            mainUI.BtnQuanLyBanHang.setEnabled(true);
-            mainUI.BtnQuanLyHoiVien.setEnabled(true);
-            mainUI.btnOrder.setEnabled(true);
-            mainUI.panelProfilePhoto.setVisible(true);
+            mainUI.BtnQuanLyHoiVien.setVisible(true);
+            mainUI.btnOrder.setVisible(true);
+//            mainUI.panelProfilePhoto.setVisible(true);
         }
         if (level >= 1) {
-            mainUI.BtnQuanLyDoanhThu.setEnabled(true);
-            mainUI.BtnQuanLyNhanVien.setEnabled(true);
-            mainUI.BtnQuanLyMon.setEnabled(true);
+//            mainUI.BtnQuanLyDoanhThu.setEnabled(true);
+            mainUI.BtnQuanLyNhanVien.setVisible(true);
+            mainUI.BtnQuanLyMon.setVisible(true);
         }
     }
 

@@ -281,12 +281,13 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblQuanLyHoiVien = new javax.swing.JTable();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 204, 204));
         setForeground(new java.awt.Color(255, 204, 204));
         setMaximumSize(new java.awt.Dimension(652, 802));
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1080, 720));
 
+        jPanel7.setBackground(new java.awt.Color(255, 204, 204));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
         btnThem.setFont(new java.awt.Font("American Typewriter", 0, 10)); // NOI18N
@@ -359,6 +360,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jPanel6.setBackground(new java.awt.Color(255, 204, 204));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hội Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("American Typewriter", 0, 10)); // NOI18N
@@ -433,6 +435,7 @@ public class QuanLyHoiVienJPanel extends javax.swing.JPanel {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        tblQuanLyHoiVien.setBackground(new java.awt.Color(255, 204, 204));
         tblQuanLyHoiVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},

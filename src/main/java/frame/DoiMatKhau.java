@@ -60,7 +60,7 @@ public class DoiMatKhau extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 204, 204));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));

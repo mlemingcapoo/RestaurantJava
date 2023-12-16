@@ -29,6 +29,8 @@ public class blank_frame extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
 
         setLayout(new java.awt.CardLayout());
+
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
         add(jPanel2, "card3");
     }// </editor-fold>//GEN-END:initComponents
 

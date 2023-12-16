@@ -148,7 +148,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
         };
         imgAnhMonAn = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 204, 204));
         setPreferredSize(new java.awt.Dimension(1080, 720));
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -320,7 +320,7 @@ public class QuanLyMonAnJPanel extends javax.swing.JPanel {
                 .addGap(5, 5, 5))
         );
 
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel14.setBackground(new java.awt.Color(255, 204, 204));
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chỉnh Sửa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("American Typewriter", 0, 12))); // NOI18N
 
         txtTenMon.setBorder(new RoundedCornerBorder());

@@ -52,7 +52,6 @@
           <Font name="Helvetica Neue" size="48" style="3"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="&#x110;ang k&#x1ebf;t n&#x1ed1;i... &#x111;&#x1ee3;i t&#xfd;"/>
       </Properties>
     </Component>
   </SubComponents>

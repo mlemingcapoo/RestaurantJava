@@ -50,9 +50,9 @@ VoucherControl control = new VoucherControl();
         txtMail = new javax.swing.JTextField();
         txtLinkAnh = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 204, 204));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vocher", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
         tblVoucher.setModel(new javax.swing.table.DefaultTableModel(
@@ -158,8 +158,6 @@ VoucherControl control = new VoucherControl();
 
         txtLinkAnh.setEditable(false);
         txtLinkAnh.setText("Link Ảnh");
-
-        txtMail.setFont(new java.awt.Font("American Typewriter", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
