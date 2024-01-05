@@ -37,7 +37,11 @@ public class FoodDAO
     
     public List<Food> selectAllUnlocked() {
         return this.selectBySQL(SELECT_ALL_SQL_EXCEPT);
+
     }
+
+  
+
 
     @Override
     protected List<Food> selectBySQL(String sql, Object... args) {

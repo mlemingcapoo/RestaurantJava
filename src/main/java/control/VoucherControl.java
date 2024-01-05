@@ -9,6 +9,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import frame.VoucherJPanel;
 import helper.DateHelper;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +37,7 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 import model.KhachHang;
 import model.Voucher;
 import okhttp3.MediaType;
@@ -47,7 +49,6 @@ import okhttp3.Response;
 import org.json.JSONObject;
 
 /**
- *
  * @author capoo
  */
 public class VoucherControl {
@@ -58,7 +59,7 @@ public class VoucherControl {
     DefaultTableModel Voucher = new DefaultTableModel();
     VoucherDAO vcdao = new VoucherDAO();
 
-//KhachHang hoiVien = new KhachHang();
+    //KhachHang hoiVien = new KhachHang();
     static List<KhachHang> hv = new ArrayList<>();
     HoiVienDAO hvdao = new HoiVienDAO();
 
@@ -133,63 +134,70 @@ public class VoucherControl {
         }
     }
 
- public void them() {
-    Date date = panel.NgayHetHan.getDate();
-    String discountText = panel.txtGiam.getText().trim();
-
-    try {
-        // Kiểm tra nếu discountText trống
-        if (discountText.isEmpty()) {
-            helper.DialogHelper.alert(panel, "Vui lòng nhập giảm giá cho voucher.");
-            return;
-        }
-
-        // Kiểm tra nếu txtGiam không phải là số
-        if (!discountText.matches("\\d+(\\.\\d+)?")) {
-            helper.DialogHelper.alert(panel, "Giảm giá phải là một số.");
-            return;
-        }
-
-        // Kiểm tra nếu ngày chưa được chọn
-        if (date == null) {
-            helper.DialogHelper.alert(panel, "Vui lòng chọn ngày hết hạn cho voucher.");
-            return;
-        }
-
-        double discount = Double.parseDouble(discountText);
-        String voucherCode = generateRandomCode();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String formattedDate = dateFormat.format(date);
-        Date expireDate = dateFormat.parse(formattedDate);
-
-        newVoucher = new Voucher();
-        newVoucher.setDiscountPercent((float) discount);
-        newVoucher.setVCode(voucherCode);
-        newVoucher.setExpireDate(formattedDate);
-
-        // Thêm cuối hỏi "BẠN CÓ MUỐN THÊM KHÔNG?"
-        int confirmationResult = JOptionPane.showConfirmDialog(null, "BẠN CÓ MUỐN THÊM KHÔNG?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-
-        if (confirmationResult == JOptionPane.YES_OPTION) {
-            // Chạy khi người dùng chọn "Yes"
-            voucher.add(newVoucher);
-            vcdao.insert(newVoucher);
-            refresh();
-
-            // Thông báo khi tạo voucher thành công
-            helper.DialogHelper.alert(panel, "Tạo voucher thành công!");
-        } else {
-            // Người dùng đã chọn "No" hoặc tương tự, không làm gì cả.
-        }
-
-    } catch (ParseException | NumberFormatException e) {
-        e.printStackTrace();
-        helper.DialogHelper.alert(panel, "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại giá trị nhập.");
-    } catch (Exception e) {
-        e.printStackTrace();
-        helper.DialogHelper.alert(panel, "Đã xảy ra lỗi. Vui lòng thử lại.");
+    public void themVoucher() {
+        Date date = panel.NgayHetHan.getDate();
+        String discountText = panel.txtGiam.getText().trim();
+        //insert voucher with function from VoucherDAO
     }
-}
+
+
+    public void them() {
+        Date date = panel.NgayHetHan.getDate();
+        String discountText = panel.txtGiam.getText().trim();
+
+        try {
+            // Kiểm tra nếu discountText trống
+            if (discountText.isEmpty()) {
+                helper.DialogHelper.alert(panel, "Vui lòng nhập giảm giá cho voucher.");
+                return;
+            }
+
+            // Kiểm tra nếu txtGiam không phải là số
+            if (!discountText.matches("\\d+(\\.\\d+)?")) {
+                helper.DialogHelper.alert(panel, "Giảm giá phải là một số.");
+                return;
+            }
+
+            // Kiểm tra nếu ngày chưa được chọn
+            if (date == null) {
+                helper.DialogHelper.alert(panel, "Vui lòng chọn ngày hết hạn cho voucher.");
+                return;
+            }
+
+            double discount = Double.parseDouble(discountText);
+            String voucherCode = generateRandomCode();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            String formattedDate = dateFormat.format(date);
+            Date expireDate = dateFormat.parse(formattedDate);
+
+            newVoucher = new Voucher();
+            newVoucher.setDiscountPercent((float) discount);
+            newVoucher.setVCode(voucherCode);
+            newVoucher.setExpireDate(formattedDate);
+
+            // Thêm cuối hỏi "BẠN CÓ MUỐN THÊM KHÔNG?"
+            int confirmationResult = JOptionPane.showConfirmDialog(null, "BẠN CÓ MUỐN THÊM KHÔNG?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+
+            if (confirmationResult == JOptionPane.YES_OPTION) {
+                // Chạy khi người dùng chọn "Yes"
+                voucher.add(newVoucher);
+                vcdao.insert(newVoucher);
+                refresh();
+
+                // Thông báo khi tạo voucher thành công
+                helper.DialogHelper.alert(panel, "Tạo voucher thành công!");
+            } else {
+                // Người dùng đã chọn "No" hoặc tương tự, không làm gì cả.
+            }
+
+        } catch (ParseException | NumberFormatException e) {
+            e.printStackTrace();
+            helper.DialogHelper.alert(panel, "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại giá trị nhập.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            helper.DialogHelper.alert(panel, "Đã xảy ra lỗi. Vui lòng thử lại.");
+        }
+    }
 
 
     public void TaoQRVoucher() {
@@ -221,9 +229,14 @@ public class VoucherControl {
         }
     }
 
- private final String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
+    private final String apiKey = "43c266c2e17b3e719a7cd819e1d9d6a7"; // Replace with your ImgBB API key
     private String imageUrl = "";
 
+    /**
+     * Uploads an image to an image hosting service and returns the URL of the uploaded image.
+     *
+     * @return the URL of the uploaded image, or null if an error occurred
+     */
     public String upload() {
         OkHttpClient client = new OkHttpClient();
 
@@ -295,17 +308,17 @@ public class VoucherControl {
 
             selectedVoucher.setDiscountPercent((float) discount);
             selectedVoucher.setExpireDate(formattedDate);
- int confirmationResult = JOptionPane.showConfirmDialog(null, "BẠN CÓ MUỐN THÊM KHÔNG?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            int confirmationResult = JOptionPane.showConfirmDialog(null, "BẠN CÓ MUỐN THÊM KHÔNG?", "Xác nhận", JOptionPane.YES_NO_OPTION);
 
-        if (confirmationResult == JOptionPane.YES_OPTION) {
-            vcdao.update(selectedVoucher); // Update the voucher in the database
+            if (confirmationResult == JOptionPane.YES_OPTION) {
+                vcdao.update(selectedVoucher); // Update the voucher in the database
 
-            refresh();
+                refresh();
 
-            // Thông báo khi cập nhật voucher thành công
-            helper.DialogHelper.alert(panel, "Cập nhật voucher thành công!");
-        }else{
-        }
+                // Thông báo khi cập nhật voucher thành công
+                helper.DialogHelper.alert(panel, "Cập nhật voucher thành công!");
+            } else {
+            }
         } catch (ParseException | NumberFormatException e) {
             e.printStackTrace();
             helper.DialogHelper.alert(panel, "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại giá trị nhập.");
@@ -320,33 +333,33 @@ public class VoucherControl {
     }
 
     public void xoaVoucher(int selectedRow) {
-    try {
-        System.out.println("xoa Voucher: " + selectedRow);
-        int confirmationResult = JOptionPane.showConfirmDialog(null, "BẠN CÓ MUỐN XOÁ VOUCHER NÀY?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        try {
+            System.out.println("xoa Voucher: " + selectedRow);
+            int confirmationResult = JOptionPane.showConfirmDialog(null, "BẠN CÓ MUỐN XOÁ VOUCHER NÀY?", "Xác nhận", JOptionPane.YES_NO_OPTION);
 
-        if (confirmationResult == JOptionPane.YES_OPTION) {
-            int voucherID = voucher.get(selectedRow).getVoucherID();
-            Voucher voucherToDelete = new Voucher();
-            voucherToDelete.setVoucherID(voucherID);
+            if (confirmationResult == JOptionPane.YES_OPTION) {
+                int voucherID = voucher.get(selectedRow).getVoucherID();
+                Voucher voucherToDelete = new Voucher();
+                voucherToDelete.setVoucherID(voucherID);
 
-            try {
-                vcdao.deleteById(voucherToDelete);
-                clearForm();
-                helper.DialogHelper.alert(panel, "Xoá Voucher Thành Công!");
-            } catch (Exception ex) {
-                helper.DialogHelper.alert(panel, "Xoá Voucher thất bại!");
-                Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    vcdao.deleteById(voucherToDelete);
+                    clearForm();
+                    helper.DialogHelper.alert(panel, "Xoá Voucher Thành Công!");
+                } catch (Exception ex) {
+                    helper.DialogHelper.alert(panel, "Xoá Voucher thất bại!");
+                    Logger.getLogger(QuanLyMonAnControl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                // User selected "No" or closed the dialog, do nothing.
             }
-        } else {
-            // User selected "No" or closed the dialog, do nothing.
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-    } catch (Exception ex) {
-        ex.printStackTrace();
     }
-}
 
 
-   public void send() {
+    public void send() {
         final String username = "infobasil.click@gmail.com";
         final String password = "c g x u h r y g v j z p e x l q ";
 
@@ -386,10 +399,10 @@ public class VoucherControl {
             helper.DialogHelper.alert(panel, "Nội dung phải có ít nhất 4 ký tự.");
             return;
         }
-if (link.isEmpty()) {
-        helper.DialogHelper.alert(panel, "Vui lòng nhập đường link ảnh QR.");
-        return;
-    }
+        if (link.isEmpty()) {
+            helper.DialogHelper.alert(panel, "Vui lòng nhập đường link ảnh QR.");
+            return;
+        }
         String imagePath = upload();
 
         try {
@@ -409,24 +422,24 @@ if (link.isEmpty()) {
             );
             multipart.addBodyPart(textPart);
 
-          if (imagePath != null && !imagePath.isEmpty()) {
-        BodyPart imagePart = new MimeBodyPart();
-        try {
-            URL imageUrl = new URL(link);
-            InputStream imageStream = imageUrl.openStream();
-            imagePart.setDataHandler(new DataHandler(new ByteArrayDataSource(imageStream, "image/jpeg")));
-            imagePart.setFileName(newVoucher.getVCode() + ".jpg");
-            multipart.addBodyPart(imagePart);
-        } catch (IOException e) {
-            e.printStackTrace();
-            helper.DialogHelper.alert(panel, "Lỗi khi đọc ảnh từ đường link: " + e.getMessage());
-            return;
-        }
-    } else {
-        // Display a message if no image is attached
-        helper.DialogHelper.alert(panel, "Chưa có ảnh QR được đính kèm!");
-        return;
-    }
+            if (imagePath != null && !imagePath.isEmpty()) {
+                BodyPart imagePart = new MimeBodyPart();
+                try {
+                    URL imageUrl = new URL(link);
+                    InputStream imageStream = imageUrl.openStream();
+                    imagePart.setDataHandler(new DataHandler(new ByteArrayDataSource(imageStream, "image/jpeg")));
+                    imagePart.setFileName(newVoucher.getVCode() + ".jpg");
+                    multipart.addBodyPart(imagePart);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    helper.DialogHelper.alert(panel, "Lỗi khi đọc ảnh từ đường link: " + e.getMessage());
+                    return;
+                }
+            } else {
+                // Display a message if no image is attached
+                helper.DialogHelper.alert(panel, "Chưa có ảnh QR được đính kèm!");
+                return;
+            }
 
             message.setContent(multipart);
 
@@ -445,10 +458,14 @@ if (link.isEmpty()) {
             helper.DialogHelper.alert(panel, "Lỗi khi gửi email: " + e.getMessage());
         }
     }
- private boolean isValidEmail(String email) {
+
+    private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
     }
+
+    public static void hmm(){}
+
     public void fillMail(int selectedRow) {
         panel.txtMail.setText(hv.get(selectedRow).getEmail());
     }
